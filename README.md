@@ -2,20 +2,6 @@
 
 A simple yet complete playback library designed for UI frameworks or even without
 
-## Technology decisions
-
-- [x] **Changesets** - for versioning
-- [x] **Happy-dom** - for node-based browser testing environment
-- [x] **Playwright** - for e2e testing across browsers
-- [x] **Tsup** - for bundling libraries
-- [x] **Turbo** - for remote-caching build system
-- [x] **Github Actions** - for CI/CD
-- [x] **Netlify** - for hosting
-- [x] **TypeScript** - for type safety
-- [x] **Vite** - for examples application
-- [x] **Vitepress** - for documentation
-- [x] **Vitest** - for unit and integration testing
-
 ## Architecture
 
 - Headless UI
@@ -25,14 +11,28 @@ A simple yet complete playback library designed for UI frameworks or even withou
 - Embrace the web platform APIs
 - Avoid framework-specific locked-in APIs
 
+## Technology decisions
+
+- [Changesets](https://github.com/changesets/changesets) - for versioning
+- [Happy-dom](https://github.com/capricorn86/happy-dom) - for node-based browser testing environment
+- [Playwright](https://playwright.dev/) - for e2e testing across browsers
+- [Tsup](https://tsup.egoist.dev/) - for bundling libraries
+- [Turbo](https://turbo.build/repo) - for remote-caching build system
+- [Github Actions](https://github.com/features/actions) - for CI/CD
+- [Netlify](https://www.netlify.com/) - for hosting
+- [TypeScript](https://www.typescriptlang.org/) - for type safety
+- [Vite](https://vitejs.dev/) - for examples application
+- [Vitepress](https://vitepress.dev/) - for documentation
+- [Vitest](https://vitest.dev/) - for unit and integration testing
+
 ## Supported framework adapters
 
-- [ ] **Vue** - coming soon
-- [ ] **Preact** - coming soon
-- [ ] **Svelte** - coming soon
-- [ ] **Solid** - coming soon
-- [ ] **React** - coming soon
-- [ ] **SOlid** - coming soon
+- [ ] Vue - coming soon
+- [ ] Preact - coming soon
+- [ ] Svelte - coming soon
+- [ ] Solid - coming soon
+- [ ] React - coming soon
+- [ ] SOlid - coming soon
 
 ## Inspiration
 
