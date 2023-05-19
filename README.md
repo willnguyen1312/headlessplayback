@@ -31,6 +31,7 @@ A simple yet complete playback library designed for UI frameworks or even withou
 - [ ] Implement core logic
 - [ ] Write documentation and add examples
 - [ ] Implement framework adapters
+- [ ] Implement some common use plugins such as data streaming
 
 ## Supported framework adapters
 
