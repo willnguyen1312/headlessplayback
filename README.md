@@ -43,9 +43,11 @@ A simple yet complete playback library designed for UI frameworks or even withou
 
 ## Inspiration
 
-- [Tanstack](https://tanstack.com/) - A collection of high-quality open source libraries for web developers
-- [Zag](https://zagjs.com/) - A collection of framework-agnostic UI component patterns
+- [Tanstack](https://tanstack.com) - A collection of high-quality open source libraries for web developers
+- [Zag](https://zagjs.com) - A collection of framework-agnostic UI component patterns
 - [Day.js](https://day.js.org/docs/en/plugin/plugin) - A modern JavaScript date utility library
+- [VueUse](https://vueuse.org) - Collection of Essential Vue Composition Utilities
+- [Radix UI](https://www.radix-ui.com) - A collection of open source UI components
 - [Building a modern design system in layers](https://blog.almaer.com/building-a-modern-design-system-in-layers/?ck_subscriber_id=1238259209)
 - [UI frameworks and Media Elements 🎧](https://medium.com/axon-enterprise/ui-frameworks-and-media-elements-c0c6832528e5)
 
