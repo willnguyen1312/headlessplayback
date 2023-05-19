@@ -25,6 +25,13 @@ A simple yet complete playback library designed for UI frameworks or even withou
 - [Vitepress](https://vitepress.dev/) - for documentation
 - [Vitest](https://vitest.dev/) - for unit and integration testing
 
+## Roadmap
+
+- [ ] Write a complete test suites before implementation
+- [ ] Implement core logic
+- [ ] Write documentation and add examples
+- [ ] Implement framework adapters
+
 ## Supported framework adapters
 
 - [ ] Vue - coming soon
@@ -41,3 +48,11 @@ A simple yet complete playback library designed for UI frameworks or even withou
 - [Day.js](https://day.js.org/docs/en/plugin/plugin) - A modern JavaScript date utility library
 - [Building a modern design system in layers](https://blog.almaer.com/building-a-modern-design-system-in-layers/?ck_subscriber_id=1238259209)
 - [UI frameworks and Media Elements 🎧](https://medium.com/axon-enterprise/ui-frameworks-and-media-elements-c0c6832528e5)
+
+## Sponsor
+
+<a href="https://www.buymeacoffee.com/namnguyenle" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
+## License
+
+MIT © [Nam Nguyen](https://github.com/willnguyen1312)
