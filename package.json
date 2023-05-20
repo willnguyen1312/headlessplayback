@@ -11,8 +11,8 @@
     "format:check": "prettier --check ./**/*.{js,ts,tsx,mjs,json,vue}",
     "format:fix": "prettier --write ./**/*.{js,ts,tsx,mjs,json,vue}",
     "changeset": "changeset",
-    "version-packages": "changeset version",
-    "release": "turbo build --filter=docs^... && changeset publish"
+    "release": "pnpm check && changeset version && changeset publish",
+    "check": "turbo run build typecheck lint test --filter=!docs"
   },
   "dependencies": {
     "@changesets/cli": "^2.26.1",
