@@ -6,5 +6,5 @@
   "linked": [],
   "access": "public",
   "updateInternalDependencies": "patch",
-  "ignore": ["with-vue", "with-react"]
+  "ignore": ["with-vue", "with-react", "with-vanilla"]
 }
