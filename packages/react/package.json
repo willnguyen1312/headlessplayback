@@ -1,5 +1,5 @@
 {
-  "name": "@headlessplayback/core",
+  "name": "@headlessplayback/react",
   "version": "0.0.0",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -16,11 +16,18 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
+    "@types/react": "^18.2.6",
     "eslint": "^8.41.0",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
     "tsup": "^6.7.0",
     "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@headlessplayback/core": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0"
   },
   "publishConfig": {
     "access": "public"
