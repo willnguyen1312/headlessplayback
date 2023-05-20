@@ -25,7 +25,8 @@
   "sideEffects": false,
   "license": "MIT",
   "files": [
-    "dist/**"
+    "dist",
+    "src"
   ],
   "scripts": {
     "build": "tsup src/index.tsx --format esm,cjs --dts --external react",
