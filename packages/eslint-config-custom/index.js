@@ -1,3 +1,12 @@
 module.exports = {
-  extends: ["turbo", "prettier"],
+  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended", "turbo", "prettier"],
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaVersion: "latest",
+  },
+  plugins: ["@typescript-eslint"],
+  env: {
+    browser: true,
+    node: true,
+  },
 }
