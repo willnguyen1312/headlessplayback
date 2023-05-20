@@ -2,8 +2,8 @@ import "virtual:uno.css"
 import "@unocss/reset/tailwind.css"
 
 import { createPlayback } from "@headlessplayback/core"
-import hlsPlaybackPlugin from "../hlsPlaybackPlugin"
-createPlayback.use(hlsPlaybackPlugin, {
+import msePlaybackPlugin from "../msePlaybackPlugin"
+createPlayback.use(msePlaybackPlugin, {
   mseString: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
 })
 
