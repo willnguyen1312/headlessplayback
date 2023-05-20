@@ -1,5 +1,23 @@
 {
   "private": true,
+  "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
+  "license": "MIT",
+  "repository": "willnguyen1312/headlessplayback",
+  "homepage": "https://github.com/sponsors/willnguyen1312",
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/willnguyen1312"
+  },
+  "keywords": [
+    "javascript",
+    "typescript",
+    "video",
+    "audio",
+    "playback",
+    "headless",
+    "mobile",
+    "desktop"
+  ],
   "scripts": {
     "core": "pnpm --filter=@headlessplayback/core",
     "react": "pnpm --filter=@headlessplayback/react",
