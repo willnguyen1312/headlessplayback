@@ -1,0 +1,21 @@
+{
+  "name": "with-vanilla",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@unocss/reset": "^0.51.13",
+    "typescript": "^5.0.2",
+    "unocss": "^0.51.13",
+    "vite": "^4.3.2"
+  },
+  "dependencies": {
+    "@headlessplayback/core": "workspace:^",
+    "hls.js": "^1.4.3"
+  }
+}

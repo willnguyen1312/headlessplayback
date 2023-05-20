@@ -2,6 +2,6 @@
 
 <template>
   <div>
-    <p class="text-xl color-cyan">Hello there</p>
+    <p class="color-cyan text-xl">Hello there</p>
   </div>
 </template>

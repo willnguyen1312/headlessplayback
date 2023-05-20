@@ -1,13 +1,11 @@
-import { HELLO } from "@headlessplayback/react";
+import {} from "@headlessplayback/react"
 
 function App() {
-  console.log(HELLO);
-
   return (
     <div>
-      <p className="text-xl color-violet">Hello there</p>
+      <p className="color-violet text-xl">Hello there</p>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
