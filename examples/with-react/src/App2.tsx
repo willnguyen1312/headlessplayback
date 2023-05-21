@@ -1,5 +1,5 @@
 import { usePlayback } from "@headlessplayback/react"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { hlsPlaybackPlugin } from "@headlessplayback/plugins"
 usePlayback.use(hlsPlaybackPlugin)
 
@@ -23,6 +23,7 @@ function App2() {
   const { activate, playbackState, playback } = usePlayback({
     id: "video",
   })
+  const [showDuration, setShowDuration] = useState(true)
 
   useEffect(() => {
     activate()
@@ -45,14 +46,23 @@ function App2() {
         <video
           className="h-full w-full"
           id="video"
-          src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+          // src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
           controls
         ></video>
       </div>
 
       <CurrenTime />
-      <Duration />
-      <button onClick={handleClick}>Switch stream</button>
+      {showDuration && <Duration />}
+      <button className="block" onClick={handleClick}>
+        Switch stream
+      </button>
+      <button
+        onClick={() => {
+          setShowDuration(!showDuration)
+        }}
+      >
+        Toggle show duration
+      </button>
       <pre>{JSON.stringify(playbackState.resolutions)}</pre>
     </div>
   )

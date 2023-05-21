@@ -16,11 +16,16 @@ export type PlaybackState = InternalPlaybackState & CustomPlaybackState
 
 export type PlaybackStore = ReturnType<typeof createStore<PlaybackState>>
 
+type CleanupFunc = () => void
+
+type OnCleanupHook = (element: HTMLMediaElement, cb: CleanupFunc) => void
+
 export type Plugin<T = unknown> = {
   install: (
     arg: {
       store: ReturnType<typeof createStore<PlaybackState>>
       playback: PlaybackFunc
+      onCleanup: OnCleanupHook
     },
     options: T,
   ) => void
@@ -36,13 +41,19 @@ type PlaybackFunc = {
     getState: () => PlaybackState
   }
   use: PluginFunc
-  $pluginsQueue: ((store: ReturnType<typeof createStore<PlaybackState>>) => void)[]
+  $pluginsQueue: ((arg: {
+    store: ReturnType<typeof createStore<PlaybackState>>
+    onCleanup: OnCleanupHook
+  }) => void)[]
 } & CustomPlaybackFunc
 
 const producers = new Map<string, ReturnType<PlaybackFunc>>()
-const playbackActivatedSet = new Set<HTMLMediaElement>()
+const idTracker = new Map<string, number>()
+const cleanupCallbackMap = new WeakMap<HTMLMediaElement, CleanupFunc[]>()
+const playbackActivatedSet = new WeakSet<HTMLMediaElement>()
 
 export const playback: PlaybackFunc = ({ id }) => {
+  idTracker.set(id, (idTracker.get(id) ?? 0) + 1)
   if (producers.has(id)) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return producers.get(id)!
@@ -75,12 +86,22 @@ export const playback: PlaybackFunc = ({ id }) => {
 
   const result = {
     cleanup() {
-      playbackElement?.removeEventListener("loadedmetadata", handleLoadedMetadata)
-      playbackElement?.removeEventListener("seeking", handleSeeking)
-      playbackElement?.removeEventListener("timeupdate", handleTimeUpdate)
-      store.cleanup()
-      producers.delete(id)
-      playbackElement && playbackActivatedSet.delete(playbackElement)
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      idTracker.set(id, idTracker.get(id)! - 1)
+
+      if (idTracker.get(id) === 1) {
+        playbackElement?.removeEventListener("loadedmetadata", handleLoadedMetadata)
+        playbackElement?.removeEventListener("seeking", handleSeeking)
+        playbackElement?.removeEventListener("timeupdate", handleTimeUpdate)
+        store.cleanup()
+        producers.delete(id)
+        playbackElement && playbackActivatedSet.delete(playbackElement)
+        if (cleanupCallbackMap.has(playbackElement as HTMLMediaElement)) {
+          cleanupCallbackMap.get(playbackElement as HTMLMediaElement)?.forEach((cb) => cb())
+          cleanupCallbackMap.delete(playbackElement as HTMLMediaElement)
+        }
+        idTracker.delete(id)
+      }
     },
     subscribe: store.subscribe,
     activate,
@@ -108,7 +129,11 @@ export const playback: PlaybackFunc = ({ id }) => {
       duration: Number.isFinite(playbackElement?.duration) ? playbackElement?.duration : 0,
     })
 
-    playback.$pluginsQueue.forEach((item) => item(store))
+    const onCleanup: OnCleanupHook = (element: HTMLMediaElement, cb) => {
+      cleanupCallbackMap.set(element, [...(cleanupCallbackMap.get(element) ?? []), cb])
+    }
+
+    playback.$pluginsQueue.forEach((item) => item({ store, onCleanup }))
     playbackActivatedSet.add(playbackElement)
   }
 
@@ -118,7 +143,7 @@ export const playback: PlaybackFunc = ({ id }) => {
 
 playback.$pluginsQueue = []
 playback.use = <T>(plugin: Plugin<T>, options: T) => {
-  playback.$pluginsQueue.push((store) => {
-    plugin.install({ store, playback }, options)
+  playback.$pluginsQueue.push(({ store, onCleanup }) => {
+    plugin.install({ store, playback, onCleanup }, options)
   })
 }
