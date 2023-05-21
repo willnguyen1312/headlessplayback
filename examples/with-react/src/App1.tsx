@@ -1,25 +1,31 @@
 import { usePlayback } from "@headlessplayback/react"
 import { useEffect } from "react"
 
-function Duration() {
+type ShareProps = {
+  id: string
+}
+
+function Duration({ id }: ShareProps) {
   const { playbackState } = usePlayback({
-    id: "video",
+    id,
   })
+
+  // console.log("playbackState", playbackState)
 
   return <p>Duration: {playbackState.duration}</p>
 }
 
-function CurrenTime() {
+function CurrenTime({ id }: ShareProps) {
   const { playbackState } = usePlayback({
-    id: "video",
+    id,
   })
 
   return <p>Current time: {playbackState.currentTime}</p>
 }
 
-function App1() {
+function VideoPlayer({ id }: ShareProps) {
   const { activate } = usePlayback({
-    id: "video",
+    id,
   })
 
   useEffect(() => {
@@ -27,7 +33,7 @@ function App1() {
   }, [])
 
   function handleClick() {
-    ;(document.getElementById("video") as HTMLMediaElement)!.src =
+    ;(document.getElementById(id) as HTMLMediaElement)!.src =
       "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
   }
 
@@ -36,15 +42,24 @@ function App1() {
       <div className="border-emerald border-1 h-[400px] w-[600px]">
         <video
           className="h-full w-full"
-          id="video"
+          id={id}
           src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
           controls
         ></video>
       </div>
 
-      <CurrenTime />
-      <Duration />
+      <CurrenTime id={id} />
+      <Duration id={id} />
       <button onClick={handleClick}>Switch stream</button>
+    </div>
+  )
+}
+
+function App1() {
+  return (
+    <div id="app" className="p-4">
+      <VideoPlayer id="video1" />
+      <VideoPlayer id="video2" />
     </div>
   )
 }

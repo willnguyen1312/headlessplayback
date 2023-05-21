@@ -22,7 +22,7 @@ switchBtn.addEventListener("click", () => {
 })
 
 const result = playback({
-  getPlaybackElement: () => videoElement,
+  id: "video",
 })
 
 result.subscribe((state) => {

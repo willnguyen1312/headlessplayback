@@ -1,5 +1,5 @@
 import { makePlayback, PlaybackState, PluginFunc } from "@headlessplayback/core"
-import { useRef, useSyncExternalStore } from "react"
+import { useEffect, useRef, useSyncExternalStore } from "react"
 
 type Playback = ReturnType<typeof makePlayback>
 
@@ -26,6 +26,12 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
     playbackRef.current.getState,
     playbackRef.current.getState,
   )
+
+  useEffect(() => {
+    return () => {
+      playbackRef.current?.cleanup()
+    }
+  }, [])
 
   return {
     playbackState,

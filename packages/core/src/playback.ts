@@ -1,9 +1,4 @@
-import { createStore } from "./store"
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const noop: any = () => {
-  // noop
-}
+import { Listener, createStore } from "./store"
 
 export interface InternalPlaybackState {
   playbackElement?: HTMLMediaElement
@@ -21,23 +16,22 @@ export type PlaybackState = InternalPlaybackState & CustomPlaybackState
 
 export type PlaybackStore = ReturnType<typeof createStore<PlaybackState>>
 
-export type PluginFunc = <T>(
-  plugin: {
-    install: (
-      arg: {
-        store: ReturnType<typeof createStore<PlaybackState>>
-        playback: PlaybackFunc
-      },
-      ...options: T[]
-    ) => void
-  },
-  ...options: T[]
-) => void
+export type Plugin<T = unknown> = {
+  install: (
+    arg: {
+      store: ReturnType<typeof createStore<PlaybackState>>
+      playback: PlaybackFunc
+    },
+    options: T,
+  ) => void
+}
+
+export type PluginFunc = <T>(plugin: Plugin<T>, ...options: T[]) => void
 
 type PlaybackFunc = {
   (arg: { id: string }): {
     cleanup: () => void
-    subscribe: (callback: (state: PlaybackState) => void) => () => void
+    subscribe: (listener: Listener<PlaybackState>) => () => void
     activate: () => void
     getState: () => PlaybackState
   }
@@ -87,6 +81,7 @@ export const makePlayback = () => {
         playbackElement?.removeEventListener("timeupdate", handleTimeUpdate)
         store.cleanup()
         producers.delete(id)
+        playbackElement && playbackActivatedSet.delete(playbackElement)
       },
       subscribe: store.subscribe,
       activate,
@@ -130,14 +125,4 @@ export const makePlayback = () => {
   }
 
   return playback
-}
-
-export type Plugin<T = unknown> = {
-  install: (
-    arg: {
-      store: ReturnType<typeof createStore<PlaybackState>>
-      playback: PlaybackFunc
-    },
-    options: T,
-  ) => void
 }

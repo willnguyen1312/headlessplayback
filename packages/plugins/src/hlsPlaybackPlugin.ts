@@ -1,5 +1,5 @@
 import { Plugin } from "@headlessplayback/core"
-import Hls from "hls.js"
+import Hls, { HlsConfig } from "hls.js"
 
 declare module "@headlessplayback/core" {
   export interface CustomPlaybackState {
@@ -11,11 +11,11 @@ declare module "@headlessplayback/core" {
   }
 }
 
-export const hlsPlaybackPlugin: Plugin = {
-  install(arg) {
+export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
+  install(arg, config) {
     arg.playback.load = ({ id, src }) => {
       const playbackElement = document.getElementById(id) as HTMLVideoElement
-      const hls = new Hls()
+      const hls = new Hls(config)
       hls.loadSource(src)
       hls.attachMedia(playbackElement)
       hls.on(Hls.Events.MANIFEST_PARSED, function (_, data) {
