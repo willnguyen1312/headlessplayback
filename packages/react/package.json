@@ -44,7 +44,8 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@headlessplayback/core": "workspace:*"
+    "@headlessplayback/core": "workspace:*",
+    "valtio": "^1.10.5"
   },
   "peerDependencies": {
     "react": "^18.0.0"

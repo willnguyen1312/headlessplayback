@@ -32,7 +32,7 @@ export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
 
       hls.loadSource(src)
       hls.attachMedia(playbackElement)
-      hls.on(Hls.Events.MANIFEST_PARSED, function (_, data) {
+      hls.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
         store.setState({
           resolutions: data.levels.map((level) => level.height.toString()),
         })

@@ -6,8 +6,7 @@ import { playback } from "@headlessplayback/core"
 
 // playback.use(hlsPlaybackPlugin)
 
-const source1 =
-  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+const source1 = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
 
 const source2 = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
 

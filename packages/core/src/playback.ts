@@ -1,7 +1,6 @@
 import { Listener, createStore } from "./store"
 
 export interface InternalPlaybackState {
-  playbackElement?: HTMLMediaElement
   currentTime: number
   duration: number
 }
@@ -41,14 +40,11 @@ type PlaybackFunc = {
     getState: () => PlaybackState
   }
   use: PluginFunc
-  $pluginsQueue: ((arg: {
-    store: ReturnType<typeof createStore<PlaybackState>>
-    onCleanup: OnCleanupHook
-  }) => void)[]
+  $pluginsQueue: ((arg: { store: ReturnType<typeof createStore<PlaybackState>>; onCleanup: OnCleanupHook }) => void)[]
 } & CustomPlaybackFunc
 
 const producers = new Map<string, { playback: ReturnType<PlaybackFunc>; users: number }>()
-const cleanupCallbackMap = new WeakMap<HTMLMediaElement, CleanupFunc[]>()
+const cleanupCallbackMap = new WeakMap<HTMLMediaElement, Set<CleanupFunc>>()
 const playbackActivatedSet = new WeakSet<HTMLMediaElement>()
 
 export const playback: PlaybackFunc = ({ id }) => {
@@ -66,6 +62,7 @@ export const playback: PlaybackFunc = ({ id }) => {
     currentTime: 0,
     duration: 0,
   })
+  const { signal, abort } = new AbortController()
 
   let playbackElement: HTMLMediaElement | undefined
 
@@ -96,20 +93,23 @@ export const playback: PlaybackFunc = ({ id }) => {
       producers.set(id, cachedResult!)
 
       if (producers.get(id)?.users === 0) {
-        playbackElement?.removeEventListener("loadedmetadata", handleLoadedMetadata)
-        playbackElement?.removeEventListener("seeking", handleSeeking)
-        playbackElement?.removeEventListener("timeupdate", handleTimeUpdate)
+        abort()
         store.cleanup()
         playbackElement && playbackActivatedSet.delete(playbackElement)
         if (cleanupCallbackMap.has(playbackElement as HTMLMediaElement)) {
-          cleanupCallbackMap.get(playbackElement as HTMLMediaElement)?.forEach((cb) => cb())
+          const cbs = cleanupCallbackMap.get(playbackElement as HTMLMediaElement) as Set<CleanupFunc>
+
+          for (const cb of cbs) {
+            cb()
+          }
+
           cleanupCallbackMap.delete(playbackElement as HTMLMediaElement)
         }
         producers.delete(id)
       }
     },
-    subscribe: store.subscribe,
     activate,
+    subscribe: store.subscribe,
     getState: store.getState,
   }
 
@@ -124,18 +124,17 @@ export const playback: PlaybackFunc = ({ id }) => {
     }
 
     playbackElement = _playbackElement
-    playbackElement?.addEventListener("loadedmetadata", handleLoadedMetadata)
-    playbackElement?.addEventListener("seeking", handleSeeking)
-    playbackElement?.addEventListener("timeupdate", handleTimeUpdate)
+    playbackElement?.addEventListener("loadedmetadata", handleLoadedMetadata, { signal })
+    playbackElement?.addEventListener("seeking", handleSeeking, { signal })
+    playbackElement?.addEventListener("timeupdate", handleTimeUpdate, { signal })
 
     store.setState({
-      playbackElement,
       currentTime: playbackElement?.currentTime,
       duration: Number.isFinite(playbackElement?.duration) ? playbackElement?.duration : 0,
     })
 
     const onCleanup: OnCleanupHook = (element: HTMLMediaElement, cb) => {
-      cleanupCallbackMap.set(element, [...(cleanupCallbackMap.get(element) ?? []), cb])
+      cleanupCallbackMap.set(element, (cleanupCallbackMap.get(element) || new Set()).add(cb))
     }
 
     playback.$pluginsQueue.forEach((item) => item({ store, onCleanup }))
