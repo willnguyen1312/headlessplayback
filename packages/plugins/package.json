@@ -1,8 +1,8 @@
 {
-  "name": "@headlessplayback/react",
-  "version": "0.1.0",
+  "name": "@headlessplayback/plugins",
+  "version": "0.0.0",
+  "description": "A core plugins of headlessplayback",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
-  "description": "Adapter of headlessplayback core for React",
   "repository": "willnguyen1312/headlessplayback",
   "homepage": "https://github.com/sponsors/willnguyen1312",
   "funding": {
@@ -35,8 +35,6 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@types/node": "^20.2.2",
-    "@types/react": "^18.2.6",
     "eslint": "^8.41.0",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
@@ -45,10 +43,7 @@
   },
   "dependencies": {
     "@headlessplayback/core": "workspace:*",
-    "valtio": "^1.10.5"
-  },
-  "peerDependencies": {
-    "react": "^18.0.0"
+    "hls.js": "^1.4.3"
   },
   "publishConfig": {
     "access": "public"

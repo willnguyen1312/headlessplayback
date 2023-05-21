@@ -6,17 +6,20 @@
     "dev": "vite"
   },
   "dependencies": {
-    "@headlessplayback/react": "workspace:^",
+    "@headlessplayback/plugins": "workspace:*",
+    "@headlessplayback/react": "workspace:*",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.11.2"
   },
   "devDependencies": {
+    "@types/node": "^20.2.2",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
-    "@unocss/reset": "^0.51.13",
+    "@unocss/reset": "^0.52.0",
     "@vitejs/plugin-react": "^4.0.0",
     "typescript": "^5.0.4",
-    "unocss": "^0.51.13",
+    "unocss": "^0.52.0",
     "vite": "^4.3.8"
   }
 }

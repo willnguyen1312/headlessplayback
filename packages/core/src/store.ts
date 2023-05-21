@@ -42,7 +42,9 @@ export function createStore<TState>(initialState: TState) {
 
   const subscribe = (listener: Listener<TState>) => {
     listeners.add(listener)
-    return () => listeners.delete(listener)
+    return () => {
+      listeners.delete(listener)
+    }
   }
 
   const cleanup = () => listeners.clear()
