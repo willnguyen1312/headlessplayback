@@ -1,7 +1,7 @@
-import { makePlayback, PlaybackState, PluginFunc } from "@headlessplayback/core"
+import { playback, PlaybackState, PluginFunc } from "@headlessplayback/core"
 import { useEffect, useRef, useSyncExternalStore } from "react"
 
-type Playback = ReturnType<typeof makePlayback>
+type Playback = typeof playback
 
 type UsePlaybackFunc = {
   (arg: Parameters<Playback>[0]): {
@@ -11,8 +11,6 @@ type UsePlaybackFunc = {
   }
   use: PluginFunc
 }
-
-const playback = makePlayback()
 
 export const usePlayback: UsePlaybackFunc = (arg) => {
   const playbackRef = useRef<ReturnType<Playback>>()

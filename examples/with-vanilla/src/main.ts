@@ -1,10 +1,9 @@
 import "virtual:uno.css"
 import "@unocss/reset/tailwind.css"
 
-import { makePlayback } from "@headlessplayback/core"
+import { playback } from "@headlessplayback/core"
 // import { hlsPlaybackPlugin } from "@headlessplayback/plugins"
 
-const playback = makePlayback()
 // playback.use(hlsPlaybackPlugin)
 
 const source1 =
