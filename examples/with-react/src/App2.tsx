@@ -19,36 +19,36 @@ function CurrenTime() {
   return <p>Current time: {playbackState.currentTime}</p>
 }
 
+const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
+const source2 = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
+
 function App2() {
   const { activate, playbackState, playback } = usePlayback({
     id: "video",
   })
   const [showDuration, setShowDuration] = useState(true)
+  const [source, setSource] = useState(source1)
 
   useEffect(() => {
     activate()
     playback.load({
       id: "video",
-      src: "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8",
+      src: source,
     })
-  }, [])
+  }, [source])
 
   function handleClick() {
-    playback.load({
-      id: "video",
-      src: "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8",
-    })
+    if (source === source1) {
+      setSource(source2)
+    } else {
+      setSource(source1)
+    }
   }
 
   return (
     <div id="app" className="p-4">
       <div className="border-emerald border-1 h-[400px] w-[600px]">
-        <video
-          className="h-full w-full"
-          id="video"
-          // src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
-          controls
-        ></video>
+        <video className="h-full w-full" id="video" controls></video>
       </div>
 
       <CurrenTime />

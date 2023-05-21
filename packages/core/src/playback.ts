@@ -47,16 +47,19 @@ type PlaybackFunc = {
   }) => void)[]
 } & CustomPlaybackFunc
 
-const producers = new Map<string, ReturnType<PlaybackFunc>>()
-const idTracker = new Map<string, number>()
+const producers = new Map<string, { playback: ReturnType<PlaybackFunc>; users: number }>()
 const cleanupCallbackMap = new WeakMap<HTMLMediaElement, CleanupFunc[]>()
 const playbackActivatedSet = new WeakSet<HTMLMediaElement>()
 
 export const playback: PlaybackFunc = ({ id }) => {
-  idTracker.set(id, (idTracker.get(id) ?? 0) + 1)
   if (producers.has(id)) {
+    const cachedResult = producers.get(id)
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return producers.get(id)!
+    cachedResult!.users++
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    producers.set(id, cachedResult!)
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return producers.get(id)!.playback
   }
 
   const store = createStore<PlaybackState>({
@@ -86,21 +89,23 @@ export const playback: PlaybackFunc = ({ id }) => {
 
   const result = {
     cleanup() {
+      const cachedResult = producers.get(id)
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      idTracker.set(id, idTracker.get(id)! - 1)
+      cachedResult!.users--
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      producers.set(id, cachedResult!)
 
-      if (idTracker.get(id) === 1) {
+      if (producers.get(id)?.users === 0) {
         playbackElement?.removeEventListener("loadedmetadata", handleLoadedMetadata)
         playbackElement?.removeEventListener("seeking", handleSeeking)
         playbackElement?.removeEventListener("timeupdate", handleTimeUpdate)
         store.cleanup()
-        producers.delete(id)
         playbackElement && playbackActivatedSet.delete(playbackElement)
         if (cleanupCallbackMap.has(playbackElement as HTMLMediaElement)) {
           cleanupCallbackMap.get(playbackElement as HTMLMediaElement)?.forEach((cb) => cb())
           cleanupCallbackMap.delete(playbackElement as HTMLMediaElement)
         }
-        idTracker.delete(id)
+        producers.delete(id)
       }
     },
     subscribe: store.subscribe,
@@ -137,7 +142,7 @@ export const playback: PlaybackFunc = ({ id }) => {
     playbackActivatedSet.add(playbackElement)
   }
 
-  producers.set(id, result)
+  producers.set(id, { playback: result, users: 1 })
   return result
 }
 

@@ -10,8 +10,6 @@ function Duration({ id }: ShareProps) {
     id,
   })
 
-  // console.log("playbackState", playbackState)
-
   return <p>Duration: {playbackState.duration}</p>
 }
 

@@ -17,7 +17,7 @@ const duration = document.getElementById("duration") as HTMLParagraphElement
 const switchBtn = document.getElementById("switch") as HTMLButtonElement
 
 switchBtn.addEventListener("click", () => {
-  videoElement.src = source2
+  videoElement.src = videoElement.src === source1 ? source2 : source1
 })
 
 const result = playback({
@@ -31,5 +31,3 @@ result.subscribe((state) => {
 })
 
 result.activate()
-
-// playback.load("https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8")

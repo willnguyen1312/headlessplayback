@@ -11,10 +11,10 @@ declare module "@headlessplayback/core" {
   }
 }
 
+const hlsMap = new WeakMap<HTMLMediaElement, Hls>()
+
 export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
   install({ playback, store, onCleanup }, config) {
-    const hlsMap = new WeakMap<HTMLMediaElement, Hls>()
-
     playback.load = ({ id, src }) => {
       const playbackElement = document.getElementById(id) as HTMLVideoElement
       let hls = hlsMap.get(playbackElement)
@@ -22,7 +22,6 @@ export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
       if (hls) {
         hls.destroy()
         hls = new Hls(config)
-        hlsMap.set(playbackElement, hls)
       } else {
         hls = new Hls(config)
         hlsMap.set(playbackElement, hls)
