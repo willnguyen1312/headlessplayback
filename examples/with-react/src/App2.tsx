@@ -31,6 +31,9 @@ function App2() {
 
   useEffect(() => {
     activate()
+  }, [])
+
+  useEffect(() => {
     playback.load({
       id: "video",
       src: source,
