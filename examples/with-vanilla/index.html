@@ -2,19 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
   </head>
   <body>
     <div id="app" class="p-4">
-      <div class="w-3xl h-auto">
-        <video controls id="video"></video>
+      <div className="border-emerald h-[400px] w-[600px] border-1">
+        <!-- <video controls id="video"></video> -->
+        <video
+          className="h-full w-full"
+          controls
+          id="video"
+          src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+        ></video>
       </div>
-      <!-- src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" -->
 
       <p id="duration"></p>
       <p id="currentTime"></p>
+
+      <button id="switch">Switch stream</button>
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>

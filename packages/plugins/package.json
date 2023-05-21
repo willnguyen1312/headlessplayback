@@ -1,7 +1,7 @@
 {
-  "name": "@headlessplayback/core",
-  "version": "0.1.0",
-  "description": "A core implementation of headlessplayback",
+  "name": "@headlessplayback/plugins",
+  "version": "0.0.0",
+  "description": "A core plugins of headlessplayback",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "repository": "willnguyen1312/headlessplayback",
   "homepage": "https://github.com/sponsors/willnguyen1312",
@@ -40,6 +40,10 @@
     "tsconfig": "workspace:*",
     "tsup": "^6.7.0",
     "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@headlessplayback/core": "workspace:*",
+    "hls.js": "^1.4.3"
   },
   "publishConfig": {
     "access": "public"

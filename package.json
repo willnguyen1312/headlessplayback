@@ -23,6 +23,7 @@
     "react": "pnpm --filter=@headlessplayback/react",
     "build": "turbo build",
     "start-vanilla": "turbo dev --filter=with-vanilla...",
+    "start-react": "turbo dev --filter=with-react...",
     "lint": "turbo lint",
     "clean": "turbo clean && rm -rf node_modules",
     "typecheck": "turbo run typecheck",
