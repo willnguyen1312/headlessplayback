@@ -62,7 +62,9 @@ export const playback: PlaybackFunc = ({ id }) => {
     currentTime: 0,
     duration: 0,
   })
-  const { signal, abort } = new AbortController()
+
+  const abortController = new AbortController()
+  const { signal } = abortController
 
   let playbackElement: HTMLMediaElement | undefined
 
@@ -93,7 +95,7 @@ export const playback: PlaybackFunc = ({ id }) => {
       producers.set(id, cachedResult!)
 
       if (producers.get(id)?.users === 0) {
-        abort()
+        abortController.abort()
         store.cleanup()
         playbackElement && playbackActivatedSet.delete(playbackElement)
         if (cleanupCallbackMap.has(playbackElement as HTMLMediaElement)) {
