@@ -1,15 +1,15 @@
 import { usePlayback } from "@headlessplayback/react"
-import React, { useEffect, useState, useMemo } from "react"
+import React, { useEffect, useState } from "react"
 import { hlsPlaybackPlugin } from "@headlessplayback/plugins"
 usePlayback.use(hlsPlaybackPlugin)
 
-function Duration() {
+const Duration = React.memo(() => {
   const { playbackState } = usePlayback({
     id: "video",
   })
 
   return <p>Duration: {playbackState.duration}</p>
-}
+})
 
 const Resolutions = React.memo(() => {
   const { playbackState } = usePlayback({
@@ -56,8 +56,6 @@ function App2() {
     }
   }
 
-  const duration = useMemo(() => <Duration />, [])
-
   return (
     <div id="app" className="p-4">
       <div className="border-emerald border-1 h-[400px] w-[600px]">
@@ -65,7 +63,7 @@ function App2() {
       </div>
 
       <CurrenTime />
-      {showDuration && duration}
+      {showDuration && <Duration />}
       <Resolutions />
       <button className="block" onClick={handleClick}>
         Switch stream

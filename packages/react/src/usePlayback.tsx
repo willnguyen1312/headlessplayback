@@ -17,12 +17,10 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
   const playbackRef = useRef<ReturnType<Playback>>()
   const playbackStateRef = useRef<PlaybackState>()
 
-  if (!playbackStateRef.current) {
-    playbackStateRef.current = proxy() as PlaybackState
-  }
-
   if (!playbackRef.current) {
     playbackRef.current = playback(arg)
+    playbackStateRef.current = proxy(playbackRef.current.getState()) as PlaybackState
+
     playbackRef.current.subscribe((state) => {
       for (const key in state) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -32,7 +30,7 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
     })
   }
 
-  const playbackState = useSnapshot(playbackStateRef.current) as PlaybackState
+  const playbackState = useSnapshot(playbackStateRef.current as PlaybackState)
 
   useEffect(() => {
     return () => {
