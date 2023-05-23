@@ -1,5 +1,19 @@
 # @headlessplayback/react
 
+## 0.3.0
+
+### Minor Changes
+
+- [#11](https://github.com/willnguyen1312/headlessplayback/pull/11)
+  [`8efdd87`](https://github.com/willnguyen1312/headlessplayback/commit/8efdd87e9e0485fbad05339f4061fbdee8a409aa) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Optimize rendering mechanism on update 💞
+
+### Patch Changes
+
+- Updated dependencies
+  [[`8efdd87`](https://github.com/willnguyen1312/headlessplayback/commit/8efdd87e9e0485fbad05339f4061fbdee8a409aa)]:
+  - @headlessplayback/core@0.2.0
+
 ## 0.2.0
 
 ### Minor Changes

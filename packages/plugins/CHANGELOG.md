@@ -1,5 +1,13 @@
 # @headlessplayback/plugins
 
+## 0.0.2
+
+### Patch Changes
+
+- Updated dependencies
+  [[`8efdd87`](https://github.com/willnguyen1312/headlessplayback/commit/8efdd87e9e0485fbad05339f4061fbdee8a409aa)]:
+  - @headlessplayback/core@0.2.0
+
 ## 0.0.1
 
 ### Patch Changes

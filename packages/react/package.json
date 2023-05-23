@@ -1,6 +1,6 @@
 {
   "name": "@headlessplayback/react",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "description": "Adapter of headlessplayback core for React",
   "repository": "willnguyen1312/headlessplayback",
