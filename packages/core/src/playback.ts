@@ -38,6 +38,7 @@ type PlaybackFunc = {
     subscribe: (listener: Listener<PlaybackState>) => () => void
     activate: () => void
     getState: () => PlaybackState
+    getNumberOfUsers: () => number
   }
   use: PluginFunc
   $pluginsQueue: ((arg: { store: ReturnType<typeof createStore<PlaybackState>>; onCleanup: OnCleanupHook }) => void)[]
@@ -110,6 +111,7 @@ export const playback: PlaybackFunc = ({ id }) => {
         producers.delete(id)
       }
     },
+    getNumberOfUsers: () => producers.get(id)?.users ?? 0,
     activate,
     subscribe: store.subscribe,
     getState: store.getState,
