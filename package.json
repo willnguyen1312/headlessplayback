@@ -22,7 +22,7 @@
     "core": "pnpm --filter=@headlessplayback/core",
     "react": "pnpm --filter=@headlessplayback/react",
     "build": "turbo build",
-    "build:docs": "turbo build --filter=docs...",
+    "build:docs": "turbo build --filter=docs... --force",
     "start-vanilla": "turbo dev --filter=with-vanilla...",
     "start-react": "turbo dev --filter=with-react...",
     "start-docs": "turbo dev --filter=docs...",
