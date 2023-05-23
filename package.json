@@ -33,7 +33,8 @@
     "format:fix": "prettier --write ./**/*.{js,ts,tsx,mjs,json,vue}",
     "changeset": "changeset",
     "release": "pnpm check && changeset version && changeset publish",
-    "check": "turbo run build typecheck lint test --filter=!docs"
+    "check": "turbo run build typecheck lint test --filter=!docs",
+    "turbo:update": "pnpx @turbo/codemod update"
   },
   "dependencies": {
     "@changesets/changelog-github": "^0.4.8",
