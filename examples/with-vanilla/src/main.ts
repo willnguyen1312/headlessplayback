@@ -26,7 +26,7 @@ const result = playback({
 result.subscribe((state) => {
   currentTime.innerText = `Current time: ${state.currentTime.toString()}`
   duration.innerText = `Duration: ${state.duration.toString()}`
-  // console.log(state.resolutions)
+  // console.info(state.resolutions)
 })
 
 result.activate()

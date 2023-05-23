@@ -13,28 +13,32 @@ type UsePlaybackFunc = {
   use: PluginFunc
 }
 
+const playbackStateMaster: Record<string, PlaybackState> = {}
+
 export const usePlayback: UsePlaybackFunc = (arg) => {
   const playbackRef = useRef<ReturnType<Playback>>()
-  const playbackStateRef = useRef<PlaybackState>()
 
   if (!playbackRef.current) {
     playbackRef.current = playback(arg)
-    playbackStateRef.current = proxy(playbackRef.current.getState()) as PlaybackState
 
-    playbackRef.current.subscribe((state) => {
-      for (const key in state) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        playbackStateRef.current[key] = state[key]
-      }
-    })
+    if (!playbackStateMaster[arg.id]) {
+      playbackStateMaster[arg.id] = proxy(playbackRef.current.getState())
+      playbackRef.current.subscribe(({ updatedProperties }) => {
+        for (const key in updatedProperties) {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          playbackStateMaster[arg.id][key] = updatedProperties[key]
+        }
+      })
+    }
   }
 
-  const playbackState = useSnapshot(playbackStateRef.current as PlaybackState)
+  const playbackState = useSnapshot(playbackStateMaster[arg.id])
 
   useEffect(() => {
     return () => {
       playbackRef.current?.cleanup()
+      playbackRef.current?.getNumberOfUsers() === 0 && delete playbackStateMaster[arg.id]
     }
   }, [])
 
