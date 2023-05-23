@@ -4,7 +4,6 @@ import { defineConfig } from "vitepress"
 export default defineConfig({
   title: "Headless Playback",
   description: "A simple yet complete playback library designed for UI frameworks or even without",
-  base: "/headless-playback/",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
