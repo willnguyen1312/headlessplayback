@@ -1,0 +1,32 @@
+{
+  "name": "docs",
+  "private": true,
+  "description": "A core implementation of headlessplayback",
+  "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
+  "repository": "willnguyen1312/headlessplayback",
+  "homepage": "https://github.com/sponsors/willnguyen1312",
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/willnguyen1312"
+  },
+  "keywords": [
+    "javascript",
+    "typescript",
+    "video",
+    "audio",
+    "playback",
+    "headless",
+    "mobile",
+    "desktop"
+  ],
+  "scripts": {
+    "dev": "vitepress dev src --open --host",
+    "build": "vitepress build src",
+    "preview": "vitepress preview src"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "vitepress": "1.0.0-beta.1",
+    "vue": "^3.3.4"
+  }
+}
