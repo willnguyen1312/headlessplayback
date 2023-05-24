@@ -31,7 +31,7 @@ const Resolutions = component$(() => {
 })
 
 const App = component$(() => {
-  const { playbackActions, playbackState, use } = usePlayback({
+  const { playbackActions, playbackState, use, activate } = usePlayback({
     id: "video",
   })
   const showDuration = useSignal(true)
@@ -39,6 +39,8 @@ const App = component$(() => {
 
   useVisibleTask$(async () => {
     await use(hlsPlaybackPlugin)
+
+    activate()
   })
 
   useVisibleTask$(({ track }) => {

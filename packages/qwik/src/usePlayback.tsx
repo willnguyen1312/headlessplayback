@@ -1,5 +1,14 @@
 import { playback, PlaybackState, PluginFunc, PlaybackActions, Plugin } from "@headlessplayback/core"
-import { useStore, $, useVisibleTask$ } from "@builder.io/qwik"
+import {
+  useStore,
+  $,
+  useVisibleTask$,
+  component$,
+  Slot,
+  createContextId,
+  useContextProvider,
+  useContext,
+} from "@builder.io/qwik"
 
 type Playback = typeof playback
 
@@ -7,19 +16,34 @@ type UsePlaybackFunc = {
   (arg: Parameters<Playback>[0]): {
     playbackState: PlaybackState
     playbackActions: PlaybackActions
-    activate: (cb?: () => void) => void
+    activate: () => void
     use: PluginFunc
   }
 }
 
+const PlaybackMasterStateContext = createContextId<PlaybackState>("PlaybackMasterStateContext")
+
+export const PlaybackProvider = component$(() => {
+  const playbackMasterState = useStore<PlaybackState>({
+    currentTime: 0,
+    duration: 0,
+  })
+  useContextProvider(PlaybackMasterStateContext, playbackMasterState)
+  return <Slot />
+})
+
 const playbackInstanceMap = new Map<string, ReturnType<Playback>>()
 
 export const usePlayback: UsePlaybackFunc = (arg) => {
-  const playbackState = useStore<{ currentTime: number; duration: number }>({ currentTime: 0, duration: 0 })
+  const playbackState = useContext(PlaybackMasterStateContext)
   const playbackActionsRef: { value: PlaybackActions } = { value: {} as PlaybackActions }
 
-  const activate = $((cb?: () => void) => {
-    const playbackInstance = playbackInstanceMap.get(arg.id) ?? playback(arg)
+  const activate = $(() => {
+    if (playbackInstanceMap.has(arg.id)) {
+      return
+    }
+
+    const playbackInstance = playback(arg)
     playbackInstance.activate()
     playbackInstance.onCleanup(() => {
       playbackInstanceMap.delete(arg.id)
@@ -48,12 +72,6 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
     if (!playbackInstanceMap.has(arg.id)) {
       playbackInstanceMap.set(arg.id, playbackInstance)
     }
-
-    cb?.()
-  })
-
-  useVisibleTask$(() => {
-    activate()
   })
 
   const use: PluginFunc = $((plugin: Plugin) => {
