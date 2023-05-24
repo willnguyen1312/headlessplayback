@@ -25,6 +25,7 @@
     "build:docs": "turbo build --filter=docs... --force",
     "start-vanilla": "turbo dev --filter=with-vanilla...",
     "start-react": "turbo dev --filter=with-react...",
+    "start-solid": "turbo dev --filter=with-solid...",
     "start-docs": "turbo dev --filter=docs...",
     "lint": "turbo lint",
     "clean": "turbo clean && rm -rf node_modules",

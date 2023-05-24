@@ -1,8 +1,8 @@
 {
-  "name": "@headlessplayback/react",
-  "version": "0.3.0",
+  "name": "@headlessplayback/solid",
+  "version": "0.0.0",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
-  "description": "Adapter of headlessplayback core for React",
+  "description": "Adapter of headlessplayback core for Solid",
   "repository": "willnguyen1312/headlessplayback",
   "homepage": "https://github.com/sponsors/willnguyen1312",
   "funding": {
@@ -18,7 +18,7 @@
     "headless",
     "mobile",
     "desktop",
-    "react"
+    "solid"
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -37,7 +37,6 @@
   },
   "devDependencies": {
     "@types/node": "^20.2.3",
-    "@types/react": "^18.2.6",
     "eslint": "^8.41.0",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
@@ -45,11 +44,10 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@headlessplayback/core": "workspace:*",
-    "valtio": "^1.10.5"
+    "@headlessplayback/core": "workspace:*"
   },
   "peerDependencies": {
-    "react": "^18.0.0"
+    "solid-js": "^1.0.0"
   },
   "publishConfig": {
     "access": "public"

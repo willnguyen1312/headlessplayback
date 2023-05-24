@@ -1,0 +1,20 @@
+{
+  "name": "with-solid",
+  "private": true,
+  "scripts": {
+    "dev": "vite"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@unocss/reset": "^0.52.1",
+    "typescript": "^5.0.4",
+    "unocss": "^0.52.1",
+    "vite": "^4.3.8",
+    "vite-plugin-solid": "^2.7.0"
+  },
+  "dependencies": {
+    "@headlessplayback/plugins": "latest",
+    "@headlessplayback/solid": "latest",
+    "solid-js": "^1.7.5"
+  }
+}

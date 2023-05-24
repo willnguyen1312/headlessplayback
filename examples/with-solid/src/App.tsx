@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react"
-
-import { usePlayback } from "@headlessplayback/react"
+import { createSignal, type Component, onMount, createEffect } from "solid-js"
+import { usePlayback } from "@headlessplayback/solid"
 import { hlsPlaybackPlugin } from "@headlessplayback/plugins"
 usePlayback.use(hlsPlaybackPlugin)
 
 const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
 const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
 
-const Duration = React.memo(() => {
+const Duration: Component = () => {
   const { playbackState } = usePlayback({
     id: "video",
   })
 
   return <p>Duration: {playbackState.duration}</p>
-})
+}
 
 function CurrenTime() {
   const playback = usePlayback({
@@ -23,34 +22,33 @@ function CurrenTime() {
   return <p>Current time: {playback.playbackState.currentTime}</p>
 }
 
-const Resolutions = React.memo(() => {
+const Resolutions: Component = () => {
   const { playbackState } = usePlayback({
     id: "video",
   })
 
   // Plugin will inject extra state to playbackState
   return <strong>Resolutions: {JSON.stringify(playbackState.resolutions)}</strong>
-})
+}
 
-function App() {
+const App: Component = () => {
   const { activate, playbackActions, playbackState } = usePlayback({
     id: "video",
   })
-  const [showDuration, setShowDuration] = useState(true)
-  const [source, setSource] = useState(source1)
+  const [showDuration, setShowDuration] = createSignal(true)
+  const [source, setSource] = createSignal(source1)
 
-  useEffect(() => {
+  onMount(() => {
     // Activate when playback element is accessible from the DOM
     activate()
-  }, [])
+  })
 
-  useEffect(() => {
-    // Plugin will also inject extra actions to playbackActions
+  createEffect(() => {
     playbackActions.load({
       id: "video",
-      source,
+      source: source(),
     })
-  }, [source])
+  })
 
   function jumpNext5s() {
     // Core actions and state are always available
@@ -62,7 +60,7 @@ function App() {
   }
 
   function toggleStreamSource() {
-    if (source === source1) {
+    if (source() === source1) {
       setSource(source2)
     } else {
       setSource(source1)
@@ -70,27 +68,30 @@ function App() {
   }
 
   return (
-    <div id="app" className="p-4">
-      <div className="border-emerald border-1 h-[400px] w-[600px]">
-        <video className="h-full w-full" id="video" controls></video>
+    <div id="app" class="p-4">
+      <div class="border-emerald border-1 h-[400px] w-[600px]">
+        <video class="h-full w-full" id="video" controls></video>
       </div>
 
       <CurrenTime />
       {showDuration && <Duration />}
       <Resolutions />
-      <button className="block" onClick={toggleStreamSource}>
-        Switch stream
-      </button>
 
-      <button onClick={jumpNext5s}>Next 5s</button>
-      <button onClick={jumpPrev5s}>Prev 5s</button>
-      <button
-        onClick={() => {
-          setShowDuration(!showDuration)
-        }}
-      >
-        Toggle show duration
-      </button>
+      <div class="flex flex-col items-start ">
+        <button class="block" onClick={toggleStreamSource}>
+          Switch stream
+        </button>
+
+        <button onClick={jumpNext5s}>Next 5s</button>
+        <button onClick={jumpPrev5s}>Prev 5s</button>
+        <button
+          onClick={() => {
+            setShowDuration(!showDuration)
+          }}
+        >
+          Toggle show duration
+        </button>
+      </div>
     </div>
   )
 }

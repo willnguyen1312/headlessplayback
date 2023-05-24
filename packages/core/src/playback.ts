@@ -155,14 +155,10 @@ export const playback: PlaybackFunc = ({ id }) => {
       cleanupCallbackMap.set(element, (cleanupCallbackMap.get(element) || new Set()).add(cb))
     }
 
-    let injectedActions: CustomPlaybackActions = {}
+    for (const plugin of playback.$pluginsQueue) {
+      Object.assign(result.playbackActions, plugin({ store, onCleanup }))
+    }
 
-    playback.$pluginsQueue.forEach((item) => {
-      const extraAction = item({ store, onCleanup })
-      injectedActions = { ...injectedActions, ...extraAction }
-    })
-
-    Object.assign(result.playbackActions, injectedActions)
     playbackActivatedSet.add(playbackElement)
   }
 
