@@ -1,5 +1,5 @@
-import { playback, PlaybackState, PluginFunc, PlaybackActions } from "@headlessplayback/core"
-import { useStore, $ } from "@builder.io/qwik"
+import { playback, PlaybackState, PluginFunc, PlaybackActions, Plugin } from "@headlessplayback/core"
+import { useStore, $, useVisibleTask$ } from "@builder.io/qwik"
 
 type Playback = typeof playback
 
@@ -8,8 +8,8 @@ type UsePlaybackFunc = {
     playbackState: PlaybackState
     playbackActions: PlaybackActions
     activate: (cb?: () => void) => void
+    use: PluginFunc
   }
-  use: PluginFunc
 }
 
 const playbackInstanceMap = new Map<string, ReturnType<Playback>>()
@@ -52,11 +52,21 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
     cb?.()
   })
 
+  useVisibleTask$(() => {
+    activate()
+  })
+
+  const use: PluginFunc = $((plugin: Plugin) => {
+    const playbackInstance = playbackInstanceMap.get(arg.id) ?? playback(arg)
+    const result = playbackInstance.use(plugin)
+
+    Object.assign(playbackActionsRef.value, result)
+  })
+
   return {
     playbackState,
     activate,
     playbackActions: playbackActionsRef.value,
+    use,
   }
 }
-
-usePlayback.use = playback.use

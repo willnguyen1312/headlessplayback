@@ -44,9 +44,10 @@ type PlaybackFunc = {
     getState: () => PlaybackState
     playbackActions: PlaybackActions
     onCleanup: (cb: CleanupFunc) => void
+    use: PluginFunc
   }
   use: PluginFunc
-  $pluginsQueue: ((arg: { store: ReturnType<typeof createStore<PlaybackState>>; onCleanup: OnCleanupHook }) => any)[]
+  $pluginsQueue: ((arg: { store: ReturnType<typeof createStore<PlaybackState>>; onCleanup: OnCleanupHook }) => void)[]
 }
 
 const cleanupCallbackMap = new WeakMap<HTMLMediaElement, Set<CleanupFunc>>()
@@ -96,6 +97,39 @@ export const playback: PlaybackFunc = ({ id }) => {
     )
   }
 
+  const onCleanup: OnCleanupHook = (element: HTMLMediaElement, cb) => {
+    cleanupCallbackMap.set(element, (cleanupCallbackMap.get(element) || new Set()).add(cb))
+  }
+
+  function activate() {
+    const _playbackElement = document.getElementById(id) as HTMLMediaElement | null
+
+    if (!_playbackElement) {
+      throw new Error(`Playback element with id ${id} not found`)
+    }
+
+    if (playbackActivatedSet.has(_playbackElement)) {
+      return false
+    }
+
+    playbackElement = _playbackElement
+    playbackElement?.addEventListener("loadedmetadata", handleLoadedMetadata, { signal })
+    playbackElement?.addEventListener("seeking", handleSeeking, { signal })
+    playbackElement?.addEventListener("timeupdate", handleTimeUpdate, { signal })
+
+    store.setState({
+      currentTime: playbackElement?.currentTime,
+      duration: Number.isFinite(playbackElement?.duration) ? playbackElement?.duration : 0,
+    })
+
+    for (const plugin of playback.$pluginsQueue) {
+      Object.assign(result.playbackActions, plugin({ store, onCleanup }))
+    }
+
+    playbackActivatedSet.add(playbackElement)
+    return true
+  }
+
   const result = {
     cleanup() {
       if (document.body.contains(playbackElement as HTMLMediaElement)) {
@@ -122,38 +156,17 @@ export const playback: PlaybackFunc = ({ id }) => {
     subscribe: store.subscribe,
     getState: store.getState,
     playbackActions,
-  }
+    use: <T>(plugin: Plugin<T>, options: T) => {
+      const result = plugin.install(
+        {
+          store,
+          onCleanup,
+        },
+        options,
+      )
 
-  function activate() {
-    const _playbackElement = document.getElementById(id) as HTMLMediaElement | null
-    if (!_playbackElement) {
-      throw new Error(`Playback element with id ${id} not found`)
-    }
-
-    if (playbackActivatedSet.has(_playbackElement)) {
-      return false
-    }
-
-    playbackElement = _playbackElement
-    playbackElement?.addEventListener("loadedmetadata", handleLoadedMetadata, { signal })
-    playbackElement?.addEventListener("seeking", handleSeeking, { signal })
-    playbackElement?.addEventListener("timeupdate", handleTimeUpdate, { signal })
-
-    store.setState({
-      currentTime: playbackElement?.currentTime,
-      duration: Number.isFinite(playbackElement?.duration) ? playbackElement?.duration : 0,
-    })
-
-    const onCleanup: OnCleanupHook = (element: HTMLMediaElement, cb) => {
-      cleanupCallbackMap.set(element, (cleanupCallbackMap.get(element) || new Set()).add(cb))
-    }
-
-    for (const plugin of playback.$pluginsQueue) {
-      Object.assign(result.playbackActions, plugin({ store, onCleanup }))
-    }
-
-    playbackActivatedSet.add(playbackElement)
-    return true
+      return result
+    },
   }
 
   return result

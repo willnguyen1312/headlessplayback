@@ -15,7 +15,7 @@ const Duration = React.memo(() => {
   return <p>Duration: {playbackState.duration}</p>
 })
 
-function currentTime() {
+function CurrentTime() {
   const playback = usePlayback({
     id: "video",
   })
@@ -75,7 +75,7 @@ function App() {
         <video className="h-full w-full" id="video" controls></video>
       </div>
 
-      <currentTime />
+      <CurrentTime />
       {showDuration && <Duration />}
       <Resolutions />
 

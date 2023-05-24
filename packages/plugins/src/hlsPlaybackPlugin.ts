@@ -6,6 +6,7 @@ type LoadFunction = (arg: { id: string; source: string }) => void
 declare module "@headlessplayback/core" {
   export interface CustomPlaybackState {
     resolutions: string[]
+    message: string
   }
 
   export interface CustomPlaybackActions {
@@ -48,6 +49,7 @@ export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
       hls.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
         store.setState({
           resolutions: data.levels.map((level) => level.height.toString()),
+          message: "Hi there",
         })
       })
 
