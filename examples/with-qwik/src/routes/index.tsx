@@ -1,41 +1,29 @@
 import { usePlayback } from "@headlessplayback/qwik"
 import { hlsPlaybackPlugin } from "@headlessplayback/plugins"
-import { useVisibleTask$, component$, useSignal, $ } from "@builder.io/qwik"
+import { useVisibleTask$, component$, useSignal, $, useTask$ } from "@builder.io/qwik"
 
 const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
 const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
 
 const Duration = component$(() => {
-  const { playbackState, activate } = usePlayback({
+  const { playbackState } = usePlayback({
     id: "video",
-  })
-
-  useVisibleTask$(() => {
-    activate()
   })
 
   return <p>Duration: {playbackState.duration}</p>
 })
 
 const CurrentTime = component$(() => {
-  const { playbackState, activate } = usePlayback({
+  const { playbackState } = usePlayback({
     id: "video",
-  })
-
-  useVisibleTask$(() => {
-    activate()
   })
 
   return <p>Current time: {playbackState.currentTime}</p>
 })
 
 const Resolutions = component$(() => {
-  const { playbackState, activate } = usePlayback({
+  const { playbackState } = usePlayback({
     id: "video",
-  })
-
-  useVisibleTask$(() => {
-    activate()
   })
 
   // Plugin will inject extra state to playbackState
@@ -43,27 +31,18 @@ const Resolutions = component$(() => {
 })
 
 const App = component$(() => {
-  const { activate, playbackActions, playbackState } = usePlayback({
+  const { playbackActions, playbackState, use } = usePlayback({
     id: "video",
   })
   const showDuration = useSignal(true)
   const source = useSignal(source1)
 
-  useVisibleTask$(() => {
-    usePlayback.use(hlsPlaybackPlugin)
-
-    // Activate when playback element is accessible from the DOM
-    activate(() => {
-      playbackActions.load?.({
-        id: "video",
-        source: source.value,
-      })
-    })
+  useVisibleTask$(async () => {
+    await use(hlsPlaybackPlugin)
   })
 
   useVisibleTask$(({ track }) => {
     track(() => source.value)
-
     playbackActions.load?.({
       id: "video",
       source: source.value,
