@@ -20,8 +20,6 @@ const currentTime = component$(() => {
 
   useTask$(({ track }) => {
     track(() => playbackState)
-
-    // console.log("playbackState", playbackState)
   })
 
   return <p>Current time: {playbackState.currentTime}</p>
@@ -45,22 +43,25 @@ const App = component$(() => {
   const showDuration = useSignal(true)
   const source = useSignal(source1)
 
-  // const store = useStore<{ currentTime: number }>({ currentTime: 0 })
-
   useVisibleTask$(() => {
     usePlayback.use(hlsPlaybackPlugin)
+
     // Activate when playback element is accessible from the DOM
-    activate()
+    activate(() => {
+      playbackActions.load?.({
+        id: "video",
+        source: source.value,
+      })
+    })
   })
 
   useVisibleTask$(({ track }) => {
     track(() => source.value)
-    // playbackActions.load({
-    //   id: "video",
-    //   source: source.value,
-    // })
 
-    // console.log("playbackActions", playbackActions)
+    playbackActions.load?.({
+      id: "video",
+      source: source.value,
+    })
   })
 
   const jumpNext5s = $(() => {
@@ -83,7 +84,7 @@ const App = component$(() => {
     <div id="app" class="p-4">
       <div class="border-emerald border-1 h-[400px] w-[600px]">
         <video
-          src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+          // src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
           class="h-full w-full"
           id="video"
           controls
