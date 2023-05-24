@@ -1,7 +1,7 @@
-import { usePlayback } from "@headlessplayback/react"
 import React, { useEffect, useState } from "react"
-import { hlsPlaybackPlugin } from "@headlessplayback/plugins"
-usePlayback.use(hlsPlaybackPlugin)
+
+const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
+const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
 
 const Duration = React.memo(() => {
   const { playbackState } = usePlayback({
@@ -9,14 +9,6 @@ const Duration = React.memo(() => {
   })
 
   return <p>Duration: {playbackState.duration}</p>
-})
-
-const Resolutions = React.memo(() => {
-  const { playbackState } = usePlayback({
-    id: "video",
-  })
-
-  return <p>Resolutions: {JSON.stringify(playbackState.resolutions)}</p>
 })
 
 function CurrenTime() {
@@ -27,28 +19,49 @@ function CurrenTime() {
   return <p>Current time: {playback.playbackState.currentTime}</p>
 }
 
-const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
-const source2 = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
+import { usePlayback } from "@headlessplayback/react"
+import { hlsPlaybackPlugin } from "@headlessplayback/plugins"
+usePlayback.use(hlsPlaybackPlugin)
 
-function App2() {
-  const { activate, playback } = usePlayback({
+const Resolutions = React.memo(() => {
+  const { playbackState } = usePlayback({
+    id: "video",
+  })
+
+  // Plugin will inject extra state to playbackState
+  return <p>Resolutions: {JSON.stringify(playbackState.resolutions)}</p>
+})
+
+function App() {
+  const { activate, playbackActions, playbackState } = usePlayback({
     id: "video",
   })
   const [showDuration, setShowDuration] = useState(true)
   const [source, setSource] = useState(source1)
 
   useEffect(() => {
+    // Activate when playback element is accessible from the DOM
     activate()
   }, [])
 
   useEffect(() => {
-    playback.load({
+    // Plugin will also inject extra actions to playbackActions
+    playbackActions.load({
       id: "video",
-      src: source,
+      source,
     })
   }, [source])
 
-  function handleClick() {
+  function jumpNext5s() {
+    // Core actions and state are always available
+    playbackActions.setCurrentTime(playbackState.currentTime + 5)
+  }
+
+  function jumpPrev5s() {
+    playbackActions.setCurrentTime(playbackState.currentTime - 5)
+  }
+
+  function toggleStreamSource() {
     if (source === source1) {
       setSource(source2)
     } else {
@@ -65,9 +78,12 @@ function App2() {
       <CurrenTime />
       {showDuration && <Duration />}
       <Resolutions />
-      <button className="block" onClick={handleClick}>
+      <button className="block" onClick={toggleStreamSource}>
         Switch stream
       </button>
+
+      <button onClick={jumpNext5s}>Next 5s</button>
+      <button onClick={jumpPrev5s}>Prev 5s</button>
       <button
         onClick={() => {
           setShowDuration(!showDuration)
@@ -75,9 +91,8 @@ function App2() {
       >
         Toggle show duration
       </button>
-      {/* <pre>{JSON.stringify(playbackState.resolutions)}</pre> */}
     </div>
   )
 }
 
-export default App2
+export default App

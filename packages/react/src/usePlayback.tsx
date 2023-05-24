@@ -1,4 +1,4 @@
-import { playback, PlaybackState, PluginFunc } from "@headlessplayback/core"
+import { playback, PlaybackState, PluginFunc, PlaybackActions } from "@headlessplayback/core"
 import { useEffect, useRef } from "react"
 import { proxy, useSnapshot } from "valtio"
 
@@ -7,8 +7,8 @@ type Playback = typeof playback
 type UsePlaybackFunc = {
   (arg: Parameters<Playback>[0]): {
     playbackState: PlaybackState
+    playbackActions: PlaybackActions
     activate: () => void
-    playback: Playback
   }
   use: PluginFunc
 }
@@ -45,7 +45,7 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
   return {
     playbackState,
     activate: playbackRef.current.activate,
-    playback,
+    playbackActions: playbackRef.current.playbackActions,
   }
 }
 

@@ -1,4 +1,5 @@
 import { Listener, createStore } from "./store"
+import { clamp } from "./utils"
 
 export interface InternalPlaybackState {
   currentTime: number
@@ -9,7 +10,11 @@ export interface InternalPlaybackState {
 export interface CustomPlaybackState {}
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface CustomPlaybackFunc {}
+export interface CustomPlaybackActions {}
+
+export type PlaybackActions = {
+  setCurrentTime: (value: number) => void
+} & CustomPlaybackActions
 
 export type PlaybackState = InternalPlaybackState & CustomPlaybackState
 
@@ -23,11 +28,10 @@ export type Plugin<T = unknown> = {
   install: (
     arg: {
       store: ReturnType<typeof createStore<PlaybackState>>
-      playback: PlaybackFunc
       onCleanup: OnCleanupHook
     },
     options: T,
-  ) => void
+  ) => CustomPlaybackActions
 }
 
 export type PluginFunc = <T>(plugin: Plugin<T>, ...options: T[]) => void
@@ -39,10 +43,11 @@ type PlaybackFunc = {
     activate: () => void
     getState: () => PlaybackState
     getNumberOfUsers: () => number
+    playbackActions: PlaybackActions
   }
   use: PluginFunc
-  $pluginsQueue: ((arg: { store: ReturnType<typeof createStore<PlaybackState>>; onCleanup: OnCleanupHook }) => void)[]
-} & CustomPlaybackFunc
+  $pluginsQueue: ((arg: { store: ReturnType<typeof createStore<PlaybackState>>; onCleanup: OnCleanupHook }) => any)[]
+}
 
 const producers = new Map<string, { playback: ReturnType<PlaybackFunc>; users: number }>()
 const cleanupCallbackMap = new WeakMap<HTMLMediaElement, Set<CleanupFunc>>()
@@ -87,6 +92,14 @@ export const playback: PlaybackFunc = ({ id }) => {
     })
   }
 
+  const playbackActions: PlaybackActions = {
+    setCurrentTime: (value: number) => {
+      if (playbackElement) {
+        playbackElement.currentTime = clamp(value, 0, playbackElement.duration)
+      }
+    },
+  }
+
   const result = {
     cleanup() {
       const cachedResult = producers.get(id)
@@ -115,6 +128,7 @@ export const playback: PlaybackFunc = ({ id }) => {
     activate,
     subscribe: store.subscribe,
     getState: store.getState,
+    playbackActions,
   }
 
   function activate() {
@@ -141,7 +155,14 @@ export const playback: PlaybackFunc = ({ id }) => {
       cleanupCallbackMap.set(element, (cleanupCallbackMap.get(element) || new Set()).add(cb))
     }
 
-    playback.$pluginsQueue.forEach((item) => item({ store, onCleanup }))
+    let injectedActions: CustomPlaybackActions = {}
+
+    playback.$pluginsQueue.forEach((item) => {
+      const extraAction = item({ store, onCleanup })
+      injectedActions = { ...injectedActions, ...extraAction }
+    })
+
+    Object.assign(result.playbackActions, injectedActions)
     playbackActivatedSet.add(playbackElement)
   }
 
@@ -152,6 +173,6 @@ export const playback: PlaybackFunc = ({ id }) => {
 playback.$pluginsQueue = []
 playback.use = <T>(plugin: Plugin<T>, options: T) => {
   playback.$pluginsQueue.push(({ store, onCleanup }) => {
-    plugin.install({ store, playback, onCleanup }, options)
+    return plugin.install({ store, onCleanup }, options)
   })
 }
