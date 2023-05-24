@@ -122,8 +122,8 @@ export const playback: PlaybackFunc = ({ id }) => {
       duration: Number.isFinite(playbackElement?.duration) ? playbackElement?.duration : 0,
     })
 
-    for (const plugin of playback.$pluginsQueue) {
-      Object.assign(result.playbackActions, plugin({ store, onCleanup }))
+    for (const pluginQueueItem of playback.$pluginsQueue) {
+      Object.assign(result.playbackActions, pluginQueueItem({ store, onCleanup }))
     }
 
     playbackActivatedSet.add(playbackElement)
@@ -157,15 +157,15 @@ export const playback: PlaybackFunc = ({ id }) => {
     getState: store.getState,
     playbackActions,
     use: <T>(plugin: Plugin<T>, options: T) => {
-      const result = plugin.install(
+      const data = plugin.install(
         {
           store,
           onCleanup,
         },
         options,
       )
-
-      return result
+      Object.assign(result.playbackActions, data)
+      return data
     },
   }
 
