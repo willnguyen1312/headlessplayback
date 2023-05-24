@@ -1,6 +1,6 @@
 import { usePlayback } from "@headlessplayback/qwik"
 import { hlsPlaybackPlugin } from "@headlessplayback/plugins"
-import { useVisibleTask$, component$, useSignal, $, useTask$ } from "@builder.io/qwik"
+import { useVisibleTask$, component$, useSignal, $ } from "@builder.io/qwik"
 
 const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
 const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
@@ -30,13 +30,16 @@ const CurrentTime = component$(() => {
 })
 
 const Resolutions = component$(() => {
-  const { playbackState } = usePlayback({
+  const { playbackState, activate } = usePlayback({
     id: "video",
   })
 
+  useVisibleTask$(() => {
+    activate()
+  })
+
   // Plugin will inject extra state to playbackState
-  // return <strong>Resolutions: {JSON.stringify(playbackState.resolutions)}</strong>
-  return null
+  return <strong>Resolutions: {JSON.stringify(playbackState.resolutions)}</strong>
 })
 
 const App = component$(() => {
