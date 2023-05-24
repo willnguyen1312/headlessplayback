@@ -4,3 +4,5 @@ coverage
 build
 images
 public
+lib
+lib-types
