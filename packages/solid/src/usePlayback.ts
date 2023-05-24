@@ -13,14 +13,17 @@ type UsePlaybackFunc = {
   use: PluginFunc
 }
 
-const playbackStateMaster: Record<string, ReturnType<typeof createStore<PlaybackState>>[0]> = {}
+const playbackStateMaster = new Map<string, PlaybackState>()
+const playbackInstanceMap = new Map<string, ReturnType<Playback>>()
 
 export const usePlayback: UsePlaybackFunc = (arg) => {
-  const playbackInstance = playback(arg)
+  if (!playbackInstanceMap.has(arg.id)) {
+    const playbackInstance = playback(arg)
+    playbackInstanceMap.set(arg.id, playbackInstance)
 
-  if (!playbackStateMaster[arg.id]) {
     const [playbackState, setPlaybackState] = createStore(playbackInstance.getState())
-    playbackStateMaster[arg.id] = playbackState
+    playbackStateMaster.set(arg.id, playbackState)
+
     playbackInstance.subscribe(({ updatedProperties }) => {
       setPlaybackState(
         produce((currentPlaybackState) => {
@@ -35,14 +38,24 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
   }
 
   onCleanup(() => {
-    playbackInstance.cleanup()
-    playbackInstance.getNumberOfUsers() === 0 && delete playbackStateMaster[arg.id]
+    playbackInstanceMap.get(arg.id)?.cleanup()
   })
 
+  const activate = () => {
+    const playbackInstance = playbackInstanceMap.get(arg.id) as ReturnType<Playback>
+    const isActivated = playbackInstance.activate()
+    if (isActivated) {
+      playbackInstance.onCleanup(() => {
+        playbackStateMaster.delete(arg.id)
+        playbackInstanceMap.delete(arg.id)
+      })
+    }
+  }
+
   return {
-    playbackState: playbackStateMaster[arg.id],
-    activate: playbackInstance.activate,
-    playbackActions: playbackInstance.playbackActions,
+    playbackState: playbackStateMaster.get(arg.id) as PlaybackState,
+    activate,
+    playbackActions: (playbackInstanceMap.get(arg.id) as ReturnType<Playback>).playbackActions,
   }
 }
 

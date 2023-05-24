@@ -1,6 +1,5 @@
 import { playback, PlaybackState, PluginFunc, PlaybackActions } from "@headlessplayback/core"
-import { useEffect, useRef } from "react"
-import { proxy, useSnapshot } from "valtio"
+import { useVisibleTask$, Slot, component$, createContextId, useContextProvider, useStore } from "@builder.io/qwik"
 
 type Playback = typeof playback
 
@@ -13,10 +12,18 @@ type UsePlaybackFunc = {
   use: PluginFunc
 }
 
+const PlaybackContext = createContextId<Record<string, PlaybackState>>("playbackContext")
+
+export const PlaybackProvider = component$(() => {
+  const playbackStateMaster = useStore<Record<string, PlaybackState>>({}, { deep: true })
+  useContextProvider(PlaybackContext, playbackStateMaster)
+  return <Slot />
+})
+
 const playbackStateMaster: Record<string, PlaybackState> = {}
 
 export const usePlayback: UsePlaybackFunc = (arg) => {
-  const playbackRef = useRef<ReturnType<Playback>>()
+  const playbackInstance = playback(arg)
 
   if (!playbackRef.current) {
     playbackRef.current = playback(arg)
@@ -33,14 +40,12 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
     }
   }
 
-  const playbackState = useSnapshot(playbackStateMaster[arg.id])
-
-  useEffect(() => {
-    return () => {
+  useVisibleTask$(({ cleanup }) => {
+    cleanup(() => {
       playbackRef.current?.cleanup()
       playbackRef.current?.getNumberOfUsers() === 0 && delete playbackStateMaster[arg.id]
-    }
-  }, [])
+    })
+  })
 
   return {
     playbackState,

@@ -78,9 +78,7 @@ const App: Component = () => {
       <Resolutions />
 
       <div class="flex flex-col items-start ">
-        <button class="block" onClick={toggleStreamSource}>
-          Switch stream
-        </button>
+        <button onClick={toggleStreamSource}>Switch stream</button>
 
         <button onClick={jumpNext5s}>Next 5s</button>
         <button onClick={jumpPrev5s}>Prev 5s</button>

@@ -40,30 +40,19 @@ type PlaybackFunc = {
   (arg: { id: string }): {
     cleanup: () => void
     subscribe: (listener: Listener<PlaybackState>) => () => void
-    activate: () => void
+    activate: () => boolean
     getState: () => PlaybackState
-    getNumberOfUsers: () => number
     playbackActions: PlaybackActions
+    onCleanup: (cb: CleanupFunc) => void
   }
   use: PluginFunc
   $pluginsQueue: ((arg: { store: ReturnType<typeof createStore<PlaybackState>>; onCleanup: OnCleanupHook }) => any)[]
 }
 
-const producers = new Map<string, { playback: ReturnType<PlaybackFunc>; users: number }>()
 const cleanupCallbackMap = new WeakMap<HTMLMediaElement, Set<CleanupFunc>>()
 const playbackActivatedSet = new WeakSet<HTMLMediaElement>()
 
 export const playback: PlaybackFunc = ({ id }) => {
-  if (producers.has(id)) {
-    const cachedResult = producers.get(id)
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    cachedResult!.users++
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    producers.set(id, cachedResult!)
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return producers.get(id)!.playback
-  }
-
   const store = createStore<PlaybackState>({
     currentTime: 0,
     duration: 0,
@@ -100,31 +89,35 @@ export const playback: PlaybackFunc = ({ id }) => {
     },
   }
 
+  const addCleanupCallback = (cb: CleanupFunc) => {
+    cleanupCallbackMap.set(
+      playbackElement as HTMLMediaElement,
+      (cleanupCallbackMap.get(playbackElement as HTMLMediaElement) || new Set()).add(cb),
+    )
+  }
+
   const result = {
     cleanup() {
-      const cachedResult = producers.get(id)
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      cachedResult!.users--
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      producers.set(id, cachedResult!)
-
-      if (producers.get(id)?.users === 0) {
-        abortController.abort()
-        store.cleanup()
-        playbackElement && playbackActivatedSet.delete(playbackElement)
-        if (cleanupCallbackMap.has(playbackElement as HTMLMediaElement)) {
-          const cbs = cleanupCallbackMap.get(playbackElement as HTMLMediaElement) as Set<CleanupFunc>
-
-          for (const cb of cbs) {
-            cb()
-          }
-
-          cleanupCallbackMap.delete(playbackElement as HTMLMediaElement)
-        }
-        producers.delete(id)
+      if (document.body.contains(playbackElement as HTMLMediaElement)) {
+        return
       }
+
+      abortController.abort()
+      store.cleanup()
+      playbackElement && playbackActivatedSet.delete(playbackElement)
+      if (cleanupCallbackMap.has(playbackElement as HTMLMediaElement)) {
+        const cbs = cleanupCallbackMap.get(playbackElement as HTMLMediaElement) as Set<CleanupFunc>
+
+        for (const cb of cbs) {
+          cb()
+        }
+
+        cleanupCallbackMap.delete(playbackElement as HTMLMediaElement)
+      }
+
+      playbackElement = undefined
     },
-    getNumberOfUsers: () => producers.get(id)?.users ?? 0,
+    onCleanup: addCleanupCallback,
     activate,
     subscribe: store.subscribe,
     getState: store.getState,
@@ -138,7 +131,7 @@ export const playback: PlaybackFunc = ({ id }) => {
     }
 
     if (playbackActivatedSet.has(_playbackElement)) {
-      return
+      return false
     }
 
     playbackElement = _playbackElement
@@ -160,9 +153,9 @@ export const playback: PlaybackFunc = ({ id }) => {
     }
 
     playbackActivatedSet.add(playbackElement)
+    return true
   }
 
-  producers.set(id, { playback: result, users: 1 })
   return result
 }
 

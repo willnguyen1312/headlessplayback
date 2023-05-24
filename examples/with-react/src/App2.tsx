@@ -78,19 +78,20 @@ function App() {
       <CurrenTime />
       {showDuration && <Duration />}
       <Resolutions />
-      <button className="block" onClick={toggleStreamSource}>
-        Switch stream
-      </button>
 
-      <button onClick={jumpNext5s}>Next 5s</button>
-      <button onClick={jumpPrev5s}>Prev 5s</button>
-      <button
-        onClick={() => {
-          setShowDuration(!showDuration)
-        }}
-      >
-        Toggle show duration
-      </button>
+      <div className="flex flex-col items-start ">
+        <button onClick={toggleStreamSource}>Switch stream</button>
+
+        <button onClick={jumpNext5s}>Next 5s</button>
+        <button onClick={jumpPrev5s}>Prev 5s</button>
+        <button
+          onClick={() => {
+            setShowDuration(!showDuration)
+          }}
+        >
+          Toggle show duration
+        </button>
+      </div>
     </div>
   )
 }
