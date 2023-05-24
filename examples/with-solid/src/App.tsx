@@ -14,7 +14,7 @@ const Duration: Component = () => {
   return <p>Duration: {playbackState.duration}</p>
 }
 
-function CurrenTime() {
+function currentTime() {
   const playback = usePlayback({
     id: "video",
   })
@@ -73,7 +73,7 @@ const App: Component = () => {
         <video class="h-full w-full" id="video" controls></video>
       </div>
 
-      <CurrenTime />
+      <currentTime />
       {showDuration && <Duration />}
       <Resolutions />
 

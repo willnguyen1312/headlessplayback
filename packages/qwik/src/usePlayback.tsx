@@ -1,5 +1,16 @@
 import { playback, PlaybackState, PluginFunc, PlaybackActions } from "@headlessplayback/core"
-import { useVisibleTask$, Slot, component$, createContextId, useContextProvider, useStore } from "@builder.io/qwik"
+import {
+  useVisibleTask$,
+  Slot,
+  component$,
+  createContextId,
+  useContextProvider,
+  useStore,
+  useContext,
+  $,
+  noSerialize,
+  useTask$,
+} from "@builder.io/qwik"
 
 type Playback = typeof playback
 
@@ -12,45 +23,84 @@ type UsePlaybackFunc = {
   use: PluginFunc
 }
 
-const PlaybackContext = createContextId<Record<string, PlaybackState>>("playbackContext")
+const PlaybackStateContext = createContextId<Record<string, PlaybackState>>("PlaybackStateContext")
+const PlaybackMapContext = createContextId<Record<string, ReturnType<Playback>>>("PlaybackMapContext")
 
 export const PlaybackProvider = component$(() => {
   const playbackStateMaster = useStore<Record<string, PlaybackState>>({}, { deep: true })
-  useContextProvider(PlaybackContext, playbackStateMaster)
+  const playbackInstanceMap = useStore<Record<string, ReturnType<Playback>>>({}, { deep: true })
+  useContextProvider(PlaybackStateContext, playbackStateMaster)
+  useContextProvider(PlaybackMapContext, playbackInstanceMap)
   return <Slot />
 })
 
-const playbackStateMaster: Record<string, PlaybackState> = {}
+// const playbackStateMaster = new Map<string, PlaybackState>()
+const playbackInstanceMap = new Map<string, ReturnType<Playback>>()
 
 export const usePlayback: UsePlaybackFunc = (arg) => {
-  const playbackInstance = playback(arg)
+  const playbackState = useStore<{ currentTime: number; duration: number }>({ currentTime: 0, duration: 0 })
+  const playbackActionsRef: { value: PlaybackActions } = { value: {} as PlaybackActions }
 
-  if (!playbackRef.current) {
-    playbackRef.current = playback(arg)
+  const activate = $(() => {
+    if (!playbackInstanceMap.has(arg.id)) {
+      const playbackInstance = playback(arg)
+      playbackInstance.activate()
 
-    if (!playbackStateMaster[arg.id]) {
-      playbackStateMaster[arg.id] = proxy(playbackRef.current.getState())
-      playbackRef.current.subscribe(({ updatedProperties }) => {
+      Object.assign(playbackActionsRef.value, playbackInstance.playbackActions)
+
+      playbackInstance.onCleanup(() => {
+        // playbackStateMaster.delete(arg.id)
+        playbackInstanceMap.delete(arg.id)
+      })
+
+      // if (!playbackInstanceMap.has(arg.id)) {
+      // const playbackInstance = playback(arg)
+      playbackInstanceMap.set(arg.id, playbackInstance)
+      // playbackStateMaster.set(arg.id, (playbackInstance.getState()))
+
+      const currentState = playbackInstance.getState()
+      for (const key in currentState) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        playbackState[key] = currentState[key]
+      }
+
+      playbackInstance.subscribe(({ updatedProperties }) => {
+        // const playbackState = playbackStateMaster.get(arg.id) as PlaybackState
         for (const key in updatedProperties) {
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
-          playbackStateMaster[arg.id][key] = updatedProperties[key]
+          playbackState[key] = updatedProperties[key]
         }
       })
     }
-  }
+    // }
 
-  useVisibleTask$(({ cleanup }) => {
-    cleanup(() => {
-      playbackRef.current?.cleanup()
-      playbackRef.current?.getNumberOfUsers() === 0 && delete playbackStateMaster[arg.id]
-    })
+    // const playbackInstance = playback(arg) as ReturnType<Playback>
+    // playbackInstance.activate() // console.log("playbackInstance", playbackInstance)
+
+    // Object.assign(playbackActionsRef.value, playbackInstance.playbackActions)
+    // const currentState = playbackInstance.getState()
+
+    // for (const key in currentState) {
+    //   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //   // @ts-ignore
+    //   playbackState[key] = currentState[key]
+    // }
+
+    // playbackInstance.subscribe(({ updatedProperties }) => {
+    //   for (const key in updatedProperties) {
+    //     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //     // @ts-ignore
+    //     playbackState[key] = updatedProperties[key]
+    //   }
+    // })
   })
 
   return {
     playbackState,
-    activate: playbackRef.current.activate,
-    playbackActions: playbackRef.current.playbackActions,
+    activate,
+    playbackActions: playbackActionsRef.value,
   }
 }
 

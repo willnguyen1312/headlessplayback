@@ -1,184 +1,117 @@
-import { component$, useSignal, useComputed$, useVisibleTask$ } from "@builder.io/qwik"
-import { useZoomImageClick, useZoomImageHover, useZoomImageMove, useZoomImageWheel } from "@zoom-image/qwik"
-import { cropImage } from "@zoom-image/core"
+import { usePlayback } from "@headlessplayback/qwik"
+import { hlsPlaybackPlugin } from "@headlessplayback/plugins"
+import { useVisibleTask$, component$, useSignal, $, useTask$ } from "@builder.io/qwik"
 
-type Tab = {
-  name: string
-  current: boolean
-  href: string
-  value: "wheel" | "hover" | "move" | "click"
-}
+const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
+const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
 
-export default component$(() => {
-  const tabs = useSignal<Tab[]>([
-    { name: "Wheel", href: "#", current: true, value: "wheel" },
-    { name: "Hover", href: "#", current: false, value: "hover" },
-    { name: "Move", href: "#", current: false, value: "move" },
-    { name: "Click", href: "#", current: false, value: "click" },
-  ])
-  const imageWheelContainerRef = useSignal<HTMLDivElement>()
-  const imageHoverContainerRef = useSignal<HTMLDivElement>()
-  const imageMoveContainerRef = useSignal<HTMLDivElement>()
-  const imageClickContainerRef = useSignal<HTMLDivElement>()
-  const zoomTargetRef = useSignal<HTMLDivElement>()
-  const croppedImage = useSignal<string>("")
+const Duration = component$(() => {
+  const { playbackState } = usePlayback({
+    id: "video",
+  })
 
-  const {
-    createZoomImage: createZoomImageWheel,
-    zoomImageState: zoomImageWheelState,
-    setZoomImageState: setZoomImageWheelState,
-  } = useZoomImageWheel()
-  const { createZoomImage: createZoomImageHover } = useZoomImageHover()
-  const { createZoomImage: createZoomImageMove } = useZoomImageMove()
-  const { createZoomImage: createZoomImageClick } = useZoomImageClick()
+  return <p>Duration: {playbackState.duration}</p>
+})
 
-  const zoomType = useComputed$(() => {
-    return tabs.value.find((tab) => tab.current)?.value || ""
+const currentTime = component$(() => {
+  const { playbackState } = usePlayback({
+    id: "video",
+  })
+
+  useTask$(({ track }) => {
+    track(() => playbackState)
+
+    // console.log("playbackState", playbackState)
+  })
+
+  return <p>Current time: {playbackState.currentTime}</p>
+  return null
+})
+
+const Resolutions = component$(() => {
+  const { playbackState } = usePlayback({
+    id: "video",
+  })
+
+  // Plugin will inject extra state to playbackState
+  // return <strong>Resolutions: {JSON.stringify(playbackState.resolutions)}</strong>
+  return null
+})
+
+const App = component$(() => {
+  const { activate, playbackActions, playbackState } = usePlayback({
+    id: "video",
+  })
+  const showDuration = useSignal(true)
+  const source = useSignal(source1)
+
+  // const store = useStore<{ currentTime: number }>({ currentTime: 0 })
+
+  useVisibleTask$(() => {
+    usePlayback.use(hlsPlaybackPlugin)
+    // Activate when playback element is accessible from the DOM
+    activate()
   })
 
   useVisibleTask$(({ track }) => {
-    track(() => zoomType.value)
-    croppedImage.value = ""
+    track(() => source.value)
+    // playbackActions.load({
+    //   id: "video",
+    //   source: source.value,
+    // })
 
-    if (zoomType.value === "wheel" && imageWheelContainerRef.value) {
-      const imageContainer = imageWheelContainerRef.value
-      createZoomImageWheel(imageContainer)
-    }
+    // console.log("playbackActions", playbackActions)
+  })
 
-    if (zoomType.value === "hover" && imageHoverContainerRef.value) {
-      const imageContainer = imageHoverContainerRef.value
-      const zoomTarget = zoomTargetRef.value
-      createZoomImageHover(imageContainer, {
-        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
-        customZoom: { width: 300, height: 500 },
-        zoomTarget,
-        scaleFactor: 0.5,
-      })
-    }
+  const jumpNext5s = $(() => {
+    playbackActions.setCurrentTime(playbackState.currentTime + 5)
+  })
 
-    if (zoomType.value === "move") {
-      const imageContainer = imageMoveContainerRef.value as HTMLDivElement
-      createZoomImageMove(imageContainer, {
-        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
-      })
-    }
+  const jumpPrev5s = $(() => {
+    playbackActions.setCurrentTime(playbackState.currentTime - 5)
+  })
 
-    if (zoomType.value === "click") {
-      const imageContainer = imageClickContainerRef.value as HTMLDivElement
-      createZoomImageClick(imageContainer, {
-        zoomImageSource: "https://nam-assets.netlify.app/static/large.webp",
-      })
+  const toggleStreamSource = $(() => {
+    if (source.value === source1) {
+      source.value = source2
+    } else {
+      source.value = source1
     }
   })
 
   return (
-    <div class="p-4 font-sans">
-      <nav class="flex space-x-4 pb-4" aria-label="Tabs">
-        {tabs.value.map((tab) => {
-          return (
-            <a
-              key={tab.name}
-              preventdefault:click
-              href={tab.href}
-              onClick$={() => {
-                tabs.value = tabs.value.map((t) => {
-                  if (t.name === tab.name) {
-                    return { ...t, current: true }
-                  } else {
-                    return { ...t, current: false }
-                  }
-                })
-              }}
-              class={
-                "decoration-none rounded-md px-3 py-2 text-sm font-medium " +
-                (tab.current ? "bg-gray-100 text-gray-700" : "text-gray-500 hover:text-gray-700")
-              }
-              aria-current={tab.current ? "page" : undefined}
-            >
-              {tab.name}
-            </a>
-          )
-        })}
-      </nav>
+    <div id="app" class="p-4">
+      <div class="border-emerald border-1 h-[400px] w-[600px]">
+        <video
+          src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+          class="h-full w-full"
+          id="video"
+          controls
+        ></video>
+      </div>
 
-      {zoomType.value === "wheel" && (
-        <div class="space-y-4">
-          <p>Current zoom: {`${Math.round(zoomImageWheelState.currentZoom * 100)}%`}</p>
-          <p>Scroll inside the image to see zoom in-out effect</p>
-          <div class="mt-1 flex space-x-2">
-            <div ref={imageWheelContainerRef} class="h-[300px] w-[300px] cursor-crosshair">
-              <img class="h-full w-full" alt="Large Pic" src="/large.webp" />
-            </div>
-            {croppedImage.value && (
-              <img src={croppedImage.value} class="h-[300px] w-[300px]" alt="Cropped placeholder" />
-            )}
-          </div>
+      <currentTime />
+      {/* {showDuration.value && <Duration />} */}
+      <p>Duration: {playbackState.duration}</p>
+      <Resolutions />
 
-          <div class="flex space-x-2">
-            <button
-              onClick$={() => {
-                setZoomImageWheelState({
-                  currentZoom: zoomImageWheelState.currentZoom + 0.5,
-                })
-              }}
-              class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"
-            >
-              Zoom in
-            </button>
-            <button
-              onClick$={() => {
-                setZoomImageWheelState({
-                  currentZoom: zoomImageWheelState.currentZoom - 0.5,
-                })
-              }}
-              class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"
-            >
-              Zoom out
-            </button>
-            <button
-              class="text-dark-500 rounded bg-gray-100 p-2 text-sm font-medium"
-              onClick$={() => {
-                croppedImage.value = cropImage({
-                  currentZoom: zoomImageWheelState.currentZoom,
-                  image: imageWheelContainerRef.value?.querySelector("img") as HTMLImageElement,
-                  positionX: zoomImageWheelState.currentPositionX,
-                  positionY: zoomImageWheelState.currentPositionY,
-                })
-              }}
-            >
-              Crop image
-            </button>
-          </div>
-        </div>
-      )}
+      <h1>{playbackState.currentTime}</h1>
 
-      {zoomType.value === "hover" && (
-        <>
-          <p>Hover inside the image to see zoom effect</p>
-          <div ref={imageHoverContainerRef} class="relative flex h-[250px] w-[250px] items-start">
-            <img class="h-full w-full" alt="Small Pic" src="https://nam-assets.netlify.app/static/small.webp" />
-            <div ref={zoomTargetRef} class="absolute left-[300px]"></div>
-          </div>
-        </>
-      )}
+      <div class="flex flex-col items-start ">
+        <button onClick$={toggleStreamSource}>Switch stream</button>
 
-      {zoomType.value === "move" && (
-        <>
-          <p>Move mouse inside the image to see zoom effect</p>
-          <div ref={imageMoveContainerRef} class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
-            <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
-          </div>
-        </>
-      )}
-
-      {zoomType.value === "click" && (
-        <>
-          <p>Click inside the image to see zoom effect</p>
-          <div ref={imageClickContainerRef} class="relative h-[300px] w-[300px] cursor-crosshair overflow-hidden">
-            <img class="h-full w-full" alt="Large Pic" src="https://nam-assets.netlify.app/static/small.webp" />
-          </div>
-        </>
-      )}
+        <button onClick$={jumpNext5s}>Next 5s</button>
+        <button onClick$={jumpPrev5s}>Prev 5s</button>
+        <button
+          onClick$={() => {
+            showDuration.value = !showDuration.value
+          }}
+        >
+          Toggle show duration
+        </button>
+      </div>
     </div>
   )
 })
+
+export default App
