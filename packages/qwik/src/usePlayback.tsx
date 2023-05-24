@@ -1,5 +1,5 @@
 import { playback, PlaybackState, PluginFunc, PlaybackActions } from "@headlessplayback/core"
-import { useStore, $, useVisibleTask$ } from "@builder.io/qwik"
+import { useStore, $ } from "@builder.io/qwik"
 
 type Playback = typeof playback
 
