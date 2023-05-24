@@ -47,6 +47,6 @@
     "prettier-plugin-svelte": "^2.10.0",
     "prettier-plugin-tailwindcss": "^0.3.0",
     "turbo": "^1.9.9",
-    "unocss": "^0.52.1"
+    "unocss": "^0.52.3"
   }
 }

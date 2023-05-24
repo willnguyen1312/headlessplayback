@@ -6,13 +6,14 @@
     "dev": "vite"
   },
   "dependencies": {
-    "vue": "^3.3.4"
+    "vue": "^3.3.4",
+    "@headlessplayback/plugins": "latest"
   },
   "devDependencies": {
-    "@unocss/reset": "^0.52.1",
+    "@unocss/reset": "^0.52.3",
     "@vitejs/plugin-vue": "^4.2.3",
     "typescript": "^5.0.4",
-    "unocss": "^0.52.1",
+    "unocss": "^0.52.3",
     "vite": "^4.3.8",
     "vue-tsc": "^1.6.5"
   }
