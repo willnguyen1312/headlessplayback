@@ -6,24 +6,27 @@ const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/
 const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
 
 const Duration = component$(() => {
-  const { playbackState } = usePlayback({
+  const { playbackState, activate } = usePlayback({
     id: "video",
+  })
+
+  useVisibleTask$(() => {
+    activate()
   })
 
   return <p>Duration: {playbackState.duration}</p>
 })
 
-const currentTime = component$(() => {
-  const { playbackState } = usePlayback({
+const CurrentTime = component$(() => {
+  const { playbackState, activate } = usePlayback({
     id: "video",
   })
 
-  useTask$(({ track }) => {
-    track(() => playbackState)
+  useVisibleTask$(() => {
+    activate()
   })
 
   return <p>Current time: {playbackState.currentTime}</p>
-  return null
 })
 
 const Resolutions = component$(() => {
@@ -91,12 +94,9 @@ const App = component$(() => {
         ></video>
       </div>
 
-      <currentTime />
-      {/* {showDuration.value && <Duration />} */}
-      <p>Duration: {playbackState.duration}</p>
+      <CurrentTime />
+      {showDuration.value && <Duration />}
       <Resolutions />
-
-      <h1>{playbackState.currentTime}</h1>
 
       <div class="flex flex-col items-start ">
         <button onClick$={toggleStreamSource}>Switch stream</button>
