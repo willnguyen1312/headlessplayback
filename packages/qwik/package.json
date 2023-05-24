@@ -1,0 +1,63 @@
+{
+  "name": "@headlessplayback/qwik",
+  "version": "0.3.0",
+  "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
+  "description": "Adapter of headlessplayback core for QWik",
+  "repository": "willnguyen1312/headlessplayback",
+  "homepage": "https://github.com/sponsors/willnguyen1312",
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/willnguyen1312"
+  },
+  "keywords": [
+    "javascript",
+    "typescript",
+    "video",
+    "audio",
+    "playback",
+    "headless",
+    "mobile",
+    "desktop",
+    "qWik"
+  ],
+  "main": "./lib/index.qwik.mjs",
+  "qwik": "./lib/index.qwik.mjs",
+  "types": "./lib-types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.qwik.mjs",
+      "require": "./lib/index.qwik.cjs",
+      "types": "./lib-types/index.d.ts"
+    }
+  },
+  "files": [
+    "lib",
+    "lib-types",
+    "src"
+  ],
+  "scripts": {
+    "build": "qwik build",
+    "build.lib": "vite build --mode lib",
+    "build.types": "tsc --emitDeclarationOnly",
+    "dev.lib": "vite build --mode lib --watch",
+    "dev.types": "tsc --emitDeclarationOnly --watch",
+    "dev": "run-p dev.lib dev.types",
+    "dev.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint \"src/**/*.ts*\"",
+    "start": "vite --open --mode ssr",
+    "qwik": "qwik"
+  },
+  "devDependencies": {
+    "@builder.io/qwik": "1.1.4",
+    "eslint-config-custom": "workspace:*",
+    "npm-run-all": "^4.1.5",
+    "prettier": "2.8.8",
+    "typescript": "5.0.4",
+    "undici": "5.22.1",
+    "vite": "4.3.8"
+  },
+  "dependencies": {
+    "@headlessplayback/core": "workspace:*"
+  }
+}
