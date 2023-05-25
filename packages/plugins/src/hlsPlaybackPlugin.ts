@@ -1,8 +1,5 @@
-import { Plugin } from "@headlessplayback/core"
+import { Plugin, flushPromises } from "@headlessplayback/core"
 import Hls, { HlsConfig } from "hls.js"
-
-// Credit: https://github.com/kentor/flush-promises
-const flushPromises = () => new Promise((resolve) => setTimeout(resolve))
 
 type LoadFunction = (arg: { id: string; source: string }) => void
 
