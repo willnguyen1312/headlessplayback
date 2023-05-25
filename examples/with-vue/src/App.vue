@@ -30,13 +30,6 @@ watch(
   { immediate: true, flush: "sync" },
 )
 
-// const handleSource = async (source: string) => {
-//   playbackActions.load({
-//     id: "video",
-//     source,
-//   })
-// }
-
 const jumpTo = (time: number) => {
   playbackActions.setCurrentTime(time)
 }
