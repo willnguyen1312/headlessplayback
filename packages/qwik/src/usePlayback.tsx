@@ -37,19 +37,31 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
       playbackState[key] = currentState[key]
     }
 
-    playbackInstance.subscribe(({ updatedProperties }) => {
+    playbackInstance.subscribe(({ updatedProperties, state }) => {
       for (const key in updatedProperties) {
         // These two are special cases because they are objects that are not serializable
-        if (["textTracks", "buffered"].includes(key)) {
+        if (["textTracks", "buffered", "levels"].includes(key)) {
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           playbackState[key] = noSerialize(updatedProperties[key])
           continue
         }
 
+        if (["subtitleTracks", "audioTracks"].includes(key)) {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          playbackState[key] = updatedProperties[key].map((track) => ({
+            id: track.id,
+            lang: track.lang,
+          }))
+          continue
+        }
+
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         playbackState[key] = updatedProperties[key]
+
+        console.log(playbackState)
       }
     })
 

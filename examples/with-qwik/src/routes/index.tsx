@@ -27,7 +27,7 @@ const Resolutions = component$(() => {
   })
 
   // Plugin will inject extra state to playbackState
-  return <strong>Resolutions: {JSON.stringify(playbackState.resolutions)}</strong>
+  return <strong>Levels: {playbackState.levels?.map((level) => level.height).join(", ")}</strong>
 })
 
 const App = component$(() => {
@@ -44,7 +44,6 @@ const App = component$(() => {
   useVisibleTask$(({ track }) => {
     track(() => source.value)
     playbackActions.load?.({
-      id: "video",
       source: source.value,
     })
   })

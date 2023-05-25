@@ -28,7 +28,7 @@ const Resolutions: Component = () => {
   })
 
   // Plugin will inject extra state to playbackState
-  return <strong>Resolutions: {JSON.stringify(playbackState.resolutions)}</strong>
+  return <strong>Levels: {playbackState.levels.map((level) => level.height).join(", ")}</strong>
 }
 
 const App: Component = () => {
