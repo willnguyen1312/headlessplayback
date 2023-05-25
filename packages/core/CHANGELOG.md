@@ -1,5 +1,13 @@
 # @headlessplayback/core
 
+## 0.5.0
+
+### Minor Changes
+
+- [#22](https://github.com/willnguyen1312/headlessplayback/pull/22)
+  [`2692a73`](https://github.com/willnguyen1312/headlessplayback/commit/2692a73c93851c1c4d9cb6f30767d8237e242abe) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Finalizing core API 🚀
+
 ## 0.4.0
 
 ### Minor Changes
