@@ -1,0 +1,55 @@
+{
+  "name": "@headlessplayback/vue",
+  "version": "0.0.0",
+  "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
+  "description": "Adapter of headlessplayback core for Vue",
+  "repository": "willnguyen1312/headlessplayback",
+  "homepage": "https://github.com/sponsors/willnguyen1312",
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/willnguyen1312"
+  },
+  "keywords": [
+    "javascript",
+    "typescript",
+    "video",
+    "audio",
+    "playback",
+    "headless",
+    "mobile",
+    "desktop",
+    "vue"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "license": "MIT",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsup src terse",
+    "dev": "tsup src --watch",
+    "lint": "eslint \"src/**/*.ts*\"",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "devDependencies": {
+    "@types/node": "^20.2.3",
+    "eslint": "^8.41.0",
+    "eslint-config-custom": "workspace:*",
+    "tsconfig": "workspace:*",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@headlessplayback/core": "workspace:*"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

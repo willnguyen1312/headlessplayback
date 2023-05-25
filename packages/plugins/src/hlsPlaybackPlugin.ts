@@ -1,6 +1,9 @@
 import { Plugin } from "@headlessplayback/core"
 import Hls, { HlsConfig } from "hls.js"
 
+// Credit: https://github.com/kentor/flush-promises
+const flushPromises = () => new Promise((resolve) => setTimeout(resolve))
+
 type LoadFunction = (arg: { id: string; source: string }) => void
 
 declare module "@headlessplayback/core" {
@@ -14,31 +17,34 @@ declare module "@headlessplayback/core" {
   }
 }
 
-const activeHlsMap = new WeakMap<HTMLMediaElement, Hls>()
+const activeHlsMap = new Map<string, Hls>()
 const activeIdSourceMap = new Map<string, string>()
 
 export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
   install({ store, onCleanup }, config) {
-    const load: LoadFunction = ({ id, source }) => {
+    const load: LoadFunction = async ({ id, source }) => {
+      await flushPromises()
+
       if (activeIdSourceMap.get(id) === source) {
         return
       }
 
       const playbackElement = document.getElementById(id) as HTMLVideoElement
-      let hls = activeHlsMap.get(playbackElement)
+
+      let hls = activeHlsMap.get(id)
 
       if (hls) {
         hls.destroy()
-        activeHlsMap.delete(playbackElement)
+        activeHlsMap.delete(id)
 
         hls = new Hls(config)
-        activeHlsMap.set(playbackElement, hls)
+        activeHlsMap.set(id, hls)
       } else {
         hls = new Hls(config)
-        activeHlsMap.set(playbackElement, hls)
-        onCleanup(playbackElement, () => {
-          activeHlsMap.get(playbackElement)?.destroy()
-          activeHlsMap.delete(playbackElement)
+        activeHlsMap.set(id, hls)
+        onCleanup(id, () => {
+          activeHlsMap.get(id)?.destroy()
+          activeHlsMap.delete(id)
           activeIdSourceMap.delete(id)
         })
       }

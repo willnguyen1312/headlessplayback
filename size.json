@@ -1,0 +1,21 @@
+{
+  "@headlessplayback/core": {
+    "playback": "752 B"
+  },
+  "@headlessplayback/react": {
+    "usePlayback": "943 B"
+  },
+  "@headlessplayback/qwik": {
+    "usePlayback": "1.21 KB",
+    "_auto_playbackInstanceMap": "920 B"
+  },
+  "@headlessplayback/solid": {
+    "usePlayback": "945 B"
+  },
+  "@headlessplayback/svelte": {
+    "usePlayback": "935 B"
+  },
+  "@headlessplayback/vue": {
+    "usePlayback": "932 B"
+  }
+}

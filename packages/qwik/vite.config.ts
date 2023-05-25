@@ -5,6 +5,7 @@ export default defineConfig(() => {
   return {
     build: {
       target: "esnext",
+      minify: true,
       lib: {
         entry: "./src/index.ts",
         formats: ["es", "cjs"],
