@@ -1,5 +1,19 @@
 # @headlessplayback/plugins
 
+## 0.1.0
+
+### Minor Changes
+
+- [#20](https://github.com/willnguyen1312/headlessplayback/pull/20)
+  [`f8a395a`](https://github.com/willnguyen1312/headlessplayback/commit/f8a395a096ff5866b3033a3d6a597a334fa4b07c) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Enhance plugin system 🚀
+
+### Patch Changes
+
+- Updated dependencies
+  [[`f8a395a`](https://github.com/willnguyen1312/headlessplayback/commit/f8a395a096ff5866b3033a3d6a597a334fa4b07c)]:
+  - @headlessplayback/core@0.4.0
+
 ## 0.0.3
 
 ### Patch Changes
