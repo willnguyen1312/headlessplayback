@@ -35,12 +35,12 @@ A simple yet complete playback library designed for UI frameworks or even withou
 
 ## Supported framework adapters
 
-- [ ] Vue - coming soon
-- [ ] Preact - coming soon
-- [ ] Svelte - coming soon
-- [ ] Solid - coming soon
-- [ ] React - coming soon
-- [ ] SOlid - coming soon
+- [x] Vue
+- [x] Preact
+- [x] Svelte
+- [x] Solid
+- [x] React
+- [x] SOlid
 
 ## Inspiration
 
