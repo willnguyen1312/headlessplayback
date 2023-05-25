@@ -44,7 +44,7 @@ const jumpTo = (time: number) => {
 
     <p v-if="showDuration">Duration: {{ playbackState.duration }}</p>
     <!-- Plugin will inject extra state to playbackState -->
-    <strong>Resolutions: {{ JSON.stringify(playbackState.resolutions) }}</strong>
+    <strong>Levels: {{ playbackState.levels.map((level) => level.height).join(", ") }}</strong>
 
     <div class="flex flex-col items-start">
       <button @click="source = source === source1 ? source2 : source1">Switch stream</button>

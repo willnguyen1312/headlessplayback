@@ -1,24 +1,100 @@
 import { Plugin, flushPromises } from "@headlessplayback/core"
-import Hls, { HlsConfig } from "hls.js"
+import Hls, { HlsConfig, Level, MediaPlaylist } from "hls.js"
 
 type LoadFunction = (arg: { source: string }) => void
+type SetCurrentLevel = (arg: { level: number }) => void
+type SetSubtitleTrack = (arg: { subtitleTrack: number }) => void
+type SetAudioTrack = (arg: { audioTrack: number }) => void
+
+export type HlsStatus = "loading" | "recovering" | "error"
+
+export type ErrorDetails =
+  | "keySystemNoKeys"
+  | "keySystemNoAccess"
+  | "keySystemNoSession"
+  | "keySystemNoConfiguredLicense"
+  | "keySystemLicenseRequestFailed"
+  | "keySystemServerCertificateRequestFailed"
+  | "keySystemServerCertificateUpdateFailed"
+  | "keySystemSessionUpdateFailed"
+  | "keySystemStatusOutputRestricted"
+  | "keySystemStatusInternalError"
+  | "manifestLoadError"
+  | "manifestLoadTimeOut"
+  | "manifestParsingError"
+  | "manifestIncompatibleCodecsError"
+  | "levelEmptyError"
+  | "levelLoadError"
+  | "levelLoadTimeOut"
+  | "levelParsingError"
+  | "levelSwitchError"
+  | "audioTrackLoadError"
+  | "audioTrackLoadTimeOut"
+  | "subtitleTrackLoadError"
+  | "subtitleTrackLoadTimeOut"
+  | "fragLoadError"
+  | "fragLoadTimeOut"
+  | "fragDecryptError"
+  | "fragParsingError"
+  | "fragGap"
+  | "remuxAllocError"
+  | "keyLoadError"
+  | "keyLoadTimeOut"
+  | "bufferAddCodecError"
+  | "bufferIncompatibleCodecsError"
+  | "bufferAppendError"
+  | "bufferAppendingError"
+  | "bufferStalledError"
+  | "bufferFullError"
+  | "bufferSeekOverHole"
+  | "bufferNudgeOnStall"
+  | "internalException"
+  | "aborted"
+  | "unknown"
+
+interface _CustomPlaybackState {
+  levels: Level[]
+  currentLevel: number
+  subtitleTracks: MediaPlaylist[]
+  subtitleTrack: number
+  audioTracks: MediaPlaylist[]
+  audioTrack: number
+  hlsStatus: HlsStatus
+  errorDetail: ErrorDetails | null
+}
 
 declare module "@headlessplayback/core" {
-  export interface CustomPlaybackState {
-    resolutions: string[]
-    message: string
-  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  export interface CustomPlaybackState extends _CustomPlaybackState {}
 
   export interface CustomPlaybackActions {
     load: LoadFunction
+    setCurrentLevel: SetCurrentLevel
+    setSubtitleTrack: SetSubtitleTrack
+    setAudioTrack: SetAudioTrack
   }
 }
 
 const activeHlsMap = new Map<string, Hls>()
 const activeIdSourceMap = new Map<string, string>()
 
+const createDefaultState = (): _CustomPlaybackState => {
+  return {
+    levels: [],
+    currentLevel: -1,
+    subtitleTracks: [],
+    subtitleTrack: -1,
+    audioTracks: [],
+    audioTrack: -1,
+    hlsStatus: "loading",
+    errorDetail: null,
+  }
+}
+
 export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
   install({ store, onCleanup }, config) {
+    store.setState(createDefaultState())
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const load: any = async ({ id, source }: { id: string; source: string }) => {
       await flushPromises()
@@ -29,7 +105,16 @@ export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
 
       const playbackElement = document.getElementById(id) as HTMLVideoElement
 
+      if (!Hls.isSupported()) {
+        playbackElement &&
+          playbackElement.canPlayType("application/vnd.apple.mpegurl") &&
+          playbackElement.src === source
+
+        return
+      }
+
       let hls = activeHlsMap.get(id)
+      store.setState(createDefaultState())
 
       if (hls) {
         hls.destroy()
@@ -47,34 +132,84 @@ export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
         })
       }
 
-      hls.loadSource(source)
       hls.attachMedia(playbackElement)
+
+      // console.log("data", playbackElement)
+      hls.on(Hls.Events.MEDIA_ATTACHED, () => {
+        hls?.loadSource(source)
+      })
 
       hls.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
         store.setState({
-          resolutions: data.levels.map((level) => level.height.toString()),
-          message: "Hi there",
+          levels: data.levels,
+        })
+      })
+
+      hls.on(Hls.Events.LEVEL_SWITCHING, (_, { level }) => {
+        store.setState({
+          currentLevel: level,
+        })
+      })
+
+      hls.on(Hls.Events.SUBTITLE_TRACKS_UPDATED, (_, data) => {
+        store.setState({
+          subtitleTracks: data.subtitleTracks,
+        })
+      })
+
+      hls.on(Hls.Events.SUBTITLE_TRACK_SWITCH, (_, data) => {
+        store.setState({
+          subtitleTrack: data.id,
+        })
+      })
+
+      hls.on(Hls.Events.AUDIO_TRACKS_UPDATED, (_, data) => {
+        store.setState({
+          audioTracks: data.audioTracks,
+        })
+      })
+
+      hls.on(Hls.Events.AUDIO_TRACK_SWITCHED, (_, data) => {
+        store.setState({
+          audioTrack: data.id,
         })
       })
 
       // Reference - https://github.com/video-dev/hls.js/blob/master/docs/API.md#fifth-step-error-handling
-      hls.on(Hls.Events.ERROR, function (_, data) {
+      hls.on(Hls.Events.ERROR, (_, data) => {
         if (data.fatal) {
           switch (data.type) {
-            case Hls.ErrorTypes.MEDIA_ERROR:
-              console.info("fatal media error encountered, try to recover")
-              hls?.recoverMediaError()
-              break
             case Hls.ErrorTypes.NETWORK_ERROR:
-              console.error("fatal network error encountered", data)
-              // All retries and media options have been exhausted.
-              // Immediately trying to restart loading could cause loop loading.
-              // Consider modifying loading policies to best fit your asset and network
-              // conditions (manifestLoadPolicy, playlistLoadPolicy, fragLoadPolicy).
+              // try to recover network error
+              hls?.startLoad()
+              store.setState({
+                hlsStatus: "recovering",
+              })
+              break
+            case Hls.ErrorTypes.MEDIA_ERROR:
+              // try to recover media error
+              hls?.recoverMediaError()
+              store.setState({
+                hlsStatus: "recovering",
+              })
               break
             default:
               // cannot recover
               hls?.destroy()
+              store.setState({
+                hlsStatus: "error",
+                errorDetail: data.details,
+              })
+              break
+          }
+        } else {
+          switch (data.details) {
+            // HLS will try to load the next segment when encounter this error
+            // so we can safely consume it as loading state
+            case Hls.ErrorDetails.BUFFER_STALLED_ERROR:
+              store.setState({
+                hlsStatus: "loading",
+              })
               break
           }
         }
@@ -83,8 +218,35 @@ export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
       activeIdSourceMap.set(id, source)
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const setCurrentLevel: any = ({ id, level }: { id: string; level: number }) => {
+      const hls = activeHlsMap.get(id)
+      if (hls && hls.currentLevel !== level) {
+        hls.currentLevel = level
+      }
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const setSubtitleTrack: any = ({ id, track }: { id: string; track: number }) => {
+      const hls = activeHlsMap.get(id)
+      if (hls && hls.subtitleTrack !== track) {
+        hls.subtitleTrack = track
+      }
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const setAudioTrack: any = ({ id, track }: { id: string; track: number }) => {
+      const hls = activeHlsMap.get(id)
+      if (hls && hls.audioTrack !== track) {
+        hls.audioTrack = track
+      }
+    }
+
     return {
       load,
+      setCurrentLevel,
+      setSubtitleTrack,
+      setAudioTrack,
     }
   },
 }

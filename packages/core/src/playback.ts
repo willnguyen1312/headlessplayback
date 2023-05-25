@@ -356,6 +356,21 @@ export const playback: PlaybackFunc = ({ id }) => {
     return true
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const processActions = (actions: any) => {
+    for (const key in actions) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const originalAction = actions[key]
+      const wrappedAction = <T extends object>(arg: T) => {
+        originalAction({ ...arg, id })
+      }
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      actions[key] = wrappedAction
+    }
+  }
+
   const result = {
     cleanup() {
       if (document.body.contains(playbackElement as HTMLMediaElement)) {
@@ -383,33 +398,22 @@ export const playback: PlaybackFunc = ({ id }) => {
     getState: store.getState,
     playbackActions,
     use: <T>(plugin: Plugin<T>, options: T) => {
-      const data = plugin.install(
+      const actions = plugin.install(
         {
           store,
           onCleanup,
         },
         options,
       )
-      Object.assign(result.playbackActions, data)
-      return data
+      processActions(actions)
+      Object.assign(result.playbackActions, actions)
+      return actions
     },
   }
 
   for (const pluginQueueItem of playback.$pluginsQueue) {
     const actions = pluginQueueItem({ store, onCleanup })
-
-    for (const key in actions) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const originalAction = actions[key]
-      const wrappedAction = <T extends object>(arg: T) => {
-        originalAction({ ...arg, id })
-      }
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      actions[key] = wrappedAction
-    }
-
+    processActions(actions)
     Object.assign(result.playbackActions, actions)
   }
 

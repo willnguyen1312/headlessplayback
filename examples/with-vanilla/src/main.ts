@@ -2,31 +2,36 @@ import "virtual:uno.css"
 import "@unocss/reset/tailwind.css"
 
 import { playback } from "@headlessplayback/core"
-// import { hlsPlaybackPlugin } from "@headlessplayback/plugins"
+import { hlsPlaybackPlugin } from "@headlessplayback/plugins"
+playback.use(hlsPlaybackPlugin)
 
-// playback.use(hlsPlaybackPlugin)
+const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
+const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
+let currentSource = source1
 
-const source1 = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
-
-const source2 = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-
-const videoElement = document.getElementById("video") as HTMLVideoElement
 const currentTime = document.getElementById("currentTime") as HTMLParagraphElement
+const resolutions = document.getElementById("resolutions") as HTMLParagraphElement
 const duration = document.getElementById("duration") as HTMLParagraphElement
 const switchBtn = document.getElementById("switch") as HTMLButtonElement
 
 switchBtn.addEventListener("click", () => {
-  videoElement.src = videoElement.src === source1 ? source2 : source1
+  currentSource = currentSource === source1 ? source2 : source1
+  result.playbackActions.load({
+    source: currentSource,
+  })
 })
 
 const result = playback({
   id: "video",
 })
 
-result.subscribe((state) => {
+result.subscribe(({ state }) => {
   currentTime.innerText = `Current time: ${state.currentTime.toString()}`
   duration.innerText = `Duration: ${state.duration.toString()}`
-  // console.info(state.resolutions)
+  resolutions.innerText = `Levels: ${state.levels.map((level) => level.height).join(", ")}`
 })
 
 result.activate()
+result.playbackActions.load({
+  source: source1,
+})

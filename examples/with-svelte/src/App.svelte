@@ -55,6 +55,7 @@
   {#if showDuration}
     <p>Duration: {playbackState.duration}</p>
   {/if}
+  <strong>Levels: {playbackState.levels.map((level) => level.height).join(", ")}</strong>
 
   <div class="flex flex-col items-start">
     <button
