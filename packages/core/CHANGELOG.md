@@ -1,5 +1,13 @@
 # @headlessplayback/core
 
+## 0.3.0
+
+### Minor Changes
+
+- [#18](https://github.com/willnguyen1312/headlessplayback/pull/18)
+  [`ed86e4d`](https://github.com/willnguyen1312/headlessplayback/commit/ed86e4d3fd32c2f5c7731220c1c52dfa7301bdac) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Include flushPromises as part of core API 🚀
+
 ## 0.2.0
 
 ### Minor Changes
