@@ -1,11 +1,10 @@
 <script lang="ts" setup>
 import { usePlayback } from "@headlessplayback/vue"
-import { hlsPlaybackPlugin } from "@headlessplayback/plugins"
 import { onMounted, ref, watch } from "vue"
+import { hlsPlaybackPlugin } from "@headlessplayback/plugins"
 usePlayback.use(hlsPlaybackPlugin)
 
-let id = "video"
-
+const id = "video"
 const { activate, playbackActions, playbackState } = usePlayback({
   id,
 })
@@ -16,21 +15,24 @@ const showDuration = ref(true)
 const source = ref(source1)
 
 onMounted(() => {
+  // Activate when playback element is accessible from the DOM
   activate()
 })
 
 watch(
   source,
   () => {
+    // Plugin will inject extra action to playbackActions
     playbackActions.load({
       id,
       source: source.value,
     })
   },
-  { immediate: true, flush: "sync" },
+  { immediate: true },
 )
 
 const jumpTo = (time: number) => {
+  // Core actions and state are always available
   playbackActions.setCurrentTime(time)
 }
 </script>
@@ -46,6 +48,8 @@ const jumpTo = (time: number) => {
     <p>Current time: {{ playbackState.currentTime }}</p>
 
     <p v-if="showDuration">Duration: {{ playbackState.duration }}</p>
+    <!-- Plugin will inject extra state to playbackState -->
+    <strong>Resolutions: {{ JSON.stringify(playbackState.resolutions) }}</strong>
 
     <div class="flex flex-col items-start">
       <button @click="source = source === source1 ? source2 : source1">Switch stream</button>

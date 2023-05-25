@@ -44,6 +44,7 @@ const App: Component = () => {
   })
 
   createEffect(() => {
+    // Plugin will inject extra action to playbackActions
     playbackActions.load({
       id: "video",
       source: source(),
