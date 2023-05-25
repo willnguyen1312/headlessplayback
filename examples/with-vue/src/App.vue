@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { usePlayback } from "@headlessplayback/vue"
-import { onMounted, ref, watch } from "vue"
+import { onMounted, ref, watchEffect } from "vue"
 import { hlsPlaybackPlugin } from "@headlessplayback/plugins"
 usePlayback.use(hlsPlaybackPlugin)
 
@@ -19,17 +19,13 @@ onMounted(() => {
   activate()
 })
 
-watch(
-  source,
-  () => {
-    // Plugin will inject extra action to playbackActions
-    playbackActions.load({
-      id,
-      source: source.value,
-    })
-  },
-  { immediate: true },
-)
+watchEffect(() => {
+  // Plugin will inject extra action to playbackActions
+  playbackActions.load({
+    id,
+    source: source.value,
+  })
+})
 
 const jumpTo = (time: number) => {
   // Core actions and state are always available
