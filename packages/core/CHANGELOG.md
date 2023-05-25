@@ -1,5 +1,13 @@
 # @headlessplayback/core
 
+## 0.6.0
+
+### Minor Changes
+
+- [#26](https://github.com/willnguyen1312/headlessplayback/pull/26)
+  [`120420f`](https://github.com/willnguyen1312/headlessplayback/commit/120420f7eda6738b00f87955eddff9f3a15e5993) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Update core's use plugin API 💞
+
 ## 0.5.0
 
 ### Minor Changes

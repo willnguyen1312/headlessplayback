@@ -1,5 +1,13 @@
 # @headlessplayback/svelte
 
+## 0.0.4
+
+### Patch Changes
+
+- Updated dependencies
+  [[`120420f`](https://github.com/willnguyen1312/headlessplayback/commit/120420f7eda6738b00f87955eddff9f3a15e5993)]:
+  - @headlessplayback/core@0.6.0
+
 ## 0.0.3
 
 ### Patch Changes
