@@ -1,5 +1,12 @@
 # @headlessplayback/plugins
 
+## 0.2.0
+
+### Minor Changes
+
+- [`ec60a74`](https://github.com/willnguyen1312/headlessplayback/commit/ec60a740688c107ee732c72773e7ea2d53cd9003) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Let's go plugins 🎢
+
 ## 0.1.1
 
 ### Patch Changes
