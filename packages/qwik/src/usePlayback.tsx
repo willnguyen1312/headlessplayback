@@ -15,7 +15,7 @@ type UsePlaybackFunc = {
 const playbackInstanceMap = new Map<string, ReturnType<Playback>>()
 
 export const usePlayback: UsePlaybackFunc = (arg) => {
-  const playbackState = useStore<{ currentTime: number; duration: number }>({ currentTime: 0, duration: 0 })
+  const playbackState = useStore<PlaybackState>({} as PlaybackState)
   const playbackActionsRef: { value: PlaybackActions } = { value: {} as PlaybackActions }
 
   const activate = $(() => {

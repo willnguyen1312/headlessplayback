@@ -77,9 +77,10 @@ type PlaybackFunc = {
 
 const cleanupCallbackMap = new Map<string, Set<CleanupFunc>>()
 const playbackActivatedSet = new WeakSet<HTMLMediaElement>()
-const isPictureInPictureSupported = document && "pictureInPictureEnabled" in document
 
 export const playback: PlaybackFunc = ({ id }) => {
+  const isPictureInPictureSupported = document && "pictureInPictureEnabled" in document
+
   const store = createStore<PlaybackState>({
     currentTime: 0,
     duration: 0,
