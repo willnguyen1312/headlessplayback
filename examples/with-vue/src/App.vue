@@ -22,7 +22,6 @@ onMounted(() => {
 watchEffect(() => {
   // Plugin will inject extra action to playbackActions
   playbackActions.load({
-    id,
     source: source.value,
   })
 })

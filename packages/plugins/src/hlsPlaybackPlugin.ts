@@ -1,7 +1,7 @@
 import { Plugin, flushPromises } from "@headlessplayback/core"
 import Hls, { HlsConfig } from "hls.js"
 
-type LoadFunction = (arg: { id: string; source: string }) => void
+type LoadFunction = (arg: { source: string }) => void
 
 declare module "@headlessplayback/core" {
   export interface CustomPlaybackState {
@@ -19,7 +19,8 @@ const activeIdSourceMap = new Map<string, string>()
 
 export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
   install({ store, onCleanup }, config) {
-    const load: LoadFunction = async ({ id, source }) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const load: any = async ({ id, source }: { id: string; source: string }) => {
       await flushPromises()
 
       if (activeIdSourceMap.get(id) === source) {
