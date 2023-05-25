@@ -16,9 +16,6 @@
   const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
   const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
 
-  // const source1 = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
-  // const source2 = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4"
-
   let id = "video"
   let source = source1
   let showDuration = true
@@ -39,7 +36,6 @@
 
   const handleSource = async (source: string) => {
     playbackActions.load({
-      id: "video",
       source,
     })
   }

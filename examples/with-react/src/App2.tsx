@@ -48,7 +48,6 @@ function App() {
   useEffect(() => {
     // Plugin can also inject extra actions to playbackActions
     playbackActions.load({
-      id,
       source,
     })
   }, [source])

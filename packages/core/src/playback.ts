@@ -6,6 +6,8 @@ export interface InternalPlaybackState {
   duration: number
 }
 
+export type CustomPlaybackAction<T> = (arg: T & { id: string }) => void
+
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface CustomPlaybackState {}
 
@@ -47,7 +49,10 @@ type PlaybackFunc = {
     use: PluginFunc
   }
   use: PluginFunc
-  $pluginsQueue: ((arg: { store: ReturnType<typeof createStore<PlaybackState>>; onCleanup: OnCleanupHook }) => void)[]
+  $pluginsQueue: ((arg: {
+    store: ReturnType<typeof createStore<PlaybackState>>
+    onCleanup: OnCleanupHook
+  }) => CustomPlaybackActions)[]
 }
 
 const cleanupCallbackMap = new Map<string, Set<CleanupFunc>>()
@@ -163,7 +168,21 @@ export const playback: PlaybackFunc = ({ id }) => {
   }
 
   for (const pluginQueueItem of playback.$pluginsQueue) {
-    Object.assign(result.playbackActions, pluginQueueItem({ store, onCleanup }))
+    const actions = pluginQueueItem({ store, onCleanup })
+
+    for (const key in actions) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const originalAction = actions[key]
+      const wrappedAction = <T extends object>(arg: T) => {
+        originalAction({ ...arg, id })
+      }
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      actions[key] = wrappedAction
+    }
+
+    Object.assign(result.playbackActions, actions)
   }
 
   return result
