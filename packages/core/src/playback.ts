@@ -22,7 +22,7 @@ export type PlaybackStore = ReturnType<typeof createStore<PlaybackState>>
 
 type CleanupFunc = () => void
 
-type OnCleanupHook = (element: HTMLMediaElement, cb: CleanupFunc) => void
+type OnCleanupHook = (id: string, cb: CleanupFunc) => void
 
 export type Plugin<T = unknown> = {
   install: (
@@ -50,7 +50,7 @@ type PlaybackFunc = {
   $pluginsQueue: ((arg: { store: ReturnType<typeof createStore<PlaybackState>>; onCleanup: OnCleanupHook }) => void)[]
 }
 
-const cleanupCallbackMap = new WeakMap<HTMLMediaElement, Set<CleanupFunc>>()
+const cleanupCallbackMap = new Map<string, Set<CleanupFunc>>()
 const playbackActivatedSet = new WeakSet<HTMLMediaElement>()
 
 export const playback: PlaybackFunc = ({ id }) => {
@@ -91,14 +91,11 @@ export const playback: PlaybackFunc = ({ id }) => {
   }
 
   const addCleanupCallback = (cb: CleanupFunc) => {
-    cleanupCallbackMap.set(
-      playbackElement as HTMLMediaElement,
-      (cleanupCallbackMap.get(playbackElement as HTMLMediaElement) || new Set()).add(cb),
-    )
+    cleanupCallbackMap.set(id, (cleanupCallbackMap.get(id) || new Set()).add(cb))
   }
 
-  const onCleanup: OnCleanupHook = (element: HTMLMediaElement, cb) => {
-    cleanupCallbackMap.set(element, (cleanupCallbackMap.get(element) || new Set()).add(cb))
+  const onCleanup: OnCleanupHook = (id: string, cb) => {
+    cleanupCallbackMap.set(id, (cleanupCallbackMap.get(id) || new Set()).add(cb))
   }
 
   function activate() {
@@ -122,10 +119,6 @@ export const playback: PlaybackFunc = ({ id }) => {
       duration: Number.isFinite(playbackElement?.duration) ? playbackElement?.duration : 0,
     })
 
-    for (const pluginQueueItem of playback.$pluginsQueue) {
-      Object.assign(result.playbackActions, pluginQueueItem({ store, onCleanup }))
-    }
-
     playbackActivatedSet.add(playbackElement)
     return true
   }
@@ -139,14 +132,14 @@ export const playback: PlaybackFunc = ({ id }) => {
       abortController.abort()
       store.cleanup()
       playbackElement && playbackActivatedSet.delete(playbackElement)
-      if (cleanupCallbackMap.has(playbackElement as HTMLMediaElement)) {
-        const cbs = cleanupCallbackMap.get(playbackElement as HTMLMediaElement) as Set<CleanupFunc>
+      if (cleanupCallbackMap.has(id)) {
+        const cbs = cleanupCallbackMap.get(id) as Set<CleanupFunc>
 
         for (const cb of cbs) {
           cb()
         }
 
-        cleanupCallbackMap.delete(playbackElement as HTMLMediaElement)
+        cleanupCallbackMap.delete(id)
       }
 
       playbackElement = undefined
@@ -167,6 +160,10 @@ export const playback: PlaybackFunc = ({ id }) => {
       Object.assign(result.playbackActions, data)
       return data
     },
+  }
+
+  for (const pluginQueueItem of playback.$pluginsQueue) {
+    Object.assign(result.playbackActions, pluginQueueItem({ store, onCleanup }))
   }
 
   return result

@@ -1,11 +1,15 @@
 {
-  "name": "svelte-ts",
+  "name": "with-svelte",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@headlessplayback/core": "latest",
+    "@headlessplayback/plugins": "latest",
+    "@headlessplayback/svelte": "latest"
+  },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^2.3.0",
     "@tsconfig/svelte": "^4.0.1",

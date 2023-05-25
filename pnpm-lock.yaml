@@ -32,36 +32,6 @@ importers:
         specifier: ^0.52.3
         version: 0.52.3(postcss@8.4.23)(vite@4.3.8)
 
-  examples/svelte-ts:
-    devDependencies:
-      '@sveltejs/vite-plugin-svelte':
-        specifier: ^2.3.0
-        version: 2.3.0(svelte@3.59.1)(vite@4.3.8)
-      '@tsconfig/svelte':
-        specifier: ^4.0.1
-        version: 4.0.1
-      '@unocss/reset':
-        specifier: ^0.52.1
-        version: 0.52.3
-      svelte:
-        specifier: ^3.59.1
-        version: 3.59.1
-      svelte-check:
-        specifier: ^3.3.2
-        version: 3.3.2(postcss@8.4.23)(svelte@3.59.1)
-      tslib:
-        specifier: ^2.5.2
-        version: 2.5.2
-      typescript:
-        specifier: ^5.0.4
-        version: 5.0.4
-      unocss:
-        specifier: ^0.52.1
-        version: 0.52.3(postcss@8.4.23)(vite@4.3.8)
-      vite:
-        specifier: ^4.3.8
-        version: 4.3.8(@types/node@20.2.3)
-
   examples/with-qwik:
     dependencies:
       '@headlessplayback/plugins':
@@ -169,6 +139,46 @@ importers:
       vite-plugin-solid:
         specifier: ^2.7.0
         version: 2.7.0(solid-js@1.7.5)(vite@4.3.8)
+
+  examples/with-svelte:
+    dependencies:
+      '@headlessplayback/core':
+        specifier: latest
+        version: link:../../packages/core
+      '@headlessplayback/plugins':
+        specifier: latest
+        version: link:../../packages/plugins
+      '@headlessplayback/svelte':
+        specifier: latest
+        version: link:../../packages/svelte
+    devDependencies:
+      '@sveltejs/vite-plugin-svelte':
+        specifier: ^2.3.0
+        version: 2.3.0(svelte@3.59.1)(vite@4.3.8)
+      '@tsconfig/svelte':
+        specifier: ^4.0.1
+        version: 4.0.1
+      '@unocss/reset':
+        specifier: ^0.52.1
+        version: 0.52.3
+      svelte:
+        specifier: ^3.59.1
+        version: 3.59.1
+      svelte-check:
+        specifier: ^3.3.2
+        version: 3.3.2(postcss@8.4.23)(svelte@3.59.1)
+      tslib:
+        specifier: ^2.5.2
+        version: 2.5.2
+      typescript:
+        specifier: ^5.0.4
+        version: 5.0.4
+      unocss:
+        specifier: ^0.52.1
+        version: 0.52.3(postcss@8.4.23)(vite@4.3.8)
+      vite:
+        specifier: ^4.3.8
+        version: 4.3.8(@types/node@20.2.3)
 
   examples/with-vanilla:
     dependencies:
@@ -363,6 +373,34 @@ importers:
       solid-js:
         specifier: ^1.0.0
         version: 1.7.5
+    devDependencies:
+      '@types/node':
+        specifier: ^20.2.3
+        version: 20.2.3
+      eslint:
+        specifier: ^8.41.0
+        version: 8.41.0
+      eslint-config-custom:
+        specifier: workspace:*
+        version: link:../eslint-config-custom
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+      tsup:
+        specifier: ^6.7.0
+        version: 6.7.0(postcss@8.4.23)(typescript@5.0.4)
+      typescript:
+        specifier: ^5.0.4
+        version: 5.0.4
+
+  packages/svelte:
+    dependencies:
+      '@headlessplayback/core':
+        specifier: workspace:*
+        version: link:../core
+      svelte:
+        specifier: ^3.0.0
+        version: 3.59.1
     devDependencies:
       '@types/node':
         specifier: ^20.2.3

@@ -27,6 +27,8 @@
     "start-react": "turbo dev --filter=with-react...",
     "start-solid": "turbo dev --filter=with-solid...",
     "start-qwik": "turbo dev --filter=with-qwik...",
+    "start-vue": "turbo dev --filter=with-vue...",
+    "start-svelte": "turbo dev --filter=with-svelte...",
     "start-docs": "turbo dev --filter=docs...",
     "lint": "turbo lint",
     "clean": "turbo clean && rm -rf node_modules",
