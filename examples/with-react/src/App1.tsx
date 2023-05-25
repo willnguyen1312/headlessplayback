@@ -13,7 +13,7 @@ function Duration({ id }: ShareProps) {
   return <p>Duration: {playbackState.duration}</p>
 }
 
-function currentTime({ id }: ShareProps) {
+function CurrentTime({ id }: ShareProps) {
   const { playbackState } = usePlayback({
     id,
   })
@@ -46,7 +46,7 @@ function VideoPlayer({ id }: ShareProps) {
         ></video>
       </div>
 
-      <currentTime id={id} />
+      <CurrentTime id={id} />
       <Duration id={id} />
       <button onClick={handleClick}>Switch stream</button>
     </div>
