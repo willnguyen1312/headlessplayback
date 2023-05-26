@@ -28,19 +28,19 @@ A simple yet complete playback library designed for UI frameworks or even withou
 ## Roadmap
 
 - [ ] Write a complete test suites before implementation
-- [x] Implement core logic
+- ✅ Implement core logic
 - [ ] Write documentation and add examples
-- [x] Implement framework adapters
-- [x] Implement some common use plugins such as data streaming
+- ✅ Implement framework adapters
+- ✅ Implement some common use plugins such as data streaming
 
 ## Supported framework adapters
 
-- [x] Vue
-- [x] Preact
-- [x] Svelte
-- [x] Solid
-- [x] React
-- [x] SOlid
+- ✅ Vue
+- ✅ Preact
+- ✅ Svelte
+- ✅ Solid
+- ✅ React
+- ✅ Qwik
 
 ## Inspiration
 
