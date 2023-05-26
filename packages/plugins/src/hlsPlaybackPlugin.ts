@@ -175,42 +175,71 @@ export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
         })
       })
 
-      // Reference - https://github.com/video-dev/hls.js/blob/master/docs/API.md#fifth-step-error-handling
+      // Credit to https://github.com/mlapps/videoplayer-hls-example
       hls.on(Hls.Events.ERROR, (_, data) => {
-        if (data.fatal) {
-          switch (data.type) {
-            case Hls.ErrorTypes.NETWORK_ERROR:
-              // try to recover network error
-              hls?.startLoad()
-              store.setState({
-                hlsStatus: "recovering",
-              })
-              break
-            case Hls.ErrorTypes.MEDIA_ERROR:
-              // try to recover media error
-              hls?.recoverMediaError()
-              store.setState({
-                hlsStatus: "recovering",
-              })
-              break
-            default:
-              // cannot recover
-              hls?.destroy()
-              store.setState({
-                hlsStatus: "error",
-                errorDetail: data.details,
-              })
-              break
-          }
-        } else {
-          switch (data.details) {
-            // HLS will try to load the next segment when encounter this error
-            // so we can safely consume it as loading state
-            case Hls.ErrorDetails.BUFFER_STALLED_ERROR:
-              store.setState({
-                hlsStatus: "loading",
-              })
-              break
+        if (hls) {
+          if (data.fatal) {
+            switch (data.type) {
+              case Hls.ErrorTypes.MEDIA_ERROR:
+                switch (data.details) {
+                  case Hls.ErrorDetails.MANIFEST_INCOMPATIBLE_CODECS_ERROR:
+                    hls.destroy()
+                    store.setState({
+                      hlsStatus: "error",
+                      errorDetail: data.details,
+                    })
+                    break
+                  default:
+                    hls.recoverMediaError()
+                    store.setState({
+                      hlsStatus: "recovering",
+                    })
+                    break
+                }
+                break
+
+              case Hls.ErrorTypes.NETWORK_ERROR:
+                switch (data.details) {
+                  case Hls.ErrorDetails.FRAG_LOAD_ERROR:
+                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                    hls.currentLevel = data.frag!.start + data.frag!.duration + 0.1
+                    break
+
+                  case Hls.ErrorDetails.MANIFEST_LOAD_ERROR:
+                    hls.destroy()
+                    store.setState({
+                      hlsStatus: "error",
+                      errorDetail: data.details,
+                    })
+                    break
+
+                  default:
+                    hls.startLoad()
+                    store.setState({
+                      hlsStatus: "recovering",
+                    })
+                    break
+                }
+                break
+
+              default:
+                hls.destroy()
+                store.setState({
+                  hlsStatus: "error",
+                  errorDetail: data.details,
+                })
+                break
+            }
+          } else {
+            switch (data.details) {
+              // HLS will try to load the next segment when encounter this error
+              // so we can safely consume it as loading state
+              case Hls.ErrorDetails.BUFFER_STALLED_ERROR:
+                store.setState({
+                  hlsStatus: "loading",
+                })
+                break
+            }
           }
         }
       })
