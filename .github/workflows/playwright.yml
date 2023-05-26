@@ -96,7 +96,7 @@ jobs:
 
       - name: Run your tests
         run: |
-          pnpm playwright test
+          pnpm playwright test --shard=3
         env:
           FRAMEWORK: react
 

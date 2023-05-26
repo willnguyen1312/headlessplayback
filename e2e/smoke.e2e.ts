@@ -6,7 +6,7 @@ test.describe("Headless playback application", () => {
     await page.goto("/app2")
   })
 
-  test("should go to the correct route", async ({ page }) => {
+  test("should pass the smoke test", async ({ page }) => {
     await expect(page.getByText("Duration: 60")).toBeVisible()
     await expect(page.getByText("Levels: 144, 240, 360, 480, 576")).toBeVisible()
 
