@@ -186,3 +186,8 @@ cache
 # Qwik
 lib
 lib-types
+
+# Playwright
+e2e/report
+e2e/junit.xml
+e2e/results
