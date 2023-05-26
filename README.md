@@ -27,11 +27,11 @@ A simple yet complete playback library designed for UI frameworks or even withou
 
 ## Roadmap
 
-- [ ] Write a complete test suites before implementation
+- ✅ Add examples
 - ✅ Implement core logic
-- [ ] Write documentation and add examples
 - ✅ Implement framework adapters
 - ✅ Implement some common use plugins such as data streaming
+- [] Write documentation
 
 ## Supported framework adapters
 
