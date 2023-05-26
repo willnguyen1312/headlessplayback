@@ -25,10 +25,18 @@
     "check": "turbo run build typecheck lint test --filter=!docs",
     "clean": "turbo clean && rm -rf node_modules",
     "core": "pnpm --filter=@headlessplayback/core",
+    "e2e-react": "FRAMEWORK=react playwright test",
+    "e2e-react-ui": "FRAMEWORK=react playwright test --ui",
+    "e2e-solid": "FRAMEWORK=solid playwright test",
+    "e2e-svelte": "FRAMEWORK=svelte playwright test",
+    "e2e-vue": "FRAMEWORK=vue playwright test",
     "format:check": "prettier --check ./**/*.{js,ts,tsx,mjs,json,vue,svelte}",
     "format:fix": "prettier --write ./**/*.{js,ts,tsx,mjs,json,vue,svelte}",
     "lint": "turbo lint",
     "postbuild": "pnpm run size",
+    "pw-report": "playwright show-report e2e/report",
+    "pw-test-debug": "playwright test --debug",
+    "pw-test": "playwright test",
     "react": "pnpm --filter=@headlessplayback/react",
     "release": "pnpm check && changeset version && changeset publish",
     "size": "esno scripts/size-limit.ts",
@@ -55,5 +63,8 @@
     "prettier-plugin-tailwindcss": "^0.3.0",
     "turbo": "^1.9.9",
     "unocss": "^0.52.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.34.3"
   }
 }

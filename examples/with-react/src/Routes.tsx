@@ -44,7 +44,9 @@ function Layout() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/app1">App1</Link>
+            <Link data-testid="app1" to="/app1">
+              App1
+            </Link>
           </li>
           <li>
             <Link to="/app2">App2</Link>
