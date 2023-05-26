@@ -51,15 +51,17 @@ jobs:
 
       - name: Install Playwright (if not cached)
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: pnpx playwright install
+        run: npx playwright install --with-deps
 
   e2e:
-    name: 🧪 Test
+    name: 🧪 Test (${{ matrix.shard }}/${{ strategy.job-total }})
     timeout-minutes: 60
     needs: install
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     steps:
       - uses: actions/checkout@v3
 
@@ -96,7 +98,7 @@ jobs:
 
       - name: Run your tests
         run: |
-          pnpm playwright test
+          pnpm playwright test --shard=${{ matrix.shard }}/${{ strategy.job-total }}
         env:
           FRAMEWORK: react
 
@@ -104,6 +106,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v3
         with:
+          name: test-results-${{ matrix.shard }}
           path: |
             e2e/report
             e2e/junit.xml
