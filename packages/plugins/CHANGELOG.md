@@ -1,5 +1,13 @@
 # @headlessplayback/plugins
 
+## 0.3.0
+
+### Minor Changes
+
+- [#30](https://github.com/willnguyen1312/headlessplayback/pull/30)
+  [`6e58ce1`](https://github.com/willnguyen1312/headlessplayback/commit/6e58ce184c692577b9614e69cf0dd5529c0f7f1b) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Improve error handling mechanism 🚀
+
 ## 0.2.1
 
 ### Patch Changes
