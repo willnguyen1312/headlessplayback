@@ -82,7 +82,7 @@ jobs:
 
       - name: Install dependencies
         shell: bash
-        run: pnpm install
+        run: pnpm install && npx playwright install ffmpeg
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
 
