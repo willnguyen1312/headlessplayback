@@ -41,9 +41,9 @@ const config: PlaywrightTestConfig = {
   },
   projects: [
     {
-      name: "Microsoft Edge",
+      name: "Google Chrome",
       use: {
-        channel: "msedge",
+        channel: "chrome",
       },
     },
   ],

@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test"
 import { testid } from "./__utils"
 
-test.describe("Application", () => {
+test.describe("Headless playback application", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/app2")
   })
