@@ -1,11 +1,43 @@
 import type { PlaywrightTestConfig, ReporterDescription } from "@playwright/test"
 
 export function getWebServer() {
-  const framework = process.env.FRAMEWORK || "react"
+  const framework = process.env.FRAMEWORK || "vanilla"
+  console.info(`Testing integration with ${framework}`)
 
   const frameworks = {
-    react: {
+    preact: {
       command: "pnpm start-react",
+      url: "http://localhost:1312",
+      reuseExistingServer: !process.env.CI,
+    },
+
+    qwik: {
+      command: "pnpm start-qwik",
+      url: "http://localhost:1312",
+      reuseExistingServer: !process.env.CI,
+    },
+    react: {
+      command: "pnpm start-preact",
+      url: "http://localhost:1312",
+      reuseExistingServer: !process.env.CI,
+    },
+    solid: {
+      command: "pnpm start-solid",
+      url: "http://localhost:1312",
+      reuseExistingServer: !process.env.CI,
+    },
+    svelte: {
+      command: "pnpm start-svelte",
+      url: "http://localhost:1312",
+      reuseExistingServer: !process.env.CI,
+    },
+    vanilla: {
+      command: "pnpm start-vanilla",
+      url: "http://localhost:1312",
+      reuseExistingServer: !process.env.CI,
+    },
+    vue: {
+      command: "pnpm start-vue",
       url: "http://localhost:1312",
       reuseExistingServer: !process.env.CI,
     },
