@@ -5,6 +5,7 @@ test.describe("Application", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/app2")
   })
+
   test("should go to the correct route", async ({ page }) => {
     await expect(page.getByText("Duration: 60")).toBeVisible()
     await expect(page.getByText("Levels: 144, 240, 360, 480, 576")).toBeVisible()
