@@ -25,10 +25,21 @@ jobs:
     name: 🔍 Install
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-      - name: Install
-        uses: ./.github/composite-actions/install
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Set node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: pnpm
 
       - name: Cache Playwright
         uses: actions/cache@v3
@@ -54,8 +65,28 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install
-        uses: ./.github/composite-actions/install
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Set node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: pnpm
+
+      - name: Setup Git User
+        shell: bash
+        run: |
+          git config --global user.email "nam.nguyen.node@gmail.com"
+          git config --global user.name "Nam Nguyen"
+
+      - name: Install dependencies
+        shell: bash
+        run: pnpm install
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
 
       - name: Cache Playwright
         uses: actions/cache@v3
