@@ -51,7 +51,7 @@ jobs:
 
       - name: Install Playwright (if not cached)
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: npx playwright install
+        run: pnpx playwright install
 
   e2e:
     name: 🧪 Test
@@ -82,7 +82,7 @@ jobs:
 
       - name: Install dependencies
         shell: bash
-        run: pnpm install && npx playwright install ffmpeg
+        run: pnpm install && pnpx playwright install ffmpeg
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
 
