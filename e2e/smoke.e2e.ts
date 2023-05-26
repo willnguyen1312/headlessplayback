@@ -12,6 +12,6 @@ test.describe("Headless playback application", () => {
 
     await page.getByText("Switch stream").click()
     await expect(page.getByText("Duration: 70.93696")).toBeVisible()
-    await expect(page.getByText("Levels: 180, 270, 360, 540, 720, 1080")).toBeVisible()
+    await expect(page.getByText("Levels: 180, 270, 360, 540, 720, 8888")).toBeVisible()
   })
 })
