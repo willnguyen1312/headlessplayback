@@ -1,5 +1,13 @@
 # @headlessplayback/core
 
+## 0.7.1
+
+### Patch Changes
+
+- [#35](https://github.com/willnguyen1312/headlessplayback/pull/35)
+  [`be6c598`](https://github.com/willnguyen1312/headlessplayback/commit/be6c5985d14ea4846f18d0991dafc7ed1bb3dc11) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Patch headless playback core 💞
+
 ## 0.7.0
 
 ### Minor Changes
