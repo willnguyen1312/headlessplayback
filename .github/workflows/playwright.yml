@@ -22,7 +22,6 @@ concurrency:
 jobs:
   e2e:
     timeout-minutes: 10
-    name: 🔍 Install
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
