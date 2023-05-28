@@ -1,7 +1,7 @@
 import fs from "fs/promises"
 import { getExportsSize } from "export-size"
 
-const packages = ["core", "react", "qwik", "solid", "svelte", "vue"]
+const packages = ["core", "react", "qwik", "solid", "svelte", "vue", "plugins"]
 
 function formatBytes(bytes, decimals = 2) {
   if (bytes === 0) return "0 Bytes"
@@ -19,8 +19,9 @@ async function main() {
         getExportsSize({
           pkg: `./packages/${pkg}`,
           output: false,
-          bundler: "esbuild",
+          bundler: "rollup",
           includes: ["@headlessplayback/core"],
+          external: ["@namnode/store", "@namnode/utils"],
         }),
       )
     }),

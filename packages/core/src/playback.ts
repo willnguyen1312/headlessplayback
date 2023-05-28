@@ -1,5 +1,5 @@
-import { Listener, createStore } from "./store"
-import { clamp } from "./utils"
+import { StoreListener, createStore } from "@namnode/store"
+import { clamp } from "@namnode/utils"
 
 export interface InternalPlaybackState {
   currentTime: number
@@ -61,7 +61,7 @@ export type PluginFunc = <T>(plugin: Plugin<T>, ...options: T[]) => void
 type PlaybackFunc = {
   (arg: { id: string }): {
     cleanup: () => void
-    subscribe: (listener: Listener<PlaybackState>) => () => void
+    subscribe: (listener: StoreListener<PlaybackState>) => () => void
     activate: () => boolean
     getState: () => PlaybackState
     playbackActions: PlaybackActions
