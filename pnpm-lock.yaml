@@ -332,7 +332,7 @@ importers:
         version: 1.4.3
     devDependencies:
       '@namnode/utils':
-        specifier: latest
+        specifier: ^0.1.0
         version: 0.1.0
       eslint:
         specifier: ^8.41.0
