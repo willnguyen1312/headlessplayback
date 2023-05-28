@@ -272,10 +272,10 @@ importers:
     devDependencies:
       '@namnode/store':
         specifier: latest
-        version: 0.0.0
+        version: 0.1.0
       '@namnode/utils':
         specifier: latest
-        version: 0.0.0
+        version: 0.1.0
       eslint:
         specifier: ^8.41.0
         version: 8.41.0
@@ -333,7 +333,7 @@ importers:
     devDependencies:
       '@namnode/utils':
         specifier: latest
-        version: 0.0.0
+        version: 0.1.0
       eslint:
         specifier: ^8.41.0
         version: 8.41.0
@@ -1642,12 +1642,12 @@ packages:
       - supports-color
     dev: true
 
-  /@namnode/store@0.0.0:
-    resolution: {integrity: sha512-lm0Qjcc219KymaFJ3LHHACKGyOIL5CbqAMF408IYCGnbswsDyi7CsPmkdfa/eHWxkJKoqBHR3AtfFYKBqrZgnw==}
+  /@namnode/store@0.1.0:
+    resolution: {integrity: sha512-4NGTldxKcmY0UuZ7OEkvCjs8ZEoeYB6M2UwMu74pdLiFMKxXbj9HdNk1Qn213bxX1O7bY5h+PLh5DZsTURZkYA==}
     dev: true
 
-  /@namnode/utils@0.0.0:
-    resolution: {integrity: sha512-5kp/kLkLStenBTZrvfkeISh8ShYFlioSjj1xh4LINUpBrBKHleLgpRCzGqFUUl1IuAZC9RV7DxGXemDK4teBDQ==}
+  /@namnode/utils@0.1.0:
+    resolution: {integrity: sha512-wSK6QJ1AUTa8zuFfBp4Foy5UFQY34NBu5wY8bIgKfZ05d80V0flUsHfXAcmPuPHN3VWBCwLFkyDnDXrb2OmOIQ==}
     dev: true
 
   /@nodelib/fs.scandir@2.1.5:
