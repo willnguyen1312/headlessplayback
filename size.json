@@ -1,21 +1,24 @@
 {
   "@headlessplayback/core": {
-    "playback": "752 B"
+    "playback": "1.2 KB"
   },
   "@headlessplayback/react": {
-    "usePlayback": "943 B"
+    "usePlayback": "1.38 KB"
   },
   "@headlessplayback/qwik": {
-    "usePlayback": "1.21 KB",
-    "_auto_playbackInstanceMap": "920 B"
+    "usePlayback": "1.61 KB",
+    "_auto_playbackInstanceMap": "77 B"
   },
   "@headlessplayback/solid": {
-    "usePlayback": "945 B"
+    "usePlayback": "2.69 KB"
   },
   "@headlessplayback/svelte": {
-    "usePlayback": "935 B"
+    "usePlayback": "1.58 KB"
   },
   "@headlessplayback/vue": {
-    "usePlayback": "932 B"
+    "usePlayback": "1.36 KB"
+  },
+  "@headlessplayback/plugins": {
+    "hlsPlaybackPlugin": "764 B"
   }
 }

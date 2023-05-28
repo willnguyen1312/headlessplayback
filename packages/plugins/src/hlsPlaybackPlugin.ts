@@ -1,4 +1,5 @@
-import { Plugin, flushPromises } from "@headlessplayback/core"
+import { Plugin } from "@headlessplayback/core"
+import { flushPromises } from "@namnode/utils"
 import Hls, { HlsConfig, Level, MediaPlaylist } from "hls.js"
 
 type LoadFunction = (arg: { source: string }) => void

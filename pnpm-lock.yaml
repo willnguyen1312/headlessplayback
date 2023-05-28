@@ -270,6 +270,12 @@ importers:
 
   packages/core:
     devDependencies:
+      '@namnode/store':
+        specifier: latest
+        version: 0.0.0
+      '@namnode/utils':
+        specifier: latest
+        version: 0.0.0
       eslint:
         specifier: ^8.41.0
         version: 8.41.0
@@ -325,6 +331,9 @@ importers:
         specifier: ^1.4.3
         version: 1.4.3
     devDependencies:
+      '@namnode/utils':
+        specifier: latest
+        version: 0.0.0
       eslint:
         specifier: ^8.41.0
         version: 8.41.0
@@ -1631,6 +1640,14 @@ packages:
       vfile: 5.3.7
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@namnode/store@0.0.0:
+    resolution: {integrity: sha512-lm0Qjcc219KymaFJ3LHHACKGyOIL5CbqAMF408IYCGnbswsDyi7CsPmkdfa/eHWxkJKoqBHR3AtfFYKBqrZgnw==}
+    dev: true
+
+  /@namnode/utils@0.0.0:
+    resolution: {integrity: sha512-5kp/kLkLStenBTZrvfkeISh8ShYFlioSjj1xh4LINUpBrBKHleLgpRCzGqFUUl1IuAZC9RV7DxGXemDK4teBDQ==}
     dev: true
 
   /@nodelib/fs.scandir@2.1.5:
