@@ -333,7 +333,7 @@ importers:
     devDependencies:
       '@namnode/utils':
         specifier: latest
-        version: 0.0.0
+        version: 0.1.0
       eslint:
         specifier: ^8.41.0
         version: 8.41.0
@@ -1644,10 +1644,6 @@ packages:
 
   /@namnode/store@0.1.0:
     resolution: {integrity: sha512-4NGTldxKcmY0UuZ7OEkvCjs8ZEoeYB6M2UwMu74pdLiFMKxXbj9HdNk1Qn213bxX1O7bY5h+PLh5DZsTURZkYA==}
-    dev: true
-
-  /@namnode/utils@0.0.0:
-    resolution: {integrity: sha512-5kp/kLkLStenBTZrvfkeISh8ShYFlioSjj1xh4LINUpBrBKHleLgpRCzGqFUUl1IuAZC9RV7DxGXemDK4teBDQ==}
     dev: true
 
   /@namnode/utils@0.1.0:
