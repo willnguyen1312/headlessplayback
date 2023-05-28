@@ -1,5 +1,13 @@
 # @headlessplayback/core
 
+## 0.7.0
+
+### Minor Changes
+
+- [#32](https://github.com/willnguyen1312/headlessplayback/pull/32)
+  [`74f1115`](https://github.com/willnguyen1312/headlessplayback/commit/74f1115e50ba80c825e2299f72fb493d45949bb0) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Switch to @namnode/store and @namnode@utils 💞
+
 ## 0.6.0
 
 ### Minor Changes
