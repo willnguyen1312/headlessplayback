@@ -21,7 +21,6 @@ async function main() {
           output: false,
           bundler: "rollup",
           includes: ["@headlessplayback/core"],
-          external: ["@namnode/store", "@namnode/utils"],
         }),
       )
     }),
