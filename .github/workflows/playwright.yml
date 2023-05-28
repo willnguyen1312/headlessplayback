@@ -1,4 +1,4 @@
-name: Playwright Tests
+name: Playwright
 
 on:
   workflow_dispatch:
@@ -20,9 +20,8 @@ concurrency:
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
-  install:
-    timeout-minutes: 60
-    name: 🔍 Install
+  e2e:
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -41,46 +40,22 @@ jobs:
           node-version: 18
           cache: pnpm
 
-      - name: Cache Playwright
-        uses: actions/cache@v3
-        id: playwright-cache
-        with:
-          path: |
-            ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('**/pnpm-lock.yaml') }}
-
-      - name: Install Playwright (if not cached)
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: npx playwright install --with-deps
-
-  e2e:
-    name: 🧪 Test (${{ matrix.shard }}/${{ strategy.job-total }})
-    timeout-minutes: 60
-    needs: install
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        shard: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
-      - name: Set node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: pnpm
-
-      - name: Setup Git User
-        shell: bash
+      - name: Store Playwright's Version
         run: |
-          git config --global user.email "nam.nguyen.node@gmail.com"
-          git config --global user.name "Nam Nguyen"
+          PLAYWRIGHT_VERSION=$(npm ls @playwright/test | grep @playwright | sed 's/.*@//')
+          echo "Playwright's Version: $PLAYWRIGHT_VERSION"
+          echo "PLAYWRIGHT_VERSION=$PLAYWRIGHT_VERSION" >> $GITHUB_ENV
+
+      - name: Cache Playwright Browsers for Playwright's Version
+        id: cache-playwright-browsers
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-browsers-${{ env.PLAYWRIGHT_VERSION }}
+
+      - name: Setup Playwright
+        if: steps.cache-playwright-browsers.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps
 
       - name: Install dependencies
         shell: bash
@@ -98,16 +73,4 @@ jobs:
 
       - name: Run your tests
         run: |
-          pnpm playwright test --shard=${{ matrix.shard }}/${{ strategy.job-total }}
-        env:
-          FRAMEWORK: react
-
-      - name: Upload test results
-        if: failure()
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-results-${{ matrix.shard }}
-          path: |
-            e2e/report
-            e2e/junit.xml
-          retention-days: 15
+          pnpm playwright test
