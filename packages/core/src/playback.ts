@@ -128,7 +128,7 @@ export const playback: PlaybackFunc = ({ id }) => {
         if (value) {
           playbackElement.pause()
         } else {
-          playbackElement.play().catch(() => {
+          playbackElement.play()?.catch(() => {
             // ignore
           })
         }
@@ -288,7 +288,7 @@ export const playback: PlaybackFunc = ({ id }) => {
       { signal },
     )
     playbackElement?.addEventListener(
-      "paused",
+      "pause",
       () => {
         store.setState({
           paused: true,
@@ -299,6 +299,8 @@ export const playback: PlaybackFunc = ({ id }) => {
     playbackElement?.addEventListener(
       "play",
       () => {
+        console.log("play")
+
         store.setState({
           paused: false,
         })
