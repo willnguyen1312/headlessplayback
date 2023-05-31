@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react"
 import { usePlayback } from "@headlessplayback/react"
-import { hijackPlaybackPlugin, Direction } from "@headlessplayback/plugins"
+import { hijackPlaybackPlugin, Direction } from "@headlessplayback/hijack-plugin"
 usePlayback.use(hijackPlaybackPlugin)
 
-const id = "video"
+const id = "hijack"
 
 function CurrentTime() {
   const playback = usePlayback({
-    id: "video",
+    id,
   })
 
   return <p>Current time: {playback.playbackState.currentTime}</p>
@@ -15,7 +15,7 @@ function CurrentTime() {
 
 const Duration = React.memo(() => {
   const { playbackState } = usePlayback({
-    id: "video",
+    id,
   })
 
   return <p>Duration: {playbackState.duration}</p>

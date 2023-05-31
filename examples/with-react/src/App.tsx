@@ -1,99 +1,80 @@
-import React, { useEffect, useState } from "react"
+import { useMemo, useState } from "react"
+import Hijack from "./Hijack"
+import Hls from "./Hls"
 
-const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
-const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
-const id = "video"
-
-function CurrentTime() {
-  const playback = usePlayback({
-    id: "video",
-  })
-
-  return <p>Current time: {playback.playbackState.currentTime}</p>
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ")
 }
 
-const Duration = React.memo(() => {
-  const { playbackState } = usePlayback({
-    id: "video",
-  })
+export default function App() {
+  const [tabs, setTabs] = useState([
+    { name: "Hls", href: "#", current: true },
+    { name: "Hijack", href: "#", current: false },
+  ])
 
-  return <p>Duration: {playbackState.duration}</p>
-})
+  const activeComponentName = tabs.find((tab) => tab.current)?.name
 
-import { usePlayback } from "@headlessplayback/react"
-import { hlsPlaybackPlugin } from "@headlessplayback/plugins"
-usePlayback.use(hlsPlaybackPlugin)
-
-const Resolutions = React.memo(() => {
-  const { playbackState } = usePlayback({
-    id,
-  })
-
-  // Plugin might inject extra state to playbackState
-  return <strong>Levels: {playbackState.levels.map((level) => level.height).join(", ")}</strong>
-})
-
-function App() {
-  const { activate, playbackActions, playbackState } = usePlayback({
-    id,
-  })
-  const [showDuration, setShowDuration] = useState(true)
-  const [source, setSource] = useState(source1)
-
-  useEffect(() => {
-    // Activate when playback element is accessible from the DOM
-    activate()
-  }, [])
-
-  useEffect(() => {
-    // Plugin can also inject extra actions to playbackActions
-    playbackActions.load({
-      source,
-    })
-  }, [source])
-
-  function jumpNext5s() {
-    // Core actions and state are always available
-    playbackActions.setCurrentTime(playbackState.currentTime + 5)
-  }
-
-  function jumpPrev5s() {
-    playbackActions.setCurrentTime(playbackState.currentTime - 5)
-  }
-
-  function toggleStreamSource() {
-    if (source === source1) {
-      setSource(source2)
-    } else {
-      setSource(source1)
+  const renderedComponent = useMemo(() => {
+    if (activeComponentName === "Hijack") {
+      return <Hijack />
     }
-  }
+
+    if (activeComponentName === "Hls") {
+      return <Hls />
+    }
+
+    return null
+  }, [activeComponentName])
 
   return (
-    <div id="app" className="p-4">
-      <div className="border-emerald border-1 h-[400px] w-[600px]">
-        <video className="h-full w-full" id={id} controls></video>
-      </div>
-
-      <CurrentTime />
-      {showDuration && <Duration />}
-      <Resolutions />
-
-      <div className="flex flex-col items-start ">
-        <button onClick={toggleStreamSource}>Switch stream</button>
-
-        <button onClick={jumpNext5s}>Next 5s</button>
-        <button onClick={jumpPrev5s}>Prev 5s</button>
-        <button
-          onClick={() => {
-            setShowDuration(!showDuration)
-          }}
+    <div className="p-4">
+      <div className="sm:hidden">
+        <label htmlFor="tabs" className="sr-only">
+          Select a tab
+        </label>
+        <select
+          id="tabs"
+          name="tabs"
+          className="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+          defaultValue={tabs.find((tab) => tab.current)?.name}
         >
-          Toggle show duration
-        </button>
+          {tabs.map((tab) => (
+            <option key={tab.name}>{tab.name}</option>
+          ))}
+        </select>
       </div>
+      <div className="hidden sm:block">
+        <div className="border-b border-gray-200">
+          <nav className="-mb-px flex space-x-8" aria-label="Tabs">
+            {tabs.map((tab) => (
+              <a
+                key={tab.name}
+                href={tab.href}
+                onClick={(event) => {
+                  event.preventDefault()
+                  setTabs((prevTabs) =>
+                    prevTabs.map((prevTab) => ({
+                      ...prevTab,
+                      current: prevTab.name === tab.name,
+                    })),
+                  )
+                }}
+                className={classNames(
+                  tab.current
+                    ? "border-indigo-500 text-indigo-600"
+                    : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700",
+                  "whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium",
+                )}
+                aria-current={tab.current ? "page" : undefined}
+              >
+                {tab.name}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </div>
+
+      <div className="mt-4">{renderedComponent}</div>
     </div>
   )
 }
-
-export default App

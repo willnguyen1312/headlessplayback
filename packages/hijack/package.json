@@ -1,7 +1,7 @@
 {
-  "name": "@headlessplayback/plugins",
-  "version": "0.4.1",
-  "description": "A core plugins of headlessplayback",
+  "name": "@headlessplayback/hijack-plugin",
+  "version": "0.0.0",
+  "description": "A hijack plugin for headlessplayback",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "repository": "willnguyen1312/headlessplayback",
   "homepage": "https://github.com/sponsors/willnguyen1312",
@@ -43,8 +43,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@headlessplayback/core": "workspace:*",
-    "hls.js": "^1.4.3"
+    "@headlessplayback/core": "workspace:*"
   },
   "publishConfig": {
     "access": "public"

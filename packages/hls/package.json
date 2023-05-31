@@ -1,0 +1,52 @@
+{
+  "name": "@headlessplayback/hls-plugin",
+  "version": "0.0.0",
+  "description": "A Hls plugin for headlessplayback",
+  "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
+  "repository": "willnguyen1312/headlessplayback",
+  "homepage": "https://github.com/sponsors/willnguyen1312",
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/willnguyen1312"
+  },
+  "keywords": [
+    "javascript",
+    "typescript",
+    "video",
+    "audio",
+    "playback",
+    "headless",
+    "mobile",
+    "desktop"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "license": "MIT",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsup src terse",
+    "dev": "tsup src --watch",
+    "lint": "eslint \"src/**/*.ts*\"",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "devDependencies": {
+    "@namnode/utils": "latest",
+    "eslint": "^8.41.0",
+    "eslint-config-custom": "workspace:*",
+    "tsconfig": "workspace:*",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@headlessplayback/core": "workspace:*",
+    "hls.js": "^1.4.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

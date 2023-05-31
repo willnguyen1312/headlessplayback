@@ -46,7 +46,7 @@ importers:
     dependencies:
       '@headlessplayback/plugins':
         specifier: latest
-        version: link:../../packages/plugins
+        version: 0.4.1
       '@headlessplayback/preact':
         specifier: latest
         version: link:../../packages/preact
@@ -74,7 +74,7 @@ importers:
     dependencies:
       '@headlessplayback/plugins':
         specifier: latest
-        version: link:../../packages/plugins
+        version: 0.4.1
       '@headlessplayback/qwik':
         specifier: latest
         version: link:../../packages/qwik
@@ -109,9 +109,12 @@ importers:
 
   examples/with-react:
     dependencies:
-      '@headlessplayback/plugins':
+      '@headlessplayback/hijack-plugin':
         specifier: latest
-        version: link:../../packages/plugins
+        version: link:../../packages/hijack
+      '@headlessplayback/hls-plugin':
+        specifier: latest
+        version: link:../../packages/hls
       '@headlessplayback/react':
         specifier: latest
         version: link:../../packages/react
@@ -151,7 +154,7 @@ importers:
     dependencies:
       '@headlessplayback/plugins':
         specifier: latest
-        version: link:../../packages/plugins
+        version: 0.4.1
       '@headlessplayback/solid':
         specifier: latest
         version: link:../../packages/solid
@@ -182,7 +185,7 @@ importers:
         version: link:../../packages/core
       '@headlessplayback/plugins':
         specifier: latest
-        version: link:../../packages/plugins
+        version: 0.4.1
       '@headlessplayback/svelte':
         specifier: latest
         version: link:../../packages/svelte
@@ -222,7 +225,7 @@ importers:
         version: link:../../packages/core
       '@headlessplayback/plugins':
         specifier: latest
-        version: link:../../packages/plugins
+        version: 0.4.1
     devDependencies:
       '@unocss/reset':
         specifier: ^0.52.3
@@ -241,7 +244,7 @@ importers:
     dependencies:
       '@headlessplayback/plugins':
         specifier: latest
-        version: link:../../packages/plugins
+        version: 0.4.1
       '@headlessplayback/vue':
         specifier: latest
         version: link:../../packages/vue
@@ -322,7 +325,32 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
-  packages/plugins:
+  packages/hijack:
+    dependencies:
+      '@headlessplayback/core':
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      '@namnode/utils':
+        specifier: latest
+        version: 0.1.0
+      eslint:
+        specifier: ^8.41.0
+        version: 8.41.0
+      eslint-config-custom:
+        specifier: workspace:*
+        version: link:../eslint-config-custom
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+      tsup:
+        specifier: ^6.7.0
+        version: 6.7.0(postcss@8.4.23)(typescript@5.0.4)
+      typescript:
+        specifier: ^5.0.4
+        version: 5.0.4
+
+  packages/hls:
     dependencies:
       '@headlessplayback/core':
         specifier: workspace:*
@@ -1530,6 +1558,17 @@ packages:
   /@eslint/js@8.41.0:
     resolution: {integrity: sha512-LxcyMGxwmTh2lY9FwHPGWOHmYFCZvbrFCBZL4FzSSsxsRPuhrYUg/49/0KDfW8tnIEaEHtfmn6+NPN+1DqaNmA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  /@headlessplayback/core@0.7.1:
+    resolution: {integrity: sha512-4Dosyf7DTg1dmXSTt3ihN2Kho+6hjFtWLkX4fm7pzyvHOskXtln409j3v8Y0AbarwwcJ8tb/uiNtKxKiI6+yyw==}
+    dev: false
+
+  /@headlessplayback/plugins@0.4.1:
+    resolution: {integrity: sha512-QEpWRVCyUn603s05bgzJl7P/aPwfrL+OU205/sdsZRFNU4he19GbJ3WDatdEoFvhLnD3PVTjhW74WJAmbABlzA==}
+    dependencies:
+      '@headlessplayback/core': 0.7.1
+      hls.js: 1.4.3
+    dev: false
 
   /@humanwhocodes/config-array@0.11.8:
     resolution: {integrity: sha512-UybHIJzJnR5Qc/MsD9Kr+RpO2h+/P1GhOwdiLPXK5TWk5sgTdu88bTD9UP+CKbPPh5Rni1u0GjAdYQLemG8g+g==}
