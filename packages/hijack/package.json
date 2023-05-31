@@ -1,8 +1,8 @@
 {
-  "name": "@headlessplayback/solid",
-  "version": "0.1.6",
+  "name": "@headlessplayback/hijack-plugin",
+  "version": "0.0.0",
+  "description": "A hijack plugin for headlessplayback",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
-  "description": "Adapter of headlessplayback core for Solid",
   "repository": "willnguyen1312/headlessplayback",
   "homepage": "https://github.com/sponsors/willnguyen1312",
   "funding": {
@@ -18,7 +18,7 @@
     "headless",
     "mobile",
     "desktop",
-    "solid"
+    "hijack"
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -36,7 +36,7 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@types/node": "^20.2.5",
+    "@namnode/utils": "^0.1.0",
     "eslint": "^8.41.0",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
@@ -45,9 +45,6 @@
   },
   "dependencies": {
     "@headlessplayback/core": "workspace:*"
-  },
-  "peerDependencies": {
-    "solid-js": "^1.0.0"
   },
   "publishConfig": {
     "access": "public"

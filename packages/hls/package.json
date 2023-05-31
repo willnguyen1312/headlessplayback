@@ -1,7 +1,7 @@
 {
-  "name": "@headlessplayback/plugins",
-  "version": "0.4.1",
-  "description": "A core plugins of headlessplayback",
+  "name": "@headlessplayback/hls-plugin",
+  "version": "0.0.0",
+  "description": "A hls plugin for headlessplayback",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "repository": "willnguyen1312/headlessplayback",
   "homepage": "https://github.com/sponsors/willnguyen1312",
@@ -17,7 +17,8 @@
     "playback",
     "headless",
     "mobile",
-    "desktop"
+    "desktop",
+    "hls"
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -35,7 +36,7 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@namnode/utils": "latest",
+    "@namnode/utils": "^0.1.0",
     "eslint": "^8.41.0",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
@@ -44,7 +45,7 @@
   },
   "dependencies": {
     "@headlessplayback/core": "workspace:*",
-    "hls.js": "^1.4.3"
+    "hls.js": "^1.4.4"
   },
   "publishConfig": {
     "access": "public"
