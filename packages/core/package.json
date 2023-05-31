@@ -35,8 +35,8 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@namnode/store": "latest",
-    "@namnode/utils": "latest",
+    "@namnode/store": "^0.1.0",
+    "@namnode/utils": "^0.1.0",
     "eslint": "^8.41.0",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
