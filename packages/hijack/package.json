@@ -17,7 +17,8 @@
     "playback",
     "headless",
     "mobile",
-    "desktop"
+    "desktop",
+    "hijack"
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
