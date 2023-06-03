@@ -1,6 +1,6 @@
 {
   "name": "@headlessplayback/qwik",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "description": "Adapter of headlessplayback core for QWik",
   "repository": "willnguyen1312/headlessplayback",

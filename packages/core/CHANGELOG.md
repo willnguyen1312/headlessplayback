@@ -1,5 +1,13 @@
 # @headlessplayback/core
 
+## 0.8.0
+
+### Minor Changes
+
+- [#38](https://github.com/willnguyen1312/headlessplayback/pull/38)
+  [`dd59961`](https://github.com/willnguyen1312/headlessplayback/commit/dd59961da0003bc80861d3e30ebe297bac9c4721) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Update internal TypeScript compiler 🚀
+
 ## 0.7.1
 
 ### Patch Changes
