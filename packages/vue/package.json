@@ -1,6 +1,6 @@
 {
   "name": "@headlessplayback/vue",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "description": "Adapter of headlessplayback core for Vue",
   "repository": "willnguyen1312/headlessplayback",
