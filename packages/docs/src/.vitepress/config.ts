@@ -7,6 +7,7 @@ export default defineConfig({
   title: "Headless Playback",
   description: "A simple yet complete playback library designed for UI frameworks or even without",
   base: "/headlessplayback/",
+  head: [["link", { rel: "shortcut icon", href: "/headlessplayback/favicon.ico", type: "image/x-icon" }]],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
