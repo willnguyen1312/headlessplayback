@@ -1,62 +1,76 @@
 # Get Started
 
-Zoom Image is a small collection of utilities for zooming image on the web. It is written in pure TypeScript and has no
-dependencies. The library is built with framework agnostic in mind, so it can be used with any framework adapters or
-even without
+Headlessplayback is a little yet powerful and extensive library for powering playback experience on the web. It is
+written in pure TypeScript and has no dependencies. The library is built with framework agnostic in mind, so it can be
+used with any framework adapters or even without
 
 ## Installation
 
 ::: code-group
 
 ```sh [pnpm]
-$ pnpm add @zoom-image/core
+$ pnpm add @headlessplayback/core
 ```
 
 ```sh [npm]
-$ npm install @zoom-image/core
+$ npm install @headlessplayback/core
 ```
 
 ```sh [yarn]
-$ yarn add @zoom-image/core
+$ yarn add @headlessplayback/core
 ```
 
 :::
 
-### CDN
-
-```html
-<script src="https://unpkg.com/@zoom-image/core"></script>
-```
-
-Everything will be exposed to global as `window.ZoomImage`
-
 ## Example with Vanilla JS
 
-Simply importing the utilities you need from `@zoom-image/core`
+Simply importing the utilities you need from `@headlessplayback/core`
 
 ```html
-<div id="container" class="imageContainer">
-  <img class="image" alt="Large Pic" src="/image.webp" />
-</div>
+<video controls id="video"></video>
+
+<p id="duration"></p>
+<p id="currentTime"></p>
+<p id="resolutions"></p>
+
+<button id="switch">Switch stream</button>
 ```
 
-```css
-.imageContainer {
-  width: var(--imageContainerWidth);
-  height: var(--imageContainerHeight);
-}
+```ts
+import { playback } from "@headlessplayback/core"
+import { hlsPlaybackPlugin } from "@headlessplayback/hls-plugin"
+playback.use(hlsPlaybackPlugin)
 
-.image {
-  width: 100%;
-  height: 100%;
-}
-```
+const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
+const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
+let currentSource = source1
 
-```js
-import { createZoomImageWheel } from "@zoom-image/core"
+const currentTime = document.getElementById("currentTime") as HTMLParagraphElement
+const resolutions = document.getElementById("resolutions") as HTMLParagraphElement
+const duration = document.getElementById("duration") as HTMLParagraphElement
+const switchBtn = document.getElementById("switch") as HTMLButtonElement
 
-const container = document.getElementById("container")
-createZoomImageWheel(container)
+switchBtn.addEventListener("click", () => {
+  currentSource = currentSource === source1 ? source2 : source1
+  result.playbackActions.load({
+    source: currentSource,
+  })
+})
+
+const result = playback({
+  id: "video",
+})
+
+result.subscribe(({ state }) => {
+  currentTime.innerText = `Current time: ${state.currentTime.toString()}`
+  duration.innerText = `Duration: ${state.duration.toString()}`
+  resolutions.innerText = `Levels: ${state.levels.map((level) => level.height).join(", ")}`
+})
+
+result.activate()
+result.playbackActions.load({
+  source: source1,
+})
 ```
 
 Refer to [Core API section](/api/) for more details

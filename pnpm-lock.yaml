@@ -223,9 +223,9 @@ importers:
       '@headlessplayback/core':
         specifier: latest
         version: link:../../packages/core
-      '@headlessplayback/plugins':
-        specifier: ^0.4.1
-        version: 0.4.1
+      '@headlessplayback/hls-plugin':
+        specifier: workspace:^
+        version: link:../../packages/hls
     devDependencies:
       '@unocss/reset':
         specifier: ^0.53.1

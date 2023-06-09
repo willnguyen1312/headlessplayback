@@ -13,6 +13,6 @@
   },
   "dependencies": {
     "@headlessplayback/core": "latest",
-    "@headlessplayback/plugins": "^0.4.1"
+    "@headlessplayback/hls-plugin": "latest"
   }
 }

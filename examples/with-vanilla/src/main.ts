@@ -2,7 +2,7 @@ import "virtual:uno.css"
 import "@unocss/reset/tailwind.css"
 
 import { playback } from "@headlessplayback/core"
-import { hlsPlaybackPlugin } from "@headlessplayback/plugins"
+import { hlsPlaybackPlugin } from "@headlessplayback/hls-plugin"
 playback.use(hlsPlaybackPlugin)
 
 const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
