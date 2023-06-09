@@ -4,22 +4,20 @@ layout: home
 
 hero:
   name: "Headless Playback"
-  text: "A simple yet complete playback library designed for UI frameworks or even without"
-  tagline: My great project tagline
+  text: "A simple yet complete playback library for the web"
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Get Started
+      link: /guide
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: View on GitHub
+      link: https://github.com/willnguyen1312/headlessplayback
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: Headless 💅
+    details: Bring your own beautiful UI
+  - title: Plugins ⚙︎
+    details: The core library is extensible with plugins
+  - title: Performance 🚀
+    details: Optimized for speed at scale
 ---
-

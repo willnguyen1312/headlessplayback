@@ -1,4 +1,5 @@
 import { defineConfig } from "vitepress"
+import pkg from "@headlessplayback/core/package.json"
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -8,8 +9,15 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: "Home", link: "/" },
-      { text: "Examples", link: "/markdown-examples" },
+      {
+        text: pkg.version,
+        items: [
+          {
+            text: "Changelog",
+            link: "https://github.com/willnguyen1312/headlessplayback/blob/main/packages/core/CHANGELOG.md",
+          },
+        ],
+      },
     ],
 
     sidebar: [
@@ -23,5 +31,14 @@ export default defineConfig({
     ],
 
     socialLinks: [{ icon: "github", link: "https://github.com/willnguyen1312/headlessplayback" }],
+
+    search: {
+      provider: "algolia",
+      options: {
+        appId: "FKWOWYBGDZ",
+        apiKey: "e8482e2e60315de80cf25a96471b9dfa",
+        indexName: "zoom-image",
+      },
+    },
   },
 })
