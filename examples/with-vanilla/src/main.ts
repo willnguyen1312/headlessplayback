@@ -2,6 +2,8 @@ import "@unocss/reset/tailwind.css"
 import "virtual:uno.css"
 
 import { createPlayback } from "@headlessplayback/core"
+import { hlsPlaybackPlugin } from "@headlessplayback/hls-plugin"
+createPlayback.use(hlsPlaybackPlugin)
 
 const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
 const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
@@ -14,8 +16,8 @@ const switchBtn = document.getElementById("switch") as HTMLButtonElement
 const activate = document.getElementById("activate") as HTMLButtonElement
 
 const hitIt = async () => {
-  const { hlsPlaybackPlugin } = await import("@headlessplayback/hls-plugin")
-  createPlayback.use(hlsPlaybackPlugin)
+  // const { hlsPlaybackPlugin } = await import("@headlessplayback/hls-plugin")
+  // createPlayback.use(hlsPlaybackPlugin)
 
   const result = createPlayback({
     id: "video",
@@ -40,4 +42,5 @@ const hitIt = async () => {
   })
 }
 
-activate.addEventListener("click", hitIt)
+// activate.addEventListener("click", hitIt)
+hitIt()
