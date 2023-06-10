@@ -1,6 +1,6 @@
 # Get Started
 
-Headlessplayback is a little yet powerful and extensive library for powering playback experience on the web. It is
+Headlessplayback is a little yet powerful and extensive library for powering createPlayback experience on the web. It is
 written in pure TypeScript and has no dependencies. The library is built with framework agnostic in mind, so it can be
 used with any framework adapters or even without
 
@@ -37,9 +37,9 @@ Simply importing the utilities you need from `@headlessplayback/core`
 ```
 
 ```ts
-import { playback } from "@headlessplayback/core"
+import { createPlayback } from "@headlessplayback/core"
 import { hlsPlaybackPlugin } from "@headlessplayback/hls-plugin"
-playback.use(hlsPlaybackPlugin)
+createPlayback.use(hlsPlaybackPlugin)
 
 const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
 const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
@@ -57,7 +57,7 @@ switchBtn.addEventListener("click", () => {
   })
 })
 
-const result = playback({
+const result = createPlayback({
   id: "video",
 })
 

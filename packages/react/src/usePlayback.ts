@@ -1,11 +1,11 @@
-import { playback, PlaybackState, PluginFunc, PlaybackActions } from "@headlessplayback/core"
+import { createPlayback, PlaybackActions, PlaybackState, PluginFunc } from "@headlessplayback/core"
 import { useEffect } from "react"
 import { proxy, useSnapshot } from "valtio"
 
-type Playback = typeof playback
+type CreatePlayback = typeof createPlayback
 
 type UsePlaybackFunc = {
-  (arg: Parameters<Playback>[0]): {
+  (arg: Parameters<CreatePlayback>[0]): {
     playbackState: PlaybackState
     playbackActions: PlaybackActions
     activate: () => void
@@ -14,11 +14,11 @@ type UsePlaybackFunc = {
 }
 
 const playbackStateMaster = new Map<string, PlaybackState>()
-const playbackInstanceMap = new Map<string, ReturnType<Playback>>()
+const playbackInstanceMap = new Map<string, ReturnType<CreatePlayback>>()
 
 export const usePlayback: UsePlaybackFunc = (arg) => {
   if (!playbackInstanceMap.has(arg.id)) {
-    const playbackInstance = playback(arg)
+    const playbackInstance = createPlayback(arg)
     playbackInstanceMap.set(arg.id, playbackInstance)
     playbackStateMaster.set(arg.id, proxy(playbackInstance.getState()))
 
@@ -33,7 +33,7 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
   }
 
   const activate = () => {
-    const playbackInstance = playbackInstanceMap.get(arg.id) as ReturnType<Playback>
+    const playbackInstance = playbackInstanceMap.get(arg.id) as ReturnType<CreatePlayback>
     const isActivated = playbackInstance.activate()
     if (isActivated) {
       playbackInstance.onCleanup(() => {
@@ -54,8 +54,8 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
   return {
     playbackState,
     activate,
-    playbackActions: (playbackInstanceMap.get(arg.id) as ReturnType<Playback>).playbackActions,
+    playbackActions: (playbackInstanceMap.get(arg.id) as ReturnType<CreatePlayback>).playbackActions,
   }
 }
 
-usePlayback.use = playback.use
+usePlayback.use = createPlayback.use
