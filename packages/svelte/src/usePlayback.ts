@@ -1,13 +1,13 @@
-import { playback, PluginFunc, PlaybackActions, PlaybackState } from "@headlessplayback/core"
+import { createPlayback, PlaybackActions, PlaybackState, PluginFunc } from "@headlessplayback/core"
 import { onDestroy } from "svelte"
 import { writable } from "svelte/store"
 
-type Playback = typeof playback
+type CreatePlayback = typeof createPlayback
 
 type PlaybackStateSubscriber = ReturnType<typeof writable>["subscribe"]
 
 type UsePlaybackFunc = {
-  (arg: Parameters<Playback>[0]): {
+  (arg: Parameters<CreatePlayback>[0]): {
     playbackState: {
       subscribe: PlaybackStateSubscriber
     }
@@ -18,11 +18,11 @@ type UsePlaybackFunc = {
 }
 
 const playbackStateMaster = new Map<string, PlaybackStateSubscriber>()
-const playbackInstanceMap = new Map<string, ReturnType<Playback>>()
+const playbackInstanceMap = new Map<string, ReturnType<CreatePlayback>>()
 
 export const usePlayback: UsePlaybackFunc = (arg) => {
   if (!playbackInstanceMap.has(arg.id)) {
-    const playbackInstance = playback(arg)
+    const playbackInstance = createPlayback(arg)
     playbackInstanceMap.set(arg.id, playbackInstance)
 
     const { subscribe, set } = writable<PlaybackState>(playbackInstance.getState())
@@ -38,7 +38,7 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
   })
 
   const activate = () => {
-    const playbackInstance = playbackInstanceMap.get(arg.id) as ReturnType<Playback>
+    const playbackInstance = playbackInstanceMap.get(arg.id) as ReturnType<CreatePlayback>
     const isActivated = playbackInstance.activate()
     if (isActivated) {
       playbackInstance.onCleanup(() => {
@@ -53,8 +53,8 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
       subscribe: playbackStateMaster.get(arg.id) as PlaybackStateSubscriber,
     },
     activate,
-    playbackActions: (playbackInstanceMap.get(arg.id) as ReturnType<Playback>).playbackActions,
+    playbackActions: (playbackInstanceMap.get(arg.id) as ReturnType<CreatePlayback>).playbackActions,
   }
 }
 
-usePlayback.use = playback.use
+usePlayback.use = createPlayback.use

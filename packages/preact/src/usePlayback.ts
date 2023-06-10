@@ -1,8 +1,8 @@
-import { playback, PlaybackState, PluginFunc, PlaybackActions } from "@headlessplayback/core"
+import { PlaybackActions, PlaybackState, PluginFunc, createPlayback } from "@headlessplayback/core"
 import { useEffect } from "preact/hooks"
 import { proxy, useSnapshot } from "valtio"
 
-type Playback = typeof playback
+type Playback = typeof createPlayback
 
 type UsePlaybackFunc = {
   (arg: Parameters<Playback>[0]): {
@@ -18,7 +18,7 @@ const playbackInstanceMap = new Map<string, ReturnType<Playback>>()
 
 export const usePlayback: UsePlaybackFunc = (arg) => {
   if (!playbackInstanceMap.has(arg.id)) {
-    const playbackInstance = playback(arg)
+    const playbackInstance = createPlayback(arg)
     playbackInstanceMap.set(arg.id, playbackInstance)
     playbackStateMaster.set(arg.id, proxy(playbackInstance.getState()))
 
@@ -58,4 +58,4 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
   }
 }
 
-usePlayback.use = playback.use
+usePlayback.use = createPlayback.use

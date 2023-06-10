@@ -1,10 +1,10 @@
-import { playback, PlaybackState, PluginFunc, PlaybackActions, Plugin } from "@headlessplayback/core"
-import { useStore, $, useVisibleTask$, noSerialize } from "@builder.io/qwik"
+import { $, noSerialize, useStore, useVisibleTask$ } from "@builder.io/qwik"
+import { PlaybackActions, PlaybackState, Plugin, PluginFunc, createPlayback } from "@headlessplayback/core"
 
-type Playback = typeof playback
+type CreatePlayback = typeof createPlayback
 
 type UsePlaybackFunc = {
-  (arg: Parameters<Playback>[0]): {
+  (arg: Parameters<CreatePlayback>[0]): {
     playbackState: PlaybackState
     playbackActions: PlaybackActions
     activate: () => void
@@ -12,14 +12,14 @@ type UsePlaybackFunc = {
   }
 }
 
-const playbackInstanceMap = new Map<string, ReturnType<Playback>>()
+const playbackInstanceMap = new Map<string, ReturnType<CreatePlayback>>()
 
 export const usePlayback: UsePlaybackFunc = (arg) => {
   const playbackState = useStore<PlaybackState>({} as PlaybackState)
   const playbackActionsRef: { value: PlaybackActions } = { value: {} as PlaybackActions }
 
   const activate = $(() => {
-    const playbackInstance = playbackInstanceMap.get(arg.id) ?? playback(arg)
+    const playbackInstance = playbackInstanceMap.get(arg.id) ?? createPlayback(arg)
     playbackInstance.activate()
     playbackInstance.onCleanup(() => {
       playbackInstanceMap.delete(arg.id)
@@ -37,7 +37,7 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
       playbackState[key] = currentState[key]
     }
 
-    playbackInstance.subscribe(({ updatedProperties, state }) => {
+    playbackInstance.subscribe(({ updatedProperties }) => {
       for (const key in updatedProperties) {
         // These two are special cases because they are objects that are not serializable
         if (["textTracks", "buffered", "levels"].includes(key)) {
@@ -71,7 +71,7 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
   })
 
   const use: PluginFunc = $((plugin: Plugin) => {
-    const playbackInstance = playbackInstanceMap.get(arg.id) ?? playback(arg)
+    const playbackInstance = playbackInstanceMap.get(arg.id) ?? createPlayback(arg)
     const result = playbackInstance.use(plugin)
     Object.assign(playbackActionsRef.value, result)
   })

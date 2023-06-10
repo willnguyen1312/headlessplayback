@@ -78,7 +78,7 @@ type PlaybackFunc = {
 const cleanupCallbackMap = new Map<string, Set<CleanupFunc>>()
 const playbackActivatedSet = new WeakSet<HTMLMediaElement>()
 
-export const playback: PlaybackFunc = ({ id }) => {
+export const createPlayback: PlaybackFunc = ({ id }) => {
   const isPictureInPictureSupported = document && "pictureInPictureEnabled" in document
 
   const store = createStore<PlaybackState>({
@@ -413,7 +413,7 @@ export const playback: PlaybackFunc = ({ id }) => {
     },
   }
 
-  for (const pluginQueueItem of playback.$pluginsQueue) {
+  for (const pluginQueueItem of createPlayback.$pluginsQueue) {
     const actions = pluginQueueItem({ store, onCleanup })
     processActions(actions)
     Object.assign(result.playbackActions, actions)
@@ -422,9 +422,9 @@ export const playback: PlaybackFunc = ({ id }) => {
   return result
 }
 
-playback.$pluginsQueue = []
-playback.use = <T>(plugin: Plugin<T>, options: T) => {
-  playback.$pluginsQueue.push(({ store, onCleanup }) => {
+createPlayback.$pluginsQueue = []
+createPlayback.use = <T>(plugin: Plugin<T>, options: T) => {
+  createPlayback.$pluginsQueue.push(({ store, onCleanup }) => {
     return plugin.install({ store, onCleanup }, options)
   })
 }
