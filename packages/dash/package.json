@@ -1,6 +1,6 @@
 {
   "name": "@headlessplayback/dash-plugin",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A dash plugin for headlessplayback",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "repository": "willnguyen1312/headlessplayback",
