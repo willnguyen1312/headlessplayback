@@ -1,5 +1,13 @@
 # @headlessplayback/core
 
+## 0.9.1
+
+### Patch Changes
+
+- [#45](https://github.com/willnguyen1312/headlessplayback/pull/45)
+  [`476f956`](https://github.com/willnguyen1312/headlessplayback/commit/476f956bf0c11b33b40876f23b25606d7392e3a4) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Patch all the things 🚀
+
 ## 0.9.0
 
 ### Minor Changes
