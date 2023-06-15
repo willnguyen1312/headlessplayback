@@ -60,8 +60,6 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         playbackState[key] = updatedProperties[key]
-
-        console.log(playbackState)
       }
     })
 

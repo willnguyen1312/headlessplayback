@@ -299,8 +299,6 @@ export const createPlayback: PlaybackFunc = ({ id }) => {
     playbackElement?.addEventListener(
       "play",
       () => {
-        console.log("play")
-
         store.setState({
           paused: false,
         })
