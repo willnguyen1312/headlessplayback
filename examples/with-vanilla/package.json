@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@headlessplayback/core": "latest",
-    "@headlessplayback/hls-plugin": "latest"
+    "@headlessplayback/hls-plugin": "latest",
+    "@headlessplayback/dash-plugin": "latest"
   }
 }

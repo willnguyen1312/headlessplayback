@@ -68,6 +68,6 @@
     "unocss": "^0.53.1"
   },
   "devDependencies": {
-    "@playwright/test": "^1.35.0"
+    "@playwright/test": "^1.35.1"
   }
 }

@@ -69,7 +69,7 @@ declare module "@headlessplayback/core" {
   export interface CustomPlaybackState extends _CustomPlaybackState {}
 
   export interface CustomPlaybackActions {
-    load: LoadFunction
+    loadHlsSource: LoadFunction
     setCurrentLevel: SetCurrentLevel
     setSubtitleTrack: SetSubtitleTrack
     setAudioTrack: SetAudioTrack
@@ -99,7 +99,7 @@ export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
     store.setState(createDefaultState())
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const load: any = async ({ id, source }: { id: string; source: string }) => {
+    const loadHlsSource: any = async ({ id, source }: { id: string; source: string }) => {
       await flushPromises()
 
       if (activeIdSourceMap.get(id) === source) {
@@ -121,8 +121,6 @@ export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
 
       if (hls) {
         hls.destroy()
-        activeHlsMap.delete(id)
-
         hls = new Hls(config)
         activeHlsMap.set(id, hls)
       } else {
@@ -137,7 +135,6 @@ export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
 
       hls.attachMedia(playbackElement)
 
-      // console.log("data", playbackElement)
       hls.on(Hls.Events.MEDIA_ATTACHED, () => {
         hls?.loadSource(source)
       })
@@ -235,7 +232,7 @@ export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
             }
           } else {
             switch (data.details) {
-              // HLS will try to load the next segment when encounter this error
+              // HLS will try to loadHlsSource the next segment when encounter this error
               // so we can safely consume it as loading state
               case Hls.ErrorDetails.BUFFER_STALLED_ERROR:
                 store.setState({
@@ -275,7 +272,7 @@ export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
     }
 
     return {
-      load,
+      loadHlsSource,
       setCurrentLevel,
       setSubtitleTrack,
       setAudioTrack,

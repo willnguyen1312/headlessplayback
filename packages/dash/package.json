@@ -1,8 +1,8 @@
 {
-  "name": "@headlessplayback/svelte",
-  "version": "0.1.0",
+  "name": "@headlessplayback/dash-plugin",
+  "version": "0.0.0",
+  "description": "A dash plugin for headlessplayback",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
-  "description": "Adapter of headlessplayback core for Svelte",
   "repository": "willnguyen1312/headlessplayback",
   "homepage": "https://github.com/sponsors/willnguyen1312",
   "funding": {
@@ -18,7 +18,7 @@
     "headless",
     "mobile",
     "desktop",
-    "svelte"
+    "dash"
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -36,7 +36,7 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@types/node": "^20.3.1",
+    "@namnode/utils": "^0.3.0",
     "eslint": "^8.42.0",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
@@ -44,10 +44,8 @@
     "typescript": "^5.1.3"
   },
   "dependencies": {
-    "@headlessplayback/core": "workspace:*"
-  },
-  "peerDependencies": {
-    "svelte": "^3.0.0"
+    "@headlessplayback/core": "workspace:*",
+    "dashjs": "^4.7.0"
   },
   "publishConfig": {
     "access": "public"

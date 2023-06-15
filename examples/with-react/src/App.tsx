@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react"
+import Dash from "./Dash"
 import Hijack from "./Hijack"
 import Hls from "./Hls"
 
@@ -9,6 +10,7 @@ function classNames(...classes: string[]) {
 export default function App() {
   const [tabs, setTabs] = useState([
     { name: "Hls", href: "#", current: true },
+    { name: "Dash", href: "#", current: false },
     { name: "Hijack", href: "#", current: false },
   ])
 
@@ -21,6 +23,10 @@ export default function App() {
 
     if (activeComponentName === "Hls") {
       return <Hls />
+    }
+
+    if (activeComponentName === "Dash") {
+      return <Dash />
     }
 
     return null
