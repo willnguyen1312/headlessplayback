@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react"
+import { Direction, hijackPlaybackPlugin } from "@headlessplayback/hijack-plugin"
 import { usePlayback } from "@headlessplayback/react"
-import { hijackPlaybackPlugin, Direction } from "@headlessplayback/hijack-plugin"
+import React, { useEffect, useState } from "react"
 usePlayback.use(hijackPlaybackPlugin)
 
 const id = "hijack"
@@ -64,7 +64,7 @@ function App() {
   }
 
   return (
-    <div id="app" className="p-4">
+    <>
       <video hidden id={id}></video>
 
       <CurrentTime />
@@ -77,7 +77,7 @@ function App() {
         <button onClick={toggleDirection}>Toggle direction</button>
         <p>Direction: {direction}</p>
       </div>
-    </div>
+    </>
   )
 }
 

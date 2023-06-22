@@ -1,57 +1,57 @@
 <script lang="ts" setup>
-import { usePlayback } from "@headlessplayback/vue"
-import { onMounted, ref, watchEffect } from "vue"
-import { hlsPlaybackPlugin } from "@headlessplayback/plugins"
-usePlayback.use(hlsPlaybackPlugin)
+import type { Component } from "vue"
+import { ref } from "vue"
+import Dash from "./Dash.vue"
+import Hijack from "./Hijack.vue"
+import Hls from "./Hls.vue"
 
-const id = "video"
-const { activate, playbackActions, playbackState } = usePlayback({
-  id,
-})
+type PlaybackName = "Hls" | "Hijack" | "Dash"
 
-const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
-const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
-const showDuration = ref(true)
-const source = ref(source1)
+const components: Record<PlaybackName, Component> = {
+  Hls,
+  Hijack,
+  Dash,
+}
 
-onMounted(() => {
-  // Activate when playback element is accessible from the DOM
-  activate()
-})
+const tabs = ref([
+  { name: "Hls", href: "#", current: true },
+  { name: "Dash", href: "#", current: false },
+  { name: "Hijack", href: "#", current: false },
+])
 
-watchEffect(() => {
-  // Plugin will inject extra action to playbackActions
-  playbackActions.load({
-    source: source.value,
+const updateTab = (tabName: string) => {
+  tabs.value = tabs.value.map((tab) => {
+    if (tab.name === tabName) {
+      return { ...tab, current: true }
+    }
+    return { ...tab, current: false }
   })
-})
-
-const jumpTo = (time: number) => {
-  // Core actions and state are always available
-  playbackActions.setCurrentTime(time)
 }
 </script>
 
 <template>
-  <div id="app" class="p-4">
-    <div class="border-emerald border-1 h-[400px] w-[600px]">
-      <video :id="id" class="h-full w-full" controls>
-        <track kind="captions" />
-      </video>
+  <div class="p-4">
+    <div class="border-gray-200">
+      <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+        <a
+          v-for="tab in tabs"
+          :key="tab.name"
+          :href="tab.href"
+          :aria-current="tab.current ? 'page' : undefined"
+          class="whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium"
+          :class="{
+            'border-indigo-500 text-indigo-600': tab.current,
+            'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700': !tab.current,
+          }"
+          @click="updateTab(tab.name)"
+        >
+          {{ tab.name }}
+        </a>
+      </nav>
     </div>
 
-    <p>Current time: {{ playbackState.currentTime }}</p>
-
-    <p v-if="showDuration">Duration: {{ playbackState.duration }}</p>
-    <!-- Plugin will inject extra state to playbackState -->
-    <strong>Levels: {{ playbackState.levels.map((level) => level.height).join(", ") }}</strong>
-
-    <div class="flex flex-col items-start">
-      <button @click="source = source === source1 ? source2 : source1">Switch stream</button>
-
-      <button @click="jumpTo(playbackState.currentTime + 5)">Next 5s</button>
-      <button @click="jumpTo(playbackState.currentTime - 5)">Prev 5s</button>
-      <button @click="showDuration = !showDuration">Toggle show duration</button>
+    <div class="mt-4">
+      <component :is="components[tabs.find((tab) => tab.current)!.name as PlaybackName]" />
     </div>
   </div>
 </template>

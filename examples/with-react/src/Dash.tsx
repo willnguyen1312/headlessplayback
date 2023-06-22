@@ -3,8 +3,6 @@ import { usePlayback } from "@headlessplayback/react"
 import React, { useEffect, useState } from "react"
 usePlayback.use(dashPlaybackPlugin)
 
-// const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-dash/dash.m3u8"
-// const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
 const source1 = "https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd"
 const source2 = "https://rdmedia.bbc.co.uk/elephants_dream/1/client_manifest-all.mpd"
 const id = "dash"
@@ -71,7 +69,7 @@ function App() {
   }
 
   return (
-    <div id="app" className="p-4">
+    <>
       <div className="border-emerald border-1 h-[400px] w-[600px]">
         <video className="h-full w-full" id={id} controls></video>
       </div>
@@ -93,7 +91,7 @@ function App() {
           Toggle show duration
         </button>
       </div>
-    </div>
+    </>
   )
 }
 

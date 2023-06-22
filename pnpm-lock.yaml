@@ -252,9 +252,15 @@ importers:
 
   examples/with-vue:
     dependencies:
-      '@headlessplayback/plugins':
-        specifier: ^0.4.1
-        version: 0.4.1
+      '@headlessplayback/dash-plugin':
+        specifier: latest
+        version: link:../../packages/dash
+      '@headlessplayback/hijack-plugin':
+        specifier: latest
+        version: link:../../packages/hijack
+      '@headlessplayback/hls-plugin':
+        specifier: latest
+        version: link:../../packages/hls
       '@headlessplayback/vue':
         specifier: latest
         version: link:../../packages/vue

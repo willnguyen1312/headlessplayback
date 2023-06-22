@@ -6,7 +6,9 @@
     "dev": "vite"
   },
   "dependencies": {
-    "@headlessplayback/plugins": "^0.4.1",
+    "@headlessplayback/dash-plugin": "latest",
+    "@headlessplayback/hijack-plugin": "latest",
+    "@headlessplayback/hls-plugin": "latest",
     "@headlessplayback/vue": "latest",
     "vue": "^3.3.4"
   },
