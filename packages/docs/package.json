@@ -26,8 +26,15 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@headlessplayback/core": "workspace:*",
-    "vitepress": "1.0.0-beta.2",
+    "@headlessplayback/core": "latest",
+    "@headlessplayback/dash-plugin": "latest",
+    "@headlessplayback/hijack-plugin": "latest",
+    "@headlessplayback/hls-plugin": "latest",
+    "@headlessplayback/vue": "latest",
+    "vitepress": "1.0.0-beta.3",
     "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "@unocss/reset": "^0.53.1"
   }
 }

@@ -69,7 +69,7 @@ function App() {
   }
 
   return (
-    <div id="app" className="p-4">
+    <>
       <div className="border-emerald border-1 h-[400px] w-[600px]">
         <video className="h-full w-full" id={id} controls></video>
       </div>
@@ -91,7 +91,7 @@ function App() {
           Toggle show duration
         </button>
       </div>
-    </div>
+    </>
   )
 }
 

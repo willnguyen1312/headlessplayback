@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react"
+import { Direction, hijackPlaybackPlugin } from "@headlessplayback/hijack-plugin"
 import { usePlayback } from "@headlessplayback/react"
-import { hijackPlaybackPlugin, Direction } from "@headlessplayback/hijack-plugin"
+import React, { useEffect, useState } from "react"
 usePlayback.use(hijackPlaybackPlugin)
 
 const id = "hijack"
@@ -64,20 +64,20 @@ function App() {
   }
 
   return (
-    <div id="app" className="p-4">
+    <>
       <video hidden id={id}></video>
 
       <CurrentTime />
       <Duration />
+      <p>Direction: {direction}</p>
 
       <div className="flex flex-col items-start ">
         <button onClick={jumpNext5s}>Next 5s</button>
         <button onClick={togglePlay}>{playbackState.paused ? "Play" : "Pause"}</button>
         <button onClick={jumpPrev5s}>Prev 5s</button>
         <button onClick={toggleDirection}>Toggle direction</button>
-        <p>Direction: {direction}</p>
       </div>
-    </div>
+    </>
   )
 }
 

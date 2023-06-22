@@ -21,3 +21,11 @@ features:
   - title: Performance 🚀
     details: Optimized for speed at scale
 ---
+
+<script setup>
+import HomePageShow from './components/HomePageShow.vue'
+import Footer from './components/FooterComp.vue'
+</script>
+
+<HomePageShow />
+<Footer />
