@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import type { Component } from "vue"
-import { ref } from "vue"
-import Dash from "./Dash.vue"
-import Hijack from "./Hijack.vue"
-import Hls from "./Hls.vue"
+import { defineAsyncComponent, ref } from "vue"
 
 type PlaybackName = "Hls" | "Hijack" | "Dash"
+
+const Dash = defineAsyncComponent(() => import("./Dash.vue"))
+const Hls = defineAsyncComponent(() => import("./Hls.vue"))
+const Hijack = defineAsyncComponent(() => import("./Hijack.vue"))
 
 const components: Record<PlaybackName, Component> = {
   Hls,
