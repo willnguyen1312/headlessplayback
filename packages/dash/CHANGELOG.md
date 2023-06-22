@@ -1,5 +1,13 @@
 # @headlessplayback/dash-plugin
 
+## 0.2.0
+
+### Minor Changes
+
+- [#48](https://github.com/willnguyen1312/headlessplayback/pull/48)
+  [`d4d4b99`](https://github.com/willnguyen1312/headlessplayback/commit/d4d4b994d7099c53d8c5b0c4af927fd709cbd97f) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Fix dash.js playback plugin autoplay initially 💞
+
 ## 0.1.1
 
 ### Patch Changes
