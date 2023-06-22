@@ -58,9 +58,7 @@ export const dashPlaybackPlugin: Plugin<DashConfig> = {
       }
 
       dashInstance.updateSettings(config)
-      dashInstance.initialize()
-      dashInstance.attachView(playbackElement)
-      dashInstance.attachSource(source)
+      dashInstance.initialize(playbackElement, source, false)
 
       dashInstance.on(dashjs.MediaPlayer.events.STREAM_INITIALIZED, () => {
         const infos = dashInstance?.getBitrateInfoListFor("video")
