@@ -342,14 +342,30 @@ importers:
   packages/docs:
     dependencies:
       '@headlessplayback/core':
-        specifier: workspace:*
+        specifier: latest
         version: link:../core
+      '@headlessplayback/dash-plugin':
+        specifier: latest
+        version: link:../dash
+      '@headlessplayback/hijack-plugin':
+        specifier: latest
+        version: link:../hijack
+      '@headlessplayback/hls-plugin':
+        specifier: latest
+        version: link:../hls
+      '@headlessplayback/vue':
+        specifier: latest
+        version: link:../vue
       vitepress:
         specifier: 1.0.0-beta.3
         version: 1.0.0-beta.3(@algolia/client-search@4.17.2)(search-insights@2.6.0)
       vue:
         specifier: ^3.3.4
         version: 3.3.4
+    devDependencies:
+      '@unocss/reset':
+        specifier: ^0.53.1
+        version: 0.53.1
 
   packages/eslint-config-custom:
     dependencies:

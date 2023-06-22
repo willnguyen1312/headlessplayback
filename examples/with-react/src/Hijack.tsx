@@ -69,13 +69,13 @@ function App() {
 
       <CurrentTime />
       <Duration />
+      <p>Direction: {direction}</p>
 
       <div className="flex flex-col items-start ">
         <button onClick={jumpNext5s}>Next 5s</button>
         <button onClick={togglePlay}>{playbackState.paused ? "Play" : "Pause"}</button>
         <button onClick={jumpPrev5s}>Prev 5s</button>
         <button onClick={toggleDirection}>Toggle direction</button>
-        <p>Direction: {direction}</p>
       </div>
     </>
   )
