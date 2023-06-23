@@ -32,7 +32,7 @@ const Resolutions = React.memo(() => {
   return <strong>BitrateInfo: {playbackState.bitrateInfo.map((level) => level.height).join(", ")}</strong>
 })
 
-function App() {
+function Dash() {
   const { activate, playbackActions, playbackState } = usePlayback({
     id,
   })
@@ -95,4 +95,4 @@ function App() {
   )
 }
 
-export default App
+export default Dash

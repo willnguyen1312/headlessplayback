@@ -21,7 +21,7 @@ const Duration = React.memo(() => {
   return <p>Duration: {playbackState.duration}</p>
 })
 
-function App() {
+function Hijack() {
   const { activate, playbackActions, playbackState } = usePlayback({
     id,
   })
@@ -81,4 +81,4 @@ function App() {
   )
 }
 
-export default App
+export default Hijack
