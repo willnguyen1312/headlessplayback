@@ -9,6 +9,12 @@ function cls(...classes: string[]) {
 
 type PlaybackName = "Hls" | "Dash" | "Hijack"
 
+const componentLookup: Record<PlaybackName, ReturnType<typeof component$>> = {
+  Hls,
+  Dash,
+  Hijack,
+}
+
 const App = component$(() => {
   const tabs = useSignal<{ name: PlaybackName; href: string; current: boolean }[]>([
     { name: "Hls", href: "#", current: true },
@@ -19,6 +25,10 @@ const App = component$(() => {
   const currentValue = useComputed$(() => {
     return tabs.value.find((tab) => tab.current)?.name as PlaybackName
   })
+
+  const ComponentToRender = useComputed$(() => {
+    return componentLookup[currentValue.value]
+  }).value
 
   return (
     <div class="p-4">
@@ -68,9 +78,7 @@ const App = component$(() => {
       </div>
 
       <div class="mt-4">
-        {currentValue.value === "Hls" && <Hls />}
-        {currentValue.value === "Dash" && <Dash />}
-        {currentValue.value === "Hijack" && <Hijack />}
+        <ComponentToRender />
       </div>
     </div>
   )
