@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Plugin } from "@headlessplayback/core"
 import { flushPromises } from "@namnode/utils"
 import Hls, { HlsConfig, Level, MediaPlaylist } from "hls.js"
@@ -93,12 +94,9 @@ const createDefaultState = (): _CustomPlaybackState => {
 }
 
 export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   install({ store, onCleanup }, config) {
     store.setState(createDefaultState())
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const loadHlsSource: any = async ({ id, source }: { id: string; source: string }) => {
       await flushPromises()
 
@@ -247,7 +245,6 @@ export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
       activeIdSourceMap.set(id, source)
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const setCurrentLevel: any = ({ id, level }: { id: string; level: number }) => {
       const hls = activeHlsMap.get(id)
       if (hls && hls.currentLevel !== level) {
@@ -255,7 +252,6 @@ export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
       }
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const setSubtitleTrack: any = ({ id, track }: { id: string; track: number }) => {
       const hls = activeHlsMap.get(id)
       if (hls && hls.subtitleTrack !== track) {
@@ -263,7 +259,6 @@ export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
       }
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const setAudioTrack: any = ({ id, track }: { id: string; track: number }) => {
       const hls = activeHlsMap.get(id)
       if (hls && hls.audioTrack !== track) {
