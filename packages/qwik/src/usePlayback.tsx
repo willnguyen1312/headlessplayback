@@ -74,8 +74,12 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
     Object.assign(playbackActionsRef.value, result)
   })
 
-  useVisibleTask$(() => {
+  useVisibleTask$(({ cleanup }) => {
     activate()
+
+    cleanup(() => {
+      playbackInstanceMap.get(arg.id)?.cleanup()
+    })
   })
 
   return {

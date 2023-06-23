@@ -1,5 +1,5 @@
 import { StoreListener, createStore } from "@namnode/store"
-import { clamp } from "@namnode/utils"
+import { clamp, flushPromises } from "@namnode/utils"
 
 export interface InternalPlaybackState {
   currentTime: number
@@ -372,7 +372,9 @@ export const createPlayback: PlaybackFunc = ({ id }) => {
   }
 
   const result = {
-    cleanup() {
+    async cleanup() {
+      await flushPromises()
+
       if (document.body.contains(playbackElement as HTMLMediaElement)) {
         return
       }
