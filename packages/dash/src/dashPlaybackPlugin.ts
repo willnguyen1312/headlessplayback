@@ -61,7 +61,16 @@ export const dashPlaybackPlugin: Plugin<DashConfig> = {
       dashInstance.initialize(playbackElement, source, false)
 
       dashInstance.on(dashjs.MediaPlayer.events.STREAM_INITIALIZED, () => {
-        const infos = dashInstance?.getBitrateInfoListFor("video")
+        const infos = (dashInstance?.getBitrateInfoListFor("video") || []).map((item) => {
+          return {
+            bitrate: item.bitrate,
+            width: item.width,
+            height: item.height,
+            scanType: item.scanType,
+            qualityIndex: item.qualityIndex,
+            mediaType: item.mediaType,
+          }
+        })
 
         store.setState({
           bitrateInfo: infos,
