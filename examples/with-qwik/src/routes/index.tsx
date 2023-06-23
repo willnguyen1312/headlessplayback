@@ -1,96 +1,76 @@
-import { usePlayback } from "@headlessplayback/qwik"
-import { hlsPlaybackPlugin } from "@headlessplayback/plugins"
-import { useVisibleTask$, component$, useSignal, $, useTask$ } from "@builder.io/qwik"
+import { component$, useComputed$, useSignal } from "@builder.io/qwik"
+import Dash from "./Dash"
+import Hijack from "./Hijack"
+import Hls from "./Hls"
 
-const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
-const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
+function cls(...classes: string[]) {
+  return classes.filter(Boolean).join(" ")
+}
 
-const Duration = component$(() => {
-  const { playbackState } = usePlayback({
-    id: "video",
-  })
-
-  return <p>Duration: {playbackState.duration}</p>
-})
-
-const CurrentTime = component$(() => {
-  const { playbackState } = usePlayback({
-    id: "video",
-  })
-
-  return <p>Current time: {playbackState.currentTime}</p>
-})
-
-const Resolutions = component$(() => {
-  const { playbackState } = usePlayback({
-    id: "video",
-  })
-
-  // Plugin will inject extra state to playbackState
-  return <strong>Levels: {playbackState.levels?.map((level) => level.height).join(", ")}</strong>
-})
+type PlaybackName = "Hls" | "Dash" | "Hijack"
 
 const App = component$(() => {
-  const { playbackActions, playbackState, use } = usePlayback({
-    id: "video",
-  })
-  const showDuration = useSignal(true)
-  const source = useSignal(source1)
+  const tabs = useSignal<{ name: PlaybackName; href: string; current: boolean }[]>([
+    { name: "Hls", href: "#", current: true },
+    { name: "Dash", href: "#", current: false },
+    { name: "Hijack", href: "#", current: false },
+  ])
 
-  useVisibleTask$(async () => {
-    await use(hlsPlaybackPlugin)
-  })
-
-  useVisibleTask$(({ track }) => {
-    track(() => source.value)
-    playbackActions.load?.({
-      source: source.value,
-    })
-  })
-
-  const jumpNext5s = $(() => {
-    playbackActions.setCurrentTime(playbackState.currentTime + 5)
-  })
-
-  const jumpPrev5s = $(() => {
-    playbackActions.setCurrentTime(playbackState.currentTime - 5)
-  })
-
-  const toggleStreamSource = $(() => {
-    if (source.value === source1) {
-      source.value = source2
-    } else {
-      source.value = source1
-    }
+  const currentValue = useComputed$(() => {
+    return tabs.value.find((tab) => tab.current)?.name as PlaybackName
   })
 
   return (
-    <div id="app" class="p-4">
-      <div class="border-emerald border-1 h-[400px] w-[600px]">
-        <video
-          // src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
-          class="h-full w-full"
-          id="video"
-          controls
-        ></video>
+    <div class="p-4">
+      <div class="sm:hidden">
+        <label for="tabs" class="sr-only">
+          Select a tab
+        </label>
+        <select
+          id="tabs"
+          name="tabs"
+          class="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+          value={currentValue.value}
+        >
+          {tabs.value.map((tab) => (
+            <option key={tab.name}>{tab.name}</option>
+          ))}
+        </select>
       </div>
 
-      <CurrentTime />
-      {showDuration.value && <Duration />}
-      <Resolutions />
+      <div class="hidden sm:block">
+        <div class="border-gray-200">
+          <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+            {tabs.value.map((tab) => (
+              <a
+                key={tab.name}
+                href={tab.href}
+                preventdefault:click
+                onClick$={() => {
+                  tabs.value = tabs.value.map((prevTab) => ({
+                    ...prevTab,
+                    current: prevTab.name === tab.name,
+                  }))
+                }}
+                class={cls(
+                  tab.current
+                    ? "border-indigo-500 text-indigo-600"
+                    : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700",
+                  "whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium",
+                )}
+                aria-current={tab.current ? "page" : undefined}
+              >
+                {tab.name}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </div>
 
-      <div class="flex flex-col items-start ">
-        <button onClick$={toggleStreamSource}>Switch stream</button>
-
-        <button onClick$={jumpNext5s}>Next 5s</button>
-        <button onClick$={jumpPrev5s}>Prev 5s</button>
-        <button
-          onClick$={() => {
-            showDuration.value = !showDuration.value
-          }}
-        >
-          Toggle show duration
-        </button>
+      <div class="mt-4">
+        {currentValue.value === "Hls" && <Hls />}
+        {currentValue.value === "Dash" && <Dash />}
+        {currentValue.value === "Hijack" && <Hijack />}
       </div>
     </div>
   )

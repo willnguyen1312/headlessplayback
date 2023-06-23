@@ -70,15 +70,15 @@ function App() {
 
   return (
     <>
-      <div className="border-emerald border-1 h-[400px] w-[600px]">
-        <video className="h-full w-full" id={id} controls></video>
+      <div class="border-emerald border-1 h-[400px] w-[600px]">
+        <video class="h-full w-full" id={id} controls></video>
       </div>
 
       <CurrentTime />
       {showDuration && <Duration />}
       <Resolutions />
 
-      <div className="flex flex-col items-start ">
+      <div class="flex flex-col items-start ">
         <button onClick={toggleStreamSource}>Switch stream</button>
 
         <button onClick={jumpNext5s}>Next 5s</button>

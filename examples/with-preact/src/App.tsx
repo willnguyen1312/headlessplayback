@@ -3,7 +3,7 @@ import Dash from "./Dash"
 import Hijack from "./Hijack"
 import Hls from "./Hls"
 
-function classNames(...classes: string[]) {
+function cls(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
 }
 
@@ -33,15 +33,15 @@ export default function App() {
   }, [activeComponentName])
 
   return (
-    <div className="p-4">
-      <div className="sm:hidden">
-        <label htmlFor="tabs" className="sr-only">
+    <div class="p-4">
+      <div class="sm:hidden">
+        <label for="tabs" class="sr-only">
           Select a tab
         </label>
         <select
           id="tabs"
           name="tabs"
-          className="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+          class="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
           defaultValue={tabs.find((tab) => tab.current)?.name}
         >
           {tabs.map((tab) => (
@@ -49,9 +49,9 @@ export default function App() {
           ))}
         </select>
       </div>
-      <div className="hidden sm:block">
-        <div className="border-gray-200">
-          <nav className="-mb-px flex space-x-8" aria-label="Tabs">
+      <div class="hidden sm:block">
+        <div class="border-gray-200">
+          <nav class="-mb-px flex space-x-8" aria-label="Tabs">
             {tabs.map((tab) => (
               <a
                 key={tab.name}
@@ -65,7 +65,7 @@ export default function App() {
                     })),
                   )
                 }}
-                className={classNames(
+                class={cls(
                   tab.current
                     ? "border-indigo-500 text-indigo-600"
                     : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700",
@@ -80,7 +80,7 @@ export default function App() {
         </div>
       </div>
 
-      <div className="mt-4">{renderedComponent}</div>
+      <div class="mt-4">{renderedComponent}</div>
     </div>
   )
 }
