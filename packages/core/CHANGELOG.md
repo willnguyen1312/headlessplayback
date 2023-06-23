@@ -1,5 +1,13 @@
 # @headlessplayback/core
 
+## 0.10.0
+
+### Minor Changes
+
+- [#51](https://github.com/willnguyen1312/headlessplayback/pull/51)
+  [`654d484`](https://github.com/willnguyen1312/headlessplayback/commit/654d48446bc95626dfe2ccc1ea7d319f3716bdb4) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Enhance cleanup mechanism 💞
+
 ## 0.9.1
 
 ### Patch Changes
