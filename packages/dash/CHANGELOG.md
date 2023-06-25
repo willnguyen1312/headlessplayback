@@ -1,5 +1,13 @@
 # @headlessplayback/dash-plugin
 
+## 0.3.0
+
+### Minor Changes
+
+- [#53](https://github.com/willnguyen1312/headlessplayback/pull/53)
+  [`6a85314`](https://github.com/willnguyen1312/headlessplayback/commit/6a85314e2b67c4bfc4dafa72e0c26ad596b49ed6) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Make Dash plugin even more framework agnostic 💞
+
 ## 0.2.1
 
 ### Patch Changes
