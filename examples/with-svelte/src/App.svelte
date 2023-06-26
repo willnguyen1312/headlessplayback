@@ -1,89 +1,53 @@
 <script lang="ts">
-  import { usePlayback } from "@headlessplayback/svelte"
-  import { hlsPlaybackPlugin } from "@headlessplayback/plugins"
-  import type { PlaybackState } from "@headlessplayback/core"
-  import { onDestroy, onMount, tick } from "svelte"
-  usePlayback.use(hlsPlaybackPlugin)
+  import Dash from "./Dash.svelte"
+  import Hijack from "./Hijack.svelte"
+  import Hls from "./Hls.svelte"
 
-  const {
-    activate,
-    playbackActions,
-    playbackState: _playbackState,
-  } = usePlayback({
-    id: "video",
-  })
+  let tabs = [
+    { name: "Hls", href: "#", current: true },
+    { name: "Dash", href: "#", current: false },
+    { name: "Hijack", href: "#", current: false },
+  ]
 
-  const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
-  const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
-
-  let id = "video"
-  let source = source1
-  let showDuration = true
-
-  let playbackState: PlaybackState
-
-  const unsubscribe = _playbackState.subscribe((value: PlaybackState) => {
-    playbackState = value
-  })
-
-  onMount(() => {
-    activate()
-  })
-
-  onDestroy(() => {
-    unsubscribe()
-  })
-
-  const handleSource = async (source: string) => {
-    playbackActions.load({
-      source,
-    })
-  }
-
-  $: handleSource(source)
+  $: activeTab = tabs.find((tab) => tab.current).name
 </script>
 
-<div id="app" class="p-4">
-  <div class="border-emerald border-1 h-[400px] w-[600px]">
-    <!-- src={source} -->
-    <video {id} class="h-full w-full" controls>
-      <track kind="captions" />
-    </video>
+<div class="p-4">
+  <div class="border-gray-200">
+    <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+      {#each tabs as tab (tab.name)}
+        <a
+          on:click={() => {
+            tabs = tabs.map((t) => {
+              if (t.name === tab.name) {
+                return { ...t, current: true }
+              } else {
+                return { ...t, current: false }
+              }
+            })
+          }}
+          class="whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium {tab.current
+            ? 'border-indigo-500 text-indigo-600'
+            : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'}"
+          href={tab.href}
+        >
+          {tab.name}
+        </a>
+      {/each}
+    </nav>
   </div>
 
-  <p>Current time: {playbackState.currentTime}</p>
-  {#if showDuration}
-    <p>Duration: {playbackState.duration}</p>
-  {/if}
-  <strong>Levels: {playbackState.levels.map((level) => level.height).join(", ")}</strong>
+  <div class="mt-4">
+    {#if activeTab === "Hls"}
+      <Hls />
+    {/if}
 
-  <div class="flex flex-col items-start">
-    <button
-      on:click={() => {
-        if (source === source1) {
-          source = source2
-        } else {
-          source = source1
-        }
-      }}>Switch stream</button
-    >
+    {#if activeTab === "Dash"}
+      <Dash />
+    {/if}
 
-    <button
-      on:click={() => {
-        playbackActions.setCurrentTime(playbackState.currentTime + 5)
-      }}>Next 5s</button
-    >
-    <button
-      on:click={() => {
-        playbackActions.setCurrentTime(playbackState.currentTime - 5)
-      }}>Prev 5s</button
-    >
-    <button
-      on:click={() => {
-        showDuration = !showDuration
-      }}
-    >
-      Toggle show duration
-    </button>
+    {#if activeTab === "Hijack"}
+      <Hijack />
+    {/if}
   </div>
 </div>
