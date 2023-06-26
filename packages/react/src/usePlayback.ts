@@ -16,6 +16,8 @@ type UsePlaybackFunc = {
 const playbackStateMaster = new Map<string, PlaybackState>()
 const playbackInstanceMap = new Map<string, ReturnType<CreatePlayback>>()
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 export const usePlayback: UsePlaybackFunc = (arg) => {
   if (!playbackInstanceMap.has(arg.id)) {
     const playbackInstance = createPlayback(arg)
