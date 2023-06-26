@@ -89,6 +89,7 @@ const makeHijackPlayback = () => {
 
   const next5sBtn = document.getElementById("next5s") as HTMLButtonElement
   const prev5sBtn = document.getElementById("prev5s") as HTMLButtonElement
+  const duration = document.getElementById("duration") as HTMLParagraphElement
   const togglePlayBtn = document.getElementById("togglePlay") as HTMLButtonElement
   const toggleDirectionBtn = document.getElementById("toggleDirection") as HTMLButtonElement
 
@@ -121,7 +122,9 @@ const makeHijackPlayback = () => {
 
   result.subscribe(({ state }) => {
     currentTime.innerText = `Current time: ${state.currentTime.toString()}`
+    duration.innerText = `Duration: ${state.duration.toString()}`
     direction.innerText = `Direction: ${state.direction}`
+    togglePlayBtn.innerText = state.paused ? "Play" : "Pause"
   })
 
   result.activate()
