@@ -1,5 +1,14 @@
 # @headlessplayback/core
 
+## 0.11.0
+
+### Minor Changes
+
+- [#63](https://github.com/willnguyen1312/headlessplayback/pull/63)
+  [`f7fa268`](https://github.com/willnguyen1312/headlessplayback/commit/f7fa268fcbcd92fdce5cb2a9d9fc6180ecdff73e) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Make core playback even more framework-agnostic by introducing
+  serializable data only 💞
+
 ## 0.10.0
 
 ### Minor Changes
