@@ -1,4 +1,4 @@
-import { $, noSerialize, useStore, useVisibleTask$ } from "@builder.io/qwik"
+import { $, useStore, useVisibleTask$ } from "@builder.io/qwik"
 import { PlaybackActions, PlaybackState, Plugin, PluginFunc, createPlayback } from "@headlessplayback/core"
 
 type CreatePlayback = typeof createPlayback
@@ -39,24 +39,6 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
 
     playbackInstance.subscribe(({ updatedProperties }) => {
       for (const key in updatedProperties) {
-        // These two are special cases because they are objects that are not serializable
-        if (["textTracks", "buffered", "levels"].includes(key)) {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          playbackState[key] = noSerialize(updatedProperties[key])
-          continue
-        }
-
-        if (["subtitleTracks", "audioTracks"].includes(key)) {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          playbackState[key] = updatedProperties[key].map((track) => ({
-            id: track.id,
-            lang: track.lang,
-          }))
-          continue
-        }
-
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         playbackState[key] = updatedProperties[key]

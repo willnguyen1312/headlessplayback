@@ -1,6 +1,38 @@
 import { StoreListener, createStore } from "@namnode/store"
 import { clamp, flushPromises } from "@namnode/utils"
 
+type CustomTimeRanges = [number, number][]
+
+function convertTimeRange(timeRanges: TimeRanges): CustomTimeRanges {
+  const result: [number, number][] = []
+
+  for (let i = 0; i < timeRanges.length; ++i) {
+    result.push([timeRanges.start(i), timeRanges.end(i)])
+  }
+
+  return result
+}
+
+type CustomTextTrackList = {
+  id: number
+  label: string
+  kind: string
+  language: string
+  mode: string
+  inBandMetadataTrackDispatchType: string
+}[]
+
+function convertTrackList(tracks: TextTrackList): CustomTextTrackList {
+  return Array.from(tracks).map(({ label, kind, language, mode, inBandMetadataTrackDispatchType }, id) => ({
+    id,
+    label,
+    kind,
+    language,
+    mode,
+    inBandMetadataTrackDispatchType,
+  }))
+}
+
 export interface InternalPlaybackState {
   currentTime: number
   duration: number
@@ -13,8 +45,8 @@ export interface InternalPlaybackState {
   muted: boolean
   volume: number
   isPictureInPicture: boolean
-  buffered?: TimeRanges
-  textTracks?: TextTrackList
+  buffered?: CustomTimeRanges
+  textTracks?: CustomTextTrackList
   selectedTrackIndex: number
   isPictureInPictureSupported: boolean
 }
@@ -206,9 +238,11 @@ export const createPlayback: PlaybackFunc = ({ id }) => {
       { signal },
     )
     playbackElement?.addEventListener("progress", () => {
-      store.setState({
-        buffered: playbackElement?.buffered,
-      })
+      if (playbackElement?.buffered) {
+        store.setState({
+          buffered: convertTimeRange(playbackElement.buffered),
+        })
+      }
     })
     playbackElement?.addEventListener(
       "seeking",
@@ -339,9 +373,11 @@ export const createPlayback: PlaybackFunc = ({ id }) => {
       playbackElement?.textTracks?.addEventListener(
         event,
         () => {
-          store.setState({
-            textTracks: playbackElement?.textTracks,
-          })
+          if (playbackElement?.textTracks) {
+            store.setState({
+              textTracks: convertTrackList(playbackElement?.textTracks),
+            })
+          }
         },
         { signal },
       )
