@@ -1,6 +1,6 @@
 {
   "name": "@headlessplayback/hls-plugin",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "A hls plugin for headlessplayback",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "repository": "willnguyen1312/headlessplayback",
