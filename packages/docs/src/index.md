@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: "Headless Playback"
-  text: "A simple yet complete playback library for the web"
+  tagline: "A simple yet complete playback library"
   actions:
     - theme: brand
       text: Get Started
