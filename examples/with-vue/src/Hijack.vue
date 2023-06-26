@@ -56,7 +56,7 @@ function toggleDirection() {
   <p>Duration: {{ playbackState.duration }}</p>
   <p>Direction: {{ direction }}</p>
 
-  <div className="flex flex-col items-start ">
+  <div className="flex flex-col items-start">
     <button @click="jumpNext5s">Next 5s</button>
     <button @click="togglePlay">{{ playbackState.paused ? "Play" : "Pause" }}</button>
     <button @click="jumpPrev5s">Prev 5s</button>

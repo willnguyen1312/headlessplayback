@@ -245,6 +245,9 @@ importers:
       '@headlessplayback/dash-plugin':
         specifier: latest
         version: link:../../packages/dash
+      '@headlessplayback/hijack-plugin':
+        specifier: latest
+        version: link:../../packages/hijack
       '@headlessplayback/hls-plugin':
         specifier: latest
         version: link:../../packages/hls
