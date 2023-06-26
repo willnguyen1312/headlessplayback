@@ -1,37 +1,20 @@
 import { hijackPlaybackPlugin } from "@headlessplayback/hijack-plugin"
-import { usePlayback } from "@headlessplayback/preact"
-import { useEffect } from "preact/hooks"
+import { usePlayback } from "@headlessplayback/solid"
+import { onMount, type Component } from "solid-js"
 usePlayback.use(hijackPlaybackPlugin)
 
 const id = "hijack"
 
-function CurrentTime() {
-  const playback = usePlayback({
-    id,
-  })
-
-  return <p>Current time: {playback.playbackState.currentTime}</p>
-}
-
-const Duration = () => {
-  const { playbackState } = usePlayback({
-    id,
-  })
-
-  return <p>Duration: {playbackState.duration}</p>
-}
-
-function Hijack() {
+const Hijack: Component = () => {
   const { activate, playbackActions, playbackState } = usePlayback({
     id,
   })
 
-  useEffect(() => {
+  onMount(() => {
     // Activate when playback element is accessible from the DOM
     activate()
-
     playbackActions.hijack({ direction: playbackState.direction, duration: 1000, frequency: 4 })
-  }, [])
+  })
 
   function jumpNext5s() {
     // Core actions and state are always available
@@ -60,10 +43,10 @@ function Hijack() {
 
   return (
     <>
-      <video hidden id={id}></video>
+      <video class="display-none" hidden id={id} />
 
-      <CurrentTime />
-      <Duration />
+      <p>Current time: {playbackState.currentTime}</p>
+      <p>Duration: {playbackState.duration}</p>
       <p>Direction: {playbackState.direction}</p>
 
       <div class="flex flex-col items-start ">

@@ -13,7 +13,10 @@
     "vite-plugin-solid": "^2.7.0"
   },
   "dependencies": {
-    "@headlessplayback/plugins": "^0.4.1",
+    "@headlessplayback/core": "latest",
+    "@headlessplayback/dash-plugin": "latest",
+    "@headlessplayback/hijack-plugin": "latest",
+    "@headlessplayback/hls-plugin": "latest",
     "@headlessplayback/solid": "latest",
     "solid-js": "^1.7.6"
   }

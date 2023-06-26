@@ -171,9 +171,18 @@ importers:
 
   examples/with-solid:
     dependencies:
-      '@headlessplayback/plugins':
-        specifier: ^0.4.1
-        version: 0.4.1
+      '@headlessplayback/core':
+        specifier: latest
+        version: link:../../packages/core
+      '@headlessplayback/dash-plugin':
+        specifier: latest
+        version: link:../../packages/dash
+      '@headlessplayback/hijack-plugin':
+        specifier: latest
+        version: link:../../packages/hijack
+      '@headlessplayback/hls-plugin':
+        specifier: latest
+        version: link:../../packages/hls
       '@headlessplayback/solid':
         specifier: latest
         version: link:../../packages/solid
@@ -1865,17 +1874,6 @@ packages:
   /@eslint/js@8.43.0:
     resolution: {integrity: sha512-s2UHCoiXfxMvmfzqoN+vrQ84ahUSYde9qNO1MdxmoEhyHWsfmwOpFlwYV+ePJEVc7gFnATGUi376WowX1N7tFg==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-
-  /@headlessplayback/core@0.7.1:
-    resolution: {integrity: sha512-4Dosyf7DTg1dmXSTt3ihN2Kho+6hjFtWLkX4fm7pzyvHOskXtln409j3v8Y0AbarwwcJ8tb/uiNtKxKiI6+yyw==}
-    dev: false
-
-  /@headlessplayback/plugins@0.4.1:
-    resolution: {integrity: sha512-QEpWRVCyUn603s05bgzJl7P/aPwfrL+OU205/sdsZRFNU4he19GbJ3WDatdEoFvhLnD3PVTjhW74WJAmbABlzA==}
-    dependencies:
-      '@headlessplayback/core': 0.7.1
-      hls.js: 1.4.6
-    dev: false
 
   /@humanwhocodes/config-array@0.11.10:
     resolution: {integrity: sha512-KVVjQmNUepDVGXNuoRRdmmEjruj0KfiGSbS8LVc12LMsWDQzRXJ0qdhN8L8uUigKpfEHRhlaQFY0ib1tnUbNeQ==}
