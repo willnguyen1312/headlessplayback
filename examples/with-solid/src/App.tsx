@@ -35,7 +35,6 @@ const App: Component = () => {
   const { activate, playbackActions, playbackState } = usePlayback({
     id: "video",
   })
-  const [showDuration, setShowDuration] = createSignal(true)
   const [source, setSource] = createSignal(source1)
 
   onMount(() => {
@@ -74,7 +73,7 @@ const App: Component = () => {
       </div>
 
       <CurrentTime />
-      {showDuration && <Duration />}
+      <Duration />
       <Resolutions />
 
       <div class="flex flex-col items-start ">
@@ -82,13 +81,6 @@ const App: Component = () => {
 
         <button onClick={jumpNext5s}>Next 5s</button>
         <button onClick={jumpPrev5s}>Prev 5s</button>
-        <button
-          onClick={() => {
-            setShowDuration(!showDuration)
-          }}
-        >
-          Toggle show duration
-        </button>
       </div>
     </div>
   )

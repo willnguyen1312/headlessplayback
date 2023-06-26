@@ -36,7 +36,6 @@ function App() {
   const { activate, playbackActions, playbackState } = usePlayback({
     id,
   })
-  const [showDuration, setShowDuration] = useState(true)
   const [source, setSource] = useState(source1)
 
   useEffect(() => {
@@ -75,7 +74,7 @@ function App() {
       </div>
 
       <CurrentTime />
-      {showDuration && <Duration />}
+      <Duration />
       <Resolutions />
 
       <div className="flex flex-col items-start ">
@@ -83,13 +82,6 @@ function App() {
 
         <button onClick={jumpNext5s}>Next 5s</button>
         <button onClick={jumpPrev5s}>Prev 5s</button>
-        <button
-          onClick={() => {
-            setShowDuration(!showDuration)
-          }}
-        >
-          Toggle show duration
-        </button>
       </div>
     </>
   )

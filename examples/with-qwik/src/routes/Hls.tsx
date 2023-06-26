@@ -35,7 +35,6 @@ const Hls = component$(() => {
   const { playbackActions, playbackState, use } = usePlayback({
     id,
   })
-  const showDuration = useSignal(true)
   const source = useSignal(source1)
 
   useVisibleTask$(async () => {
@@ -65,10 +64,6 @@ const Hls = component$(() => {
     }
   })
 
-  const toggleDuration = $(() => {
-    showDuration.value = !showDuration.value
-  })
-
   return (
     <>
       <div class="border-emerald border-1 h-[400px] w-[600px]">
@@ -76,7 +71,7 @@ const Hls = component$(() => {
       </div>
 
       <CurrentTime />
-      {showDuration && <Duration />}
+      <Duration />
       <Resolutions />
 
       <div class="flex flex-col items-start ">
@@ -84,7 +79,6 @@ const Hls = component$(() => {
 
         <button onClick$={jumpNext5s}>Next 5s</button>
         <button onClick$={jumpPrev5s}>Prev 5s</button>
-        <button onClick$={toggleDuration}>Toggle show duration</button>
       </div>
     </>
   )
