@@ -1,5 +1,13 @@
 # @headlessplayback/plugins
 
+## 0.1.0
+
+### Minor Changes
+
+- [#55](https://github.com/willnguyen1312/headlessplayback/pull/55)
+  [`e94ea84`](https://github.com/willnguyen1312/headlessplayback/commit/e94ea841a7a9d9ea24cc39485676af1198cc9896) Thanks
+  [@willnguyen1312](https://github.com/willnguyen1312)! - Improve hijack playback plugin 💞
+
 ## 0.0.4
 
 ### Patch Changes
