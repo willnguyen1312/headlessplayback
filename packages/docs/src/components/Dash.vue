@@ -14,7 +14,6 @@ const { activate, playbackActions, playbackState } = usePlayback({
 })
 
 const source = ref(source1)
-const showDuration = ref(true)
 
 onMounted(() => {
   // Activate when playback element is accessible from the DOM
@@ -40,7 +39,7 @@ const jumpTo = (time: number) => {
 
   <p>Current time: {{ playbackState.currentTime }}</p>
 
-  <p v-if="showDuration">Duration: {{ playbackState.duration }}</p>
+  <p>Duration: {{ playbackState.duration }}</p>
 
   <strong>BitrateInfo: {{ playbackState.bitrateInfo.map((level) => level.height).join(", ") }}</strong>
 
@@ -49,6 +48,5 @@ const jumpTo = (time: number) => {
 
     <button @click="jumpTo(playbackState.currentTime + 5)">Next 5s</button>
     <button @click="jumpTo(playbackState.currentTime - 5)">Prev 5s</button>
-    <button @click="showDuration = !showDuration">Toggle show duration</button>
   </div>
 </template>
