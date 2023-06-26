@@ -7,7 +7,9 @@
   },
   "dependencies": {
     "@headlessplayback/core": "latest",
-    "@headlessplayback/plugins": "^0.4.1",
+    "@headlessplayback/dash-plugin": "latest",
+    "@headlessplayback/hijack-plugin": "latest",
+    "@headlessplayback/hls-plugin": "latest",
     "@headlessplayback/svelte": "latest"
   },
   "devDependencies": {

@@ -202,9 +202,15 @@ importers:
       '@headlessplayback/core':
         specifier: latest
         version: link:../../packages/core
-      '@headlessplayback/plugins':
-        specifier: ^0.4.1
-        version: 0.4.1
+      '@headlessplayback/dash-plugin':
+        specifier: latest
+        version: link:../../packages/dash
+      '@headlessplayback/hijack-plugin':
+        specifier: latest
+        version: link:../../packages/hijack
+      '@headlessplayback/hls-plugin':
+        specifier: latest
+        version: link:../../packages/hls
       '@headlessplayback/svelte':
         specifier: latest
         version: link:../../packages/svelte
