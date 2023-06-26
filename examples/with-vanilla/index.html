@@ -6,9 +6,34 @@
     <title>Vite + TS</title>
   </head>
   <body>
-    <div id="app" class="p-4">
+    <div class="p-4">
+      <div class="border-gray-200">
+        <nav id="nav" class="-mb-px flex space-x-8">
+          <a
+            data-current="true"
+            data-name="hls"
+            class="cursor-pointer whitespace-nowrap border-b-2 border-indigo-500 px-1 py-4 text-sm font-medium text-indigo-600"
+            >Hls</a
+          >
+          <a
+            data-name="dash"
+            class="cursor-pointer whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+            >Dash</a
+          >
+          <a
+            data-name="hijack"
+            class="cursor-pointer whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+            >Hijack</a
+          >
+        </nav>
+      </div>
+
+      <div class="mt-4" id="parent"></div>
+    </div>
+
+    <template id="hls">
       <div class="border-emerald border-1 h-[400px] w-[600px]">
-        <video class="h-full w-full" controls id="video"></video>
+        <video class="h-full w-full" controls id="hls"></video>
       </div>
 
       <p id="duration"></p>
@@ -16,8 +41,34 @@
       <p id="resolutions"></p>
 
       <button id="switch">Switch stream</button>
-      <!-- <button id="activate">Activate</button> -->
-    </div>
+    </template>
+
+    <template id="dash">
+      <div class="border-emerald border-1 h-[400px] w-[600px]">
+        <video class="h-full w-full" controls id="dash"></video>
+      </div>
+
+      <p id="duration"></p>
+      <p id="currentTime"></p>
+      <p id="resolutions"></p>
+
+      <button id="switch">Switch stream</button>
+    </template>
+
+    <template id="hijack">
+      <video class="display-none" hidden id="hijack"></video>
+
+      <p id="currentTime"></p>
+      <p id="duration"></p>
+      <p id="direction"></p>
+
+      <div class="flex flex-col items-start">
+        <button id="next5s">Next 5s</button>
+        <button id="togglePlay">Play</button>
+        <button id="prev5s">Prev 5s</button>
+        <button id="toggleDirection">Toggle direction</button>
+      </div>
+    </template>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

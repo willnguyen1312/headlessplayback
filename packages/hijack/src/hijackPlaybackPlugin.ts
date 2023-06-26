@@ -155,12 +155,17 @@ const hijackPlaybackElement = (
 
 const activeHijackedMap = new Map<string, ReturnType<typeof hijackPlaybackElement>>()
 
+const createDefaultState = (): _CustomPlaybackState => {
+  return {
+    direction: "forward",
+  }
+}
+
 export const hijackPlaybackPlugin: Plugin = {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  install: ({ onCleanup }) => {
-    // const setDuration: any = noop
-    // const setFrequency: any = noop
+  install: ({ onCleanup, store }) => {
+    store.setState(createDefaultState())
 
     const hijack: any = ({ id, direction, duration, frequency }: { id: string } & HijackArgs) => {
       const playbackElement = document.getElementById(id) as HTMLVideoElement
@@ -180,6 +185,7 @@ export const hijackPlaybackPlugin: Plugin = {
 
     const setDirection = ({ id, direction }: { id: string } & { direction: Direction }) => {
       activeHijackedMap.get(id)?.setDirection(direction)
+      store.setState({ direction })
     }
 
     const setDuration = ({ id, duration }: { id: string } & { duration: number }) => {

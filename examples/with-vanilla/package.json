@@ -14,6 +14,7 @@
   "dependencies": {
     "@headlessplayback/core": "latest",
     "@headlessplayback/dash-plugin": "latest",
+    "@headlessplayback/hijack-plugin": "latest",
     "@headlessplayback/hls-plugin": "latest"
   }
 }
