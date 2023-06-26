@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Plugin } from "@headlessplayback/core"
 import { flushPromises } from "@namnode/utils"
-import Hls, { HlsConfig, Level, MediaPlaylist } from "hls.js"
+import Hls, { HlsConfig } from "hls.js"
 
 type LoadFunction = (arg: { source: string }) => void
 type SetCurrentLevel = (arg: { level: number }) => void
@@ -54,12 +54,30 @@ export type ErrorDetails =
   | "aborted"
   | "unknown"
 
+export interface Level {
+  bitrate: number
+  width: number
+  height: number
+  id: number
+}
+
+export interface SubtitleTrack {
+  id: number
+  lang?: string
+}
+
+export interface AudioTrack {
+  id: number
+  lang?: string
+  name: string
+}
+
 interface _CustomPlaybackState {
   levels: Level[]
   currentLevel: number
-  subtitleTracks: MediaPlaylist[]
+  subtitleTracks: SubtitleTrack[]
   subtitleTrack: number
-  audioTracks: MediaPlaylist[]
+  audioTracks: AudioTrack[]
   audioTrack: number
   hlsStatus: HlsStatus
   errorDetail: ErrorDetails | null
@@ -139,7 +157,12 @@ export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
 
       hls.on(Hls.Events.MANIFEST_PARSED, (_, data) => {
         store.setState({
-          levels: data.levels,
+          levels: data.levels.map((level) => ({
+            bitrate: level.bitrate,
+            width: level.width,
+            height: level.height,
+            id: level.id,
+          })),
         })
       })
 
@@ -151,7 +174,10 @@ export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
 
       hls.on(Hls.Events.SUBTITLE_TRACKS_UPDATED, (_, data) => {
         store.setState({
-          subtitleTracks: data.subtitleTracks,
+          subtitleTracks: data.subtitleTracks.map((track) => ({
+            id: track.id,
+            lang: track.lang,
+          })),
         })
       })
 
@@ -163,7 +189,11 @@ export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
 
       hls.on(Hls.Events.AUDIO_TRACKS_UPDATED, (_, data) => {
         store.setState({
-          audioTracks: data.audioTracks,
+          audioTracks: data.audioTracks.map((track) => ({
+            id: track.id,
+            lang: track.lang,
+            name: track.name,
+          })),
         })
       })
 
