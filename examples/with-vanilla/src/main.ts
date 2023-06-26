@@ -35,8 +35,8 @@ function makeHlsPlayback() {
   })
 
   result.subscribe(({ state }) => {
-    currentTime.innerText = `Current time: ${state.currentTime.toString()}`
-    duration.innerText = `Duration: ${state.duration.toString()}`
+    currentTime.innerText = `Current time: ${state.currentTime}`
+    duration.innerText = `Duration: ${state.duration}`
     resolutions.innerHTML = `<strong>Levels: ${state.levels.map((level) => level.height).join(", ")}</strong>`
   })
 
@@ -70,8 +70,8 @@ function makeDashPlayback() {
   })
 
   result.subscribe(({ state }) => {
-    currentTime.innerText = `Current time: ${state.currentTime.toString()}`
-    duration.innerText = `Duration: ${state.duration.toString()}`
+    currentTime.innerText = `Current time: ${state.currentTime}`
+    duration.innerText = `Duration: ${state.duration}`
     resolutions.innerHTML = `<strong>BitrateInfo: ${state.bitrateInfo.map((level) => level.height).join(", ")}</strong>`
   })
 
@@ -121,8 +121,8 @@ const makeHijackPlayback = () => {
   })
 
   result.subscribe(({ state }) => {
-    currentTime.innerText = `Current time: ${state.currentTime.toString()}`
-    duration.innerText = `Duration: ${state.duration.toString()}`
+    currentTime.innerText = `Current time: ${state.currentTime}`
+    duration.innerText = `Duration: ${state.duration}`
     direction.innerText = `Direction: ${state.direction}`
     togglePlayBtn.innerText = state.paused ? "Play" : "Pause"
   })

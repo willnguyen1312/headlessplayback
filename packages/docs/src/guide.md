@@ -1,6 +1,6 @@
 # Get Started
 
-Headlessplayback is a little yet powerful and extensive library for powering createPlayback experience on the web. It is
+Headlessplayback is a little yet powerful and extensive library for powering playback experience on the web. It is
 written in pure TypeScript and has no dependencies. The library is built with framework agnostic in mind, so it can be
 used with any framework adapters or even without
 
@@ -31,84 +31,52 @@ Simply importing the utilities you need from `@headlessplayback/core`
 
 <p id="duration"></p>
 <p id="currentTime"></p>
-<p id="resolutions"></p>
-
-<button id="switch">Switch stream</button>
 ```
 
 ```ts
 import { createPlayback } from "@headlessplayback/core"
-import { hlsPlaybackPlugin } from "@headlessplayback/hls-plugin"
-createPlayback.use(hlsPlaybackPlugin)
-
-const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
-const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
-let currentSource = source1
 
 const currentTime = document.getElementById("currentTime") as HTMLParagraphElement
-const resolutions = document.getElementById("resolutions") as HTMLParagraphElement
 const duration = document.getElementById("duration") as HTMLParagraphElement
-const switchBtn = document.getElementById("switch") as HTMLButtonElement
-
-switchBtn.addEventListener("click", () => {
-  currentSource = currentSource === source1 ? source2 : source1
-  result.playbackActions.load({
-    source: currentSource,
-  })
-})
 
 const result = createPlayback({
   id: "video",
 })
 
 result.subscribe(({ state }) => {
-  currentTime.innerText = `Current time: ${state.currentTime.toString()}`
-  duration.innerText = `Duration: ${state.duration.toString()}`
-  resolutions.innerText = `Levels: ${state.levels.map((level) => level.height).join(", ")}`
+  currentTime.innerText = `Current time: ${state.currentTime}`
+  duration.innerText = `Duration: ${state.duration}`
 })
 
 result.activate()
-result.playbackActions.load({
-  source: source1,
-})
 ```
 
 Refer to [Core API section](/api/) for more details
 
 ## Example with React Adapter
 
-Simply importing the utilities you need from `@zoom-image/react`
-
-```css
-/* styles.css */
-.imageContainer {
-  width: var(--imageContainerWidth);
-  height: var(--imageContainerHeight);
-}
-
-.image {
-  width: 100%;
-  height: 100%;
-}
-```
+Simply importing the utilities you need from `@headlessplayback/react`
 
 ```tsx
-import "style.css"
-import { useRef, useEffect } from "react"
-import { useZoomImageWheel } from "@zoom-image/react"
+import { useEffect } from "react"
+import { usePlayback } from "@headlessplayback/react"
 
 function App() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const { createZoomImage } = useZoomImageWheel()
+  const { activate, playbackState } = usePlayback({
+    id: "video",
+  })
 
   useEffect(() => {
-    createZoomImage(containerRef.value)
+    activate()
   }, [])
 
   return (
-    <div className="imageContainer" ref={containerRef}>
-      <img className="image" alt="Large Pic" src="/image.webp" />
-    </div>
+    <>
+      <video controls id="video"></video>
+
+      <p>{playbackState.duration}</p>
+      <p>{playbackState.currentTime}</p>
+    </>
   )
 }
 ```
@@ -117,38 +85,28 @@ Refer to [React Adapter section](/api/adapters/react) for more details
 
 ## Example with Preact Adapter
 
-Simply importing the utilities you need from `@zoom-image/preact`
-
-```css
-/* styles.css */
-.imageContainer {
-  width: var(--imageContainerWidth);
-  height: var(--imageContainerHeight);
-}
-
-.image {
-  width: 100%;
-  height: 100%;
-}
-```
+Simply importing the utilities you need from `@headlessplayback/preact`
 
 ```tsx
-import "style.css"
-import { useRef, useEffect } from "preact/hooks"
-import { useZoomImageWheel } from "@zoom-image/preact"
+import { useEffect } from "preact/hooks"
+import { usePlayback } from "@headlessplayback/preact"
 
 function App() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const { createZoomImage } = useZoomImageWheel()
+  const { activate, playbackState } = usePlayback({
+    id: "video",
+  })
 
   useEffect(() => {
-    createZoomImage(containerRef.value)
+    activate()
   }, [])
 
   return (
-    <div class="imageContainer" ref={containerRef}>
-      <img class="image" alt="Large Pic" src="/image.webp" />
-    </div>
+    <>
+      <video controls id="video"></video>
+
+      <p>{playbackState.duration}</p>
+      <p>{playbackState.currentTime}</p>
+    </>
   )
 }
 ```
@@ -157,38 +115,23 @@ Refer to [Preact Adapter section](/api/adapters/preact) for more details
 
 ## Example with Qwik Adapter
 
-Simply importing the utilities you need from `@zoom-image/qwik`
-
-```css
-/* styles.css */
-.imageContainer {
-  width: var(--imageContainerWidth);
-  height: var(--imageContainerHeight);
-}
-
-.image {
-  width: 100%;
-  height: 100%;
-}
-```
+Simply importing the utilities you need from `@headlessplayback/qwik`
 
 ```tsx
-import "style.css"
-import { useSignal, useVisibleTask$ } from "@builder.io/qwik"
-import { useZoomImageWheel } from "@zoom-image/qwik"
+import { usePlayback } from "@headlessplayback/qwik"
 
 function App() {
-  const containerRef = useSignal<HTMLDivElement>()
-  const { createZoomImage } = useZoomImageWheel()
-
-  useVisibleTask$(() => {
-    createZoomImage(containerRef.value)
+  const { playbackState } = usePlayback({
+    id: "video",
   })
 
   return (
-    <div class="imageContainer" ref={containerRef}>
-      <img class="image" alt="Large Pic" src="/image.webp" />
-    </div>
+    <>
+      <video controls id="video"></video>
+
+      <p>{playbackState.duration}</p>
+      <p>{playbackState.currentTime}</p>
+    </>
   )
 }
 ```
@@ -197,37 +140,28 @@ Refer to [Qwik Adapter section](/api/adapters/qwik) for more details
 
 ## Example with Solid Adapter
 
-Simply importing the utilities you need from `@zoom-image/qwik`
-
-```css
-/* styles.css */
-.imageContainer {
-  width: var(--imageContainerWidth);
-  height: var(--imageContainerHeight);
-}
-
-.image {
-  width: 100%;
-  height: 100%;
-}
-```
+Simply importing the utilities you need from `@headlessplayback/solid`
 
 ```tsx
-import "style.css"
-import { useZoomImageWheel } from "@zoom-image/solid"
+import { onMount } from "solid-js"
+import { usePlayback } from "@headlessplayback/solid"
 
 function App() {
-  let container: HTMLDivElement
-  const { createZoomImage } = useZoomImageWheel()
-
-  onMount(() => {
-    createZoomImage(container)
+  const { activate, playbackActions, playbackState } = usePlayback({
+    id: "video",
   })
 
+  onMount(() => {
+    activate()
+  }, [])
+
   return (
-    <div class="imageContainer" ref={container}>
-      <img class="image" alt="Large Pic" src="/image.webp" />
-    </div>
+    <>
+      <video controls id="video"></video>
+
+      <p>{playbackState.duration}</p>
+      <p>{playbackState.currentTime}</p>
+    </>
   )
 }
 ```
@@ -236,74 +170,60 @@ Refer to [Solid Adapter section](/api/adapters/solid) for more details
 
 ## Example with Svelte Adapter
 
-Simply importing the utilities you need from `@zoom-image/svelte`
+Simply importing the utilities you need from `@headlessplayback/svelte`
 
 ```svelte
 <script lang="ts">
   import { onMount } from "svelte"
-  import { useZoomImageWheel } from "@zoom-image/svelte"
+  import { usePlayback } from "@headlessplayback/svelte"
 
-  let container: HTMLDivElement
-  const { createZoomImage } = useZoomImageWheel()
+  const { activate, playbackState: _playbackState } = usePlayback({
+    id,
+  })
+
+  let playbackState: PlaybackState
+
+  const unsubscribe = _playbackState.subscribe((value: PlaybackState) => {
+    playbackState = value
+  })
 
   onMount(() => {
-    createZoomImage(container)
+    activate()
   })
 </script>
 
-<div class="imageContainer" bind:this={imageWheelContainer}>
-  <img class="image" alt="Large Pic" src="/image.webp" />
-</div>
+<video id="video" controls />
 
-<style>
-  .imageContainer {
-    width: var(--imageContainerWidth);
-    height: var(--imageContainerHeight);
-  }
-
-  .image {
-    width: 100%;
-    height: 100%;
-  }
-</style>
+<p>{playbackState.duration}</p>
+<p>{playbackState.currentTime}</p>
 ```
 
 Refer to [Svelte Adapter section](/api/adapters/svelte) for more details
 
 ## Example with Vue Adapter
 
-Simply importing the utilities you need from `@zoom-image/vue`
+Simply importing the utilities you need from `@headlessplayback/vue`
 
 ```vue
 <script lang="ts" setup>
 import { onMounted } from "vue"
-import { useZoomImageWheel } from "@zoom-image/vue"
+import { usePlayback } from "@headlessplayback/vue"
 
-const imageWheelContainerRef = ref<HTMLDivElement>()
-const { createZoomImage } = useZoomImageWheel()
+const { playbackState, activate } = usePlayback({
+  id: "video",
+})
 
 onMounted(() => {
-  createZoomImage(imageWheelContainerRef.value)
+  activate()
 })
 </script>
 
 <template>
-  <div class="imageContainer" ref="imageWheelContainerRef">
-    <img class="image" alt="Large Pic" src="/image.webp" />
-  </div>
+  <video id="video" controls />
+
+  <p>{{ playbackState.duration }}</p>
+  <p>{{ playbackState.currentTime }}</p>
 </template>
-
-<style>
-.imageContainer {
-  width: var(--imageContainerWidth);
-  height: var(--imageContainerHeight);
-}
-
-.image {
-  width: 100%;
-  height: 100%;
-}
-</style>
 ```
 
 Refer to [Svelte Adapter section](/api/adapters/vue) for more details
