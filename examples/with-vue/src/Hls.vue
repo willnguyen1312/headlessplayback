@@ -11,7 +11,6 @@ const { activate, playbackActions, playbackState } = usePlayback({
 
 const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
 const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
-const showDuration = ref(true)
 const source = ref(source1)
 
 onMounted(() => {
@@ -41,7 +40,7 @@ const jumpTo = (time: number) => {
 
   <p>Current time: {{ playbackState.currentTime }}</p>
 
-  <p v-if="showDuration">Duration: {{ playbackState.duration }}</p>
+  <p>Duration: {{ playbackState.duration }}</p>
   <!-- Plugin will inject extra state to playbackState -->
   <strong>Levels: {{ playbackState.levels.map((level) => level.height).join(", ") }}</strong>
 
@@ -50,6 +49,5 @@ const jumpTo = (time: number) => {
 
     <button @click="jumpTo(playbackState.currentTime + 5)">Next 5s</button>
     <button @click="jumpTo(playbackState.currentTime - 5)">Prev 5s</button>
-    <button @click="showDuration = !showDuration">Toggle show duration</button>
   </div>
 </template>
