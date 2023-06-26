@@ -1,5 +1,5 @@
-import { $, component$, useSignal, useVisibleTask$ } from "@builder.io/qwik"
-import { Direction, hijackPlaybackPlugin } from "@headlessplayback/hijack-plugin"
+import { $, component$, useVisibleTask$ } from "@builder.io/qwik"
+import { hijackPlaybackPlugin } from "@headlessplayback/hijack-plugin"
 import { usePlayback } from "@headlessplayback/qwik"
 
 const id = "hijack"
@@ -24,16 +24,10 @@ const Hijack = component$(() => {
   const { playbackActions, playbackState, use } = usePlayback({
     id,
   })
-  const direction = useSignal<Direction>("forward")
 
   useVisibleTask$(async () => {
     await use(hijackPlaybackPlugin)
-    playbackActions.hijack({ direction: direction.value, duration: 1000, frequency: 4 })
-  })
-
-  useVisibleTask$(({ track }) => {
-    track(() => direction.value)
-    playbackActions.setDirection({ direction: direction.value })
+    playbackActions.hijack({ direction: playbackState.direction, duration: 1000, frequency: 4 })
   })
 
   const jumpNext5s = $(() => {
@@ -54,10 +48,10 @@ const Hijack = component$(() => {
   })
 
   const toggleDirection = $(() => {
-    if (direction.value === "forward") {
-      direction.value = "backward"
+    if (playbackState.direction === "forward") {
+      playbackActions.setDirection({ direction: "backward" })
     } else {
-      direction.value = "forward"
+      playbackActions.setDirection({ direction: "forward" })
     }
   })
 
@@ -67,7 +61,7 @@ const Hijack = component$(() => {
 
       <CurrentTime />
       <Duration />
-      <p>Direction: {direction}</p>
+      <p>Direction: {playbackState.direction}</p>
 
       <div class="flex flex-col items-start ">
         <button onClick$={jumpNext5s}>Next 5s</button>
