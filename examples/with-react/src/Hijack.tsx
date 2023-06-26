@@ -1,6 +1,6 @@
-import { Direction, hijackPlaybackPlugin } from "@headlessplayback/hijack-plugin"
+import { hijackPlaybackPlugin } from "@headlessplayback/hijack-plugin"
 import { usePlayback } from "@headlessplayback/react"
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 usePlayback.use(hijackPlaybackPlugin)
 
 const id = "hijack"
@@ -25,18 +25,13 @@ function Hijack() {
   const { activate, playbackActions, playbackState } = usePlayback({
     id,
   })
-  const [direction, setDirection] = useState<Direction>("forward")
 
   useEffect(() => {
     // Activate when playback element is accessible from the DOM
     activate()
 
-    playbackActions.hijack({ direction, duration: 1000, frequency: 4 })
+    playbackActions.hijack({ direction: playbackState.direction, duration: 1000, frequency: 4 })
   }, [])
-
-  useEffect(() => {
-    playbackActions.setDirection({ direction })
-  }, [direction])
 
   function jumpNext5s() {
     // Core actions and state are always available
@@ -56,10 +51,10 @@ function Hijack() {
   }
 
   function toggleDirection() {
-    if (direction === "forward") {
-      setDirection("backward")
+    if (playbackState.direction === "forward") {
+      playbackActions.setDirection({ direction: "backward" })
     } else {
-      setDirection("forward")
+      playbackActions.setDirection({ direction: "forward" })
     }
   }
 
@@ -69,7 +64,7 @@ function Hijack() {
 
       <CurrentTime />
       <Duration />
-      <p>Direction: {direction}</p>
+      <p>Direction: {playbackState.direction}</p>
 
       <div className="flex flex-col items-start ">
         <button onClick={jumpNext5s}>Next 5s</button>
