@@ -43,7 +43,7 @@
   $: handleSource(source)
 </script>
 
-<div class="border-emerald border-1 h-[400px] w-[600px]">
+<div class="border-fuchsia border-1 h-[400px] w-[600px]">
   <video {id} class="h-full w-full" controls>
     <track kind="captions" />
   </video>
