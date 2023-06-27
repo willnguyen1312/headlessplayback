@@ -33,7 +33,7 @@ const jumpTo = (time: number) => {
 </script>
 
 <template>
-  <div class="border-emerald border-1 h-[400px] w-[600px]">
+  <div class="border-fuchsia border-1 h-[400px] w-[600px]">
     <video class="h-full w-full" :id="id" controls></video>
   </div>
 
