@@ -69,7 +69,7 @@ function App() {
 
   return (
     <>
-      <div className="border-emerald border-1 h-[400px] w-[600px]">
+      <div className="border-fuchsia border-1 h-[400px] w-[600px]">
         <video className="h-full w-full" id={id} controls></video>
       </div>
 
