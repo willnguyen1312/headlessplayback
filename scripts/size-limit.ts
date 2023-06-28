@@ -3,6 +3,7 @@ import fs from "fs/promises"
 
 const packages = [
   "core",
+  "preact",
   "react",
   "qwik",
   "solid",

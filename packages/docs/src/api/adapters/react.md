@@ -4,8 +4,7 @@ import BundleSize from '../../components/BundleSize.vue'
 
 # Headless playback React
 
-The @headlessplayback/react adapter is a wrapper around the core
-headlessplayback API.
+The @headlessplayback/react adapter is a wrapper around the core API.
 
 ## `usePlayback` - <BundleSize func="usePlayback" pkg="@headlessplayback/react" />
 

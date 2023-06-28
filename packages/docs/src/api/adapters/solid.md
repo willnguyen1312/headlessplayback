@@ -4,8 +4,7 @@ import BundleSize from '../../components/BundleSize.vue'
 
 # Headless playback Solid
 
-The @headlessplayback/solid adapter is a wrapper around the core
-headlessplayback API.
+The @headlessplayback/solid adapter is a wrapper around the core API.
 
 ## `usePlayback` - <BundleSize func="usePlayback" pkg="@headlessplayback/solid" />
 

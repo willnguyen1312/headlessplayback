@@ -4,8 +4,7 @@ import BundleSize from '../../components/BundleSize.vue'
 
 # Headless playback Qwik
 
-The @headlessplayback/qwik adapter is a wrapper around the core headlessplayback
-API.
+The @headlessplayback/qwik adapter is a wrapper around the core API.
 
 ## `usePlayback` - <BundleSize func="usePlayback" pkg="@headlessplayback/qwik" />
 

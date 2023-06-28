@@ -2,6 +2,9 @@
   "@headlessplayback/core": {
     "createPlayback": "1.34 KB"
   },
+  "@headlessplayback/preact": {
+    "usePlayback": "2.13 KB"
+  },
   "@headlessplayback/react": {
     "usePlayback": "1.52 KB"
   },
