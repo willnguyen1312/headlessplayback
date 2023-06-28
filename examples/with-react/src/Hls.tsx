@@ -82,11 +82,26 @@ function App() {
       <Duration />
       <Resolutions />
 
-      <div className="flex flex-col items-start ">
-        <button onClick={toggleStreamSource}>Switch stream</button>
+      <div className="flex flex-col items-start space-y-1 ">
+        <button
+          className="rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
+          onClick={toggleStreamSource}
+        >
+          Switch stream
+        </button>
 
-        <button onClick={jumpNext5s}>Next 5s</button>
-        <button onClick={jumpPrev5s}>Prev 5s</button>
+        <button
+          className="rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
+          onClick={jumpNext5s}
+        >
+          Next 5s
+        </button>
+        <button
+          className="rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
+          onClick={jumpPrev5s}
+        >
+          Prev 5s
+        </button>
       </div>
     </>
   )
