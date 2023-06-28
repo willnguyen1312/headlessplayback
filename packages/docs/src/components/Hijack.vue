@@ -48,6 +48,7 @@ function toggleDirection() {
 </script>
 
 <template>
+  <p>You can even hijack media element without source and play backward 🥳</p>
   <video class="display-none" hidden :id="id"></video>
 
   <p>Current time: {{ playbackState.currentTime }}</p>
