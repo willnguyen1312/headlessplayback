@@ -14,12 +14,17 @@ type PlayerType = "hls" | "dash" | "hijack"
 let currentResult: any
 
 function makeHlsPlayback() {
-  const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
+  const source1 =
+    "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
   const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
   let currentSource = source1
 
-  const currentTime = document.getElementById("currentTime") as HTMLParagraphElement
-  const resolutions = document.getElementById("resolutions") as HTMLParagraphElement
+  const currentTime = document.getElementById(
+    "currentTime",
+  ) as HTMLParagraphElement
+  const resolutions = document.getElementById(
+    "resolutions",
+  ) as HTMLParagraphElement
   const duration = document.getElementById("duration") as HTMLParagraphElement
   const switchBtn = document.getElementById("switch") as HTMLButtonElement
 
@@ -37,7 +42,9 @@ function makeHlsPlayback() {
   result.subscribe(({ state }) => {
     currentTime.innerText = `Current time: ${state.currentTime}`
     duration.innerText = `Duration: ${state.duration}`
-    resolutions.innerHTML = `<strong>Levels: ${state.levels.map((level) => level.height).join(", ")}</strong>`
+    resolutions.innerHTML = `<strong>Levels: ${state.levels
+      .map((level) => level.height)
+      .join(", ")}</strong>`
   })
 
   result.activate()
@@ -50,11 +57,16 @@ function makeHlsPlayback() {
 
 function makeDashPlayback() {
   const source1 = "https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd"
-  const source2 = "https://rdmedia.bbc.co.uk/elephants_dream/1/client_manifest-all.mpd"
+  const source2 =
+    "https://rdmedia.bbc.co.uk/elephants_dream/1/client_manifest-all.mpd"
   let currentSource = source1
 
-  const currentTime = document.getElementById("currentTime") as HTMLParagraphElement
-  const resolutions = document.getElementById("resolutions") as HTMLParagraphElement
+  const currentTime = document.getElementById(
+    "currentTime",
+  ) as HTMLParagraphElement
+  const resolutions = document.getElementById(
+    "resolutions",
+  ) as HTMLParagraphElement
   const duration = document.getElementById("duration") as HTMLParagraphElement
   const switchBtn = document.getElementById("switch") as HTMLButtonElement
 
@@ -72,7 +84,9 @@ function makeDashPlayback() {
   result.subscribe(({ state }) => {
     currentTime.innerText = `Current time: ${state.currentTime}`
     duration.innerText = `Duration: ${state.duration}`
-    resolutions.innerHTML = `<strong>BitrateInfo: ${state.bitrateInfo.map((level) => level.height).join(", ")}</strong>`
+    resolutions.innerHTML = `<strong>BitrateInfo: ${state.bitrateInfo
+      .map((level) => level.height)
+      .join(", ")}</strong>`
   })
 
   result.activate()
@@ -84,14 +98,20 @@ function makeDashPlayback() {
 }
 
 const makeHijackPlayback = () => {
-  const currentTime = document.getElementById("currentTime") as HTMLParagraphElement
+  const currentTime = document.getElementById(
+    "currentTime",
+  ) as HTMLParagraphElement
   const direction = document.getElementById("direction") as HTMLParagraphElement
 
   const next5sBtn = document.getElementById("next5s") as HTMLButtonElement
   const prev5sBtn = document.getElementById("prev5s") as HTMLButtonElement
   const duration = document.getElementById("duration") as HTMLParagraphElement
-  const togglePlayBtn = document.getElementById("togglePlay") as HTMLButtonElement
-  const toggleDirectionBtn = document.getElementById("toggleDirection") as HTMLButtonElement
+  const togglePlayBtn = document.getElementById(
+    "togglePlay",
+  ) as HTMLButtonElement
+  const toggleDirectionBtn = document.getElementById(
+    "toggleDirection",
+  ) as HTMLButtonElement
 
   const result = createPlayback({
     id: "hijack",
@@ -116,7 +136,8 @@ const makeHijackPlayback = () => {
   })
 
   toggleDirectionBtn.addEventListener("click", () => {
-    const currentDirection = result.getState().direction === "forward" ? "backward" : "forward"
+    const currentDirection =
+      result.getState().direction === "forward" ? "backward" : "forward"
     result.playbackActions.setDirection({ direction: currentDirection })
   })
 
@@ -128,7 +149,11 @@ const makeHijackPlayback = () => {
   })
 
   result.activate()
-  result.playbackActions.hijack({ direction: result.getState().direction, duration: 1000, frequency: 4 })
+  result.playbackActions.hijack({
+    direction: result.getState().direction,
+    duration: 1000,
+    frequency: 4,
+  })
 
   currentResult = result
 }

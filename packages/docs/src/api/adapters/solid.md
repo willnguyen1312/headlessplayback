@@ -2,44 +2,21 @@
 import BundleSize from '../../components/BundleSize.vue'
 </script>
 
-# Zoom Image Solid
+# Headless playback Solid
 
-The @zoom-image/solid adapter is a wrapper around the core zoom image logic.
+The @headlessplayback/solid adapter is a wrapper around the core
+headlessplayback API.
 
-## `useZoomImageWheel` - <BundleSize func="useZoomImageWheel" pkg="@zoom-image/solid" />
-
-```ts
-function useZoomImageWheel(): {
-  createZoomImage
-  zoomImageState
-  setZoomImageState
-}
-```
-
-## `useZoomImageHover` - <BundleSize func="useZoomImageHover" pkg="@zoom-image/solid" />
+## `usePlayback` - <BundleSize func="usePlayback" pkg="@headlessplayback/solid" />
 
 ```ts
-function useZoomImageHover(): {
-  createZoomImage
-  zoomImageState
-  setZoomImageState
+function usePlayback(arg: { id: string }): {
+  activate
+  playbackActions
+  playbackState
 }
-```
 
-## `useZoomImageMove` - <BundleSize func="useZoomImageMove" pkg="@zoom-image/solid" />
-
-```ts
-function useZoomImageMove(): {
-  createZoomImage
-  zoomImageState
-}
-```
-
-## `useZoomImageClick` - <BundleSize func="useZoomImageClick" pkg="@zoom-image/solid" />
-
-```ts
-function useZoomImageClick(): {
-  createZoomImage
-  zoomImageState
-}
+usePlayback.use(plugin, {
+  /* Your plugin config */
+})
 ```

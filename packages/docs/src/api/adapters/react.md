@@ -2,44 +2,23 @@
 import BundleSize from '../../components/BundleSize.vue'
 </script>
 
-# Zoom Image React
+# Headless playback React
 
-The @zoom-image/react adapter is a wrapper around the core zoom image logic.
+The @headlessplayback/react adapter is a wrapper around the core
+headlessplayback API.
 
-## `useZoomImageWheel` - <BundleSize func="useZoomImageWheel" pkg="@zoom-image/react" />
+## `usePlayback` - <BundleSize func="usePlayback" pkg="@headlessplayback/react" />
 
-```ts
-function useZoomImageWheel(): {
-  createZoomImage
-  zoomImageState
-  setZoomImageState
-}
-```
-
-## `useZoomImageHover` - <BundleSize func="useZoomImageHover" pkg="@zoom-image/react" />
+### Basic Usage
 
 ```ts
-function useZoomImageHover(): {
-  createZoomImage
-  zoomImageState
-  setZoomImageState
+function usePlayback(arg: { id: string }): {
+  activate
+  playbackActions
+  playbackState
 }
-```
 
-## `useZoomImageMove` - <BundleSize func="useZoomImageMove" pkg="@zoom-image/react" />
-
-```ts
-function useZoomImageMove(): {
-  createZoomImage
-  zoomImageState
-}
-```
-
-## `useZoomImageClick` - <BundleSize func="useZoomImageClick" pkg="@zoom-image/react" />
-
-```ts
-function useZoomImageClick(): {
-  createZoomImage
-  zoomImageState
-}
+usePlayback.use(plugin, {
+  /* Your plugin config */
+})
 ```

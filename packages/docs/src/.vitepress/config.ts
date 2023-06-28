@@ -1,13 +1,23 @@
+import pkg from "@headlessplayback/core/package.json"
 import Unocss from "unocss/vite"
 import { defineConfig } from "vitepress"
-import pkg from "@headlessplayback/core/package.json"
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "Headless Playback",
-  description: "A simple yet complete playback library designed for UI frameworks or even without",
+  description:
+    "A simple yet complete playback library designed for UI frameworks or even without",
   base: "/headlessplayback/",
-  head: [["link", { rel: "shortcut icon", href: "/headlessplayback/favicon.ico", type: "image/x-icon" }]],
+  head: [
+    [
+      "link",
+      {
+        rel: "shortcut icon",
+        href: "/headlessplayback/favicon.ico",
+        type: "image/x-icon",
+      },
+    ],
+  ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -22,7 +32,12 @@ export default defineConfig({
       },
     ],
 
-    socialLinks: [{ icon: "github", link: "https://github.com/willnguyen1312/headlessplayback" }],
+    socialLinks: [
+      {
+        icon: "github",
+        link: "https://github.com/willnguyen1312/headlessplayback",
+      },
+    ],
 
     sidebar: [
       {
@@ -66,16 +81,8 @@ export default defineConfig({
         text: "Core API",
         link: "/api/",
         items: [
-          { text: "createZoomImageClick", link: "/api/createZoomImageClick" },
-          { text: "createZoomImageHover", link: "/api/createZoomImageHover" },
-          { text: "createZoomImageMove", link: "/api/createZoomImageMove" },
-          { text: "createZoomImageWheel", link: "/api/createZoomImageWheel" },
-          { text: "cropImage", link: "/api/cropImage" },
-          { text: "makeCalculateZoom", link: "/api/makeCalculateZoom" },
-          {
-            text: "makeCalculatePercentage",
-            link: "/api/makeCalculatePercentage",
-          },
+          { text: "createPlayback", link: "/api/createPlayback" },
+          { text: "plugin", link: "/api/plugin" },
         ],
       },
       {
@@ -109,7 +116,7 @@ export default defineConfig({
       options: {
         appId: "FKWOWYBGDZ",
         apiKey: "e8482e2e60315de80cf25a96471b9dfa",
-        indexName: "zoom-image",
+        indexName: "headlessplayback",
       },
     },
   },
