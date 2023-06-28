@@ -6,7 +6,8 @@ import { onMounted, ref, watchEffect } from "vue"
 usePlayback.use(dashPlaybackPlugin)
 
 const source1 = "https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd"
-const source2 = "https://rdmedia.bbc.co.uk/elephants_dream/1/client_manifest-all.mpd"
+const source2 =
+  "https://rdmedia.bbc.co.uk/elephants_dream/1/client_manifest-all.mpd"
 
 const id = "dash"
 const { activate, playbackActions, playbackState } = usePlayback({
@@ -41,10 +42,17 @@ const jumpTo = (time: number) => {
 
   <p>Duration: {{ playbackState.duration }}</p>
 
-  <strong>BitrateInfo: {{ playbackState.bitrateInfo.map((level) => level.height).join(", ") }}</strong>
+  <strong
+    >BitrateInfo:
+    {{
+      playbackState.bitrateInfo.map((level) => level.height).join(", ")
+    }}</strong
+  >
 
   <div class="flex flex-col items-start">
-    <button @click="source = source === source1 ? source2 : source1">Switch stream</button>
+    <button @click="source = source === source1 ? source2 : source1">
+      Switch stream
+    </button>
 
     <button @click="jumpTo(playbackState.currentTime + 5)">Next 5s</button>
     <button @click="jumpTo(playbackState.currentTime - 5)">Prev 5s</button>

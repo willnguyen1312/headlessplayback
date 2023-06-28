@@ -23,17 +23,19 @@ type CustomTextTrackList = {
 }[]
 
 function convertTrackList(tracks: TextTrackList): CustomTextTrackList {
-  return Array.from(tracks).map(({ label, kind, language, mode, inBandMetadataTrackDispatchType }, id) => ({
-    id,
-    label,
-    kind,
-    language,
-    mode,
-    inBandMetadataTrackDispatchType,
-  }))
+  return Array.from(tracks).map(
+    ({ label, kind, language, mode, inBandMetadataTrackDispatchType }, id) => ({
+      id,
+      label,
+      kind,
+      language,
+      mode,
+      inBandMetadataTrackDispatchType,
+    }),
+  )
 }
 
-export interface InternalPlaybackState {
+interface InternalPlaybackState {
   currentTime: number
   duration: number
   seeking: boolean
@@ -51,8 +53,6 @@ export interface InternalPlaybackState {
   isPictureInPictureSupported: boolean
 }
 
-export type CustomPlaybackAction<T> = (arg: T & { id: string }) => void
-
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface CustomPlaybackState {}
 
@@ -67,7 +67,9 @@ export type PlaybackActions = {
   setPaused: (value: boolean) => void
   disableTrack: () => void
   enableTrack: (index: number) => void
-  setPictureInPicture: (value: boolean) => Promise<void | PictureInPictureWindow>
+  setPictureInPicture: (
+    value: boolean,
+  ) => Promise<void | PictureInPictureWindow>
 } & CustomPlaybackActions
 
 export type PlaybackState = InternalPlaybackState & CustomPlaybackState
@@ -76,7 +78,7 @@ export type PlaybackStore = ReturnType<typeof createStore<PlaybackState>>
 
 type CleanupFunc = () => void
 
-type OnCleanupHook = (id: string, cb: CleanupFunc) => void
+export type OnCleanupHook = (id: string, cb: CleanupFunc) => void
 
 export type Plugin<T = unknown> = {
   install: (
@@ -84,7 +86,7 @@ export type Plugin<T = unknown> = {
       store: ReturnType<typeof createStore<PlaybackState>>
       onCleanup: OnCleanupHook
     },
-    options: T,
+    ...options: T[]
   ) => CustomPlaybackActions
 }
 
@@ -111,7 +113,8 @@ const cleanupCallbackMap = new Map<string, Set<CleanupFunc>>()
 const playbackActivatedSet = new WeakSet<HTMLMediaElement>()
 
 export const createPlayback: PlaybackFunc = ({ id }) => {
-  const isPictureInPictureSupported = document && "pictureInPictureEnabled" in document
+  const isPictureInPictureSupported =
+    document && "pictureInPictureEnabled" in document
 
   const store = createStore<PlaybackState>({
     currentTime: 0,
@@ -181,7 +184,11 @@ export const createPlayback: PlaybackFunc = ({ id }) => {
       store.setState({ selectedTrackIndex: index })
     },
     setPictureInPicture: (value: boolean) => {
-      if (!isPictureInPictureSupported || !playbackElement || !(playbackElement instanceof HTMLVideoElement)) {
+      if (
+        !isPictureInPictureSupported ||
+        !playbackElement ||
+        !(playbackElement instanceof HTMLVideoElement)
+      ) {
         return Promise.reject()
       }
 
@@ -200,15 +207,23 @@ export const createPlayback: PlaybackFunc = ({ id }) => {
   }
 
   const addCleanupCallback = (cb: CleanupFunc) => {
-    cleanupCallbackMap.set(id, (cleanupCallbackMap.get(id) || new Set()).add(cb))
+    cleanupCallbackMap.set(
+      id,
+      (cleanupCallbackMap.get(id) || new Set()).add(cb),
+    )
   }
 
   const onCleanup: OnCleanupHook = (id: string, cb) => {
-    cleanupCallbackMap.set(id, (cleanupCallbackMap.get(id) || new Set()).add(cb))
+    cleanupCallbackMap.set(
+      id,
+      (cleanupCallbackMap.get(id) || new Set()).add(cb),
+    )
   }
 
   function activate() {
-    const _playbackElement = document.getElementById(id) as HTMLMediaElement | null
+    const _playbackElement = document.getElementById(
+      id,
+    ) as HTMLMediaElement | null
 
     if (!_playbackElement) {
       throw new Error(`Playback element with id ${id} not found`)
@@ -385,7 +400,9 @@ export const createPlayback: PlaybackFunc = ({ id }) => {
 
     store.setState({
       currentTime: playbackElement?.currentTime,
-      duration: Number.isFinite(playbackElement?.duration) ? playbackElement?.duration : 0,
+      duration: Number.isFinite(playbackElement?.duration)
+        ? playbackElement?.duration
+        : 0,
     })
 
     playbackActivatedSet.add(playbackElement)

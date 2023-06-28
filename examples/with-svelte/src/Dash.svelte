@@ -7,7 +7,8 @@
   usePlayback.use(dashPlaybackPlugin)
 
   const source1 = "https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd"
-  const source2 = "https://rdmedia.bbc.co.uk/elephants_dream/1/client_manifest-all.mpd"
+  const source2 =
+    "https://rdmedia.bbc.co.uk/elephants_dream/1/client_manifest-all.mpd"
 
   const id = "dash"
   const {
@@ -54,7 +55,11 @@
 
 <p>Duration: {playbackState.duration}</p>
 
-<strong>BitrateInfo: {playbackState.bitrateInfo.map((level) => level.height).join(", ")}</strong>
+<strong
+  >BitrateInfo: {playbackState.bitrateInfo
+    .map((level) => level.height)
+    .join(", ")}</strong
+>
 
 <div class="flex flex-col items-start">
   <button
@@ -67,6 +72,8 @@
     }}>Switch stream</button
   >
 
-  <button on:click={() => jumpTo(playbackState.currentTime + 5)}>Next 5s</button>
-  <button on:click={() => jumpTo(playbackState.currentTime - 5)}>Prev 5s</button>
+  <button on:click={() => jumpTo(playbackState.currentTime + 5)}>Next 5s</button
+  >
+  <button on:click={() => jumpTo(playbackState.currentTime - 5)}>Prev 5s</button
+  >
 </div>

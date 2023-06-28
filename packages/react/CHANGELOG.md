@@ -29,8 +29,9 @@
 ### Minor Changes
 
 - [#41](https://github.com/willnguyen1312/headlessplayback/pull/41)
-  [`f7dcc50`](https://github.com/willnguyen1312/headlessplayback/commit/f7dcc5000f4674b861bc1927bb966acbd40bdbef) Thanks
-  [@willnguyen1312](https://github.com/willnguyen1312)! - Fix naming convention 🎢
+  [`f7dcc50`](https://github.com/willnguyen1312/headlessplayback/commit/f7dcc5000f4674b861bc1927bb966acbd40bdbef)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Fix naming
+  convention 🎢
 
 ### Patch Changes
 
@@ -99,8 +100,9 @@
 ### Minor Changes
 
 - [#11](https://github.com/willnguyen1312/headlessplayback/pull/11)
-  [`8efdd87`](https://github.com/willnguyen1312/headlessplayback/commit/8efdd87e9e0485fbad05339f4061fbdee8a409aa) Thanks
-  [@willnguyen1312](https://github.com/willnguyen1312)! - Optimize rendering mechanism on update 💞
+  [`8efdd87`](https://github.com/willnguyen1312/headlessplayback/commit/8efdd87e9e0485fbad05339f4061fbdee8a409aa)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Optimize
+  rendering mechanism on update 💞
 
 ### Patch Changes
 
@@ -113,8 +115,9 @@
 ### Minor Changes
 
 - [#9](https://github.com/willnguyen1312/headlessplayback/pull/9)
-  [`0985288`](https://github.com/willnguyen1312/headlessplayback/commit/0985288422d4500d19680d5c137afb9b5db35612) Thanks
-  [@willnguyen1312](https://github.com/willnguyen1312)! - Enhance react adapter integration with valtio 💞
+  [`0985288`](https://github.com/willnguyen1312/headlessplayback/commit/0985288422d4500d19680d5c137afb9b5db35612)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Enhance react
+  adapter integration with valtio 💞
 
 ### Patch Changes
 
@@ -127,8 +130,9 @@
 ### Minor Changes
 
 - [#6](https://github.com/willnguyen1312/headlessplayback/pull/6)
-  [`ca77f07`](https://github.com/willnguyen1312/headlessplayback/commit/ca77f0788dda5d0106118c77e1010cf60701c8e6) Thanks
-  [@willnguyen1312](https://github.com/willnguyen1312)! - Pump minor version of headlessplayback in React
+  [`ca77f07`](https://github.com/willnguyen1312/headlessplayback/commit/ca77f0788dda5d0106118c77e1010cf60701c8e6)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Pump minor
+  version of headlessplayback in React
 
 ## 0.0.1
 

@@ -2,7 +2,8 @@ import { $, component$, useSignal, useVisibleTask$ } from "@builder.io/qwik"
 import { hlsPlaybackPlugin } from "@headlessplayback/hls-plugin"
 import { usePlayback } from "@headlessplayback/qwik"
 
-const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
+const source1 =
+  "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
 const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
 const id = "hls"
 
@@ -28,7 +29,11 @@ const Resolutions = component$(() => {
   })
 
   // Plugin will inject extra state to playbackState
-  return <strong>Levels: {playbackState.levels?.map((level) => level.height).join(", ")}</strong>
+  return (
+    <strong>
+      Levels: {playbackState.levels?.map((level) => level.height).join(", ")}
+    </strong>
+  )
 })
 
 const Hls = component$(() => {

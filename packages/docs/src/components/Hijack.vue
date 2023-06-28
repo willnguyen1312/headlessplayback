@@ -14,7 +14,10 @@ onMounted(() => {
   // Activate when playback element is accessible from the DOM
   activate()
 
-  playbackActions.hijack({ direction: playbackState.direction, duration: 1000, frequency: 4 })
+  playbackActions.hijack({
+    duration: 1000,
+    frequency: 4,
+  })
 })
 
 function jumpNext5s() {
@@ -48,6 +51,7 @@ function toggleDirection() {
 </script>
 
 <template>
+  <p>You can even hijack media element without source and play backward 🥳</p>
   <video class="display-none" hidden :id="id"></video>
 
   <p>Current time: {{ playbackState.currentTime }}</p>
@@ -56,7 +60,9 @@ function toggleDirection() {
 
   <div className="flex flex-col items-start ">
     <button @click="jumpNext5s">Next 5s</button>
-    <button @click="togglePlay">{{ playbackState.paused ? "Play" : "Pause" }}</button>
+    <button @click="togglePlay">
+      {{ playbackState.paused ? "Play" : "Pause" }}
+    </button>
     <button @click="jumpPrev5s">Prev 5s</button>
     <button @click="toggleDirection">Toggle direction</button>
   </div>

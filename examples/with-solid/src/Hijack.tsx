@@ -13,7 +13,10 @@ const Hijack: Component = () => {
   onMount(() => {
     // Activate when playback element is accessible from the DOM
     activate()
-    playbackActions.hijack({ direction: playbackState.direction, duration: 1000, frequency: 4 })
+    playbackActions.hijack({
+      duration: 1000,
+      frequency: 4,
+    })
   })
 
   function jumpNext5s() {
@@ -51,7 +54,9 @@ const Hijack: Component = () => {
 
       <div class="flex flex-col items-start ">
         <button onClick={jumpNext5s}>Next 5s</button>
-        <button onClick={togglePlay}>{playbackState.paused ? "Play" : "Pause"}</button>
+        <button onClick={togglePlay}>
+          {playbackState.paused ? "Play" : "Pause"}
+        </button>
         <button onClick={jumpPrev5s}>Prev 5s</button>
         <button onClick={toggleDirection}>Toggle direction</button>
       </div>

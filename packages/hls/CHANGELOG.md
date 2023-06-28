@@ -13,9 +13,9 @@
 ### Minor Changes
 
 - [#61](https://github.com/willnguyen1312/headlessplayback/pull/61)
-  [`ab1f9b0`](https://github.com/willnguyen1312/headlessplayback/commit/ab1f9b0919c766b29ba1657ebacfccc08f7b8754) Thanks
-  [@willnguyen1312](https://github.com/willnguyen1312)! - Make hls playback plugin more framework friendly by using
-  serialize values only 💞
+  [`ab1f9b0`](https://github.com/willnguyen1312/headlessplayback/commit/ab1f9b0919c766b29ba1657ebacfccc08f7b8754)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Make hls
+  playback plugin more framework friendly by using serialize values only 💞
 
 ## 0.0.4
 

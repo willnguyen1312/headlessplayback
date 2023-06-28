@@ -2,44 +2,22 @@
 import BundleSize from '../../components/BundleSize.vue'
 </script>
 
-# Zoom Image Preact
+# Headless playback Preact
 
-The @zoom-image/preact adapter is a wrapper around the core zoom image logic.
+The @headlessplayback/preact adapter is a wrapper around the core API.
 
-## `useZoomImageWheel` - <BundleSize func="useZoomImageWheel" pkg="@zoom-image/preact" />
+## `usePlayback` - <BundleSize func="usePlayback" pkg="@headlessplayback/preact" />
 
-```ts
-function useZoomImageWheel(): {
-  createZoomImage
-  zoomImageState
-  setZoomImageState
-}
-```
-
-## `useZoomImageHover` - <BundleSize func="useZoomImageHover" pkg="@zoom-image/preact" />
+### Basic Usage
 
 ```ts
-function useZoomImageHover(): {
-  createZoomImage
-  zoomImageState
-  setZoomImageState
+function usePlayback(arg: { id: string }): {
+  activate
+  playbackActions
+  playbackState
 }
-```
 
-## `useZoomImageMove` - <BundleSize func="useZoomImageMove" pkg="@zoom-image/preact" />
-
-```ts
-function useZoomImageMove(): {
-  createZoomImage
-  zoomImageState
-}
-```
-
-## `useZoomImageClick` - <BundleSize func="useZoomImageClick" pkg="@zoom-image/preact" />
-
-```ts
-function useZoomImageClick(): {
-  createZoomImage
-  zoomImageState
-}
+usePlayback.use(plugin, {
+  /* Your plugin config */
+})
 ```

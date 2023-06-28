@@ -40,7 +40,8 @@ const updateTab = (tabName: string) => {
         class="whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium"
         :class="{
           'border-indigo-500 text-indigo-600': tab.current,
-          'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700': !tab.current,
+          'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700':
+            !tab.current,
         }"
         @click="updateTab(tab.name)"
       >
@@ -49,7 +50,9 @@ const updateTab = (tabName: string) => {
     </nav>
 
     <div class="mt-4">
-      <component :is="components[tabs.find((tab) => tab.current)!.name as PlaybackName]" />
+      <component
+        :is="components[tabs.find((tab) => tab.current)!.name as PlaybackName]"
+      />
     </div>
   </div>
 </template>

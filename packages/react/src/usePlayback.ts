@@ -1,4 +1,9 @@
-import { createPlayback, PlaybackActions, PlaybackState, PluginFunc } from "@headlessplayback/core"
+import {
+  createPlayback,
+  PlaybackActions,
+  PlaybackState,
+  PluginFunc,
+} from "@headlessplayback/core"
 import { useEffect } from "react"
 import { proxy, useSnapshot } from "valtio"
 
@@ -35,7 +40,9 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
   }
 
   const activate = () => {
-    const playbackInstance = playbackInstanceMap.get(arg.id) as ReturnType<CreatePlayback>
+    const playbackInstance = playbackInstanceMap.get(
+      arg.id,
+    ) as ReturnType<CreatePlayback>
     const isActivated = playbackInstance.activate()
     if (isActivated) {
       playbackInstance.onCleanup(() => {
@@ -51,12 +58,16 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
     }
   }, [])
 
-  const playbackState = useSnapshot(playbackStateMaster.get(arg.id) as PlaybackState)
+  const playbackState = useSnapshot(
+    playbackStateMaster.get(arg.id) as PlaybackState,
+  )
 
   return {
     playbackState,
     activate,
-    playbackActions: (playbackInstanceMap.get(arg.id) as ReturnType<CreatePlayback>).playbackActions,
+    playbackActions: (
+      playbackInstanceMap.get(arg.id) as ReturnType<CreatePlayback>
+    ).playbackActions,
   }
 }
 

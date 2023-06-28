@@ -13,8 +13,9 @@
 ### Minor Changes
 
 - [#55](https://github.com/willnguyen1312/headlessplayback/pull/55)
-  [`e94ea84`](https://github.com/willnguyen1312/headlessplayback/commit/e94ea841a7a9d9ea24cc39485676af1198cc9896) Thanks
-  [@willnguyen1312](https://github.com/willnguyen1312)! - Improve hijack playback plugin 💞
+  [`e94ea84`](https://github.com/willnguyen1312/headlessplayback/commit/e94ea841a7a9d9ea24cc39485676af1198cc9896)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Improve hijack
+  playback plugin 💞
 
 ## 0.0.4
 
@@ -61,8 +62,9 @@
 ### Minor Changes
 
 - [#32](https://github.com/willnguyen1312/headlessplayback/pull/32)
-  [`74f1115`](https://github.com/willnguyen1312/headlessplayback/commit/74f1115e50ba80c825e2299f72fb493d45949bb0) Thanks
-  [@willnguyen1312](https://github.com/willnguyen1312)! - Switch to @namnode/store and @namnode@utils 💞
+  [`74f1115`](https://github.com/willnguyen1312/headlessplayback/commit/74f1115e50ba80c825e2299f72fb493d45949bb0)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Switch to
+  @namnode/store and @namnode@utils 💞
 
 ### Patch Changes
 
@@ -75,8 +77,9 @@
 ### Minor Changes
 
 - [#30](https://github.com/willnguyen1312/headlessplayback/pull/30)
-  [`6e58ce1`](https://github.com/willnguyen1312/headlessplayback/commit/6e58ce184c692577b9614e69cf0dd5529c0f7f1b) Thanks
-  [@willnguyen1312](https://github.com/willnguyen1312)! - Improve error handling mechanism 🚀
+  [`6e58ce1`](https://github.com/willnguyen1312/headlessplayback/commit/6e58ce184c692577b9614e69cf0dd5529c0f7f1b)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Improve error
+  handling mechanism 🚀
 
 ## 0.2.1
 
@@ -90,8 +93,9 @@
 
 ### Minor Changes
 
-- [`ec60a74`](https://github.com/willnguyen1312/headlessplayback/commit/ec60a740688c107ee732c72773e7ea2d53cd9003) Thanks
-  [@willnguyen1312](https://github.com/willnguyen1312)! - Let's go plugins 🎢
+- [`ec60a74`](https://github.com/willnguyen1312/headlessplayback/commit/ec60a740688c107ee732c72773e7ea2d53cd9003)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Let's go
+  plugins 🎢
 
 ## 0.1.1
 
@@ -106,8 +110,9 @@
 ### Minor Changes
 
 - [#20](https://github.com/willnguyen1312/headlessplayback/pull/20)
-  [`f8a395a`](https://github.com/willnguyen1312/headlessplayback/commit/f8a395a096ff5866b3033a3d6a597a334fa4b07c) Thanks
-  [@willnguyen1312](https://github.com/willnguyen1312)! - Enhance plugin system 🚀
+  [`f8a395a`](https://github.com/willnguyen1312/headlessplayback/commit/f8a395a096ff5866b3033a3d6a597a334fa4b07c)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Enhance plugin
+  system 🚀
 
 ### Patch Changes
 
