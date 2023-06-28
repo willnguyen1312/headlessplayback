@@ -16,7 +16,9 @@ const componentLookup: Record<PlaybackName, ReturnType<typeof component$>> = {
 }
 
 const App = component$(() => {
-  const tabs = useSignal<{ name: PlaybackName; href: string; current: boolean }[]>([
+  const tabs = useSignal<
+    { name: PlaybackName; href: string; current: boolean }[]
+  >([
     { name: "Hls", href: "#", current: true },
     { name: "Dash", href: "#", current: false },
     { name: "Hijack", href: "#", current: false },

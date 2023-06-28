@@ -1,5 +1,11 @@
 import { $, useStore, useVisibleTask$ } from "@builder.io/qwik"
-import { PlaybackActions, PlaybackState, Plugin, PluginFunc, createPlayback } from "@headlessplayback/core"
+import {
+  PlaybackActions,
+  PlaybackState,
+  Plugin,
+  PluginFunc,
+  createPlayback,
+} from "@headlessplayback/core"
 
 type CreatePlayback = typeof createPlayback
 
@@ -16,10 +22,13 @@ const playbackInstanceMap = new Map<string, ReturnType<CreatePlayback>>()
 
 export const usePlayback: UsePlaybackFunc = (arg) => {
   const playbackState = useStore<PlaybackState>({} as PlaybackState)
-  const playbackActionsRef: { value: PlaybackActions } = { value: {} as PlaybackActions }
+  const playbackActionsRef: { value: PlaybackActions } = {
+    value: {} as PlaybackActions,
+  }
 
   const activate = $(() => {
-    const playbackInstance = playbackInstanceMap.get(arg.id) ?? createPlayback(arg)
+    const playbackInstance =
+      playbackInstanceMap.get(arg.id) ?? createPlayback(arg)
     playbackInstance.activate()
     playbackInstance.onCleanup(() => {
       playbackInstanceMap.delete(arg.id)
@@ -51,7 +60,8 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
   })
 
   const use: PluginFunc = $((plugin: Plugin) => {
-    const playbackInstance = playbackInstanceMap.get(arg.id) ?? createPlayback(arg)
+    const playbackInstance =
+      playbackInstanceMap.get(arg.id) ?? createPlayback(arg)
     const result = playbackInstance.use(plugin)
     Object.assign(playbackActionsRef.value, result)
   })

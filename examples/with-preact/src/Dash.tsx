@@ -4,7 +4,8 @@ import { useEffect, useState } from "preact/hooks"
 usePlayback.use(dashPlaybackPlugin)
 
 const source1 = "https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd"
-const source2 = "https://rdmedia.bbc.co.uk/elephants_dream/1/client_manifest-all.mpd"
+const source2 =
+  "https://rdmedia.bbc.co.uk/elephants_dream/1/client_manifest-all.mpd"
 const id = "dash"
 
 function CurrentTime() {
@@ -29,7 +30,12 @@ const Resolutions = () => {
   })
 
   // Plugin might inject extra state to playbackState
-  return <strong>BitrateInfo: {playbackState.bitrateInfo.map((level) => level.height).join(", ")}</strong>
+  return (
+    <strong>
+      BitrateInfo:{" "}
+      {playbackState.bitrateInfo.map((level) => level.height).join(", ")}
+    </strong>
+  )
 }
 
 function Dash() {

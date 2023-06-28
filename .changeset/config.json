@@ -1,6 +1,9 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.3.0/schema.json",
-  "changelog": ["@changesets/changelog-github", { "repo": "willnguyen1312/headlessplayback" }],
+  "changelog": [
+    "@changesets/changelog-github",
+    { "repo": "willnguyen1312/headlessplayback" }
+  ],
   "commit": false,
   "fixed": [],
   "linked": [],

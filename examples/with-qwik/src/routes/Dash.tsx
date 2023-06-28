@@ -3,7 +3,8 @@ import { dashPlaybackPlugin } from "@headlessplayback/dash-plugin"
 import { usePlayback } from "@headlessplayback/qwik"
 
 const source1 = "https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd"
-const source2 = "https://rdmedia.bbc.co.uk/elephants_dream/1/client_manifest-all.mpd"
+const source2 =
+  "https://rdmedia.bbc.co.uk/elephants_dream/1/client_manifest-all.mpd"
 const id = "dash"
 
 const CurrentTime = component$(() => {
@@ -28,7 +29,12 @@ const Resolutions = component$(() => {
   })
 
   // Plugin might inject extra state to playbackState
-  return <strong>BitrateInfo: {playbackState.bitrateInfo?.map((level) => level.height).join(", ")}</strong>
+  return (
+    <strong>
+      BitrateInfo:{" "}
+      {playbackState.bitrateInfo?.map((level) => level.height).join(", ")}
+    </strong>
+  )
 })
 
 const Dash = component$(() => {

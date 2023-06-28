@@ -31,7 +31,9 @@ const updateTab = (tabName: string) => {
 </script>
 
 <template>
-  <div class="min-h-xl m-x-auto rounded-4 container mt-4 flex h-[700px] flex-col bg-white p-4 font-sans text-black">
+  <div
+    class="min-h-xl m-x-auto rounded-4 container mt-4 flex h-[700px] flex-col bg-white p-4 font-sans text-black"
+  >
     <nav class="-mb-px flex space-x-8 border-gray-200" aria-label="Tabs">
       <a
         v-for="tab in tabs"
@@ -41,7 +43,8 @@ const updateTab = (tabName: string) => {
         class="whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium"
         :class="{
           'border-indigo-500 text-indigo-600': tab.current,
-          'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700': !tab.current,
+          'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700':
+            !tab.current,
         }"
         @click="updateTab(tab.name)"
       >
@@ -50,7 +53,9 @@ const updateTab = (tabName: string) => {
     </nav>
 
     <div class="mt-4">
-      <component :is="components[tabs.find((tab) => tab.current)!.name as PlaybackName]" />
+      <component
+        :is="components[tabs.find((tab) => tab.current)!.name as PlaybackName]"
+      />
     </div>
   </div>
 </template>

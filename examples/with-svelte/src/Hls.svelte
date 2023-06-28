@@ -15,7 +15,8 @@
     id,
   })
 
-  const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
+  const source1 =
+    "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
   const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
 
   let source = source1
@@ -52,7 +53,11 @@
 <p>Current time: {playbackState.currentTime}</p>
 <p>Duration: {playbackState.duration}</p>
 
-<strong>Levels: {playbackState.levels.map((level) => level.height).join(", ")}</strong>
+<strong
+  >Levels: {playbackState.levels
+    .map((level) => level.height)
+    .join(", ")}</strong
+>
 
 <div class="flex flex-col items-start">
   <button

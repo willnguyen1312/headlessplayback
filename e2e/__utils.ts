@@ -27,9 +27,11 @@ export const part = (part: string) => `[data-part=${esc(part)}]`
 
 const esc = (str: string) => str.replace(/[-[\]{}()*+?:.,\\^$|#\s]/g, "\\$&")
 
-export const clickViz = (page: Page) => page.locator("text=Visualizer").first().click()
+export const clickViz = (page: Page) =>
+  page.locator("text=Visualizer").first().click()
 
-export const clickControls = (page: Page) => page.locator("text=Controls").first().click()
+export const clickControls = (page: Page) =>
+  page.locator("text=Controls").first().click()
 
 export const paste = (node: HTMLElement, value: string) => {
   const clipboardData = new DataTransfer()
@@ -42,14 +44,23 @@ export const paste = (node: HTMLElement, value: string) => {
   node.dispatchEvent(event)
 }
 
-export const nativeInput = (node: HTMLInputElement | HTMLTextAreaElement, value: string) => {
+export const nativeInput = (
+  node: HTMLInputElement | HTMLTextAreaElement,
+  value: string,
+) => {
   const event = new InputEvent("input", {
     bubbles: true,
     inputType: "insertFromPaste",
   })
 
-  const __input__setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value")?.set
-  const __textarea__setter = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, "value")?.set
+  const __input__setter = Object.getOwnPropertyDescriptor(
+    HTMLInputElement.prototype,
+    "value",
+  )?.set
+  const __textarea__setter = Object.getOwnPropertyDescriptor(
+    HTMLTextAreaElement.prototype,
+    "value",
+  )?.set
 
   const textValue = `${node.value}${value}`
 
@@ -68,7 +79,11 @@ export const rect = async (el: Locator) => {
     throw new Error("Element not found")
   }
 
-  return { ...bbox, midX: bbox.x + bbox.width / 2, midY: bbox.y + bbox.height / 2 }
+  return {
+    ...bbox,
+    midX: bbox.x + bbox.width / 2,
+    midY: bbox.y + bbox.height / 2,
+  }
 }
 
 export async function isInViewport(viewport: Locator, el: Locator) {

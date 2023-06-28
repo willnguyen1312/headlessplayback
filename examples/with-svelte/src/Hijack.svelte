@@ -23,7 +23,11 @@
 
   onMount(() => {
     activate()
-    playbackActions.hijack({ direction: playbackState.direction, duration: 1000, frequency: 4 })
+    playbackActions.hijack({
+      direction: playbackState.direction,
+      duration: 1000,
+      frequency: 4,
+    })
   })
 
   onDestroy(() => {
@@ -35,23 +39,30 @@
   }
 </script>
 
-<video class="display-none" hidden {id} controls> <track kind="captions" /></video>
+<video class="display-none" hidden {id} controls>
+  <track kind="captions" /></video
+>
 
 <p>Current time: {playbackState.currentTime}</p>
 <p>Duration: {playbackState.duration}</p>
 <p>Direction: {playbackState.direction}</p>
 
 <div class="flex flex-col items-start">
-  <button on:click={() => jumpTo(playbackState.currentTime + 5)}>Next 5s</button>
+  <button on:click={() => jumpTo(playbackState.currentTime + 5)}>Next 5s</button
+  >
   <button
     on:click={() => {
       playbackActions.setPaused(!playbackState.paused)
     }}>{playbackState.paused ? "Play" : "Pause"}</button
   >
-  <button on:click={() => jumpTo(playbackState.currentTime - 5)}>Prev 5s</button>
+  <button on:click={() => jumpTo(playbackState.currentTime - 5)}>Prev 5s</button
+  >
   <button
     on:click={() => {
-      playbackActions.setDirection({ direction: playbackState.direction === "forward" ? "backward" : "forward" })
+      playbackActions.setDirection({
+        direction:
+          playbackState.direction === "forward" ? "backward" : "forward",
+      })
     }}>Toggle direction</button
   >
 </div>

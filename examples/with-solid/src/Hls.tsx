@@ -3,7 +3,8 @@ import { usePlayback } from "@headlessplayback/solid"
 import { createEffect, createSignal, onMount, type Component } from "solid-js"
 usePlayback.use(hlsPlaybackPlugin)
 
-const source1 = "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
+const source1 =
+  "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
 const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
 
 const id = "hls"
@@ -30,7 +31,11 @@ const Resolutions: Component = () => {
   })
 
   // Plugin will inject extra state to playbackState
-  return <strong>Levels: {playbackState.levels.map((level) => level.height).join(", ")}</strong>
+  return (
+    <strong>
+      Levels: {playbackState.levels.map((level) => level.height).join(", ")}
+    </strong>
+  )
 }
 
 const Hls: Component = () => {
