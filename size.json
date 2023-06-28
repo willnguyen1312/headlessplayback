@@ -1,24 +1,30 @@
 {
   "@headlessplayback/core": {
-    "playback": "1.2 KB"
+    "createPlayback": "1.34 KB"
   },
   "@headlessplayback/react": {
-    "usePlayback": "1.38 KB"
+    "usePlayback": "1.52 KB"
   },
   "@headlessplayback/qwik": {
-    "usePlayback": "1.61 KB",
+    "usePlayback": "1.67 KB",
     "_auto_playbackInstanceMap": "77 B"
   },
   "@headlessplayback/solid": {
-    "usePlayback": "2.69 KB"
+    "usePlayback": "2.84 KB"
   },
   "@headlessplayback/svelte": {
-    "usePlayback": "1.58 KB"
+    "usePlayback": "1.72 KB"
   },
   "@headlessplayback/vue": {
-    "usePlayback": "1.36 KB"
+    "usePlayback": "1.5 KB"
   },
-  "@headlessplayback/plugins": {
-    "hlsPlaybackPlugin": "764 B"
+  "@headlessplayback/hls-plugin": {
+    "hlsPlaybackPlugin": "823 B"
+  },
+  "@headlessplayback/dash-plugin": {
+    "dashPlaybackPlugin": "372 B"
+  },
+  "@headlessplayback/hijack-plugin": {
+    "hijackPlaybackPlugin": "619 B"
   }
 }
