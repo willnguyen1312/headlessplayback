@@ -1,4 +1,7 @@
-import type { PlaywrightTestConfig, ReporterDescription } from "@playwright/test"
+import type {
+  PlaywrightTestConfig,
+  ReporterDescription,
+} from "@playwright/test"
 
 export function getWebServer() {
   const framework = process.env.FRAMEWORK || "vanilla"
@@ -58,7 +61,9 @@ const config: PlaywrightTestConfig = {
   forbidOnly: !!process.env.CI,
   workers: process.env.CI ? 1 : undefined,
   reporter: [
-    process.env.CI ? ["github", ["junit", { outputFile: "e2e/junit.xml" }]] : ["list"],
+    process.env.CI
+      ? ["github", ["junit", { outputFile: "e2e/junit.xml" }]]
+      : ["list"],
     ["html", { outputFolder: "e2e/report", open: "never" }],
   ].filter(Boolean) as ReporterDescription[],
   retries: process.env.CI ? 2 : 0,

@@ -1,4 +1,9 @@
-import { createPlayback, PlaybackActions, PlaybackState, PluginFunc } from "@headlessplayback/core"
+import {
+  createPlayback,
+  PlaybackActions,
+  PlaybackState,
+  PluginFunc,
+} from "@headlessplayback/core"
 import { onDestroy } from "svelte"
 import { writable } from "svelte/store"
 
@@ -25,7 +30,9 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
     const playbackInstance = createPlayback(arg)
     playbackInstanceMap.set(arg.id, playbackInstance)
 
-    const { subscribe, set } = writable<PlaybackState>(playbackInstance.getState())
+    const { subscribe, set } = writable<PlaybackState>(
+      playbackInstance.getState(),
+    )
     playbackStateMaster.set(arg.id, subscribe)
 
     playbackInstance.subscribe(({ state }) => {
@@ -38,7 +45,9 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
   })
 
   const activate = () => {
-    const playbackInstance = playbackInstanceMap.get(arg.id) as ReturnType<CreatePlayback>
+    const playbackInstance = playbackInstanceMap.get(
+      arg.id,
+    ) as ReturnType<CreatePlayback>
     const isActivated = playbackInstance.activate()
     if (isActivated) {
       playbackInstance.onCleanup(() => {
@@ -53,7 +62,9 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
       subscribe: playbackStateMaster.get(arg.id) as PlaybackStateSubscriber,
     },
     activate,
-    playbackActions: (playbackInstanceMap.get(arg.id) as ReturnType<CreatePlayback>).playbackActions,
+    playbackActions: (
+      playbackInstanceMap.get(arg.id) as ReturnType<CreatePlayback>
+    ).playbackActions,
   }
 }
 

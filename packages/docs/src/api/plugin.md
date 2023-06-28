@@ -14,7 +14,7 @@ Plugins can be installed by either:
 
 Please feel free to open a pull request to share your plugin 😊
 
-## Template of a headlessplayback plugin
+## Template
 
 ```ts
 declare module "@headlessplayback/core" {
@@ -86,7 +86,7 @@ createPlayback.use(customPlugin, {
   /* Your plugin config */
 })
 
-const { playbackActions, getState } = createPlayback({ id: "media" })
+const { playbackActions, getState } = createPlayback({ id: "playback" })
 // customAction will be available on playbackActions
 playbackActions.customAction({
   message: "Hello from plugin",

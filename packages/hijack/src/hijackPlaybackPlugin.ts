@@ -3,6 +3,11 @@ import { Plugin } from "@headlessplayback/core"
 import { clamp } from "@namnode/utils"
 export type Direction = "forward" | "backward"
 
+type Hijack = (arg: HijackArgs) => void
+type SetDirection = (arg: { direction: Direction }) => void
+type SetDuration = (arg: { duration: number }) => void
+type SetFrequency = (arg: { frequency: number }) => void
+
 interface _CustomPlaybackState {
   direction: Direction
 }
@@ -12,10 +17,10 @@ declare module "@headlessplayback/core" {
   export interface CustomPlaybackState extends _CustomPlaybackState {}
 
   export interface CustomPlaybackActions {
-    hijack: (arg: HijackArgs) => void
-    setDirection: (arg: { direction: Direction }) => void
-    setDuration: (arg: { duration: number }) => void
-    setFrequency: (arg: { frequency: number }) => void
+    hijack: Hijack
+    setDirection: SetDirection
+    setDuration: SetDuration
+    setFrequency: SetFrequency
   }
 }
 
@@ -24,7 +29,7 @@ interface HijackedMediaElement extends HTMLMediaElement {
   duration: number
 }
 
-type HijackArgs = { frequency: number; duration: number; direction: Direction }
+type HijackArgs = { frequency: number; duration: number; direction?: Direction }
 
 const hijackPlaybackElement = (
   mediaElement: HijackedMediaElement,
@@ -35,7 +40,7 @@ const hijackPlaybackElement = (
   setDuration: (newDuration: number) => void
   setFrequency: (newFrequency: number) => void
 } => {
-  let _direction = direction
+  let _direction = direction ?? "forward"
   let _duration = duration
   let _frequency = frequency
 
@@ -153,7 +158,10 @@ const hijackPlaybackElement = (
   }
 }
 
-const activeHijackedMap = new Map<string, ReturnType<typeof hijackPlaybackElement>>()
+const activeHijackedMap = new Map<
+  string,
+  ReturnType<typeof hijackPlaybackElement>
+>()
 
 const createDefaultState = (): _CustomPlaybackState => {
   return {
@@ -167,14 +175,23 @@ export const hijackPlaybackPlugin: Plugin = {
   install: ({ onCleanup, store }) => {
     store.setState(createDefaultState())
 
-    const hijack: any = ({ id, direction, duration, frequency }: { id: string } & HijackArgs) => {
+    const hijack: any = ({
+      id,
+      direction,
+      duration,
+      frequency,
+    }: { id: string } & HijackArgs) => {
       const playbackElement = document.getElementById(id) as HTMLVideoElement
       let hijackedResult = activeHijackedMap.get(id)
 
       if (hijackedResult) {
         return
       } else {
-        hijackedResult = hijackPlaybackElement(playbackElement, { direction, duration, frequency })
+        hijackedResult = hijackPlaybackElement(playbackElement, {
+          direction,
+          duration,
+          frequency,
+        })
         activeHijackedMap.set(id, hijackedResult)
         onCleanup(id, () => {
           hijackedResult?.cleanup()
@@ -183,16 +200,25 @@ export const hijackPlaybackPlugin: Plugin = {
       }
     }
 
-    const setDirection = ({ id, direction }: { id: string } & { direction: Direction }) => {
+    const setDirection = ({
+      id,
+      direction,
+    }: { id: string } & { direction: Direction }) => {
       activeHijackedMap.get(id)?.setDirection(direction)
       store.setState({ direction })
     }
 
-    const setDuration = ({ id, duration }: { id: string } & { duration: number }) => {
+    const setDuration = ({
+      id,
+      duration,
+    }: { id: string } & { duration: number }) => {
       activeHijackedMap.get(id)?.setDuration(duration)
     }
 
-    const setFrequency = ({ id, frequency }: { id: string } & { frequency: number }) => {
+    const setFrequency = ({
+      id,
+      frequency,
+    }: { id: string } & { frequency: number }) => {
       activeHijackedMap.get(id)?.setFrequency(frequency)
     }
 

@@ -86,6 +86,15 @@ export default defineConfig({
         ],
       },
       {
+        text: "Core Plugins",
+        link: "/plugins/",
+        items: [
+          { text: "dash", link: "/plugins/dash" },
+          { text: "hijack", link: "/plugins/hijack" },
+          { text: "hls", link: "/plugins/hls" },
+        ],
+      },
+      {
         text: "Vue Adapter",
         link: "/api/adapters/vue",
       },

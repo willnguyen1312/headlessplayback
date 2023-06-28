@@ -28,7 +28,6 @@ const Hijack = component$(() => {
   useVisibleTask$(async () => {
     await use(hijackPlaybackPlugin)
     playbackActions.hijack({
-      direction: playbackState.direction,
       duration: 1000,
       frequency: 4,
     })

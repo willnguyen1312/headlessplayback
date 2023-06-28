@@ -24,7 +24,7 @@
   onMount(() => {
     activate()
     playbackActions.hijack({
-      direction: playbackState.direction,
+      
       duration: 1000,
       frequency: 4,
     })

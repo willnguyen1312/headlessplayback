@@ -29,8 +29,9 @@
 ### Minor Changes
 
 - [#41](https://github.com/willnguyen1312/headlessplayback/pull/41)
-  [`f7dcc50`](https://github.com/willnguyen1312/headlessplayback/commit/f7dcc5000f4674b861bc1927bb966acbd40bdbef) Thanks
-  [@willnguyen1312](https://github.com/willnguyen1312)! - Fix naming convention 🎢
+  [`f7dcc50`](https://github.com/willnguyen1312/headlessplayback/commit/f7dcc5000f4674b861bc1927bb966acbd40bdbef)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Fix naming
+  convention 🎢
 
 ### Patch Changes
 
@@ -99,5 +100,6 @@
 ### Minor Changes
 
 - [#15](https://github.com/willnguyen1312/headlessplayback/pull/15)
-  [`1dee84d`](https://github.com/willnguyen1312/headlessplayback/commit/1dee84d90e52ad569ffbd44d8f609cdca486ede7) Thanks
-  [@willnguyen1312](https://github.com/willnguyen1312)! - Let's go Solid 🚀
+  [`1dee84d`](https://github.com/willnguyen1312/headlessplayback/commit/1dee84d90e52ad569ffbd44d8f609cdca486ede7)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Let's go Solid
+  🚀

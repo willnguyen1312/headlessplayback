@@ -1,4 +1,9 @@
-import { createPlayback, PlaybackActions, PlaybackState, PluginFunc } from "@headlessplayback/core"
+import {
+  createPlayback,
+  PlaybackActions,
+  PlaybackState,
+  PluginFunc,
+} from "@headlessplayback/core"
 import { onCleanup } from "solid-js"
 import { createStore, produce } from "solid-js/store"
 
@@ -21,7 +26,9 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
     const playbackInstance = createPlayback(arg)
     playbackInstanceMap.set(arg.id, playbackInstance)
 
-    const [playbackState, setPlaybackState] = createStore(playbackInstance.getState())
+    const [playbackState, setPlaybackState] = createStore(
+      playbackInstance.getState(),
+    )
     playbackStateMaster.set(arg.id, playbackState)
 
     playbackInstance.subscribe(({ updatedProperties }) => {
@@ -42,7 +49,9 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
   })
 
   const activate = () => {
-    const playbackInstance = playbackInstanceMap.get(arg.id) as ReturnType<CreatePlayback>
+    const playbackInstance = playbackInstanceMap.get(
+      arg.id,
+    ) as ReturnType<CreatePlayback>
     const isActivated = playbackInstance.activate()
     if (isActivated) {
       playbackInstance.onCleanup(() => {
@@ -55,7 +64,9 @@ export const usePlayback: UsePlaybackFunc = (arg) => {
   return {
     playbackState: playbackStateMaster.get(arg.id) as PlaybackState,
     activate,
-    playbackActions: (playbackInstanceMap.get(arg.id) as ReturnType<CreatePlayback>).playbackActions,
+    playbackActions: (
+      playbackInstanceMap.get(arg.id) as ReturnType<CreatePlayback>
+    ).playbackActions,
   }
 }
 

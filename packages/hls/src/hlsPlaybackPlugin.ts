@@ -115,7 +115,13 @@ export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
   install({ store, onCleanup }, config) {
     store.setState(createDefaultState())
 
-    const loadHlsSource: any = async ({ id, source }: { id: string; source: string }) => {
+    const loadHlsSource: any = async ({
+      id,
+      source,
+    }: {
+      id: string
+      source: string
+    }) => {
       await flushPromises()
 
       if (activeIdSourceMap.get(id) === source) {
@@ -230,7 +236,8 @@ export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
                 switch (data.details) {
                   case Hls.ErrorDetails.FRAG_LOAD_ERROR:
                     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                    hls.currentLevel = data.frag!.start + data.frag!.duration + 0.1
+                    hls.currentLevel =
+                      data.frag!.start + data.frag!.duration + 0.1
                     break
 
                   case Hls.ErrorDetails.MANIFEST_LOAD_ERROR:
@@ -275,21 +282,39 @@ export const hlsPlaybackPlugin: Plugin<Partial<HlsConfig>> = {
       activeIdSourceMap.set(id, source)
     }
 
-    const setCurrentLevel: any = ({ id, level }: { id: string; level: number }) => {
+    const setCurrentLevel: any = ({
+      id,
+      level,
+    }: {
+      id: string
+      level: number
+    }) => {
       const hls = activeHlsMap.get(id)
       if (hls && hls.currentLevel !== level) {
         hls.currentLevel = level
       }
     }
 
-    const setSubtitleTrack: any = ({ id, track }: { id: string; track: number }) => {
+    const setSubtitleTrack: any = ({
+      id,
+      track,
+    }: {
+      id: string
+      track: number
+    }) => {
       const hls = activeHlsMap.get(id)
       if (hls && hls.subtitleTrack !== track) {
         hls.subtitleTrack = track
       }
     }
 
-    const setAudioTrack: any = ({ id, track }: { id: string; track: number }) => {
+    const setAudioTrack: any = ({
+      id,
+      track,
+    }: {
+      id: string
+      track: number
+    }) => {
       const hls = activeHlsMap.get(id)
       if (hls && hls.audioTrack !== track) {
         hls.audioTrack = track

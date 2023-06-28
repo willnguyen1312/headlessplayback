@@ -16,7 +16,7 @@ const {
   subscribe,
   use,
 } = createPlayback({
-  id: "media-player",
+  id: "playback",
 })
 
 // activate playback when your element is available in the DOM

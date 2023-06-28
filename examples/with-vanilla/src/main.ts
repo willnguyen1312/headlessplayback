@@ -150,7 +150,6 @@ const makeHijackPlayback = () => {
 
   result.activate()
   result.playbackActions.hijack({
-    direction: result.getState().direction,
     duration: 1000,
     frequency: 4,
   })

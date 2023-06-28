@@ -1,7 +1,8 @@
 # Get Started
 
-Headlessplayback is a little yet powerful and extensive library for powering playback experience on the web. It is
-written in pure TypeScript and has no dependencies. The library is built with framework agnostic in mind, so it can be
+Headlessplayback is a little yet powerful and extensive library for powering
+playback experience on the web. It is written in pure TypeScript and has no
+dependencies. The library is built with framework agnostic in mind, so it can be
 used with any framework adapters or even without
 
 ## Installation
@@ -36,11 +37,13 @@ Simply importing the utilities you need from `@headlessplayback/core`
 ```ts
 import { createPlayback } from "@headlessplayback/core"
 
-const currentTime = document.getElementById("currentTime") as HTMLParagraphElement
+const currentTime = document.getElementById(
+  "currentTime",
+) as HTMLParagraphElement
 const duration = document.getElementById("duration") as HTMLParagraphElement
 
 const result = createPlayback({
-  id: "video",
+  id: "playback",
 })
 
 result.subscribe(({ state }) => {

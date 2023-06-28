@@ -14,7 +14,6 @@ const Hijack: Component = () => {
     // Activate when playback element is accessible from the DOM
     activate()
     playbackActions.hijack({
-      direction: playbackState.direction,
       duration: 1000,
       frequency: 4,
     })
