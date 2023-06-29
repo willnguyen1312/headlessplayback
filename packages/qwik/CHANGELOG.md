@@ -1,5 +1,13 @@
 # @headlessplayback/qwik
 
+## 0.5.4
+
+### Patch Changes
+
+- Updated dependencies
+  [[`00f2f18`](https://github.com/willnguyen1312/headlessplayback/commit/00f2f188b6d4b2fadebd954357011f3e14599386)]:
+  - @headlessplayback/core@0.12.0
+
 ## 0.5.3
 
 ### Patch Changes
