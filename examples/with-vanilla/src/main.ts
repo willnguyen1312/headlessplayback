@@ -19,6 +19,8 @@ function makeHlsPlayback() {
   const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
   let currentSource = source1
 
+  const next5sBtn = document.getElementById("next5s") as HTMLButtonElement
+  const prev5sBtn = document.getElementById("prev5s") as HTMLButtonElement
   const currentTime = document.getElementById(
     "currentTime",
   ) as HTMLParagraphElement
@@ -30,6 +32,14 @@ function makeHlsPlayback() {
 
   const result = createPlayback({
     id: "hls",
+  })
+
+  next5sBtn.addEventListener("click", () => {
+    result.playbackActions.setCurrentTime(result.getState().currentTime + 5)
+  })
+
+  prev5sBtn.addEventListener("click", () => {
+    result.playbackActions.setCurrentTime(result.getState().currentTime - 5)
   })
 
   switchBtn.addEventListener("click", () => {
@@ -61,6 +71,8 @@ function makeDashPlayback() {
     "https://rdmedia.bbc.co.uk/elephants_dream/1/client_manifest-all.mpd"
   let currentSource = source1
 
+  const next5sBtn = document.getElementById("next5s") as HTMLButtonElement
+  const prev5sBtn = document.getElementById("prev5s") as HTMLButtonElement
   const currentTime = document.getElementById(
     "currentTime",
   ) as HTMLParagraphElement
@@ -72,6 +84,14 @@ function makeDashPlayback() {
 
   const result = createPlayback({
     id: "dash",
+  })
+
+  next5sBtn.addEventListener("click", () => {
+    result.playbackActions.setCurrentTime(result.getState().currentTime + 5)
+  })
+
+  prev5sBtn.addEventListener("click", () => {
+    result.playbackActions.setCurrentTime(result.getState().currentTime - 5)
   })
 
   switchBtn.addEventListener("click", () => {
