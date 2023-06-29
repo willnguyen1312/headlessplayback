@@ -32,7 +32,7 @@ const updateTab = (tabName: string) => {
 
 <template>
   <div
-    class="min-h-xl m-x-auto rounded-4 container mt-4 flex h-[700px] flex-col bg-white p-4 font-sans text-black"
+    class="min-h-xl m-x-auto rounded-4 xs-hidden sm-block container mt-4 flex h-[700px] flex-col bg-white p-4 font-sans text-black"
   >
     <nav class="-mb-px flex space-x-8 border-gray-200" aria-label="Tabs">
       <a
