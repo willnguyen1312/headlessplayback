@@ -111,6 +111,6 @@ function createPlayback(id: string): {
       updatedProperties: Partial<PlaybackState>
     }) => void,
   ) => () => void
-  use: <T>(plugin: Plugin<T>, options: T) => PlaybackActions
+  use: <T>(plugin: Plugin<T>, ...options: T[]) => PlaybackActions
 }
 ```
