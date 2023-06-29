@@ -1,5 +1,14 @@
 # @headlessplayback/core
 
+## 0.12.0
+
+### Minor Changes
+
+- [#69](https://github.com/willnguyen1312/headlessplayback/pull/69)
+  [`00f2f18`](https://github.com/willnguyen1312/headlessplayback/commit/00f2f188b6d4b2fadebd954357011f3e14599386)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Improve core
+  API plugin usage 💞
+
 ## 0.11.0
 
 ### Minor Changes
