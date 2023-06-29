@@ -452,13 +452,13 @@ export const createPlayback: PlaybackFunc = ({ id }) => {
     subscribe: store.subscribe,
     getState: store.getState,
     playbackActions,
-    use: <T>(plugin: Plugin<T>, options: T) => {
+    use: <T>(plugin: Plugin<T>, ...options: T[]) => {
       const actions = plugin.install(
         {
           store,
           onCleanup,
         },
-        options,
+        ...options,
       )
       processActions(actions)
       Object.assign(result.playbackActions, actions)
@@ -476,8 +476,8 @@ export const createPlayback: PlaybackFunc = ({ id }) => {
 }
 
 createPlayback.$pluginsQueue = []
-createPlayback.use = <T>(plugin: Plugin<T>, options: T) => {
+createPlayback.use = <T>(plugin: Plugin<T>, ...options: T[]) => {
   createPlayback.$pluginsQueue.push(({ store, onCleanup }) => {
-    return plugin.install({ store, onCleanup }, options)
+    return plugin.install({ store, onCleanup }, ...options)
   })
 }
