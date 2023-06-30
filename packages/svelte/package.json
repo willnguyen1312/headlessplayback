@@ -1,6 +1,6 @@
 {
   "name": "@headlessplayback/svelte",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "description": "Adapter of headlessplayback core for Svelte",
   "repository": "willnguyen1312/headlessplayback",

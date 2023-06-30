@@ -1,5 +1,13 @@
 # @headlessplayback/solid
 
+## 0.2.5
+
+### Patch Changes
+
+- Updated dependencies
+  [[`d2d842a`](https://github.com/willnguyen1312/headlessplayback/commit/d2d842a5d45f3e7fff8eb0c0a8159b782821f628)]:
+  - @headlessplayback/core@0.13.0
+
 ## 0.2.4
 
 ### Patch Changes
