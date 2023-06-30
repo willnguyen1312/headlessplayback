@@ -20,7 +20,7 @@ features:
   - title: Plugins ⚙︎
     details: The core library is extensible with plugins
   - title: Performance 🚀
-    details: Optimized for speed at scale
+    details: Optimized for speed at scale with < 3KB
 ---
 
 <script setup>
