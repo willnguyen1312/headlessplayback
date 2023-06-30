@@ -4,7 +4,8 @@ layout: home
 
 hero:
   name: "Headless Playback"
-  tagline: "A simple yet complete playback library"
+  tagline:
+    "A little yet powerful framework agnostic library for playback experience"
   actions:
     - theme: brand
       text: Get Started
