@@ -32,8 +32,8 @@ without
 - ✅ Add examples
 - ✅ Implement core logic
 - ✅ Implement framework adapters
-- ✅ Implement some common use plugins such as data streaming
-- [] Write documentation
+- ✅ Implement some common-use plugins such as data streaming
+- ✅ Write documentation
 
 ## Supported framework adapters
 
