@@ -229,7 +229,7 @@ onMounted(() => {
 </template>
 ```
 
-Refer to [Svelte Adapter section](/api/adapters/vue) for more details
+Refer to [Vue Adapter section](/api/adapters/vue) for more details
 
 ## Demos
 
