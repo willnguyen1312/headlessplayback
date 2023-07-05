@@ -27,6 +27,64 @@ without
 - [Vitepress](https://vitepress.dev/) - for documentation
 - [Vitest](https://vitest.dev/) - for unit and integration testing
 
+## Development
+
+```bash
+git clone https://github.com/willnguyen1312/headlessplayback
+cd headlessplayback
+pnpm install
+```
+
+## Commands
+
+### With Docs
+
+```bash
+pnpm start-docs
+```
+
+### With Preact
+
+```bash
+pnpm start-preact
+```
+
+### With React
+
+```bash
+pnpm start-react
+```
+
+### With Svelte
+
+```bash
+pnpm start-svelte
+```
+
+### With Vanilla JS
+
+```bash
+pnpm start-vanilla
+```
+
+### With Vue
+
+```bash
+pnpm start-vue
+```
+
+### With Solid
+
+```bash
+pnpm start-solid
+```
+
+### With Qwik
+
+```bash
+pnpm start-qwik
+```
+
 ## Roadmap
 
 - ✅ Add examples
