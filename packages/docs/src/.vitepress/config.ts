@@ -123,9 +123,9 @@ export default defineConfig({
     search: {
       provider: "algolia",
       options: {
-        appId: "FKWOWYBGDZ",
-        apiKey: "e8482e2e60315de80cf25a96471b9dfa",
-        indexName: "headlessplayback",
+        appId: "XZT4OBOFTH",
+        apiKey: "44b3b3fdd7e19eb79d39ccbd2cd0808e",
+        indexName: "headlessplayback1",
       },
     },
   },
