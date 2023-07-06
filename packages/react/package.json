@@ -36,9 +36,9 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@types/node": "^20.3.2",
+    "@types/node": "^20.4.0",
     "@types/react": "^18.2.14",
-    "eslint": "^8.43.0",
+    "eslint": "^8.44.0",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
     "tsup": "^7.1.0",
