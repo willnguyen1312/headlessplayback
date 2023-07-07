@@ -30,7 +30,7 @@ importers:
         version: 2.8.8
       prettier-plugin-svelte:
         specifier: ^2.10.1
-        version: 2.10.1(prettier@2.8.8)(svelte@4.0.4)
+        version: 2.10.1(prettier@2.8.8)(svelte@4.0.5)
       prettier-plugin-tailwindcss:
         specifier: ^0.3.0
         version: 0.3.0(prettier-plugin-svelte@2.10.1)(prettier@2.8.8)
@@ -39,7 +39,7 @@ importers:
         version: 1.10.7
       unocss:
         specifier: ^0.53.4
-        version: 0.53.4(postcss@8.4.24)(rollup@2.79.1)(vite@4.4.0)
+        version: 0.53.4(postcss@8.4.24)(rollup@2.79.1)(vite@4.4.2)
     devDependencies:
       "@playwright/test":
         specifier: ^1.35.1
@@ -65,7 +65,7 @@ importers:
     devDependencies:
       "@preact/preset-vite":
         specifier: ^2.5.0
-        version: 2.5.0(@babel/core@7.22.5)(preact@10.15.1)(vite@4.4.0)
+        version: 2.5.0(@babel/core@7.22.5)(preact@10.15.1)(vite@4.4.2)
       "@unocss/reset":
         specifier: ^0.53.4
         version: 0.53.4
@@ -74,10 +74,10 @@ importers:
         version: 5.1.6
       unocss:
         specifier: ^0.53.4
-        version: 0.53.4(postcss@8.4.24)(rollup@2.79.1)(vite@4.4.0)
+        version: 0.53.4(postcss@8.4.24)(rollup@2.79.1)(vite@4.4.2)
       vite:
-        specifier: ^4.4.0
-        version: 4.4.0(@types/node@20.4.0)
+        specifier: ^4.4.2
+        version: 4.4.2(@types/node@20.4.0)
 
   examples/with-qwik:
     dependencies:
@@ -98,8 +98,8 @@ importers:
         specifier: 1.1.5
         version: 1.1.5(undici@5.22.1)
       "@builder.io/qwik-city":
-        specifier: ^1.2.5
-        version: 1.2.5(rollup@2.79.1)
+        specifier: ^1.2.6
+        version: 1.2.6(rollup@2.79.1)
       "@types/node":
         specifier: ^20.4.0
         version: 20.4.0
@@ -157,16 +157,16 @@ importers:
         version: 0.53.4
       "@vitejs/plugin-react":
         specifier: ^4.0.2
-        version: 4.0.2(vite@4.4.0)
+        version: 4.0.2(vite@4.4.2)
       typescript:
         specifier: ^5.1.6
         version: 5.1.6
       unocss:
         specifier: ^0.53.4
-        version: 0.53.4(postcss@8.4.24)(rollup@2.79.1)(vite@4.4.0)
+        version: 0.53.4(postcss@8.4.24)(rollup@2.79.1)(vite@4.4.2)
       vite:
-        specifier: ^4.4.0
-        version: 4.4.0(@types/node@20.4.0)
+        specifier: ^4.4.2
+        version: 4.4.2(@types/node@20.4.0)
 
   examples/with-solid:
     dependencies:
@@ -197,13 +197,13 @@ importers:
         version: 5.1.6
       unocss:
         specifier: ^0.53.4
-        version: 0.53.4(postcss@8.4.24)(rollup@2.79.1)(vite@4.4.0)
+        version: 0.53.4(postcss@8.4.24)(rollup@2.79.1)(vite@4.4.2)
       vite:
-        specifier: ^4.4.0
-        version: 4.4.0(@types/node@20.4.0)
+        specifier: ^4.4.2
+        version: 4.4.2(@types/node@20.4.0)
       vite-plugin-solid:
         specifier: ^2.7.0
-        version: 2.7.0(solid-js@1.7.7)(vite@4.4.0)
+        version: 2.7.0(solid-js@1.7.7)(vite@4.4.2)
 
   examples/with-svelte:
     dependencies:
@@ -225,7 +225,7 @@ importers:
     devDependencies:
       "@sveltejs/vite-plugin-svelte":
         specifier: ^2.4.2
-        version: 2.4.2(svelte@4.0.4)(vite@4.4.0)
+        version: 2.4.2(svelte@4.0.5)(vite@4.4.2)
       "@tsconfig/svelte":
         specifier: ^4.0.1
         version: 4.0.1
@@ -233,11 +233,11 @@ importers:
         specifier: ^0.53.4
         version: 0.53.4
       svelte:
-        specifier: ^4.0.4
-        version: 4.0.4
+        specifier: ^4.0.5
+        version: 4.0.5
       svelte-check:
-        specifier: ^3.4.4
-        version: 3.4.4(postcss@8.4.24)(svelte@4.0.4)
+        specifier: ^3.4.5
+        version: 3.4.5(postcss@8.4.24)(svelte@4.0.5)
       tslib:
         specifier: ^2.6.0
         version: 2.6.0
@@ -246,10 +246,10 @@ importers:
         version: 5.1.6
       unocss:
         specifier: ^0.53.4
-        version: 0.53.4(postcss@8.4.24)(rollup@2.79.1)(vite@4.4.0)
+        version: 0.53.4(postcss@8.4.24)(rollup@2.79.1)(vite@4.4.2)
       vite:
-        specifier: ^4.4.0
-        version: 4.4.0(@types/node@20.4.0)
+        specifier: ^4.4.2
+        version: 4.4.2(@types/node@20.4.0)
 
   examples/with-vanilla:
     dependencies:
@@ -274,10 +274,10 @@ importers:
         version: 5.1.6
       unocss:
         specifier: ^0.53.4
-        version: 0.53.4(postcss@8.4.24)(rollup@2.79.1)(vite@4.4.0)
+        version: 0.53.4(postcss@8.4.24)(rollup@2.79.1)(vite@4.4.2)
       vite:
-        specifier: ^4.4.0
-        version: 4.4.0(@types/node@20.4.0)
+        specifier: ^4.4.2
+        version: 4.4.2(@types/node@20.4.0)
 
   examples/with-vue:
     dependencies:
@@ -302,16 +302,16 @@ importers:
         version: 0.53.4
       "@vitejs/plugin-vue":
         specifier: ^4.2.3
-        version: 4.2.3(vite@4.4.0)(vue@3.3.4)
+        version: 4.2.3(vite@4.4.2)(vue@3.3.4)
       typescript:
         specifier: ^5.1.6
         version: 5.1.6
       unocss:
         specifier: ^0.53.4
-        version: 0.53.4(postcss@8.4.24)(rollup@2.79.1)(vite@4.4.0)
+        version: 0.53.4(postcss@8.4.24)(rollup@2.79.1)(vite@4.4.2)
       vite:
-        specifier: ^4.4.0
-        version: 4.4.0(@types/node@20.4.0)
+        specifier: ^4.4.2
+        version: 4.4.2(@types/node@20.4.0)
       vue-tsc:
         specifier: ^1.8.4
         version: 1.8.4(typescript@5.1.6)
@@ -1359,10 +1359,10 @@ packages:
       "@babel/helper-validator-identifier": 7.22.5
       to-fast-properties: 2.0.0
 
-  /@builder.io/qwik-city@1.2.5(rollup@2.79.1):
+  /@builder.io/qwik-city@1.2.6(rollup@2.79.1):
     resolution:
       {
-        integrity: sha512-kmxh5KQ+amsPla4l51myX2d7QRsQRQtSZolQJEkrNNyH5onBTLlkDKl35KVJLLv/4S57MaEb3AcruKPiiLvWBw==,
+        integrity: sha512-/uo58NysxpdsiEwuuKo8HDM9UYYAofrniupor2v5vci3Dr6PTXcvKAFJ1Z+SdJGv2uxr5hvKsbVohnVYa9jxYg==,
       }
     engines: { node: ">=16.8.0 <18.0.0 || >=18.11" }
     dependencies:
@@ -2791,7 +2791,7 @@ packages:
         integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==,
       }
 
-  /@preact/preset-vite@2.5.0(@babel/core@7.22.5)(preact@10.15.1)(vite@4.4.0):
+  /@preact/preset-vite@2.5.0(@babel/core@7.22.5)(preact@10.15.1)(vite@4.4.2):
     resolution:
       {
         integrity: sha512-BUhfB2xQ6ex0yPkrT1Z3LbfPzjpJecOZwQ/xJrXGFSZD84+ObyS//41RdEoQCMWsM0t7UHGaujUxUBub7WM1Jw==,
@@ -2803,13 +2803,13 @@ packages:
       "@babel/core": 7.22.5
       "@babel/plugin-transform-react-jsx": 7.22.5(@babel/core@7.22.5)
       "@babel/plugin-transform-react-jsx-development": 7.22.5(@babel/core@7.22.5)
-      "@prefresh/vite": 2.4.0(preact@10.15.1)(vite@4.4.0)
+      "@prefresh/vite": 2.4.0(preact@10.15.1)(vite@4.4.2)
       "@rollup/pluginutils": 4.2.1
       babel-plugin-transform-hook-names: 1.0.2(@babel/core@7.22.5)
       debug: 4.3.4
       kolorist: 1.8.0
       resolve: 1.22.2
-      vite: 4.4.0(@types/node@20.4.0)
+      vite: 4.4.2(@types/node@20.4.0)
     transitivePeerDependencies:
       - preact
       - supports-color
@@ -2840,7 +2840,7 @@ packages:
       }
     dev: true
 
-  /@prefresh/vite@2.4.0(preact@10.15.1)(vite@4.4.0):
+  /@prefresh/vite@2.4.0(preact@10.15.1)(vite@4.4.2):
     resolution:
       {
         integrity: sha512-makifAztmlWCMx79E8tl/gMKPKe3WartplGk+GTqtXSZ/JqoTiN4nkF9GqlhATqGEvsdtRnlDGKQ09s7fneJ/Q==,
@@ -2855,7 +2855,7 @@ packages:
       "@prefresh/utils": 1.2.0
       "@rollup/pluginutils": 4.2.1
       preact: 10.15.1
-      vite: 4.4.0(@types/node@20.4.0)
+      vite: 4.4.2(@types/node@20.4.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2921,7 +2921,7 @@ packages:
       picomatch: 2.3.1
       rollup: 2.79.1
 
-  /@sveltejs/vite-plugin-svelte-inspector@1.0.3(@sveltejs/vite-plugin-svelte@2.4.2)(svelte@4.0.4)(vite@4.4.0):
+  /@sveltejs/vite-plugin-svelte-inspector@1.0.3(@sveltejs/vite-plugin-svelte@2.4.2)(svelte@4.0.5)(vite@4.4.2):
     resolution:
       {
         integrity: sha512-Khdl5jmmPN6SUsVuqSXatKpQTMIifoQPDanaxC84m9JxIibWvSABJyHpyys0Z+1yYrxY5TTEQm+6elh0XCMaOA==,
@@ -2932,15 +2932,15 @@ packages:
       svelte: ^3.54.0 || ^4.0.0
       vite: ^4.0.0
     dependencies:
-      "@sveltejs/vite-plugin-svelte": 2.4.2(svelte@4.0.4)(vite@4.4.0)
+      "@sveltejs/vite-plugin-svelte": 2.4.2(svelte@4.0.5)(vite@4.4.2)
       debug: 4.3.4
-      svelte: 4.0.4
-      vite: 4.4.0(@types/node@20.4.0)
+      svelte: 4.0.5
+      vite: 4.4.2(@types/node@20.4.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /@sveltejs/vite-plugin-svelte@2.4.2(svelte@4.0.4)(vite@4.4.0):
+  /@sveltejs/vite-plugin-svelte@2.4.2(svelte@4.0.5)(vite@4.4.2):
     resolution:
       {
         integrity: sha512-ePfcC48ftMKhkT0OFGdOyycYKnnkT6i/buzey+vHRTR/JpQvuPzzhf1PtKqCDQfJRgoPSN2vscXs6gLigx/zGw==,
@@ -2950,15 +2950,15 @@ packages:
       svelte: ^3.54.0 || ^4.0.0
       vite: ^4.0.0
     dependencies:
-      "@sveltejs/vite-plugin-svelte-inspector": 1.0.3(@sveltejs/vite-plugin-svelte@2.4.2)(svelte@4.0.4)(vite@4.4.0)
+      "@sveltejs/vite-plugin-svelte-inspector": 1.0.3(@sveltejs/vite-plugin-svelte@2.4.2)(svelte@4.0.5)(vite@4.4.2)
       debug: 4.3.4
       deepmerge: 4.3.1
       kleur: 4.1.5
       magic-string: 0.30.0
-      svelte: 4.0.4
-      svelte-hmr: 0.15.2(svelte@4.0.4)
-      vite: 4.4.0(@types/node@20.4.0)
-      vitefu: 0.2.4(vite@4.4.0)
+      svelte: 4.0.5
+      svelte-hmr: 0.15.2(svelte@4.0.5)
+      vite: 4.4.2(@types/node@20.4.0)
+      vitefu: 0.2.4(vite@4.4.2)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3373,7 +3373,7 @@ packages:
       - vite
     dev: true
 
-  /@unocss/astro@0.53.4(rollup@2.79.1)(vite@4.4.0):
+  /@unocss/astro@0.53.4(rollup@2.79.1)(vite@4.4.2):
     resolution:
       {
         integrity: sha512-fR1F0mNktoN79R+t4GD4y3cvfHUVxtV0+9/6vraZTw3SOXTOMdHeisdxDLjJb3N1yer7XoKX+2GHrKCt873IUA==,
@@ -3381,7 +3381,7 @@ packages:
     dependencies:
       "@unocss/core": 0.53.4
       "@unocss/reset": 0.53.4
-      "@unocss/vite": 0.53.4(rollup@2.79.1)(vite@4.4.0)
+      "@unocss/vite": 0.53.4(rollup@2.79.1)(vite@4.4.2)
     transitivePeerDependencies:
       - rollup
       - vite
@@ -3609,7 +3609,7 @@ packages:
       - rollup
     dev: true
 
-  /@unocss/vite@0.53.4(rollup@2.79.1)(vite@4.4.0):
+  /@unocss/vite@0.53.4(rollup@2.79.1)(vite@4.4.2):
     resolution:
       {
         integrity: sha512-s2t7Es2L788MSyPAJUksUaiTLBGyISiyESelyGxBwDpAR6ddHiKB9LU2MVLTU289rmnhebWHFvw7lbE+Trs/Dw==,
@@ -3627,11 +3627,11 @@ packages:
       chokidar: 3.5.3
       fast-glob: 3.2.12
       magic-string: 0.30.0
-      vite: 4.4.0(@types/node@20.4.0)
+      vite: 4.4.2(@types/node@20.4.0)
     transitivePeerDependencies:
       - rollup
 
-  /@vitejs/plugin-react@4.0.2(vite@4.4.0):
+  /@vitejs/plugin-react@4.0.2(vite@4.4.2):
     resolution:
       {
         integrity: sha512-zbnVp3Esfg33zDaoLrjxG+p/dPiOtpvJA+1oOEQwSxMMTRL9zi1eghIcd2WtLjkcKnPsa3S15LzS/OzDn2BOCA==,
@@ -3644,12 +3644,12 @@ packages:
       "@babel/plugin-transform-react-jsx-self": 7.22.5(@babel/core@7.22.5)
       "@babel/plugin-transform-react-jsx-source": 7.22.5(@babel/core@7.22.5)
       react-refresh: 0.14.0
-      vite: 4.4.0(@types/node@20.4.0)
+      vite: 4.4.2(@types/node@20.4.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /@vitejs/plugin-vue@4.2.3(vite@4.4.0)(vue@3.3.4):
+  /@vitejs/plugin-vue@4.2.3(vite@4.4.2)(vue@3.3.4):
     resolution:
       {
         integrity: sha512-R6JDUfiZbJA9cMiguQ7jxALsgiprjBeHL5ikpXfJCH62pPHtI+JdJ5xWj6Ev73yXSlYl86+blXn1kZHQ7uElxw==,
@@ -3659,7 +3659,7 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.4.0(@types/node@20.4.0)
+      vite: 4.4.2(@types/node@20.4.0)
       vue: 3.3.4
 
   /@volar/language-core@1.8.0:
@@ -8577,7 +8577,7 @@ packages:
       }
     engines: { node: ">= 0.8.0" }
 
-  /prettier-plugin-svelte@2.10.1(prettier@2.8.8)(svelte@4.0.4):
+  /prettier-plugin-svelte@2.10.1(prettier@2.8.8)(svelte@4.0.5):
     resolution:
       {
         integrity: sha512-Wlq7Z5v2ueCubWo0TZzKc9XHcm7TDxqcuzRuGd0gcENfzfT4JZ9yDlCbEgxWgiPmLHkBjfOtpAWkcT28MCDpUQ==,
@@ -8587,7 +8587,7 @@ packages:
       svelte: ^3.2.0 || ^4.0.0-next.0
     dependencies:
       prettier: 2.8.8
-      svelte: 4.0.4
+      svelte: 4.0.5
     dev: false
 
   /prettier-plugin-tailwindcss@0.3.0(prettier-plugin-svelte@2.10.1)(prettier@2.8.8):
@@ -8646,7 +8646,7 @@ packages:
         optional: true
     dependencies:
       prettier: 2.8.8
-      prettier-plugin-svelte: 2.10.1(prettier@2.8.8)(svelte@4.0.4)
+      prettier-plugin-svelte: 2.10.1(prettier@2.8.8)(svelte@4.0.5)
     dev: false
 
   /prettier@2.8.8:
@@ -9589,10 +9589,10 @@ packages:
       }
     engines: { node: ">= 0.4" }
 
-  /svelte-check@3.4.4(postcss@8.4.24)(svelte@4.0.4):
+  /svelte-check@3.4.5(postcss@8.4.24)(svelte@4.0.5):
     resolution:
       {
-        integrity: sha512-Uys9+R65cj8TmP8f5UpS7B2xKpNLYNxEWJsA5ZoKcWq/uwvABFF7xS6iPQGLoa7hxz0DS6xU60YFpmq06E4JxA==,
+        integrity: sha512-FsD/CUVdEI0F9sfylh1Fe15kDjvvbyBxzDpACPsdq0EASgaZukBXaMXofpxlgmWsgVET3OynMQlbtUQoWCz9Rw==,
       }
     hasBin: true
     peerDependencies:
@@ -9604,8 +9604,8 @@ packages:
       import-fresh: 3.3.0
       picocolors: 1.0.0
       sade: 1.8.1
-      svelte: 4.0.4
-      svelte-preprocess: 5.0.4(postcss@8.4.24)(svelte@4.0.4)(typescript@5.1.6)
+      svelte: 4.0.5
+      svelte-preprocess: 5.0.4(postcss@8.4.24)(svelte@4.0.5)(typescript@5.1.6)
       typescript: 5.1.6
     transitivePeerDependencies:
       - "@babel/core"
@@ -9619,7 +9619,7 @@ packages:
       - sugarss
     dev: true
 
-  /svelte-hmr@0.15.2(svelte@4.0.4):
+  /svelte-hmr@0.15.2(svelte@4.0.5):
     resolution:
       {
         integrity: sha512-q/bAruCvFLwvNbeE1x3n37TYFb3mTBJ6TrCq6p2CoFbSTNhDE9oAtEfpy+wmc9So8AG0Tja+X0/mJzX9tSfvIg==,
@@ -9628,10 +9628,10 @@ packages:
     peerDependencies:
       svelte: ^3.19.0 || ^4.0.0-next.0
     dependencies:
-      svelte: 4.0.4
+      svelte: 4.0.5
     dev: true
 
-  /svelte-preprocess@5.0.4(postcss@8.4.24)(svelte@4.0.4)(typescript@5.1.6):
+  /svelte-preprocess@5.0.4(postcss@8.4.24)(svelte@4.0.5)(typescript@5.1.6):
     resolution:
       {
         integrity: sha512-ABia2QegosxOGsVlsSBJvoWeXy1wUKSfF7SWJdTjLAbx/Y3SrVevvvbFNQqrSJw89+lNSsM58SipmZJ5SRi5iw==,
@@ -9678,7 +9678,7 @@ packages:
       postcss: 8.4.24
       sorcery: 0.11.0
       strip-indent: 3.0.0
-      svelte: 4.0.4
+      svelte: 4.0.5
       typescript: 5.1.6
     dev: true
 
@@ -9690,10 +9690,10 @@ packages:
     engines: { node: ">= 8" }
     dev: false
 
-  /svelte@4.0.4:
+  /svelte@4.0.5:
     resolution:
       {
-        integrity: sha512-DDJavyX1mpNFLZ7jU9FwBKouemh6CJHZXwePBa5GXSaW5GuHZ361L2/1uznBqOCxu2UsUoWu8wRsB2iB8QG5sQ==,
+        integrity: sha512-PHKPWP1wiWHBtsE57nCb8xiWB3Ht7/3Kvi3jac0XIxUM2rep8alO7YoAtgWeGD7++tFy46krilOrPW0mG3Dx+A==,
       }
     engines: { node: ">=16" }
     dependencies:
@@ -10363,7 +10363,7 @@ packages:
       - vite
     dev: true
 
-  /unocss@0.53.4(postcss@8.4.24)(rollup@2.79.1)(vite@4.4.0):
+  /unocss@0.53.4(postcss@8.4.24)(rollup@2.79.1)(vite@4.4.2):
     resolution:
       {
         integrity: sha512-UUEi+oh1rngHHP0DVESRS+ScoKMRF8q6GIQrElHb67gqG7GDEGpy3oocIA/6+1t71I4FFvnnxLMGIo9qAD0TEw==,
@@ -10375,7 +10375,7 @@ packages:
       "@unocss/webpack":
         optional: true
     dependencies:
-      "@unocss/astro": 0.53.4(rollup@2.79.1)(vite@4.4.0)
+      "@unocss/astro": 0.53.4(rollup@2.79.1)(vite@4.4.2)
       "@unocss/cli": 0.53.4(rollup@2.79.1)
       "@unocss/core": 0.53.4
       "@unocss/extractor-arbitrary-variants": 0.53.4
@@ -10394,7 +10394,7 @@ packages:
       "@unocss/transformer-compile-class": 0.53.4
       "@unocss/transformer-directives": 0.53.4
       "@unocss/transformer-variant-group": 0.53.4
-      "@unocss/vite": 0.53.4(rollup@2.79.1)(vite@4.4.0)
+      "@unocss/vite": 0.53.4(rollup@2.79.1)(vite@4.4.2)
     transitivePeerDependencies:
       - postcss
       - rollup
@@ -10523,7 +10523,7 @@ packages:
       - rollup
     dev: true
 
-  /vite-plugin-solid@2.7.0(solid-js@1.7.7)(vite@4.4.0):
+  /vite-plugin-solid@2.7.0(solid-js@1.7.7)(vite@4.4.2):
     resolution:
       {
         integrity: sha512-avp/Jl5zOp/Itfo67xtDB2O61U7idviaIp4mLsjhCa13PjKNasz+IID0jYTyqUp9SFx6/PmBr6v4KgDppqompg==,
@@ -10539,8 +10539,8 @@ packages:
       merge-anything: 5.1.7
       solid-js: 1.7.7
       solid-refresh: 0.5.3(solid-js@1.7.7)
-      vite: 4.4.0(@types/node@20.4.0)
-      vitefu: 0.2.4(vite@4.4.0)
+      vite: 4.4.2(@types/node@20.4.0)
+      vitefu: 0.2.4(vite@4.4.2)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -10601,10 +10601,10 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vite@4.4.0(@types/node@20.4.0):
+  /vite@4.4.2(@types/node@20.4.0):
     resolution:
       {
-        integrity: sha512-Wf+DCEjuM8aGavEYiF77hnbxEZ+0+/jC9nABR46sh5Xi+GYeSvkeEFRiVuI3x+tPjxgZeS91h1jTAQTPFgePpA==,
+        integrity: sha512-zUcsJN+UvdSyHhYa277UHhiJ3iq4hUBwHavOpsNUGsTgjBeoBlK8eDt+iT09pBq0h9/knhG/SPrZiM7cGmg7NA==,
       }
     engines: { node: ^14.18.0 || >=16.0.0 }
     hasBin: true
@@ -10639,7 +10639,7 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
 
-  /vitefu@0.2.4(vite@4.4.0):
+  /vitefu@0.2.4(vite@4.4.2):
     resolution:
       {
         integrity: sha512-fanAXjSaf9xXtOOeno8wZXIhgia+CZury481LsDaV++lSvcU2R9Ch2bPh3PYFyoHW+w9LqAeYRISVQjUIew14g==,
@@ -10650,7 +10650,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 4.4.0(@types/node@20.4.0)
+      vite: 4.4.2(@types/node@20.4.0)
     dev: true
 
   /vitepress@1.0.0-beta.3(@algolia/client-search@4.18.0)(search-insights@2.6.0):
@@ -10662,7 +10662,7 @@ packages:
     dependencies:
       "@docsearch/css": 3.5.1
       "@docsearch/js": 3.5.1(@algolia/client-search@4.18.0)(search-insights@2.6.0)
-      "@vitejs/plugin-vue": 4.2.3(vite@4.4.0)(vue@3.3.4)
+      "@vitejs/plugin-vue": 4.2.3(vite@4.4.2)(vue@3.3.4)
       "@vue/devtools-api": 6.5.0
       "@vueuse/core": 10.2.0(vue@3.3.4)
       "@vueuse/integrations": 10.2.0(focus-trap@7.4.3)(vue@3.3.4)
@@ -10671,7 +10671,7 @@ packages:
       mark.js: 8.11.1
       minisearch: 6.1.0
       shiki: 0.14.2
-      vite: 4.4.0(@types/node@20.4.0)
+      vite: 4.4.2(@types/node@20.4.0)
       vue: 3.3.4
     transitivePeerDependencies:
       - "@algolia/client-search"
