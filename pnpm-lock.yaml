@@ -247,6 +247,9 @@ importers:
 
   examples/with-vanilla:
     dependencies:
+      "@headlessplayback/core":
+        specifier: latest
+        version: link:../../packages/core
       "@headlessplayback/dash-plugin":
         specifier: latest
         version: link:../../packages/dash

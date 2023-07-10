@@ -12,6 +12,7 @@
     "vite": "^4.4.2"
   },
   "dependencies": {
+    "@headlessplayback/core": "latest",
     "@headlessplayback/dash-plugin": "latest",
     "@headlessplayback/hijack-plugin": "latest",
     "@headlessplayback/hls-plugin": "latest"
