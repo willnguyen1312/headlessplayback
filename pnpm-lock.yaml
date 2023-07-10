@@ -170,9 +170,6 @@ importers:
 
   examples/with-solid:
     dependencies:
-      "@headlessplayback/core":
-        specifier: latest
-        version: link:../../packages/core
       "@headlessplayback/dash-plugin":
         specifier: latest
         version: link:../../packages/dash
@@ -207,9 +204,6 @@ importers:
 
   examples/with-svelte:
     dependencies:
-      "@headlessplayback/core":
-        specifier: latest
-        version: link:../../packages/core
       "@headlessplayback/dash-plugin":
         specifier: latest
         version: link:../../packages/dash
@@ -253,9 +247,6 @@ importers:
 
   examples/with-vanilla:
     dependencies:
-      "@headlessplayback/core":
-        specifier: latest
-        version: link:../../packages/core
       "@headlessplayback/dash-plugin":
         specifier: latest
         version: link:../../packages/dash
