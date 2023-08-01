@@ -10,13 +10,13 @@
     "@headlessplayback/hijack-plugin": "latest",
     "@headlessplayback/hls-plugin": "latest",
     "@headlessplayback/preact": "latest",
-    "preact": "^10.15.1"
+    "preact": "^10.16.0"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.5.0",
-    "@unocss/reset": "^0.53.4",
+    "@unocss/reset": "^0.54.1",
     "typescript": "^5.1.6",
-    "unocss": "^0.53.4",
-    "vite": "^4.4.2"
+    "unocss": "^0.54.1",
+    "vite": "^4.4.7"
   }
 }

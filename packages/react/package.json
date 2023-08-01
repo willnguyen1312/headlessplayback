@@ -36,9 +36,9 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@types/node": "^20.4.0",
-    "@types/react": "^18.2.14",
-    "eslint": "^8.44.0",
+    "@types/node": "^20.4.5",
+    "@types/react": "^18.2.18",
+    "eslint": "^8.46.0",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
     "tsup": "^7.1.0",
@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@headlessplayback/core": "workspace:*",
-    "valtio": "^1.10.6"
+    "valtio": "^1.11.1"
   },
   "peerDependencies": {
     "react": "^18.0.0"
