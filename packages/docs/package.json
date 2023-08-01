@@ -31,10 +31,10 @@
     "@headlessplayback/hijack-plugin": "latest",
     "@headlessplayback/hls-plugin": "latest",
     "@headlessplayback/vue": "latest",
-    "vitepress": "1.0.0-beta.3",
+    "vitepress": "1.0.0-beta.7",
     "vue": "^3.3.4"
   },
   "devDependencies": {
-    "@unocss/reset": "^0.53.4"
+    "@unocss/reset": "^0.54.1"
   }
 }
