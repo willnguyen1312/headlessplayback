@@ -2,20 +2,23 @@
 import type { Component } from "vue"
 import { defineAsyncComponent, ref } from "vue"
 
-type PlaybackName = "Hls" | "Hijack" | "Dash"
+type PlaybackName = "Hls" | "Hijack" | "Dash" | "Normal"
 
 const Dash = defineAsyncComponent(() => import("./Dash.vue"))
 const Hls = defineAsyncComponent(() => import("./Hls.vue"))
 const Hijack = defineAsyncComponent(() => import("./Hijack.vue"))
+const Normal = defineAsyncComponent(() => import("./Normal.vue"))
 
 const components: Record<PlaybackName, Component> = {
   Hls,
   Hijack,
   Dash,
+  Normal,
 }
 
 const tabs = ref([
-  { name: "Hls", href: "#", current: true },
+  { name: "Normal", href: "#", current: true },
+  { name: "Hls", href: "#", current: false },
   { name: "Dash", href: "#", current: false },
   { name: "Hijack", href: "#", current: false },
 ])
