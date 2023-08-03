@@ -4,17 +4,20 @@ import { ref } from "vue"
 import Dash from "./Dash.vue"
 import Hijack from "./Hijack.vue"
 import Hls from "./Hls.vue"
+import Normal from "./Normal.vue"
 
-type PlaybackName = "Hls" | "Hijack" | "Dash"
+type PlaybackName = "Hls" | "Hijack" | "Dash" | "Normal"
 
 const components: Record<PlaybackName, Component> = {
   Hls,
   Hijack,
   Dash,
+  Normal,
 }
 
 const tabs = ref([
-  { name: "Hls", href: "#", current: true },
+  { name: "Normal", href: "#", current: true },
+  { name: "Hls", href: "#", current: false },
   { name: "Dash", href: "#", current: false },
   { name: "Hijack", href: "#", current: false },
 ])
