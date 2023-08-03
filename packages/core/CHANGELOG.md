@@ -1,5 +1,14 @@
 # @headlessplayback/core
 
+## 0.14.0
+
+### Minor Changes
+
+- [#85](https://github.com/willnguyen1312/headlessplayback/pull/85)
+  [`63c66de`](https://github.com/willnguyen1312/headlessplayback/commit/63c66de636b7ec058791d22d3f9082a6ca473662)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Bump minor
+  update to all packages 💞
+
 ## 0.13.0
 
 ### Minor Changes
