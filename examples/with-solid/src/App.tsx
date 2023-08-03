@@ -2,6 +2,7 @@ import { For, createMemo, createSignal, type Component } from "solid-js"
 import Dash from "./Dash"
 import Hijack from "./Hijack"
 import Hls from "./Hls"
+import Normal from "./Normal"
 
 function cls(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
@@ -9,12 +10,13 @@ function cls(...classes: string[]) {
 
 const App: Component = () => {
   const [tabs, setTabs] = createSignal([
-    { name: "Hls", href: "#", current: true },
+    { name: "Normal", href: "#", current: true },
+    { name: "Hls", href: "#", current: false },
     { name: "Dash", href: "#", current: false },
     { name: "Hijack", href: "#", current: false },
   ])
 
-  const activeTab = createMemo(() => tabs().find((tab) => tab.current).name)
+  const activeTab = createMemo(() => tabs().find((tab) => tab.current)!.name)
 
   return (
     <div class="p-4">
@@ -47,6 +49,7 @@ const App: Component = () => {
       </nav>
 
       <div class="mt-4">
+        {activeTab() === "Normal" && <Normal />}
         {activeTab() === "Hls" && <Hls />}
         {activeTab() === "Dash" && <Dash />}
         {activeTab() === "Hijack" && <Hijack />}
