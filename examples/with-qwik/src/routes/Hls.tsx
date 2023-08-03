@@ -42,12 +42,11 @@ const Hls = component$(() => {
   })
   const source = useSignal(source1)
 
-  useVisibleTask$(async () => {
+  useVisibleTask$(async ({ track }) => {
     await use(hlsPlaybackPlugin)
-  })
 
-  useVisibleTask$(({ track }) => {
     track(() => source.value)
+
     playbackActions.loadHlsSource?.({
       source: source.value,
     })
