@@ -2,24 +2,27 @@ import { component$, useComputed$, useSignal } from "@builder.io/qwik"
 import Dash from "./Dash"
 import Hijack from "./Hijack"
 import Hls from "./Hls"
+import Normal from "./Normal"
 
 function cls(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
 }
 
-type PlaybackName = "Hls" | "Dash" | "Hijack"
+type PlaybackName = "Hls" | "Dash" | "Hijack" | "Normal"
 
 const componentLookup: Record<PlaybackName, ReturnType<typeof component$>> = {
   Hls,
   Dash,
   Hijack,
+  Normal,
 }
 
 const App = component$(() => {
   const tabs = useSignal<
     { name: PlaybackName; href: string; current: boolean }[]
   >([
-    { name: "Hls", href: "#", current: true },
+    { name: "Normal", href: "#", current: true },
+    { name: "Hls", href: "#", current: false },
     { name: "Dash", href: "#", current: false },
     { name: "Hijack", href: "#", current: false },
   ])

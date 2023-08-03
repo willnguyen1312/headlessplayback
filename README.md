@@ -17,7 +17,6 @@ without
 - [Changesets](https://github.com/changesets/changesets) - for versioning
 - [Happy-dom](https://github.com/capricorn86/happy-dom) - for node-based browser
   testing environment
-- [Playwright](https://playwright.dev/) - for e2e testing across browsers
 - [Tsup](https://tsup.egoist.dev/) - for bundling libraries
 - [Turbo](https://turbo.build/repo) - for remote-caching build system
 - [Github Actions](https://github.com/features/actions) - for CI/CD

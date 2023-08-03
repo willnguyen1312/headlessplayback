@@ -43,11 +43,9 @@ const Dash = component$(() => {
   })
   const source = useSignal(source1)
 
-  useVisibleTask$(async () => {
+  useVisibleTask$(async ({ track }) => {
     await use(dashPlaybackPlugin)
-  })
 
-  useVisibleTask$(({ track }) => {
     track(() => source.value)
     playbackActions.loadDashSource?.({
       source: source.value,

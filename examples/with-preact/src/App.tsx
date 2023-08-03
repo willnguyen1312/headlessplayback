@@ -2,6 +2,7 @@ import { useMemo, useState } from "preact/hooks"
 import Dash from "./Dash"
 import Hijack from "./Hijack"
 import Hls from "./Hls"
+import Normal from "./Normal"
 
 function cls(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
@@ -9,7 +10,8 @@ function cls(...classes: string[]) {
 
 export default function App() {
   const [tabs, setTabs] = useState([
-    { name: "Hls", href: "#", current: true },
+    { name: "Normal", href: "#", current: true },
+    { name: "Hls", href: "#", current: false },
     { name: "Dash", href: "#", current: false },
     { name: "Hijack", href: "#", current: false },
   ])
@@ -17,6 +19,10 @@ export default function App() {
   const activeComponentName = tabs.find((tab) => tab.current)?.name
 
   const renderedComponent = useMemo(() => {
+    if (activeComponentName === "Normal") {
+      return <Normal />
+    }
+
     if (activeComponentName === "Hijack") {
       return <Hijack />
     }

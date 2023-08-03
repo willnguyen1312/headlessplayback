@@ -2,9 +2,11 @@
   import Dash from "./Dash.svelte"
   import Hijack from "./Hijack.svelte"
   import Hls from "./Hls.svelte"
+  import Normal from "./Normal.svelte"
 
   let tabs = [
-    { name: "Hls", href: "#", current: true },
+    { name: "Normal", href: "#", current: true },
+    { name: "Hls", href: "#", current: false },
     { name: "Dash", href: "#", current: false },
     { name: "Hijack", href: "#", current: false },
   ]
@@ -36,6 +38,10 @@
   </nav>
 
   <div class="mt-4">
+    {#if activeTab === "Normal"}
+      <Normal />
+    {/if}
+
     {#if activeTab === "Hls"}
       <Hls />
     {/if}
