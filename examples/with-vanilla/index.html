@@ -10,8 +10,13 @@
       <nav id="nav" class="-mb-px flex space-x-8 border-gray-200">
         <a
           data-current="true"
-          data-name="hls"
+          data-name="normal"
           class="cursor-pointer whitespace-nowrap border-b-2 border-violet-500 px-1 py-4 text-sm font-medium text-violet-600"
+          >Normal</a
+        >
+        <a
+          data-name="hls"
+          class="cursor-pointer whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
           >Hls</a
         >
         <a
@@ -28,6 +33,35 @@
 
       <div class="mt-4" id="parent"></div>
     </div>
+
+    <template id="normal">
+      <div class="border-fuchsia border-1 h-[400px] w-[600px]">
+        <video
+          src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+          class="h-full w-full"
+          controls
+          id="normal"
+        ></video>
+      </div>
+
+      <p id="duration"></p>
+      <p id="currentTime"></p>
+
+      <div class="flex flex-col items-start space-y-1">
+        <button
+          class="rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
+          id="next5s"
+        >
+          Next 5s
+        </button>
+        <button
+          class="rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
+          id="prev5s"
+        >
+          Prev 5s
+        </button>
+      </div>
+    </template>
 
     <template id="hls">
       <div class="border-fuchsia border-1 h-[400px] w-[600px]">
@@ -127,6 +161,7 @@
         </button>
       </div>
     </template>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

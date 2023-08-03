@@ -9,9 +9,38 @@ createPlayback.use(hlsPlaybackPlugin)
 createPlayback.use(dashPlaybackPlugin)
 createPlayback.use(hijackPlaybackPlugin)
 
-type PlayerType = "hls" | "dash" | "hijack"
+type PlayerType = "hls" | "dash" | "hijack" | "normal"
 
 let currentResult: any
+
+function makeNormalPlayback() {
+  const currentTime = document.getElementById(
+    "currentTime",
+  ) as HTMLParagraphElement
+
+  const next5sBtn = document.getElementById("next5s") as HTMLButtonElement
+  const prev5sBtn = document.getElementById("prev5s") as HTMLButtonElement
+  const duration = document.getElementById("duration") as HTMLParagraphElement
+  const result = createPlayback({
+    id: "normal",
+  })
+
+  next5sBtn.addEventListener("click", () => {
+    result.playbackActions.setCurrentTime(result.getState().currentTime + 5)
+  })
+
+  prev5sBtn.addEventListener("click", () => {
+    result.playbackActions.setCurrentTime(result.getState().currentTime - 5)
+  })
+
+  result.subscribe(({ state }) => {
+    currentTime.innerText = `Current time: ${state.currentTime}`
+    duration.innerText = `Duration: ${state.duration}`
+  })
+
+  result.activate()
+  currentResult = result
+}
 
 function makeHlsPlayback() {
   const source1 =
@@ -216,6 +245,7 @@ anchorList.forEach((anchor) => {
       hls: makeHlsPlayback,
       dash: makeDashPlayback,
       hijack: makeHijackPlayback,
+      normal: makeNormalPlayback,
     }
 
     const handler = handlers[dataName]
@@ -223,7 +253,7 @@ anchorList.forEach((anchor) => {
   })
 })
 
-const template = getImageTemplate("hls")
+const template = getImageTemplate("normal")
 parent.replaceChildren(template)
 
-makeHlsPlayback()
+makeNormalPlayback()
