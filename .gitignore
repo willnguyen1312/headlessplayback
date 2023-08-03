@@ -169,10 +169,6 @@ temp/
 .DS_Store
 .ultra.cache.json
 
-# Playwright
-e2e/report
-e2e/junit.xml
-e2e/results
 # Local Netlify folder
 .netlify
 
@@ -186,8 +182,3 @@ cache
 # Qwik
 lib
 lib-types
-
-# Playwright
-e2e/report
-e2e/junit.xml
-e2e/results
