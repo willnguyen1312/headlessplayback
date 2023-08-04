@@ -36,7 +36,7 @@
   <video
     {id}
     class="h-full w-full"
-    src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
     controls
   >
     <track kind="captions" />

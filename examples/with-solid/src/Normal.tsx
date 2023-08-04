@@ -42,7 +42,7 @@ const Hls: Component = () => {
     <>
       <div class="border-fuchsia border-1 h-[400px] w-[600px]">
         <video
-          src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+          src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
           class="h-full w-full"
           id={id}
           controls
