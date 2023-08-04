@@ -1,6 +1,6 @@
 {
   "name": "@headlessplayback/core",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "description": "A core implementation of headlessplayback",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "repository": "willnguyen1312/headlessplayback",

@@ -1,6 +1,6 @@
 {
   "name": "@headlessplayback/preact",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "description": "Adapter of headlessplayback core for Preact",
   "repository": "willnguyen1312/headlessplayback",
