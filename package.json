@@ -34,6 +34,7 @@
     "size": "esno scripts/size-limit.ts",
     "start-docs": "turbo dev --filter=docs...",
     "start-preact": "turbo dev --filter=with-preact...",
+    "start-angular": "turbo run dev --filter=with-angular...",
     "start-qwik": "turbo dev --filter=with-qwik...",
     "start-react": "turbo dev --filter=with-react...",
     "start-solid": "turbo dev --filter=with-solid...",
