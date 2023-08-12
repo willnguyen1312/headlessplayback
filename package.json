@@ -31,7 +31,7 @@
     "postbuild": "pnpm run size",
     "react": "pnpm --filter=@headlessplayback/react",
     "release": "pnpm check && changeset version && changeset publish",
-    "size": "esno scripts/size-limit.ts",
+    "size": "esno scripts/size.ts",
     "start-docs": "turbo dev --filter=docs...",
     "start-preact": "turbo dev --filter=with-preact...",
     "start-angular": "turbo run dev --filter=with-angular...",
