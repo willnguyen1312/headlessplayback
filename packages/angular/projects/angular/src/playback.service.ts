@@ -1,8 +1,10 @@
 import { Injectable } from "@angular/core"
 
-@Injectable()
+@Injectable({
+  providedIn: "root",
+})
 export class PlaybackService {
   constructor() {
-    console.log("PlaybackService constructor")
+    console.log("PlaybackService 💞")
   }
 }
