@@ -1,1 +1,22 @@
-<h1>Hello there</h1>
+<div class="p-4">
+  <nav class="-mb-px flex space-x-8 border-gray-200" aria-label="Tabs">
+    <a
+      *ngFor="let tab of tabs"
+      [attr.href]="tab.href"
+      [attr.aria-current]="tab.current ? 'page' : undefined"
+      [ngClass]="{
+        'border-violet-500 text-violet-600': tab.current,
+        'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700':
+          !tab.current,
+        'whitespace-nowrap border-b-2 px-1 py-4 text-sm font-medium': true
+      }"
+      (click)="updateTab(tab.name)"
+    >
+      {{ tab.name }}
+    </a>
+  </nav>
+
+  <div class="mt-4">
+    <playback-normal *ngIf="currentTab() === 'Normal'"></playback-normal>
+  </div>
+</div>

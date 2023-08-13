@@ -125,7 +125,7 @@ importers:
         version: 0.55.0(postcss@8.4.27)(rollup@2.79.1)(vite@4.4.9)
       vite:
         specifier: ^4.4.9
-        version: 4.4.9
+        version: 4.4.9(@types/node@20.4.10)
 
   examples/with-qwik:
     dependencies:
@@ -245,7 +245,7 @@ importers:
         version: 0.55.0(postcss@8.4.27)(rollup@2.79.1)(vite@4.4.9)
       vite:
         specifier: ^4.4.9
-        version: 4.4.9
+        version: 4.4.9(@types/node@20.4.10)
       vite-plugin-solid:
         specifier: ^2.7.0
         version: 2.7.0(solid-js@1.7.11)(vite@4.4.9)
@@ -291,7 +291,7 @@ importers:
         version: 0.55.0(postcss@8.4.27)(rollup@2.79.1)(vite@4.4.9)
       vite:
         specifier: ^4.4.9
-        version: 4.4.9
+        version: 4.4.9(@types/node@20.4.10)
 
   examples/with-vanilla:
     dependencies:
@@ -319,7 +319,7 @@ importers:
         version: 0.55.0(postcss@8.4.27)(rollup@2.79.1)(vite@4.4.9)
       vite:
         specifier: ^4.4.9
-        version: 4.4.9
+        version: 4.4.9(@types/node@20.4.10)
 
   examples/with-vue:
     dependencies:
@@ -353,7 +353,7 @@ importers:
         version: 0.55.0(postcss@8.4.27)(rollup@2.79.1)(vite@4.4.9)
       vite:
         specifier: ^4.4.9
-        version: 4.4.9
+        version: 4.4.9(@types/node@20.4.10)
       vue-tsc:
         specifier: ^1.8.8
         version: 1.8.8(typescript@5.1.6)
@@ -363,6 +363,9 @@ importers:
       "@headlessplayback/core":
         specifier: workspace:*
         version: link:../core
+      rxjs:
+        specifier: ~7.8.1
+        version: 7.8.1
       tslib:
         specifier: ^2.6.1
         version: 2.6.1
@@ -601,7 +604,7 @@ importers:
         version: 5.23.0
       vite:
         specifier: 4.4.9
-        version: 4.4.9
+        version: 4.4.9(@types/node@20.4.10)
 
   packages/react:
     dependencies:
@@ -3598,6 +3601,7 @@ packages:
     cpu: [arm64]
     os: [android]
     requiresBuild: true
+    dev: true
     optional: true
 
   /@esbuild/android-arm64@0.18.17:
@@ -3609,7 +3613,6 @@ packages:
     cpu: [arm64]
     os: [android]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/android-arm64@0.19.1:
@@ -3645,6 +3648,7 @@ packages:
     cpu: [arm]
     os: [android]
     requiresBuild: true
+    dev: true
     optional: true
 
   /@esbuild/android-arm@0.18.17:
@@ -3656,7 +3660,6 @@ packages:
     cpu: [arm]
     os: [android]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/android-arm@0.19.1:
@@ -3692,6 +3695,7 @@ packages:
     cpu: [x64]
     os: [android]
     requiresBuild: true
+    dev: true
     optional: true
 
   /@esbuild/android-x64@0.18.17:
@@ -3703,7 +3707,6 @@ packages:
     cpu: [x64]
     os: [android]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/android-x64@0.19.1:
@@ -3739,6 +3742,7 @@ packages:
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
+    dev: true
     optional: true
 
   /@esbuild/darwin-arm64@0.18.17:
@@ -3750,7 +3754,6 @@ packages:
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/darwin-arm64@0.19.1:
@@ -3786,6 +3789,7 @@ packages:
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
+    dev: true
     optional: true
 
   /@esbuild/darwin-x64@0.18.17:
@@ -3797,7 +3801,6 @@ packages:
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/darwin-x64@0.19.1:
@@ -3833,6 +3836,7 @@ packages:
     cpu: [arm64]
     os: [freebsd]
     requiresBuild: true
+    dev: true
     optional: true
 
   /@esbuild/freebsd-arm64@0.18.17:
@@ -3844,7 +3848,6 @@ packages:
     cpu: [arm64]
     os: [freebsd]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/freebsd-arm64@0.19.1:
@@ -3880,6 +3883,7 @@ packages:
     cpu: [x64]
     os: [freebsd]
     requiresBuild: true
+    dev: true
     optional: true
 
   /@esbuild/freebsd-x64@0.18.17:
@@ -3891,7 +3895,6 @@ packages:
     cpu: [x64]
     os: [freebsd]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/freebsd-x64@0.19.1:
@@ -3927,6 +3930,7 @@ packages:
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
+    dev: true
     optional: true
 
   /@esbuild/linux-arm64@0.18.17:
@@ -3938,7 +3942,6 @@ packages:
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-arm64@0.19.1:
@@ -3974,6 +3977,7 @@ packages:
     cpu: [arm]
     os: [linux]
     requiresBuild: true
+    dev: true
     optional: true
 
   /@esbuild/linux-arm@0.18.17:
@@ -3985,7 +3989,6 @@ packages:
     cpu: [arm]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-arm@0.19.1:
@@ -4021,6 +4024,7 @@ packages:
     cpu: [ia32]
     os: [linux]
     requiresBuild: true
+    dev: true
     optional: true
 
   /@esbuild/linux-ia32@0.18.17:
@@ -4032,7 +4036,6 @@ packages:
     cpu: [ia32]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-ia32@0.19.1:
@@ -4068,6 +4071,7 @@ packages:
     cpu: [loong64]
     os: [linux]
     requiresBuild: true
+    dev: true
     optional: true
 
   /@esbuild/linux-loong64@0.18.17:
@@ -4079,7 +4083,6 @@ packages:
     cpu: [loong64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-loong64@0.19.1:
@@ -4115,6 +4118,7 @@ packages:
     cpu: [mips64el]
     os: [linux]
     requiresBuild: true
+    dev: true
     optional: true
 
   /@esbuild/linux-mips64el@0.18.17:
@@ -4126,7 +4130,6 @@ packages:
     cpu: [mips64el]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-mips64el@0.19.1:
@@ -4162,6 +4165,7 @@ packages:
     cpu: [ppc64]
     os: [linux]
     requiresBuild: true
+    dev: true
     optional: true
 
   /@esbuild/linux-ppc64@0.18.17:
@@ -4173,7 +4177,6 @@ packages:
     cpu: [ppc64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-ppc64@0.19.1:
@@ -4209,6 +4212,7 @@ packages:
     cpu: [riscv64]
     os: [linux]
     requiresBuild: true
+    dev: true
     optional: true
 
   /@esbuild/linux-riscv64@0.18.17:
@@ -4220,7 +4224,6 @@ packages:
     cpu: [riscv64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-riscv64@0.19.1:
@@ -4256,6 +4259,7 @@ packages:
     cpu: [s390x]
     os: [linux]
     requiresBuild: true
+    dev: true
     optional: true
 
   /@esbuild/linux-s390x@0.18.17:
@@ -4267,7 +4271,6 @@ packages:
     cpu: [s390x]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-s390x@0.19.1:
@@ -4303,6 +4306,7 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
+    dev: true
     optional: true
 
   /@esbuild/linux-x64@0.18.17:
@@ -4314,7 +4318,6 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-x64@0.19.1:
@@ -4350,6 +4353,7 @@ packages:
     cpu: [x64]
     os: [netbsd]
     requiresBuild: true
+    dev: true
     optional: true
 
   /@esbuild/netbsd-x64@0.18.17:
@@ -4361,7 +4365,6 @@ packages:
     cpu: [x64]
     os: [netbsd]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/netbsd-x64@0.19.1:
@@ -4397,6 +4400,7 @@ packages:
     cpu: [x64]
     os: [openbsd]
     requiresBuild: true
+    dev: true
     optional: true
 
   /@esbuild/openbsd-x64@0.18.17:
@@ -4408,7 +4412,6 @@ packages:
     cpu: [x64]
     os: [openbsd]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/openbsd-x64@0.19.1:
@@ -4444,6 +4447,7 @@ packages:
     cpu: [x64]
     os: [sunos]
     requiresBuild: true
+    dev: true
     optional: true
 
   /@esbuild/sunos-x64@0.18.17:
@@ -4455,7 +4459,6 @@ packages:
     cpu: [x64]
     os: [sunos]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/sunos-x64@0.19.1:
@@ -4491,6 +4494,7 @@ packages:
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
+    dev: true
     optional: true
 
   /@esbuild/win32-arm64@0.18.17:
@@ -4502,7 +4506,6 @@ packages:
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/win32-arm64@0.19.1:
@@ -4538,6 +4541,7 @@ packages:
     cpu: [ia32]
     os: [win32]
     requiresBuild: true
+    dev: true
     optional: true
 
   /@esbuild/win32-ia32@0.18.17:
@@ -4549,7 +4553,6 @@ packages:
     cpu: [ia32]
     os: [win32]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/win32-ia32@0.19.1:
@@ -4585,6 +4588,7 @@ packages:
     cpu: [x64]
     os: [win32]
     requiresBuild: true
+    dev: true
     optional: true
 
   /@esbuild/win32-x64@0.18.17:
@@ -4596,7 +4600,6 @@ packages:
     cpu: [x64]
     os: [win32]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/win32-x64@0.19.1:
@@ -5026,7 +5029,7 @@ packages:
       debug: 4.3.4
       kolorist: 1.8.0
       resolve: 1.22.2
-      vite: 4.4.9
+      vite: 4.4.9(@types/node@20.4.10)
     transitivePeerDependencies:
       - preact
       - supports-color
@@ -5072,7 +5075,7 @@ packages:
       "@prefresh/utils": 1.2.0
       "@rollup/pluginutils": 4.2.1
       preact: 10.16.0
-      vite: 4.4.9
+      vite: 4.4.9(@types/node@20.4.10)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -5271,7 +5274,7 @@ packages:
       "@sveltejs/vite-plugin-svelte": 2.4.5(svelte@4.2.0)(vite@4.4.9)
       debug: 4.3.4
       svelte: 4.2.0
-      vite: 4.4.9
+      vite: 4.4.9(@types/node@20.4.10)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -5293,7 +5296,7 @@ packages:
       magic-string: 0.30.2
       svelte: 4.2.0
       svelte-hmr: 0.15.3(svelte@4.2.0)
-      vite: 4.4.9
+      vite: 4.4.9(@types/node@20.4.10)
       vitefu: 0.2.4(vite@4.4.9)
     transitivePeerDependencies:
       - supports-color
@@ -5930,7 +5933,7 @@ packages:
       "@unocss/core": 0.55.0
       "@unocss/reset": 0.55.0
       "@unocss/vite": 0.55.0(rollup@2.79.1)(vite@4.4.9)
-      vite: 4.4.9
+      vite: 4.4.9(@types/node@20.4.10)
     transitivePeerDependencies:
       - rollup
 
@@ -6152,7 +6155,7 @@ packages:
       chokidar: 3.5.3
       fast-glob: 3.3.1
       magic-string: 0.30.2
-      vite: 4.4.9
+      vite: 4.4.9(@types/node@20.4.10)
     transitivePeerDependencies:
       - rollup
 
@@ -6196,7 +6199,7 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.4.9
+      vite: 4.4.9(@types/node@20.4.10)
       vue: 3.3.4
 
   /@volar/language-core@1.10.0:
@@ -9196,6 +9199,7 @@ packages:
       "@esbuild/win32-arm64": 0.18.11
       "@esbuild/win32-ia32": 0.18.11
       "@esbuild/win32-x64": 0.18.11
+    dev: true
 
   /esbuild@0.18.17:
     resolution:
@@ -9228,7 +9232,6 @@ packages:
       "@esbuild/win32-arm64": 0.18.17
       "@esbuild/win32-ia32": 0.18.17
       "@esbuild/win32-x64": 0.18.17
-    dev: true
 
   /esbuild@0.19.1:
     resolution:
@@ -16941,7 +16944,7 @@ packages:
       "@unocss/transformer-directives": 0.55.0
       "@unocss/transformer-variant-group": 0.55.0
       "@unocss/vite": 0.55.0(rollup@2.79.1)(vite@4.4.9)
-      vite: 4.4.9
+      vite: 4.4.9(@types/node@20.4.10)
     transitivePeerDependencies:
       - postcss
       - rollup
@@ -17141,7 +17144,7 @@ packages:
       merge-anything: 5.1.7
       solid-js: 1.7.11
       solid-refresh: 0.5.3(solid-js@1.7.11)
-      vite: 4.4.9
+      vite: 4.4.9(@types/node@20.4.10)
       vitefu: 0.2.4(vite@4.4.9)
     transitivePeerDependencies:
       - supports-color
@@ -17208,43 +17211,6 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vite@4.4.9:
-    resolution:
-      {
-        integrity: sha512-2mbUn2LlUmNASWwSCNSJ/EG2HuSRTnVNaydp6vMCm5VIqJsjMfbIWtbH2kDuwUVW5mMUKKZvGPX/rqeqVvv1XA==,
-      }
-    engines: { node: ^14.18.0 || >=16.0.0 }
-    hasBin: true
-    peerDependencies:
-      "@types/node": ">= 14"
-      less: "*"
-      lightningcss: ^1.21.0
-      sass: "*"
-      stylus: "*"
-      sugarss: "*"
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      "@types/node":
-        optional: true
-      less:
-        optional: true
-      lightningcss:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      esbuild: 0.18.11
-      postcss: 8.4.27
-      rollup: 3.28.0
-    optionalDependencies:
-      fsevents: 2.3.2
-
   /vite@4.4.9(@types/node@20.4.10):
     resolution:
       {
@@ -17282,7 +17248,6 @@ packages:
       rollup: 3.28.0
     optionalDependencies:
       fsevents: 2.3.2
-    dev: true
 
   /vitefu@0.2.4(vite@4.4.9):
     resolution:
@@ -17295,7 +17260,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 4.4.9
+      vite: 4.4.9(@types/node@20.4.10)
     dev: true
 
   /vitepress@1.0.0-beta.7(@algolia/client-search@4.18.0)(search-insights@2.6.0):
@@ -17316,7 +17281,7 @@ packages:
       mark.js: 8.11.1
       minisearch: 6.1.0
       shiki: 0.14.3
-      vite: 4.4.9
+      vite: 4.4.9(@types/node@20.4.10)
       vue: 3.3.4
     transitivePeerDependencies:
       - "@algolia/client-search"
