@@ -70,6 +70,15 @@ importers:
       "@headlessplayback/angular":
         specifier: latest
         version: link:../../packages/angular/dist/angular
+      "@headlessplayback/dash-plugin":
+        specifier: latest
+        version: link:../../packages/dash
+      "@headlessplayback/hijack-plugin":
+        specifier: latest
+        version: link:../../packages/hijack
+      "@headlessplayback/hls-plugin":
+        specifier: latest
+        version: link:../../packages/hls
       rxjs:
         specifier: ~7.8.1
         version: 7.8.1
