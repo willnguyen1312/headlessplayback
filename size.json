@@ -2,7 +2,7 @@
   "@headlessplayback/core": {
     "createPlayback": "1.35 KB"
   },
-  "angular": {
+  "@headlessplayback/angular": {
     "PlaybackService": "1.72 KB"
   },
   "@headlessplayback/preact": {
