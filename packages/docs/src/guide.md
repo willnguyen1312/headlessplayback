@@ -28,7 +28,7 @@ $ yarn add @headlessplayback/core
 Simply importing the utilities you need from `@headlessplayback/core`
 
 ```html
-<video controls id="video"></video>
+<video src="src" controls id="video"></video>
 
 <p id="duration"></p>
 <p id="currentTime"></p>
@@ -75,7 +75,7 @@ function App() {
 
   return (
     <>
-      <video controls id="video"></video>
+      <video src="src" controls id="video"></video>
 
       <p>{playbackState.duration}</p>
       <p>{playbackState.currentTime}</p>
@@ -105,7 +105,7 @@ function App() {
 
   return (
     <>
-      <video controls id="video"></video>
+      <video src="src" controls id="video"></video>
 
       <p>{playbackState.duration}</p>
       <p>{playbackState.currentTime}</p>
@@ -130,7 +130,7 @@ function App() {
 
   return (
     <>
-      <video controls id="video"></video>
+      <video src="src" controls id="video"></video>
 
       <p>{playbackState.duration}</p>
       <p>{playbackState.currentTime}</p>
@@ -160,7 +160,7 @@ function App() {
 
   return (
     <>
-      <video controls id="video"></video>
+      <video src="src" controls id="video"></video>
 
       <p>{playbackState.duration}</p>
       <p>{playbackState.currentTime}</p>
@@ -195,7 +195,7 @@ Simply importing the utilities you need from `@headlessplayback/svelte`
   })
 </script>
 
-<video id="video" controls />
+<video src="src" id="video" controls />
 
 <p>{playbackState.duration}</p>
 <p>{playbackState.currentTime}</p>
@@ -222,7 +222,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <video id="video" controls />
+  <video src="src" id="video" controls />
 
   <p>{{ playbackState.duration }}</p>
   <p>{{ playbackState.currentTime }}</p>
@@ -231,10 +231,53 @@ onMounted(() => {
 
 Refer to [Vue Adapter section](/api/adapters/vue) for more details
 
+## Example with Angular Adapter
+
+Simply importing the utilities you need from `@headlessplayback/angular`
+
+```html
+<!-- playback.component.html -->
+<video src="src" [id]="id" controls />
+
+<p>{{ playbackState.duration }}</p>
+<p>{{ playbackState.currentTime }}</p>
+```
+
+```ts
+// playback.component.ts
+import { AfterViewInit, Component } from "@angular/core"
+import { PlaybackService, PlaybackState } from "@headlessplayback/angular"
+
+@Component({
+  selector: "playback-component",
+  templateUrl: "./playback.component.html",
+  providers: [PlaybackService],
+})
+export class PlaybackNormalComponent implements AfterViewInit {
+  id = "playback"
+  playbackState: PlaybackState
+
+  constructor(private playbackService: PlaybackService) {
+    this.playbackService.usePlayback({ id: this.id })
+    this.playbackState = this.playbackService.playbackState
+  }
+
+  ngAfterViewInit() {
+    this.playbackService.activate()
+    this.playbackService.playbackState$.subscribe((state) => {
+      this.playbackState = state
+    })
+  }
+}
+```
+
+Refer to [Angular Adapter section](/api/adapters/angular) for more details
+
 ## Demos
 
 - [Vanilla JS](/examples/vanilla)
 - [Vue](/examples/vue)
+- [Angular](/examples/angular)
 - [React](/examples/react)
 - [Preact](/examples/preact)
 - [Svelte](/examples/svelte)

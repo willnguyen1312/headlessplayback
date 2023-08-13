@@ -20,6 +20,7 @@
   ],
   "scripts": {
     "build:docs": "turbo build --filter=docs... --force",
+    "preview:docs": "pnpm --filter=docs preview",
     "build": "turbo build --filter=!docs",
     "changeset": "changeset",
     "check": "turbo run build typecheck lint test --filter=!docs",
