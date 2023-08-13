@@ -4,7 +4,6 @@ import { hijackPlaybackPlugin } from "@headlessplayback/hijack-plugin"
 import { sleep } from "./helper"
 PlaybackService.use(hijackPlaybackPlugin)
 
-
 @Component({
   selector: "playback-hijack",
   templateUrl: "./hijack.component.html",

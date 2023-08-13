@@ -13,10 +13,10 @@ import { PlaybackNormalComponent } from "./normal.component"
     PlaybackNormalComponent,
     PlaybackHlsComponent,
     PlaybackDashComponent,
-    PlaybackHijackComponent
+    PlaybackHijackComponent,
   ],
   imports: [BrowserModule],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
