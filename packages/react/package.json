@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@headlessplayback/core": "workspace:*",
-    "valtio": "^1.11.1"
+    "valtio": "^1.11.2"
   },
   "peerDependencies": {
     "react": "^18.0.0"

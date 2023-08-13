@@ -2,7 +2,9 @@
   "$schema": "https://unpkg.com/@changesets/config@2.3.0/schema.json",
   "changelog": [
     "@changesets/changelog-github",
-    { "repo": "willnguyen1312/headlessplayback" }
+    {
+      "repo": "willnguyen1312/headlessplayback"
+    }
   ],
   "commit": false,
   "fixed": [],
@@ -10,5 +12,15 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["docs", "with-vue", "with-react", "with-vanilla"]
+  "ignore": [
+    "docs",
+    "with-preact",
+    "with-qwik",
+    "with-angular",
+    "with-react",
+    "with-solid",
+    "with-svelte",
+    "with-vanilla",
+    "with-vue"
+  ]
 }
