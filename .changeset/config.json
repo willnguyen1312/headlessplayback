@@ -16,6 +16,7 @@
     "docs",
     "with-preact",
     "with-qwik",
+    "with-angular",
     "with-react",
     "with-solid",
     "with-svelte",
