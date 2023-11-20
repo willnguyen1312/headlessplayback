@@ -13,7 +13,6 @@
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": [
-    "angular",
     "docs",
     "with-preact",
     "with-qwik",
