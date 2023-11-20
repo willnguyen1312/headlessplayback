@@ -1,0 +1,52 @@
+{
+  "name": "@headlessplayback/zoomable-plugin",
+  "version": "0.1.0",
+  "description": "A zoomable plugin for headlessplayback",
+  "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
+  "repository": "willnguyen1312/headlessplayback",
+  "homepage": "https://github.com/sponsors/willnguyen1312",
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/willnguyen1312"
+  },
+  "keywords": [
+    "javascript",
+    "typescript",
+    "video",
+    "audio",
+    "playback",
+    "headless",
+    "mobile",
+    "desktop",
+    "zoomable"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "license": "MIT",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsup src terse",
+    "dev": "tsup src --watch",
+    "lint": "eslint \"src/**/*.ts*\"",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "devDependencies": {
+    "@namnode/utils": "^0.4.0",
+    "eslint": "^8.54.0",
+    "eslint-config-custom": "workspace:*",
+    "tsconfig": "workspace:*",
+    "tsup": "^7.3.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@headlessplayback/core": "workspace:*"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
