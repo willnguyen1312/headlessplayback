@@ -5,14 +5,16 @@ import Dash from "./Dash.vue"
 import Hijack from "./Hijack.vue"
 import Hls from "./Hls.vue"
 import Normal from "./Normal.vue"
+import Zoomable from "./Zoomable.vue"
 
-type PlaybackName = "Hls" | "Hijack" | "Dash" | "Normal"
+type PlaybackName = "Hls" | "Hijack" | "Dash" | "Normal" | "Zoomable"
 
 const components: Record<PlaybackName, Component> = {
   Hls,
   Hijack,
   Dash,
   Normal,
+  Zoomable,
 }
 
 const tabs = ref([
@@ -20,6 +22,7 @@ const tabs = ref([
   { name: "Hls", href: "#", current: false },
   { name: "Dash", href: "#", current: false },
   { name: "Hijack", href: "#", current: false },
+  { name: "Zoomable", href: "#", current: false },
 ])
 
 const updateTab = (tabName: string) => {

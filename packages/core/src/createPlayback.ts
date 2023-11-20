@@ -293,7 +293,7 @@ export const createPlayback: PlaybackFunc = ({ id }) => {
         () => {
           store.setState({
             waiting: true,
-            paused: false,
+            paused: true,
           })
         },
         { signal },

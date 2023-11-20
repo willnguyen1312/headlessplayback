@@ -8,8 +8,8 @@ import BundleSize from '../components/BundleSize.vue'
 
 ```ts
 import { createPlayback } from "@headlessplayback/core"
-import { dashPlaybackPlugin } from "@headlessplayback/dash-plugin"
-createPlayback.use(dashPlaybackPlugin)
+import { hijackPlaybackPlugin } from "@headlessplayback/hijack-plugin"
+createPlayback.use(hijackPlaybackPlugin)
 
 const { activate, playbackActions } = createPlayback({
   id: "playback",
@@ -26,13 +26,15 @@ playbackActions.hijack({
 
 ```ts
 interface CustomPlaybackActions {
-  hijack: (arg: HijackArgs) => void
+  hijack: (arg: {
+    frequency: number
+    duration: number
+    direction?: Direction
+  }) => void
   setDirection: (arg: { direction: Direction }) => void
   setDuration: (arg: { duration: number }) => void
   setFrequency: (arg: { frequency: number }) => void
 }
-
-type HijackArgs = { frequency: number; duration: number; direction?: Direction }
 
 interface CustomPlaybackState {
   direction: Direction

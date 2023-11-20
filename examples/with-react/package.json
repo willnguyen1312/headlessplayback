@@ -9,6 +9,7 @@
     "@headlessplayback/dash-plugin": "latest",
     "@headlessplayback/hijack-plugin": "latest",
     "@headlessplayback/hls-plugin": "latest",
+    "@headlessplayback/zoomable-plugin": "latest",
     "@headlessplayback/react": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

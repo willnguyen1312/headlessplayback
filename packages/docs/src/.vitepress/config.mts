@@ -98,6 +98,7 @@ export default defineConfig({
           { text: "dash", link: "/plugins/dash" },
           { text: "hijack", link: "/plugins/hijack" },
           { text: "hls", link: "/plugins/hls" },
+          { text: "zoomable", link: "/plugins/zoomable" },
         ],
       },
       {

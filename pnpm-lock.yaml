@@ -193,6 +193,9 @@ importers:
       "@headlessplayback/react":
         specifier: latest
         version: link:../../packages/react
+      "@headlessplayback/zoomable-plugin":
+        specifier: latest
+        version: link:../../packages/zoomable
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -344,6 +347,9 @@ importers:
       "@headlessplayback/vue":
         specifier: latest
         version: link:../../packages/vue
+      "@headlessplayback/zoomable-plugin":
+        specifier: latest
+        version: link:../../packages/zoomable
       vue:
         specifier: ^3.3.8
         version: 3.3.8(typescript@5.2.2)
@@ -471,6 +477,9 @@ importers:
       "@headlessplayback/vue":
         specifier: latest
         version: link:../vue
+      "@headlessplayback/zoomable-plugin":
+        specifier: latest
+        version: link:../zoomable
       vitepress:
         specifier: 1.0.0-rc.27
         version: 1.0.0-rc.27(@algolia/client-search@4.20.0)(postcss@8.4.31)(search-insights@2.6.0)
@@ -719,6 +728,31 @@ importers:
       "@types/node":
         specifier: ^20.9.1
         version: 20.9.1
+      eslint:
+        specifier: ^8.54.0
+        version: 8.54.0
+      eslint-config-custom:
+        specifier: workspace:*
+        version: link:../eslint-config-custom
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+      tsup:
+        specifier: ^7.3.0
+        version: 7.3.0(postcss@8.4.31)(typescript@5.2.2)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
+
+  packages/zoomable:
+    dependencies:
+      "@headlessplayback/core":
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      "@namnode/utils":
+        specifier: ^0.4.0
+        version: 0.4.0
       eslint:
         specifier: ^8.54.0
         version: 8.54.0
