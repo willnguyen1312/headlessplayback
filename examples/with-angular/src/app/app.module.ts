@@ -6,6 +6,7 @@ import { PlaybackDashComponent } from "./dash.component"
 import { PlaybackHijackComponent } from "./hijack.component"
 import { PlaybackHlsComponent } from "./hls.component"
 import { PlaybackNormalComponent } from "./normal.component"
+import { PlaybackZoomableComponent } from "./zoomable.component"
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { PlaybackNormalComponent } from "./normal.component"
     PlaybackHlsComponent,
     PlaybackDashComponent,
     PlaybackHijackComponent,
+    PlaybackZoomableComponent,
   ],
   imports: [BrowserModule],
   providers: [],

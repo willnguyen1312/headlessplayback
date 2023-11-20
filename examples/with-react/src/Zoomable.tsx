@@ -67,7 +67,7 @@ function Zoomable() {
       <CurrentTime />
       <Duration />
 
-      <div className="flex items-start space-x-1 ">
+      <div className="flex space-x-1 ">
         <button
           className="rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
           onClick={jumpPrev5s}
