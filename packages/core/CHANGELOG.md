@@ -1,5 +1,14 @@
 # @headlessplayback/core
 
+## 0.14.1
+
+### Patch Changes
+
+- [#97](https://github.com/willnguyen1312/headlessplayback/pull/97)
+  [`afd39ff`](https://github.com/willnguyen1312/headlessplayback/commit/afd39ff64be7e230784a67028078392d4b6613e7)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Fix paused
+  state on seek 🚀
+
 ## 0.14.0
 
 ### Minor Changes
