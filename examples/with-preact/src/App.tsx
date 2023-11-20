@@ -3,6 +3,7 @@ import Dash from "./Dash"
 import Hijack from "./Hijack"
 import Hls from "./Hls"
 import Normal from "./Normal"
+import Zoomable from "./Zoomable"
 
 function cls(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
@@ -14,6 +15,7 @@ export default function App() {
     { name: "Hls", href: "#", current: false },
     { name: "Dash", href: "#", current: false },
     { name: "Hijack", href: "#", current: false },
+    { name: "Zoomable", href: "#", current: false },
   ])
 
   const activeComponentName = tabs.find((tab) => tab.current)?.name
@@ -33,6 +35,10 @@ export default function App() {
 
     if (activeComponentName === "Dash") {
       return <Dash />
+    }
+
+    if (activeComponentName === "Zoomable") {
+      return <Zoomable />
     }
 
     return null

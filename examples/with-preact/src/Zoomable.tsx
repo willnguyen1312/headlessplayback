@@ -1,6 +1,9 @@
 import { usePlayback } from "@headlessplayback/preact"
-import { useEffect } from "preact/hooks"
-const id = "normal"
+import { zoomablePlaybackPlugin } from "@headlessplayback/zoomable-plugin"
+import { useEffect, useRef } from "preact/hooks"
+const id = "zoomable"
+
+usePlayback.use(zoomablePlaybackPlugin)
 
 function CurrentTime() {
   const playback = usePlayback({
@@ -18,14 +21,21 @@ const Duration = () => {
   return <p>Duration: {playbackState.duration}</p>
 }
 
-function App() {
+function Zoomable() {
   const { activate, playbackActions, playbackState } = usePlayback({
     id,
   })
+  const videoContainerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     // Activate when playback element is accessible from the DOM
     activate()
+
+    playbackActions.createZoomablePlayback({
+      container: videoContainerRef.current as HTMLDivElement,
+    })
+
+    playbackActions.setEnableZoom({ enableZoom: true })
   }, [])
 
   function jumpNext5s() {
@@ -37,36 +47,50 @@ function App() {
     playbackActions.setCurrentTime(playbackState.currentTime - 5)
   }
 
+  function togglePlayback() {
+    playbackActions.setPaused(!playbackState.paused)
+  }
+
   return (
     <>
-      <div class="border-fuchsia border-1 h-[400px] w-[600px]">
+      <div
+        ref={videoContainerRef}
+        class="border-fuchsia border-1 h-[337.5px] w-[600px]"
+      >
         <video
           src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-          class="h-full w-full"
+          class="h-full w-full cursor-zoom-in"
           id={id}
-          controls
         ></video>
       </div>
 
       <CurrentTime />
       <Duration />
 
-      <div class="flex flex-col items-start space-y-1 ">
-        <button
-          class="rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
-          onClick={jumpNext5s}
-        >
-          Next 5s
-        </button>
+      <div class="flex space-x-1 ">
         <button
           class="rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
           onClick={jumpPrev5s}
         >
           Prev 5s
         </button>
+
+        <button
+          class="rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
+          onClick={togglePlayback}
+        >
+          {playbackState.paused ? "Play" : "Pause"}
+        </button>
+
+        <button
+          class="rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
+          onClick={jumpNext5s}
+        >
+          Next 5s
+        </button>
       </div>
     </>
   )
 }
 
-export default App
+export default Zoomable
