@@ -72,7 +72,7 @@ importers:
         version: 17.0.3(@angular/common@17.0.3)(@angular/core@17.0.3)(@angular/platform-browser@17.0.3)(rxjs@7.8.1)
       "@headlessplayback/angular":
         specifier: latest
-        version: link:../../packages/angular/dist/angular
+        version: 0.1.0(@angular/common@17.0.3)(@angular/core@17.0.3)
       "@headlessplayback/dash-plugin":
         specifier: latest
         version: link:../../packages/dash
@@ -415,7 +415,6 @@ importers:
       typescript:
         specifier: ~5.2.2
         version: 5.2.2
-    publishDirectory: ./dist/angular
 
   packages/core:
     devDependencies:
@@ -4203,6 +4202,29 @@ packages:
       }
     engines: { node: ">=14" }
     dev: true
+
+  /@headlessplayback/angular@0.1.0(@angular/common@17.0.3)(@angular/core@17.0.3):
+    resolution:
+      {
+        integrity: sha512-C/iF3QFP8dboxoC3GX6VAPUZMjTHG5S/yRoy2+q3OdDITnyzfcHk2tLvypq8FpbmaWyk34SyZiG8YrNDKfEv9g==,
+      }
+    peerDependencies:
+      "@angular/common": ^16.1.0
+      "@angular/core": ^16.1.0
+    dependencies:
+      "@angular/common": 17.0.3(@angular/core@17.0.3)(rxjs@7.8.1)
+      "@angular/core": 17.0.3(rxjs@7.8.1)(zone.js@0.14.2)
+      "@headlessplayback/core": 0.14.0
+      rxjs: 7.8.1
+      tslib: 2.6.2
+    dev: false
+
+  /@headlessplayback/core@0.14.0:
+    resolution:
+      {
+        integrity: sha512-TJgayDyc3thTvf1xEyquZUkf7KpOnay7FogIh9xzima9wKDs4S01ihwKpp+JaNgfVThRMASE25eilrQaXxDQfw==,
+      }
+    dev: false
 
   /@humanwhocodes/config-array@0.11.13:
     resolution:
