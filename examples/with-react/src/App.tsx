@@ -11,11 +11,11 @@ function classNames(...classes: string[]) {
 
 export default function App() {
   const [tabs, setTabs] = useState([
-    { name: "Normal", href: "#", current: false },
+    { name: "Normal", href: "#", current: true },
     { name: "Hls", href: "#", current: false },
     { name: "Dash", href: "#", current: false },
     { name: "Hijack", href: "#", current: false },
-    { name: "Zoomable", href: "#", current: true },
+    { name: "Zoomable", href: "#", current: false },
   ])
 
   const activeComponentName = tabs.find((tab) => tab.current)?.name
