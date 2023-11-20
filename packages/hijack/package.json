@@ -1,6 +1,6 @@
 {
   "name": "@headlessplayback/hijack-plugin",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A hijack plugin for headlessplayback",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "repository": "willnguyen1312/headlessplayback",

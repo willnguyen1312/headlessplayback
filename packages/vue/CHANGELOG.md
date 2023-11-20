@@ -1,5 +1,13 @@
 # @headlessplayback/vue
 
+## 0.1.7
+
+### Patch Changes
+
+- Updated dependencies
+  [[`afd39ff`](https://github.com/willnguyen1312/headlessplayback/commit/afd39ff64be7e230784a67028078392d4b6613e7)]:
+  - @headlessplayback/core@0.14.1
+
 ## 0.1.6
 
 ### Patch Changes

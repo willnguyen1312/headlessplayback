@@ -1,6 +1,6 @@
 {
   "name": "@headlessplayback/zoomable-plugin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A zoomable plugin for headlessplayback",
   "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
   "repository": "willnguyen1312/headlessplayback",
