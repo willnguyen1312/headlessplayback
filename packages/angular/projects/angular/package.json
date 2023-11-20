@@ -1,6 +1,6 @@
 {
   "name": "@headlessplayback/angular",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "peerDependencies": {
     "@angular/common": "^16.1.0",
     "@angular/core": "^16.1.0"
@@ -10,5 +10,8 @@
     "rxjs": "~7.8.1",
     "tslib": "^2.6.2"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "publishConfig": {
+    "directory": "../../dist/angular"
+  }
 }
