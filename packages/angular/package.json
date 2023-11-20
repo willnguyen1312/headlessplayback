@@ -1,11 +1,10 @@
 {
-  "name": "angular",
-  "version": "0.0.1",
+  "name": "@headlessplayback/angular",
+  "version": "0.1.1",
   "scripts": {
     "build": "ng build angular --configuration development",
     "dev": "ng build angular --watch --configuration development"
   },
-  "private": true,
   "dependencies": {
     "@headlessplayback/core": "workspace:*",
     "rxjs": "~7.8.1",
@@ -19,5 +18,8 @@
     "@angular/core": "^17.0.3",
     "ng-packagr": "^17.0.1",
     "typescript": "~5.2.2"
+  },
+  "publishConfig": {
+    "directory": "./dist/angular"
   }
 }
