@@ -9,7 +9,7 @@
     "usePlayback": "2.13 KB"
   },
   "@headlessplayback/react": {
-    "usePlayback": "1.53 KB"
+    "usePlayback": "1.52 KB"
   },
   "@headlessplayback/qwik": {
     "usePlayback": "1.68 KB",
@@ -19,7 +19,7 @@
     "usePlayback": "2.84 KB"
   },
   "@headlessplayback/svelte": {
-    "usePlayback": "1.73 KB"
+    "usePlayback": "1.72 KB"
   },
   "@headlessplayback/vue": {
     "usePlayback": "1.5 KB"
