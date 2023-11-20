@@ -13,6 +13,7 @@ const packages = [
   "hls",
   "dash",
   "hijack",
+  "zoomable",
 ]
 
 function formatBytes(bytes, decimals = 2) {
