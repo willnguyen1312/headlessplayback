@@ -1,6 +1,6 @@
 {
-  "name": "@headlessplayback/angular",
-  "version": "0.1.1",
+  "name": "angular",
+  "private": true,
   "scripts": {
     "build": "ng build angular --configuration development",
     "dev": "ng build angular --watch --configuration development"
