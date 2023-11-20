@@ -2,7 +2,7 @@
 import BundleSize from '../components/BundleSize.vue'
 </script>
 
-## `hijack` - <BundleSize func="zoomablePlaybackPlugin" pkg="@headlessplayback/zoomable-plugin" />
+## `zoomable` - <BundleSize func="zoomablePlaybackPlugin" pkg="@headlessplayback/zoomable-plugin" />
 
 ### Basic Usage
 
