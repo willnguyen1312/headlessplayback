@@ -33,6 +33,11 @@ const togglePlayback = () => {
 </script>
 
 <template>
+  <p>
+    Please feel free to hit play and scroll (pinch 🤏 on touch device) inside
+    the video to see the magic 🪄
+  </p>
+
   <div ref="videoRef" class="border-fuchsia border-1 h-[337.5px] w-[600px]">
     <video
       src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
