@@ -1,5 +1,14 @@
 # @headlessplayback/angular
 
+## 0.2.0
+
+### Minor Changes
+
+- [#100](https://github.com/willnguyen1312/headlessplayback/pull/100)
+  [`5325891`](https://github.com/willnguyen1312/headlessplayback/commit/5325891832850402e6a4d51cd0672a7181e9ec96)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Release minor
+  version of Angular adapter properly 💞
+
 ## 0.1.1
 
 ### Patch Changes
