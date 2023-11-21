@@ -716,7 +716,7 @@ importers:
         specifier: workspace:*
         version: link:../core
       svelte:
-        specifier: ^3.0.0 || ^4.0.0
+        specifier: ^3.0.0 || ^4.0.0 || ^5.0.0
         version: 4.2.5
     devDependencies:
       "@types/node":
@@ -6024,7 +6024,7 @@ packages:
       "@vue/reactivity-transform": 3.3.4
       "@vue/shared": 3.3.4
       estree-walker: 2.0.2
-      magic-string: 0.30.2
+      magic-string: 0.30.5
       postcss: 8.4.27
       source-map-js: 1.0.2
     dev: false
@@ -11551,16 +11551,6 @@ packages:
     dependencies:
       "@jridgewell/sourcemap-codec": 1.4.15
     dev: true
-
-  /magic-string@0.30.2:
-    resolution:
-      {
-        integrity: sha512-lNZdu7pewtq/ZvWUp9Wpf/x7WzMTsR26TWV03BRZrXFsv+BI6dy8RAiKgm1uM/kyR0rCfUcqvOlXKG66KhIGug==,
-      }
-    engines: { node: ">=12" }
-    dependencies:
-      "@jridgewell/sourcemap-codec": 1.4.15
-    dev: false
 
   /magic-string@0.30.5:
     resolution:
