@@ -254,6 +254,9 @@ importers:
       "@headlessplayback/solid":
         specifier: latest
         version: link:../../packages/solid
+      "@headlessplayback/zoomable-plugin":
+        specifier: latest
+        version: link:../../packages/zoomable
       solid-js:
         specifier: ^1.8.5
         version: 1.8.5

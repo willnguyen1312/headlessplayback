@@ -3,6 +3,7 @@ import Dash from "./Dash"
 import Hijack from "./Hijack"
 import Hls from "./Hls"
 import Normal from "./Normal"
+import Zoomable from "./Zoomable"
 
 function cls(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
@@ -14,12 +15,13 @@ const App: Component = () => {
     { name: "Hls", href: "#", current: false },
     { name: "Dash", href: "#", current: false },
     { name: "Hijack", href: "#", current: false },
+    { name: "Zoomable", href: "#", current: false },
   ])
 
   const activeTab = createMemo(() => tabs().find((tab) => tab.current)!.name)
 
   return (
-    <div class="p-4">
+    <>
       <nav class="-mb-px flex space-x-8 border-gray-200" aria-label="Tabs">
         <For each={tabs()}>
           {(tab) => (
@@ -53,8 +55,9 @@ const App: Component = () => {
         {activeTab() === "Hls" && <Hls />}
         {activeTab() === "Dash" && <Dash />}
         {activeTab() === "Hijack" && <Hijack />}
+        {activeTab() === "Zoomable" && <Zoomable />}
       </div>
-    </div>
+    </>
   )
 }
 

@@ -19,7 +19,7 @@ const CurrentTime = component$(() => {
   return <p>Current time: {playbackState.currentTime}</p>
 })
 
-const Hijack = component$(() => {
+const Normal = component$(() => {
   const { playbackActions, playbackState, use } = usePlayback({
     id,
   })
@@ -64,4 +64,4 @@ const Hijack = component$(() => {
   )
 })
 
-export default Hijack
+export default Normal

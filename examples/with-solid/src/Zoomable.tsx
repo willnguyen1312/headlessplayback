@@ -1,37 +1,39 @@
-import { $, component$, useSignal, useVisibleTask$ } from "@builder.io/qwik"
-import { usePlayback } from "@headlessplayback/qwik"
+import { usePlayback } from "@headlessplayback/solid"
 import { zoomablePlaybackPlugin } from "@headlessplayback/zoomable-plugin"
+import { onMount, type Component } from "solid-js"
+
+usePlayback.use(zoomablePlaybackPlugin)
 
 const id = "zoomable"
 
-const Duration = component$(() => {
+const Duration: Component = () => {
   const { playbackState } = usePlayback({
     id,
   })
 
   return <p>Duration: {playbackState.duration}</p>
-})
+}
 
-const CurrentTime = component$(() => {
-  const { playbackState } = usePlayback({
+function CurrentTime() {
+  const playback = usePlayback({
     id,
   })
 
-  return <p>Current time: {playbackState.currentTime}</p>
-})
+  return <p>Current time: {playback.playbackState.currentTime}</p>
+}
 
-const Zoomable = component$(() => {
-  const { playbackActions, playbackState, use } = usePlayback({
+const Zoomable: Component = () => {
+  const { activate, playbackActions, playbackState } = usePlayback({
     id,
   })
+  let videoContainerRef: any
 
-  const videoContainerRef = useSignal<HTMLDivElement>()
-
-  useVisibleTask$(async () => {
-    await use(zoomablePlaybackPlugin)
+  onMount(() => {
+    // Activate when playback element is accessible from the DOM
+    activate()
 
     playbackActions.createZoomablePlayback?.({
-      container: videoContainerRef.value as HTMLDivElement,
+      container: videoContainerRef as HTMLDivElement,
     })
 
     playbackActions.setEnableZoom({
@@ -39,17 +41,18 @@ const Zoomable = component$(() => {
     })
   })
 
-  const jumpNext5s = $(() => {
+  function jumpNext5s() {
+    // Core actions and state are always available
     playbackActions.setCurrentTime(playbackState.currentTime + 5)
-  })
+  }
 
-  const jumpPrev5s = $(() => {
+  function jumpPrev5s() {
     playbackActions.setCurrentTime(playbackState.currentTime - 5)
-  })
+  }
 
-  const togglePlayback = $(() => {
+  function togglePlayback() {
     playbackActions.setPaused(!playbackState.paused)
-  })
+  }
 
   return (
     <>
@@ -70,27 +73,27 @@ const Zoomable = component$(() => {
       <div class="flex flex-col items-start space-y-1 ">
         <button
           class="rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
-          onClick$={jumpPrev5s}
+          onClick={jumpPrev5s}
         >
           Prev 5s
         </button>
 
         <button
           class="rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
-          onClick$={togglePlayback}
+          onClick={togglePlayback}
         >
           {playbackState.paused ? "Play" : "Pause"}
         </button>
 
         <button
           class="rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
-          onClick$={jumpNext5s}
+          onClick={jumpNext5s}
         >
           Next 5s
         </button>
       </div>
     </>
   )
-})
+}
 
 export default Zoomable
