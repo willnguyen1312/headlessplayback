@@ -19,8 +19,8 @@
   let playbackState: PlaybackState
   let videoContainer: HTMLDivElement
 
-  const unsubscribe = _playbackState.subscribe((value: PlaybackState) => {
-    playbackState = value
+  const unsubscribe = _playbackState.subscribe((value) => {
+    playbackState = value as PlaybackState
   })
 
   const jumpTo = (time: number) => {

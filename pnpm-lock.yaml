@@ -279,6 +279,9 @@ importers:
 
   examples/with-svelte:
     dependencies:
+      "@headlessplayback/core":
+        specifier: latest
+        version: link:../../packages/core
       "@headlessplayback/dash-plugin":
         specifier: latest
         version: link:../../packages/dash
@@ -337,6 +340,9 @@ importers:
       "@headlessplayback/hls-plugin":
         specifier: latest
         version: link:../../packages/hls
+      "@headlessplayback/zoomable-plugin":
+        specifier: latest
+        version: link:../../packages/zoomable
     devDependencies:
       "@unocss/reset":
         specifier: ^0.57.5

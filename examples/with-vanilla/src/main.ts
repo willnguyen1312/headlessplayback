@@ -5,11 +5,13 @@ import { createPlayback } from "@headlessplayback/core"
 import { dashPlaybackPlugin } from "@headlessplayback/dash-plugin"
 import { hijackPlaybackPlugin } from "@headlessplayback/hijack-plugin"
 import { hlsPlaybackPlugin } from "@headlessplayback/hls-plugin"
+import { zoomablePlaybackPlugin } from "@headlessplayback/zoomable-plugin"
 createPlayback.use(hlsPlaybackPlugin)
 createPlayback.use(dashPlaybackPlugin)
 createPlayback.use(hijackPlaybackPlugin)
+createPlayback.use(zoomablePlaybackPlugin)
 
-type PlayerType = "hls" | "dash" | "hijack" | "normal"
+type PlayerType = "hls" | "dash" | "hijack" | "normal" | "zoomable"
 
 let currentResult: any
 
@@ -39,6 +41,52 @@ function makeNormalPlayback() {
   })
 
   result.activate()
+  currentResult = result
+}
+
+function makeZoomablePlayback() {
+  const currentTime = document.getElementById(
+    "currentTime",
+  ) as HTMLParagraphElement
+
+  const next5sBtn = document.getElementById("next5s") as HTMLButtonElement
+  const togglePlayback = document.getElementById(
+    "togglePlayback",
+  ) as HTMLButtonElement
+  const prev5sBtn = document.getElementById("prev5s") as HTMLButtonElement
+  const duration = document.getElementById("duration") as HTMLParagraphElement
+  const result = createPlayback({
+    id: "zoomable",
+  })
+
+  next5sBtn.addEventListener("click", () => {
+    result.playbackActions.setCurrentTime(result.getState().currentTime + 5)
+  })
+
+  togglePlayback.addEventListener("click", () => {
+    const newPaused = !result.getState().paused
+    togglePlayback.textContent = newPaused ? "Play" : "Pause"
+    result.playbackActions.setPaused(newPaused)
+  })
+
+  prev5sBtn.addEventListener("click", () => {
+    result.playbackActions.setCurrentTime(result.getState().currentTime - 5)
+  })
+
+  result.subscribe(({ state }) => {
+    currentTime.innerText = `Current time: ${state.currentTime}`
+    duration.innerText = `Duration: ${state.duration}`
+  })
+
+  result.activate()
+  result.playbackActions.createZoomablePlayback({
+    container: document.getElementById(
+      "zoomableVideoContainer",
+    ) as HTMLDivElement,
+  })
+  result.playbackActions.setEnableZoom({
+    enableZoom: true,
+  })
   currentResult = result
 }
 
@@ -246,6 +294,7 @@ anchorList.forEach((anchor) => {
       dash: makeDashPlayback,
       hijack: makeHijackPlayback,
       normal: makeNormalPlayback,
+      zoomable: makeZoomablePlayback,
     }
 
     const handler = handlers[dataName]
