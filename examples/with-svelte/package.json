@@ -9,7 +9,8 @@
     "@headlessplayback/dash-plugin": "latest",
     "@headlessplayback/hijack-plugin": "latest",
     "@headlessplayback/hls-plugin": "latest",
-    "@headlessplayback/svelte": "latest"
+    "@headlessplayback/svelte": "latest",
+    "@headlessplayback/zoomable-plugin": "latest"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^3.0.0",

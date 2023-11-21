@@ -291,6 +291,9 @@ importers:
       "@headlessplayback/svelte":
         specifier: latest
         version: link:../../packages/svelte
+      "@headlessplayback/zoomable-plugin":
+        specifier: latest
+        version: link:../../packages/zoomable
     devDependencies:
       "@sveltejs/vite-plugin-svelte":
         specifier: ^3.0.0

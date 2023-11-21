@@ -3,12 +3,14 @@
   import Hijack from "./Hijack.svelte"
   import Hls from "./Hls.svelte"
   import Normal from "./Normal.svelte"
+  import Zoomable from "./Zoomable.svelte"
 
   let tabs = [
     { name: "Normal", href: "#", current: true },
     { name: "Hls", href: "#", current: false },
     { name: "Dash", href: "#", current: false },
     { name: "Hijack", href: "#", current: false },
+    { name: "Zoomable", href: "#", current: false },
   ]
 
   $: activeTab = tabs.find((tab) => tab.current).name
@@ -52,6 +54,10 @@
 
     {#if activeTab === "Hijack"}
       <Hijack />
+    {/if}
+
+    {#if activeTab === "Zoomable"}
+      <Zoomable />
     {/if}
   </div>
 </div>
