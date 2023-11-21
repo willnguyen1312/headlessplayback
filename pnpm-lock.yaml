@@ -159,6 +159,9 @@ importers:
       "@headlessplayback/qwik":
         specifier: latest
         version: link:../../packages/qwik
+      "@headlessplayback/zoomable-plugin":
+        specifier: latest
+        version: link:../../packages/zoomable
     devDependencies:
       "@builder.io/qwik":
         specifier: ^1.2.18
