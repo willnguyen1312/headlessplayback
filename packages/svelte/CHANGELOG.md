@@ -1,5 +1,14 @@
 # @headlessplayback/svelte
 
+## 0.1.8
+
+### Patch Changes
+
+- [#102](https://github.com/willnguyen1312/headlessplayback/pull/102)
+  [`306d34a`](https://github.com/willnguyen1312/headlessplayback/commit/306d34a75c12328f1edc4b6139cb36eaec1360b1)
+  Thanks [@willnguyen1312](https://github.com/willnguyen1312)! - Fix svelte
+  package's peer dependencies 🚀
+
 ## 0.1.7
 
 ### Patch Changes
