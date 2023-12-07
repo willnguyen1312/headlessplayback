@@ -6,14 +6,14 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^17.0.3",
-    "@angular/common": "^17.0.3",
-    "@angular/compiler": "^17.0.3",
-    "@angular/core": "^17.0.3",
-    "@angular/forms": "^17.0.3",
-    "@angular/platform-browser": "^17.0.3",
-    "@angular/platform-browser-dynamic": "^17.0.3",
-    "@angular/router": "^17.0.3",
+    "@angular/animations": "^17.0.6",
+    "@angular/common": "^17.0.6",
+    "@angular/compiler": "^17.0.6",
+    "@angular/core": "^17.0.6",
+    "@angular/forms": "^17.0.6",
+    "@angular/platform-browser": "^17.0.6",
+    "@angular/platform-browser-dynamic": "^17.0.6",
+    "@angular/router": "^17.0.6",
     "@headlessplayback/angular": "latest",
     "@headlessplayback/dash-plugin": "latest",
     "@headlessplayback/hijack-plugin": "latest",
@@ -24,9 +24,9 @@
     "zone.js": "~0.14.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^17.0.1",
-    "@angular/cli": "~17.0.1",
-    "@angular/compiler-cli": "^17.0.3",
-    "typescript": "~5.2.2"
+    "@angular-devkit/build-angular": "^17.0.6",
+    "@angular/cli": "~17.0.6",
+    "@angular/compiler-cli": "^17.0.6",
+    "typescript": "~5.3.3"
   }
 }
