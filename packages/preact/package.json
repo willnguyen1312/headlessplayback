@@ -36,16 +36,16 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@types/node": "^20.9.1",
-    "eslint": "^8.54.0",
+    "@types/node": "^20.10.4",
+    "eslint": "^8.55.0",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
-    "tsup": "^7.3.0",
-    "typescript": "^5.2.2"
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3"
   },
   "dependencies": {
     "@headlessplayback/core": "workspace:*",
-    "valtio": "^1.12.0"
+    "valtio": "^1.12.1"
   },
   "peerDependencies": {
     "preact": "^10.0.0"
