@@ -46,17 +46,17 @@
     "typecheck": "turbo run typecheck"
   },
   "dependencies": {
-    "@angular/cli": "~17.0.6",
+    "@angular/cli": "~17.0.7",
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.1",
-    "eslint": "^8.55.0",
+    "eslint": "^8.56.0",
     "eslint-config-custom": "workspace:*",
     "esno": "^4.0.0",
     "export-size": "^0.7.0",
-    "prettier": "^3.1.0",
+    "prettier": "^3.1.1",
     "prettier-plugin-svelte": "^3.1.2",
     "prettier-plugin-tailwindcss": "^0.5.9",
-    "turbo": "^1.11.0",
+    "turbo": "^1.11.2",
     "unocss": "^0.58.0"
   }
 }
