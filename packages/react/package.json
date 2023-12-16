@@ -37,8 +37,8 @@
   },
   "devDependencies": {
     "@types/node": "^20.10.4",
-    "@types/react": "^18.2.42",
-    "eslint": "^8.55.0",
+    "@types/react": "^18.2.45",
+    "eslint": "^8.56.0",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
     "tsup": "^8.0.1",
