@@ -14,10 +14,10 @@
     "preact": "^10.19.3"
   },
   "devDependencies": {
-    "@preact/preset-vite": "^2.7.0",
-    "@unocss/reset": "^0.58.0",
+    "@preact/preset-vite": "^2.8.1",
+    "@unocss/reset": "^0.58.3",
     "typescript": "^5.3.3",
-    "unocss": "^0.58.0",
-    "vite": "^5.0.10"
+    "unocss": "^0.58.3",
+    "vite": "^5.0.11"
   }
 }

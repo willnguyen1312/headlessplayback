@@ -32,10 +32,10 @@
     "@headlessplayback/hls-plugin": "latest",
     "@headlessplayback/vue": "latest",
     "@headlessplayback/zoomable-plugin": "latest",
-    "vitepress": "1.0.0-rc.32",
-    "vue": "^3.3.12"
+    "vitepress": "1.0.0-rc.35",
+    "vue": "^3.4.5"
   },
   "devDependencies": {
-    "@unocss/reset": "^0.58.0"
+    "@unocss/reset": "^0.58.3"
   }
 }

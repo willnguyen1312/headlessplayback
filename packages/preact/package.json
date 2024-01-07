@@ -36,7 +36,7 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@types/node": "^20.10.4",
+    "@types/node": "^20.10.6",
     "eslint": "^8.56.0",
     "eslint-config-custom": "workspace:*",
     "tsconfig": "workspace:*",
@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "@headlessplayback/core": "workspace:*",
-    "valtio": "^1.12.1"
+    "valtio": "^1.13.0"
   },
   "peerDependencies": {
     "preact": "^10.0.0"
