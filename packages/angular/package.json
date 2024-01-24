@@ -11,13 +11,13 @@
     "tslib": "^2.6.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^17.0.9",
-    "@angular/cli": "~17.0.9",
-    "@angular/compiler": "^17.0.8",
-    "@angular/compiler-cli": "^17.0.8",
-    "@angular/core": "^17.0.8",
-    "ng-packagr": "^17.0.3",
-    "typescript": "~5.2.2"
+    "@angular-devkit/build-angular": "^17.1.1",
+    "@angular/cli": "~17.1.1",
+    "@angular/compiler": "^17.1.0",
+    "@angular/compiler-cli": "^17.1.0",
+    "@angular/core": "^17.1.0",
+    "ng-packagr": "^17.1.2",
+    "typescript": "~5.3.3"
   },
   "publishConfig": {
     "directory": "./dist/angular"
