@@ -6,14 +6,22 @@ import Hijack from "./Hijack.vue"
 import Hls from "./Hls.vue"
 import Normal from "./Normal.vue"
 import Zoomable from "./Zoomable.vue"
+import Rotatable from "./Rotatable.vue"
 
-type PlaybackName = "Hls" | "Hijack" | "Dash" | "Normal" | "Zoomable"
+type PlaybackName =
+  | "Hls"
+  | "Hijack"
+  | "Dash"
+  | "Normal"
+  | "Rotatable"
+  | "Zoomable"
 
 const components: Record<PlaybackName, Component> = {
   Hls,
   Hijack,
   Dash,
   Normal,
+  Rotatable,
   Zoomable,
 }
 
@@ -23,6 +31,7 @@ const tabs = ref([
   { name: "Dash", href: "#", current: false },
   { name: "Hijack", href: "#", current: false },
   { name: "Zoomable", href: "#", current: false },
+  { name: "Rotatable", href: "#", current: false },
 ])
 
 const updateTab = (tabName: string) => {

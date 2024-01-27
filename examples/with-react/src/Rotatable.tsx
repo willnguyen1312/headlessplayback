@@ -1,7 +1,8 @@
 import { usePlayback } from "@headlessplayback/react"
 import { rotatablePlaybackPlugin } from "@headlessplayback/rotatable-plugin"
 import React, { useEffect } from "react"
-const id = "zoomable"
+
+const id = "rotatable"
 
 usePlayback.use(rotatablePlaybackPlugin)
 
@@ -57,7 +58,7 @@ function Rotatable() {
     <>
       <div
         ref={videoContainerRef}
-        className="border-fuchsia border-1 grid h-[400px] w-[800px] place-items-center"
+        className="border-fuchsia border-1 grid h-[400px] w-[600px] place-items-center"
       >
         <video
           style={{

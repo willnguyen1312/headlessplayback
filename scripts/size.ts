@@ -13,6 +13,7 @@ const packages = [
   "hls",
   "dash",
   "hijack",
+  "rotatable",
   "zoomable",
 ]
 
