@@ -2,7 +2,13 @@
 import type { Component } from "vue"
 import { defineAsyncComponent, ref } from "vue"
 
-type PlaybackName = "Hls" | "Hijack" | "Dash" | "Normal" | "Zoomable"
+type PlaybackName =
+  | "Hls"
+  | "Hijack"
+  | "Dash"
+  | "Normal"
+  | "Zoomable"
+  | "Rotatable"
 
 const Dash = defineAsyncComponent(() => import("./Dash.vue"))
 const Hls = defineAsyncComponent(() => import("./Hls.vue"))
@@ -21,12 +27,12 @@ const components: Record<PlaybackName, Component> = {
 }
 
 const tabs = ref([
-  { name: "Normal", href: "#", current: false },
+  { name: "Normal", href: "#", current: true },
   { name: "Hls", href: "#", current: false },
   { name: "Dash", href: "#", current: false },
   { name: "Hijack", href: "#", current: false },
   { name: "Zoomable", href: "#", current: false },
-  { name: "Rotatable", href: "#", current: true },
+  { name: "Rotatable", href: "#", current: false },
 ])
 
 const updateTab = (tabName: string) => {
