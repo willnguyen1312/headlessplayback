@@ -84,7 +84,6 @@ interface _CustomPlaybackState {
 }
 
 declare module "@headlessplayback/core" {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
   export interface CustomPlaybackState extends _CustomPlaybackState {}
 
   export interface CustomPlaybackActions {

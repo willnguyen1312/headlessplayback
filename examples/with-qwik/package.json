@@ -7,7 +7,7 @@
   "devDependencies": {
     "@builder.io/qwik": "^1.4.2",
     "@builder.io/qwik-city": "^1.4.2",
-    "@types/node": "^20.11.7",
+    "@types/node": "^20.11.8",
     "@unocss/reset": "^0.58.4",
     "typescript": "5.3.3",
     "undici": "^6.5.0",

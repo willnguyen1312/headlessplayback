@@ -4,6 +4,7 @@ import Hijack from "./Hijack"
 import Hls from "./Hls"
 import Normal from "./Normal"
 import Zoomable from "./Zoomable"
+import Rotatable from "./Rotatable"
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
@@ -15,6 +16,7 @@ export default function App() {
     { name: "Hls", href: "#", current: false },
     { name: "Dash", href: "#", current: false },
     { name: "Hijack", href: "#", current: false },
+    { name: "Rotatable", href: "#", current: false },
     { name: "Zoomable", href: "#", current: false },
   ])
 
@@ -39,6 +41,10 @@ export default function App() {
 
     if (activeComponentName === "Zoomable") {
       return <Zoomable />
+    }
+
+    if (activeComponentName === "Rotatable") {
+      return <Rotatable />
     }
 
     return null

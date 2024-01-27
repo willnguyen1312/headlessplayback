@@ -316,11 +316,11 @@ export const zoomablePlaybackPlugin: Plugin = {
       if (zoomableResult) {
         return
       } else {
-        const zoomableResult = _createZoomableVideo(arg)
-        activeZoomableMap.set(arg.id, zoomableResult)
+        const result = _createZoomableVideo(arg)
+        activeZoomableMap.set(arg.id, result)
 
         onCleanup(arg.id, () => {
-          zoomableResult?.cleanup()
+          result.cleanup()
           activeZoomableMap.delete(arg.id)
         })
       }
