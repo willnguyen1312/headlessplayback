@@ -16,8 +16,8 @@ export default function App() {
     { name: "Hls", href: "#", current: false },
     { name: "Dash", href: "#", current: false },
     { name: "Hijack", href: "#", current: false },
-    { name: "Zoomable", href: "#", current: false },
     { name: "Rotatable", href: "#", current: false },
+    { name: "Zoomable", href: "#", current: false },
   ])
 
   const activeComponentName = tabs.find((tab) => tab.current)?.name
