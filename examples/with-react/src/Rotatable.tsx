@@ -65,7 +65,6 @@ function Rotatable() {
             height: playbackState.height,
           }}
           src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-          className="h-full w-full cursor-zoom-in"
           id={id}
         ></video>
       </div>
