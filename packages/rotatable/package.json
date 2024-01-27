@@ -1,0 +1,52 @@
+{
+  "name": "@headlessplayback/rotatable-plugin",
+  "version": "0.1.1",
+  "description": "A rotatable plugin for headlessplayback",
+  "author": "Nam Nguyen <nam.nguyen.node@gmail.com>",
+  "repository": "willnguyen1312/headlessplayback",
+  "homepage": "https://github.com/sponsors/willnguyen1312",
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/willnguyen1312"
+  },
+  "keywords": [
+    "javascript",
+    "typescript",
+    "video",
+    "audio",
+    "playback",
+    "headless",
+    "mobile",
+    "desktop",
+    "rotatable"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "license": "MIT",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsup src terse",
+    "dev": "tsup src --watch",
+    "lint": "eslint \"src/**/*.ts*\"",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "devDependencies": {
+    "@namnode/utils": "^0.4.0",
+    "eslint": "^8.56.0",
+    "eslint-config-custom": "workspace:*",
+    "tsconfig": "workspace:*",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@headlessplayback/core": "workspace:*"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

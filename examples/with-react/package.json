@@ -10,6 +10,7 @@
     "@headlessplayback/hijack-plugin": "latest",
     "@headlessplayback/hls-plugin": "latest",
     "@headlessplayback/react": "latest",
+    "@headlessplayback/rotatable-plugin": "latest",
     "@headlessplayback/zoomable-plugin": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

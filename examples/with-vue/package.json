@@ -11,6 +11,7 @@
     "@headlessplayback/hls-plugin": "latest",
     "@headlessplayback/vue": "latest",
     "@headlessplayback/zoomable-plugin": "latest",
+    "@headlessplayback/rotatable-plugin": "latest",
     "vue": "^3.4.15"
   },
   "devDependencies": {
