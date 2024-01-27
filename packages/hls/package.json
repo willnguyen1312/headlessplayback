@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "@headlessplayback/core": "workspace:*",
-    "hls.js": "^1.5.1"
+    "hls.js": "^1.5.2"
   },
   "publishConfig": {
     "access": "public"

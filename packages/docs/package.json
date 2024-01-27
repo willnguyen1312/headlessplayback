@@ -36,6 +36,6 @@
     "vue": "^3.4.15"
   },
   "devDependencies": {
-    "@unocss/reset": "^0.58.3"
+    "@unocss/reset": "^0.58.4"
   }
 }
