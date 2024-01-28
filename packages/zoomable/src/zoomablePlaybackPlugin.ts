@@ -9,6 +9,7 @@ import {
 } from "./utils"
 
 interface _CustomPlaybackState {
+  currentRotation?: number
   currentZoom: number
   enableZoom: boolean
 }
@@ -75,7 +76,6 @@ export const zoomablePlaybackPlugin: Plugin = {
         newPositionX: number,
         currentZoom: number,
       ) => {
-        const width = container.clientWidth
         if (newPositionX > 0) return 0
         if (newPositionX + width * currentZoom < width)
           return -width * (currentZoom - 1)
@@ -86,7 +86,6 @@ export const zoomablePlaybackPlugin: Plugin = {
         newPositionY: number,
         currentZoom: number,
       ) => {
-        const height = container.clientHeight
         if (newPositionY > 0) return 0
         if (newPositionY + height * currentZoom < height)
           return -height * (currentZoom - 1)
@@ -94,6 +93,7 @@ export const zoomablePlaybackPlugin: Plugin = {
       }
 
       let prevDistance = -1
+      let isDimensionsSwitched = false
       let enabledScroll = true
       const pointerMap = new Map<number, { x: number; y: number }>()
 
@@ -101,12 +101,17 @@ export const zoomablePlaybackPlugin: Plugin = {
       let lastPositionY = 0
       let startX = 0
       let startY = 0
+      let lastWidth = container.clientWidth
+      let lastHeight = container.clientHeight
+      let width = container.clientWidth
+      let height = container.clientHeight
 
       container.style.overflow = "hidden"
-      playbackElement.style.transformOrigin = "0 0"
+      // playbackElement.style.transformOrigin = "0 0"
 
       function updateZoom() {
         const currentState = store.getState()
+
         playbackElement.style.transform = `translate(${currentPositionX}px, ${currentPositionY}px) scale(${currentState.currentZoom})`
       }
 
@@ -269,6 +274,11 @@ export const zoomablePlaybackPlugin: Plugin = {
         }
       }
 
+      function _handlePointerEnter() {
+        width = container.clientWidth
+        height = container.clientHeight
+      }
+
       function checkZoomEnabled() {
         return store.getState().enableZoom
       }
@@ -291,13 +301,36 @@ export const zoomablePlaybackPlugin: Plugin = {
         _handlePointerUp,
       )
 
+      const handlePointerEnter = makeMaybeCallFunction(
+        checkZoomEnabled,
+        _handlePointerEnter,
+      )
+
       const controller = new AbortController()
       const { signal } = controller
       container.addEventListener("wheel", handleWheel, { signal })
+      container.addEventListener("pointerenter", handlePointerEnter, { signal })
       container.addEventListener("pointerdown", handlePointerDown, { signal })
       container.addEventListener("pointerleave", handlePointerLeave, { signal })
       container.addEventListener("pointermove", handlePointerMove, { signal })
       container.addEventListener("pointerup", handlePointerUp, { signal })
+
+      store.subscribe(async ({ state }) => {
+        if (state.currentRotation === undefined) return
+
+        isDimensionsSwitched = state.currentRotation % 180 !== 0
+
+        // Wait for the next frame to get the correct dimensions
+        await new Promise((resolve) => setTimeout(resolve, 1))
+
+        lastWidth = width
+        lastHeight = height
+        width = container.clientWidth
+        height = container.clientHeight
+
+        calculatePositionX(currentPositionX, state.currentZoom)
+        calculatePositionY(currentPositionY, state.currentZoom)
+      })
 
       return {
         cleanup() {

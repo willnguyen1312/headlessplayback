@@ -1,12 +1,15 @@
 <script lang="ts" setup>
 import { usePlayback } from "@headlessplayback/vue"
 import { rotatablePlaybackPlugin } from "@headlessplayback/rotatable-plugin"
+import { zoomablePlaybackPlugin } from "@headlessplayback/zoomable-plugin"
 import { onMounted, ref } from "vue"
 
 usePlayback.use(rotatablePlaybackPlugin)
+usePlayback.use(zoomablePlaybackPlugin)
 
 const id = "rotatable"
-const videoRef = ref<HTMLElement | null>(null)
+const videoOuterRef = ref<HTMLElement | null>(null)
+const videoInnerRef = ref<HTMLElement | null>(null)
 const { activate, playbackActions, playbackState } = usePlayback({
   id,
 })
@@ -16,8 +19,14 @@ onMounted(() => {
   activate()
 
   playbackActions.createRotatablePlayback({
-    container: videoRef.value as HTMLElement,
+    container: videoOuterRef.value as HTMLElement,
   })
+
+  playbackActions.createZoomablePlayback({
+    container: videoInnerRef.value as HTMLElement,
+  })
+
+  playbackActions.setEnableZoom({ enableZoom: true })
 })
 
 const jumpTo = (time: number) => {
@@ -36,19 +45,24 @@ const rotate = () => {
 
 <template>
   <div
-    ref="videoRef"
-    className="border-fuchsia border-1 grid h-[400px] w-[600px] place-items-center"
+    ref="videoOuterRef"
+    class="border-fuchsia border-1 grid h-[400px] w-[600px] place-items-center"
   >
-    <video
+    <div
+      ref="videoInnerRef"
+      class="grid place-items-center"
       :style="{
         width: `${playbackState.width}px`,
         height: `${playbackState.height}px`,
       }"
-      src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-      :id="id"
     >
-      <track kind="captions" />
-    </video>
+      <video
+        src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+        :id="id"
+      >
+        <track kind="captions" />
+      </video>
+    </div>
   </div>
 
   <p>Current time: {{ playbackState.currentTime }}</p>

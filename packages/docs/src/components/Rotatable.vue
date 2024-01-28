@@ -37,7 +37,7 @@ const rotate = () => {
 <template>
   <div
     ref="videoRef"
-    className="border-fuchsia border-1 grid h-[400px] w-[600px] place-items-center"
+    class="border-fuchsia border-1 grid h-[400px] w-[600px] place-items-center"
   >
     <video
       :style="{
