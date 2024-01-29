@@ -4,6 +4,7 @@ interface _CustomPlaybackState {
   width: number
   height: number
   currentRotation: number
+  currentScale: number
 }
 
 const createDefaultState = (): _CustomPlaybackState => {
@@ -11,6 +12,7 @@ const createDefaultState = (): _CustomPlaybackState => {
     width: 0,
     height: 0,
     currentRotation: 0,
+    currentScale: 1,
   }
 }
 
@@ -36,13 +38,14 @@ export const rotatablePlaybackPlugin: Plugin = {
       id: string
       container: HTMLElement
     }) {
-      const playbackElement = document.getElementById(id) as HTMLVideoElement
+      const playbackElement = document.getElementById(
+        id,
+      ) as HTMLVideoElement | null
       const controller = new AbortController()
       const { signal } = controller
-      let loadedmetadata = false
 
       function updatePlaybackDimensions() {
-        if (!loadedmetadata) return
+        if (!playbackElement) return
 
         const { clientWidth, clientHeight } = container
         const { videoWidth, videoHeight } = playbackElement
@@ -55,32 +58,33 @@ export const rotatablePlaybackPlugin: Plugin = {
         const containerRatio = clientWidth / clientHeight
         const videoRatio = finalVideoWidth / finalVideoHeight
 
-        const scale = isDimensionsSwitched
+        const currentScale = isDimensionsSwitched
           ? Math.max(videoWidth, videoHeight) /
             Math.min(videoWidth, videoHeight)
           : 1
 
         playbackElement.style.transform = `rotate(${
           store.getState().currentRotation
-        }deg) scale(${scale})`
+        }deg) scale(${currentScale})`
 
         if (containerRatio > videoRatio) {
           store.setState({
             width: clientHeight * videoRatio,
             height: clientHeight,
+            currentScale,
           })
         } else {
           store.setState({
             width: clientWidth,
             height: clientWidth / videoRatio,
+            currentScale,
           })
         }
       }
 
-      playbackElement.addEventListener(
+      playbackElement?.addEventListener(
         "loadedmetadata",
         () => {
-          loadedmetadata = true
           updatePlaybackDimensions()
         },
         { signal },

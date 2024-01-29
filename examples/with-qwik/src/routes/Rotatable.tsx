@@ -1,11 +1,8 @@
 import { $, component$, useSignal, useVisibleTask$ } from "@builder.io/qwik"
-import { hlsPlaybackPlugin } from "@headlessplayback/hls-plugin"
 import { usePlayback } from "@headlessplayback/qwik"
+import { rotatablePlaybackPlugin } from "@headlessplayback/rotatable-plugin"
 
-const source1 =
-  "https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8"
-const source2 = "https://cdn.jwplayer.com/manifests/pZxWPRg4.m3u8"
-const id = "hls"
+const id = "rotatable"
 
 const Duration = component$(() => {
   const { playbackState } = usePlayback({
@@ -23,32 +20,18 @@ const CurrentTime = component$(() => {
   return <p>Current time: {playbackState.currentTime}</p>
 })
 
-const Resolutions = component$(() => {
-  const { playbackState } = usePlayback({
-    id,
-  })
-
-  // Plugin will inject extra state to playbackState
-  return (
-    <strong>
-      Levels: {playbackState.levels?.map((level) => level.height).join(", ")}
-    </strong>
-  )
-})
-
-const Hls = component$(() => {
+const Rotatable = component$(() => {
   const { playbackActions, playbackState, use } = usePlayback({
     id,
   })
-  const source = useSignal(source1)
 
-  useVisibleTask$(async ({ track }) => {
-    await use(hlsPlaybackPlugin)
+  const videoContainerRef = useSignal<HTMLDivElement>()
 
-    track(() => source.value)
+  useVisibleTask$(async () => {
+    await use(rotatablePlaybackPlugin)
 
-    playbackActions.loadHlsSource?.({
-      source: source.value,
+    playbackActions.createRotatablePlayback?.({
+      container: videoContainerRef.value as HTMLDivElement,
     })
   })
 
@@ -60,30 +43,48 @@ const Hls = component$(() => {
     playbackActions.setCurrentTime(playbackState.currentTime - 5)
   })
 
-  const toggleStreamSource = $(() => {
-    if (source.value === source1) {
-      source.value = source2
-    } else {
-      source.value = source1
-    }
+  const togglePlayback = $(() => {
+    playbackActions.setPaused(!playbackState.paused)
+  })
+
+  const rotate = $(() => {
+    playbackActions.rotate()
   })
 
   return (
     <>
-      <div class="border-fuchsia border-1 h-[400px] w-[600px]">
-        <video class="h-full w-full" id={id} controls></video>
+      <div
+        ref={videoContainerRef}
+        class="border-fuchsia border-1 grid h-[400px] w-[600px] place-items-center"
+      >
+        <video
+          style={{
+            width: playbackState.width,
+            height: playbackState.height,
+            rotate: playbackState.currentRotation + "deg",
+            scale: playbackState.currentScale,
+          }}
+          src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+          id={id}
+        ></video>
       </div>
 
       <CurrentTime />
       <Duration />
-      <Resolutions />
 
       <div className="flex space-x-1">
         <button
           class="rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
-          onClick$={toggleStreamSource}
+          onClick$={jumpPrev5s}
         >
-          Switch stream
+          Prev 5s
+        </button>
+
+        <button
+          class="rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
+          onClick$={togglePlayback}
+        >
+          {playbackState.paused ? "Play" : "Pause"}
         </button>
 
         <button
@@ -92,15 +93,16 @@ const Hls = component$(() => {
         >
           Next 5s
         </button>
+
         <button
           class="rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
-          onClick$={jumpPrev5s}
+          onClick$={rotate}
         >
-          Prev 5s
+          Rotate
         </button>
       </div>
     </>
   )
 })
 
-export default Hls
+export default Rotatable
