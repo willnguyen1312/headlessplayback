@@ -165,6 +165,9 @@ importers:
       "@headlessplayback/qwik":
         specifier: latest
         version: link:../../packages/qwik
+      "@headlessplayback/rotatable-plugin":
+        specifier: latest
+        version: link:../../packages/rotatable
       "@headlessplayback/zoomable-plugin":
         specifier: latest
         version: link:../../packages/zoomable

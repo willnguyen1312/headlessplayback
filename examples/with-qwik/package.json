@@ -20,6 +20,7 @@
     "@headlessplayback/hijack-plugin": "latest",
     "@headlessplayback/hls-plugin": "latest",
     "@headlessplayback/qwik": "latest",
+    "@headlessplayback/rotatable-plugin": "latest",
     "@headlessplayback/zoomable-plugin": "latest"
   }
 }
