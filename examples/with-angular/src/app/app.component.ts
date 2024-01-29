@@ -1,7 +1,13 @@
 import { Component } from "@angular/core"
 import { PlaybackService } from "@headlessplayback/angular"
 
-type PlaybackName = "Hls" | "Hijack" | "Dash" | "Normal" | "Zoomable"
+type PlaybackName =
+  | "Hls"
+  | "Hijack"
+  | "Dash"
+  | "Normal"
+  | "Zoomable"
+  | "Rotatable"
 
 @Component({
   selector: "app-root",
@@ -14,6 +20,7 @@ export class AppComponent {
     { name: "Hls", href: "#", current: false },
     { name: "Dash", href: "#", current: false },
     { name: "Hijack", href: "#", current: false },
+    { name: "Rotatable", href: "#", current: false },
     { name: "Zoomable", href: "#", current: false },
   ]
 

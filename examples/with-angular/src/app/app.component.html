@@ -21,6 +21,9 @@
     <playback-hls *ngIf="currentTab() === 'Hls'"></playback-hls>
     <playback-dash *ngIf="currentTab() === 'Dash'"></playback-dash>
     <playback-hijack *ngIf="currentTab() === 'Hijack'"></playback-hijack>
+    <playback-rotatable
+      *ngIf="currentTab() === 'Rotatable'"
+    ></playback-rotatable>
     <playback-zoomable *ngIf="currentTab() === 'Zoomable'"></playback-zoomable>
   </div>
 </div>
