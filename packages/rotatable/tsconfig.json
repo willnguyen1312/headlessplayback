@@ -4,6 +4,6 @@
   "exclude": ["dist", "build", "node_modules"],
   "compilerOptions": {
     "lib": ["ESNext", "DOM"],
-    "target": "ESNext"
-  }
+    "target": "ESNext",
+  },
 }
