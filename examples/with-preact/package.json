@@ -10,6 +10,7 @@
     "@headlessplayback/hijack-plugin": "latest",
     "@headlessplayback/hls-plugin": "latest",
     "@headlessplayback/preact": "latest",
+    "@headlessplayback/rotatable-plugin": "latest",
     "@headlessplayback/zoomable-plugin": "latest",
     "preact": "^10.19.3"
   },

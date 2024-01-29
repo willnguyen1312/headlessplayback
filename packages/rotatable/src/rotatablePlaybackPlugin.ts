@@ -60,7 +60,9 @@ export const rotatablePlaybackPlugin: Plugin = {
             Math.min(videoWidth, videoHeight)
           : 1
 
-        playbackElement.style.transform = `rotate(${store.getState().currentRotation}deg) scale(${scale})`
+        playbackElement.style.transform = `rotate(${
+          store.getState().currentRotation
+        }deg) scale(${scale})`
 
         if (containerRatio > videoRatio) {
           store.setState({
