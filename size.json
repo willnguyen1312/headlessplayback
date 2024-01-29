@@ -34,7 +34,7 @@
     "hijackPlaybackPlugin": "622 B"
   },
   "@headlessplayback/rotatable-plugin": {
-    "rotatablePlaybackPlugin": "478 B"
+    "rotatablePlaybackPlugin": "480 B"
   },
   "@headlessplayback/zoomable-plugin": {
     "zoomablePlaybackPlugin": "1.12 KB"
