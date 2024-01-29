@@ -122,6 +122,9 @@ importers:
       "@headlessplayback/preact":
         specifier: latest
         version: link:../../packages/preact
+      "@headlessplayback/rotatable-plugin":
+        specifier: latest
+        version: link:../../packages/rotatable
       "@headlessplayback/zoomable-plugin":
         specifier: latest
         version: link:../../packages/zoomable
