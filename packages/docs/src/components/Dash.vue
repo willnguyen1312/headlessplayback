@@ -49,7 +49,7 @@ const jumpTo = (time: number) => {
     }}</strong
   >
 
-  <div class="flex flex-col items-start space-y-1">
+  <div class="flex space-x-1">
     <button
       class="rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
       @click="source = source === source1 ? source2 : source1"

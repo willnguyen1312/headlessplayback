@@ -1,9 +1,18 @@
-import { hijackPlaybackPlugin } from "@headlessplayback/hijack-plugin"
-import { usePlayback } from "@headlessplayback/preact"
-import { useEffect } from "preact/hooks"
-usePlayback.use(hijackPlaybackPlugin)
+import { usePlayback } from "@headlessplayback/solid"
+import { rotatablePlaybackPlugin } from "@headlessplayback/rotatable-plugin"
+import { onMount, type Component } from "solid-js"
 
-const id = "hijack"
+usePlayback.use(rotatablePlaybackPlugin)
+
+const id = "rotatable"
+
+const Duration: Component = () => {
+  const { playbackState } = usePlayback({
+    id,
+  })
+
+  return <p>Duration: {playbackState.duration}</p>
+}
 
 function CurrentTime() {
   const playback = usePlayback({
@@ -13,28 +22,20 @@ function CurrentTime() {
   return <p>Current time: {playback.playbackState.currentTime}</p>
 }
 
-const Duration = () => {
-  const { playbackState } = usePlayback({
-    id,
-  })
-
-  return <p>Duration: {playbackState.duration}</p>
-}
-
-function Hijack() {
+const Zoomable: Component = () => {
   const { activate, playbackActions, playbackState } = usePlayback({
     id,
   })
+  let videoContainerRef: any
 
-  useEffect(() => {
+  onMount(() => {
     // Activate when playback element is accessible from the DOM
     activate()
 
-    playbackActions.hijack({
-      duration: 1000,
-      frequency: 4,
+    playbackActions.createRotatablePlayback?.({
+      container: videoContainerRef as HTMLDivElement,
     })
-  }, [])
+  })
 
   function jumpNext5s() {
     // Core actions and state are always available
@@ -45,58 +46,64 @@ function Hijack() {
     playbackActions.setCurrentTime(playbackState.currentTime - 5)
   }
 
-  function togglePlay() {
-    if (playbackState.paused) {
-      playbackActions.setPaused(false)
-    } else {
-      playbackActions.setPaused(true)
-    }
+  function togglePlayback() {
+    playbackActions.setPaused(!playbackState.paused)
   }
 
-  function toggleDirection() {
-    if (playbackState.direction === "forward") {
-      playbackActions.setDirection({ direction: "backward" })
-    } else {
-      playbackActions.setDirection({ direction: "forward" })
-    }
+  function rotate() {
+    playbackActions.rotate()
   }
 
   return (
     <>
-      <video hidden id={id}></video>
+      <div
+        ref={videoContainerRef}
+        class="border-fuchsia border-1 grid h-[400px] w-[600px] place-items-center"
+      >
+        <video
+          style={{
+            width: playbackState.width + "px",
+            height: playbackState.height + "px",
+          }}
+          src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+          id={id}
+        ></video>
+      </div>
 
       <CurrentTime />
       <Duration />
-      <p>Direction: {playbackState.direction}</p>
 
       <div class="flex space-x-1">
-        <button
-          class="rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
-          onClick={jumpNext5s}
-        >
-          Next 5s
-        </button>
-        <button
-          class="rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
-          onClick={togglePlay}
-        >
-          {playbackState.paused ? "Play" : "Pause"}
-        </button>
         <button
           class="rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
           onClick={jumpPrev5s}
         >
           Prev 5s
         </button>
+
         <button
           class="rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
-          onClick={toggleDirection}
+          onClick={togglePlayback}
         >
-          Toggle direction
+          {playbackState.paused ? "Play" : "Pause"}
+        </button>
+
+        <button
+          class="rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
+          onClick={jumpNext5s}
+        >
+          Next 5s
+        </button>
+
+        <button
+          class="rounded-md bg-violet-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
+          onClick={rotate}
+        >
+          Rotate
         </button>
       </div>
     </>
   )
 }
 
-export default Hijack
+export default Zoomable
