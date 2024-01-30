@@ -3,6 +3,7 @@ import Dash from "./Dash"
 import Hijack from "./Hijack"
 import Hls from "./Hls"
 import Normal from "./Normal"
+import Rotatable from "./Rotatable"
 import Zoomable from "./Zoomable"
 
 function cls(...classes: string[]) {
@@ -15,6 +16,7 @@ const App: Component = () => {
     { name: "Hls", href: "#", current: false },
     { name: "Dash", href: "#", current: false },
     { name: "Hijack", href: "#", current: false },
+    { name: "Rotatable", href: "#", current: false },
     { name: "Zoomable", href: "#", current: false },
   ])
 
@@ -55,6 +57,7 @@ const App: Component = () => {
         {activeTab() === "Hls" && <Hls />}
         {activeTab() === "Dash" && <Dash />}
         {activeTab() === "Hijack" && <Hijack />}
+        {activeTab() === "Rotatable" && <Rotatable />}
         {activeTab() === "Zoomable" && <Zoomable />}
       </div>
     </>

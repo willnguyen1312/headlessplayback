@@ -63,7 +63,7 @@
     .join(", ")}</strong
 >
 
-<div class="flex flex-col items-start space-y-1">
+<div class="flex space-x-1">
   <button
     on:click={() => {
       if (source === source1) {

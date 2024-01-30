@@ -263,6 +263,9 @@ importers:
       "@headlessplayback/hls-plugin":
         specifier: latest
         version: link:../../packages/hls
+      "@headlessplayback/rotatable-plugin":
+        specifier: latest
+        version: link:../../packages/rotatable
       "@headlessplayback/solid":
         specifier: latest
         version: link:../../packages/solid
