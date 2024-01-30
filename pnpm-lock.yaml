@@ -306,6 +306,9 @@ importers:
       "@headlessplayback/hls-plugin":
         specifier: latest
         version: link:../../packages/hls
+      "@headlessplayback/rotatable-plugin":
+        specifier: latest
+        version: link:../../packages/rotatable
       "@headlessplayback/svelte":
         specifier: latest
         version: link:../../packages/svelte
