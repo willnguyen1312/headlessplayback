@@ -11,6 +11,7 @@
     "@headlessplayback/hijack-plugin": "latest",
     "@headlessplayback/hls-plugin": "latest",
     "@headlessplayback/svelte": "latest",
+    "@headlessplayback/rotatable-plugin": "latest",
     "@headlessplayback/zoomable-plugin": "latest"
   },
   "devDependencies": {

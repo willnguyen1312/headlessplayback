@@ -3,6 +3,7 @@
   import Hijack from "./Hijack.svelte"
   import Hls from "./Hls.svelte"
   import Normal from "./Normal.svelte"
+  import Rotatable from "./Rotatable.svelte"
   import Zoomable from "./Zoomable.svelte"
 
   let tabs = [
@@ -10,10 +11,11 @@
     { name: "Hls", href: "#", current: false },
     { name: "Dash", href: "#", current: false },
     { name: "Hijack", href: "#", current: false },
+    { name: "Rotatable", href: "#", current: false },
     { name: "Zoomable", href: "#", current: false },
   ]
 
-  $: activeTab = tabs.find((tab) => tab.current).name
+  $: activeTab = tabs.find((tab) => tab.current)?.name
 </script>
 
 <div class="p-4">
@@ -54,6 +56,10 @@
 
     {#if activeTab === "Hijack"}
       <Hijack />
+    {/if}
+
+    {#if activeTab === "Rotatable"}
+      <Rotatable />
     {/if}
 
     {#if activeTab === "Zoomable"}
