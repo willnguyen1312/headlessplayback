@@ -16,6 +16,7 @@
     "@headlessplayback/dash-plugin": "latest",
     "@headlessplayback/hijack-plugin": "latest",
     "@headlessplayback/hls-plugin": "latest",
+    "@headlessplayback/rotatable-plugin": "latest",
     "@headlessplayback/zoomable-plugin": "latest"
   }
 }

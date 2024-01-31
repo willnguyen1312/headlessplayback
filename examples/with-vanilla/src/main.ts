@@ -5,13 +5,22 @@ import { createPlayback } from "@headlessplayback/core"
 import { dashPlaybackPlugin } from "@headlessplayback/dash-plugin"
 import { hijackPlaybackPlugin } from "@headlessplayback/hijack-plugin"
 import { hlsPlaybackPlugin } from "@headlessplayback/hls-plugin"
+import { rotatablePlaybackPlugin } from "@headlessplayback/rotatable-plugin"
 import { zoomablePlaybackPlugin } from "@headlessplayback/zoomable-plugin"
+
 createPlayback.use(hlsPlaybackPlugin)
 createPlayback.use(dashPlaybackPlugin)
 createPlayback.use(hijackPlaybackPlugin)
+createPlayback.use(rotatablePlaybackPlugin)
 createPlayback.use(zoomablePlaybackPlugin)
 
-type PlayerType = "hls" | "dash" | "hijack" | "normal" | "zoomable"
+type PlayerType =
+  | "hls"
+  | "dash"
+  | "hijack"
+  | "normal"
+  | "zoomable"
+  | "rotatable"
 
 let currentResult: any
 
@@ -87,6 +96,59 @@ function makeZoomablePlayback() {
   result.playbackActions.setEnableZoom({
     enableZoom: true,
   })
+  currentResult = result
+}
+
+function makeRotatablePlayback() {
+  const currentTime = document.getElementById(
+    "currentTime",
+  ) as HTMLParagraphElement
+
+  const next5sBtn = document.getElementById("next5s") as HTMLButtonElement
+  const togglePlayback = document.getElementById(
+    "togglePlayback",
+  ) as HTMLButtonElement
+  const prev5sBtn = document.getElementById("prev5s") as HTMLButtonElement
+  const rotateBtn = document.getElementById("rotate") as HTMLButtonElement
+  const duration = document.getElementById("duration") as HTMLParagraphElement
+  const videoElement = document.getElementById("rotatable") as HTMLVideoElement
+
+  const result = createPlayback({
+    id: "rotatable",
+  })
+
+  next5sBtn.addEventListener("click", () => {
+    result.playbackActions.setCurrentTime(result.getState().currentTime + 5)
+  })
+
+  togglePlayback.addEventListener("click", () => {
+    const newPaused = !result.getState().paused
+    togglePlayback.textContent = newPaused ? "Play" : "Pause"
+    result.playbackActions.setPaused(newPaused)
+  })
+
+  prev5sBtn.addEventListener("click", () => {
+    result.playbackActions.setCurrentTime(result.getState().currentTime - 5)
+  })
+
+  rotateBtn.addEventListener("click", () => {
+    result.playbackActions.rotate()
+  })
+
+  result.subscribe(({ state }) => {
+    currentTime.innerText = `Current time: ${state.currentTime}`
+    duration.innerText = `Duration: ${state.duration}`
+    videoElement.style.width = `${state.width}px`
+    videoElement.style.height = `${state.height}px`
+  })
+
+  result.activate()
+  result.playbackActions.createRotatablePlayback({
+    container: document.getElementById(
+      "rotatableVideoContainer",
+    ) as HTMLDivElement,
+  })
+
   currentResult = result
 }
 
@@ -294,6 +356,7 @@ anchorList.forEach((anchor) => {
       dash: makeDashPlayback,
       hijack: makeHijackPlayback,
       normal: makeNormalPlayback,
+      rotatable: makeRotatablePlayback,
       zoomable: makeZoomablePlayback,
     }
 
