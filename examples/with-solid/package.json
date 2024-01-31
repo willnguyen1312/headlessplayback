@@ -16,8 +16,8 @@
     "@headlessplayback/dash-plugin": "latest",
     "@headlessplayback/hijack-plugin": "latest",
     "@headlessplayback/hls-plugin": "latest",
-    "@headlessplayback/solid": "latest",
     "@headlessplayback/rotatable-plugin": "latest",
+    "@headlessplayback/solid": "latest",
     "@headlessplayback/zoomable-plugin": "latest",
     "solid-js": "^1.8.12"
   }
