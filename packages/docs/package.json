@@ -33,7 +33,6 @@
     "@headlessplayback/rotatable-plugin": "latest",
     "@headlessplayback/vue": "latest",
     "@headlessplayback/zoomable-plugin": "latest",
-    "vitepress": "^1.0.1",
     "vue": "^3.4.15"
   },
   "devDependencies": {
